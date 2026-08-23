@@ -2,23 +2,15 @@
 
 A deliberately tiny public experiment in becoming a real vendor to software agents.
 
-## North-star milestone
+## What has been proven
 
 > An automated client pays this service over x402, receives a useful result, and continues its task.
 
-**Milestone achieved on 2026-08-23.** A disposable automated buyer paid the service `0.01` test USDC over x402 v2 on Base Sepolia, the payment settled successfully, and the buyer received the structured `/analyze-job` response.
+**Proven on 2026-08-23.** A disposable automated buyer paid `0.01` test USDC over x402 v2 on Base Sepolia, settlement succeeded, and the buyer received the protected `/analyze-job` result.
 
-The first version sells exactly one thing:
-
-`POST /analyze-job` — structured recruiting signals from a job title + job description.
-
-**Testnet price:** `$0.01` on Base Sepolia.
-
-This repository is intentionally narrow. The first goal was to prove the economic loop before adding AI models, candidate data, databases, authentication, dashboards, or a marketplace. That loop now works.
+The permanent record is in [`docs/FIRST-TRANSACTION.md`](docs/FIRST-TRANSACTION.md).
 
 ## Product direction
-
-x402-lab is now moving from protocol experiment toward a tiny agent-native business experiment.
 
 The governing product thesis is:
 
@@ -26,15 +18,82 @@ The governing product thesis is:
 
 The full governing document is [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md).
 
-The primary buyer is a software agent with a budget and a task. x402-lab should compete on total decision and transaction cost: discovery, interpretation, integration, authentication, payment, execution, recovery, and trust — not nominal price alone.
-
-`/analyze-job` is a learning product, not a commitment that x402-lab must become a recruiting company.
-
-The next question is:
-
-> **What is the smallest recurring X that machine buyers already need, where x402-lab can make buying X easier than thinking about how else to get it?**
+The primary buyer is a software agent with a budget and a task. x402-lab competes on total decision and transaction cost — discovery, interpretation, integration, authentication, payment, execution, recovery, and trust — not nominal price alone.
 
 Early success is measured by **repeat autonomous purchases**, not endpoint count, GitHub stars, or nominal revenue.
+
+## First selected shelf item: Evidence Slice
+
+The first product hypothesis selected under Product Thesis v0.1 is **Evidence Slice**:
+
+> **Give x402-lab a public URL and a question. We return the few passages on that page that actually contain evidence relevant to the question, packaged as clean JSON.**
+
+Frozen V0 contract: [`docs/EVIDENCE-SLICE-V0.md`](docs/EVIDENCE-SLICE-V0.md)
+
+Planned paid endpoint:
+
+`POST /extract-evidence`
+
+Testnet price:
+
+`$0.003` USDC on Base Sepolia (`eip155:84532`)
+
+Example request:
+
+```json
+{
+  "url": "https://example.com/article",
+  "question": "When did the company announce the factory closure?"
+}
+```
+
+Example response shape:
+
+```json
+{
+  "service": "x402-lab/evidence-slice",
+  "network": "eip155:84532",
+  "price": "$0.003",
+  "source": {
+    "url": "https://example.com/article",
+    "title": "Example article title",
+    "retrievedAt": "2026-08-23T22:00:00.000Z",
+    "contentHash": "sha256:..."
+  },
+  "question": "When did the company announce the factory closure?",
+  "evidence": [
+    {
+      "text": "The company announced Thursday that the plant will close...",
+      "score": 0.91
+    }
+  ]
+}
+```
+
+V0 is intentionally narrow:
+
+- one public URL
+- one question
+- 0–3 passages
+- deterministic lexical ranking first
+- clean JSON
+- source provenance + content hash
+- no LLM
+- no search engine
+- no database
+- no accounts or API keys
+- no MCP yet
+- no mainnet
+
+The one area that is not allowed to be naive is URL safety: caller-supplied URLs must be restricted to public HTTP(S) resources with SSRF protections, redirect revalidation, timeout, content-type, and response-size bounds.
+
+## Original learning product
+
+`POST /analyze-job` remains in the repository as the first learning endpoint that proved the payment loop.
+
+It is **not** a commitment that x402-lab must become a recruiting company.
+
+Current testnet price: `$0.01` USDC.
 
 ## Product rules
 
@@ -47,11 +106,7 @@ Early success is measured by **repeat autonomous purchases**, not endpoint count
 - one excellent recurring service beats twenty unproven endpoints
 - earn complexity
 
-## Why this exists
-
-x402 turns HTTP `402 Payment Required` into a machine-readable payment flow. A client can request a resource, receive payment requirements, sign a payment, retry automatically, and receive the resource.
-
-The proven seller/buyer loop is:
+## Proven x402 loop
 
 ```text
 buyer client
@@ -67,7 +122,13 @@ automatic retry + settlement
 200 OK + structured analysis
 ```
 
-The permanent record of the first successful transaction is in [`docs/FIRST-TRANSACTION.md`](docs/FIRST-TRANSACTION.md).
+First transaction:
+
+- protocol: x402 v2
+- network: Base Sepolia (`eip155:84532`)
+- amount: `0.01` test USDC
+- status: settled
+- transaction: `0xd36cf4bb86fbdb97e3ccca01acdf4ea46edf5fd20a4580bf5ae64ab1344d48be`
 
 ## Safety rules
 
@@ -75,8 +136,9 @@ The permanent record of the first successful transaction is in [`docs/FIRST-TRAN
 2. Use a **fresh disposable test wallet** as the automated buyer.
 3. Never commit `.env`, a seed phrase, or a private key.
 4. The seller only needs a public receiving address.
-5. No candidate PII in V0.
+5. No candidate PII.
 6. No mainnet switch until real utility, external testing, and operational readiness earn it.
+7. Do not weaken public-URL safety to make Evidence Slice easier to demo.
 
 ## Stack
 
@@ -85,8 +147,8 @@ The permanent record of the first successful transaction is in [`docs/FIRST-TRAN
 - x402 v2 packages
 - Base Sepolia (`eip155:84532`)
 - Official x402 test facilitator: `https://x402.org/facilitator`
-- Deterministic job analysis for V0
-- A separate x402 buyer client with a `$0.05` max-per-payment guardrail
+- deterministic V0 behavior
+- separate x402 buyer client with a `$0.05` max-per-payment guardrail
 
 ## Start locally
 
@@ -104,7 +166,7 @@ cp .env.example .env
 
 Set `X402_PAY_TO` to an EVM wallet address you control.
 
-Do **not** add `EVM_PRIVATE_KEY` until you have created a disposable Base Sepolia buyer wallet.
+Keep buyer private keys only in the local gitignored `.env`.
 
 ### 3. Run the seller
 
@@ -118,75 +180,40 @@ Free health check:
 curl http://localhost:4021/health
 ```
 
-An unpaid request to the protected endpoint should return `402`:
-
-```bash
-curl -i \
-  -X POST http://localhost:4021/analyze-job \
-  -H "content-type: application/json" \
-  -d '{"title":"Senior Software Engineer","description":"Build TypeScript APIs on AWS using PostgreSQL and Docker."}'
-```
-
-### 4. Run the buyer
-
-After the disposable buyer wallet has Base Sepolia test USDC and `EVM_PRIVATE_KEY` is set:
+### 4. Run the existing buyer
 
 ```bash
 npm run buy
 ```
 
-The buyer uses the official x402 client flow to handle the `402`, sign the payment, retry the request, and print the settlement result.
+The buyer uses the x402 client flow to handle the `402`, sign the payment, retry, and process settlement.
 
-## What the endpoint returns
+## Current active milestone
 
-Example shape:
+**Milestone 3 — Build Evidence Slice V0 locally.**
 
-```json
-{
-  "normalizedTitle": "Senior Software Engineer",
-  "seniority": "senior",
-  "skills": ["TypeScript", "AWS", "PostgreSQL", "Docker"],
-  "searchTerms": [
-    "Senior Software Engineer",
-    "TypeScript",
-    "AWS",
-    "PostgreSQL",
-    "Docker"
-  ],
-  "confidence": 0.95
-}
-```
+See [Issue #3](https://github.com/RichardRacette/x402-lab/issues/3).
 
-The analysis is intentionally deterministic in V0. This keeps payment debugging separate from model/API debugging.
+The exit condition is intentionally strict: Evidence Slice must safely accept one public URL + one question, survive tests, complete one local paid x402 transaction at `$0.003`, and return useful passages before any public deployment work begins.
 
 ## Roadmap
 
 See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
-The current active milestone is **Milestone 2 — Product thesis and opportunity selection**. No new paid endpoint should be added until one service hypothesis wins the qualification test defined in Product Thesis v0.1.
+## Progress
 
-## Definition of done for V0.1
-
-- [x] Public GitHub repository exists
-- [x] Initial seller + buyer scaffold exists
-- [x] `/health` returns `200`
-- [x] unpaid `/analyze-job` returns `402`
-- [x] disposable buyer wallet is funded on Base Sepolia
-- [x] buyer automatically satisfies the payment requirement
-- [x] settlement result is recorded
-- [x] seller receives the testnet payment
-- [x] transaction is documented in `docs/FIRST-TRANSACTION.md`
-- [x] Product Thesis v0.1 is formalized
+- [x] public repository
+- [x] seller + buyer scaffold
+- [x] first HTTP 402 challenge
+- [x] first automated x402 settlement
+- [x] first protected result returned after payment
+- [x] first transaction documented
+- [x] Product Thesis v0.1
+- [x] first product hypothesis selected: Evidence Slice
+- [ ] Evidence Slice local V0
+- [ ] public Base Sepolia deployment
 - [ ] first external machine purchase
 - [ ] first external repeat purchase
-
-## First transaction
-
-- protocol: x402 v2
-- network: Base Sepolia (`eip155:84532`)
-- amount: `0.01` test USDC
-- status: settled
-- transaction: `0xd36cf4bb86fbdb97e3ccca01acdf4ea46edf5fd20a4580bf5ae64ab1344d48be`
 
 ## License
 
