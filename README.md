@@ -6,19 +6,33 @@ A deliberately tiny public experiment in becoming a real vendor to software agen
 
 > An automated client pays this service over x402, receives a useful result, and continues its task.
 
+**Milestone achieved on 2026-08-23.** A disposable automated buyer paid the service `0.01` test USDC over x402 v2 on Base Sepolia, the payment settled successfully, and the buyer received the structured `/analyze-job` response.
+
 The first version sells exactly one thing:
 
 `POST /analyze-job` — structured recruiting signals from a job title + job description.
 
 **Testnet price:** `$0.01` on Base Sepolia.
 
-This repository is intentionally narrow. The goal is to prove the economic loop before adding AI models, candidate data, databases, authentication, dashboards, or a marketplace.
+This repository is intentionally narrow. The first goal was to prove the economic loop before adding AI models, candidate data, databases, authentication, dashboards, or a marketplace. That loop now works.
+
+## Product direction
+
+The project is now moving from protocol experiment toward a tiny agent-native business experiment.
+
+The governing product thesis is:
+
+> **Reduce transaction friction so aggressively that choosing us becomes cheaper for the agent than thinking about alternatives.**
+
+`/analyze-job` is a learning product, not a commitment that x402-lab must become a recruiting company. Before adding more services, the next step is to formalize Product Thesis v0.1 and identify the smallest recurring need that agents demonstrably pay to solve.
+
+Early success should be measured by repeat autonomous purchases, not by endpoint count, GitHub stars, or nominal revenue.
 
 ## Why this exists
 
 x402 turns HTTP `402 Payment Required` into a machine-readable payment flow. A client can request a resource, receive payment requirements, sign a payment, retry automatically, and receive the resource.
 
-This lab tests the simplest meaningful seller/buyer loop:
+The proven seller/buyer loop is:
 
 ```text
 buyer client
@@ -29,15 +43,17 @@ POST /analyze-job
     |
 $0.01 test USDC
     |
-automatic retry
+automatic retry + settlement
     |
-structured analysis
+200 OK + structured analysis
 ```
+
+The permanent record of the first successful transaction is in [`docs/FIRST-TRANSACTION.md`](docs/FIRST-TRANSACTION.md).
 
 ## Safety rules
 
-1. **Base Sepolia only** until the testnet milestone is complete.
-2. Use a **fresh disposable test wallet** as the buyer.
+1. **Base Sepolia only** until a separate mainnet-readiness decision is made.
+2. Use a **fresh disposable test wallet** as the automated buyer.
 3. Never commit `.env`, a seed phrase, or a private key.
 4. The seller only needs a public receiving address.
 5. No candidate PII in V0.
@@ -104,7 +120,7 @@ npm run buy
 
 The buyer uses the official x402 client flow to handle the `402`, sign the payment, retry the request, and print the settlement result.
 
-That successful response is **Milestone 1B**.
+A successful paid response is **Milestone 1B**.
 
 ## What the endpoint returns
 
@@ -122,7 +138,7 @@ Example shape:
     "PostgreSQL",
     "Docker"
   ],
-  "confidence": 0.9
+  "confidence": 0.95
 }
 ```
 
@@ -136,16 +152,22 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 - [x] Public GitHub repository exists
 - [x] Initial seller + buyer scaffold exists
-- [ ] CI installs, typechecks, and tests successfully
-- [ ] `/health` returns `200`
-- [ ] unpaid `/analyze-job` returns `402`
-- [ ] disposable buyer wallet is funded on Base Sepolia
-- [ ] buyer automatically satisfies the payment requirement
-- [ ] settlement result is recorded
-- [ ] seller receives the testnet payment
-- [ ] transaction is documented in `docs/FIRST-TRANSACTION.md`
+- [x] `/health` returns `200`
+- [x] unpaid `/analyze-job` returns `402`
+- [x] disposable buyer wallet is funded on Base Sepolia
+- [x] buyer automatically satisfies the payment requirement
+- [x] settlement result is recorded
+- [x] seller receives the testnet payment
+- [x] transaction is documented in `docs/FIRST-TRANSACTION.md`
+- [ ] CI install/typecheck/test run is confirmed green after the documentation close-out
 
-Only then do we deploy publicly and begin work toward a tiny mainnet sale.
+## First transaction
+
+- protocol: x402 v2
+- network: Base Sepolia (`eip155:84532`)
+- amount: `0.01` test USDC
+- status: settled
+- transaction: `0xd36cf4bb86fbdb97e3ccca01acdf4ea46edf5fd20a4580bf5ae64ab1344d48be`
 
 ## License
 
