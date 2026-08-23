@@ -1,0 +1,33 @@
+{
+  "name": "x402-lab",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A tiny x402 vendor lab: one paid job-analysis API, one buyer client, one path to a real machine-to-machine transaction.",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "server": "tsx src/server.ts",
+    "buy": "tsx src/client.ts",
+    "test": "tsx --test src/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@x402/core": "2.23.0",
+    "@x402/evm": "2.23.0",
+    "@x402/express": "2.23.0",
+    "@x402/fetch": "2.23.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "viem": "^2.37.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}
