@@ -18,15 +18,34 @@ This repository is intentionally narrow. The first goal was to prove the economi
 
 ## Product direction
 
-The project is now moving from protocol experiment toward a tiny agent-native business experiment.
+x402-lab is now moving from protocol experiment toward a tiny agent-native business experiment.
 
 The governing product thesis is:
 
 > **Reduce transaction friction so aggressively that choosing us becomes cheaper for the agent than thinking about alternatives.**
 
-`/analyze-job` is a learning product, not a commitment that x402-lab must become a recruiting company. Before adding more services, the next step is to formalize Product Thesis v0.1 and identify the smallest recurring need that agents demonstrably pay to solve.
+The full governing document is [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md).
 
-Early success should be measured by repeat autonomous purchases, not by endpoint count, GitHub stars, or nominal revenue.
+The primary buyer is a software agent with a budget and a task. x402-lab should compete on total decision and transaction cost: discovery, interpretation, integration, authentication, payment, execution, recovery, and trust — not nominal price alone.
+
+`/analyze-job` is a learning product, not a commitment that x402-lab must become a recruiting company.
+
+The next question is:
+
+> **What is the smallest recurring X that machine buyers already need, where x402-lab can make buying X easier than thinking about how else to get it?**
+
+Early success is measured by **repeat autonomous purchases**, not endpoint count, GitHub stars, or nominal revenue.
+
+## Product rules
+
+- reliability is a feature
+- machine-readable beats decorative
+- no unnecessary signup, subscription, API-key, or approval gates
+- predictable tiny prices
+- clean structured outputs and errors
+- operation before abstraction
+- one excellent recurring service beats twenty unproven endpoints
+- earn complexity
 
 ## Why this exists
 
@@ -57,7 +76,7 @@ The permanent record of the first successful transaction is in [`docs/FIRST-TRAN
 3. Never commit `.env`, a seed phrase, or a private key.
 4. The seller only needs a public receiving address.
 5. No candidate PII in V0.
-6. No mainnet switch until the transaction is reproducible and understood.
+6. No mainnet switch until real utility, external testing, and operational readiness earn it.
 
 ## Stack
 
@@ -108,8 +127,6 @@ curl -i \
   -d '{"title":"Senior Software Engineer","description":"Build TypeScript APIs on AWS using PostgreSQL and Docker."}'
 ```
 
-That `402` is **Milestone 1A**.
-
 ### 4. Run the buyer
 
 After the disposable buyer wallet has Base Sepolia test USDC and `EVM_PRIVATE_KEY` is set:
@@ -119,8 +136,6 @@ npm run buy
 ```
 
 The buyer uses the official x402 client flow to handle the `402`, sign the payment, retry the request, and print the settlement result.
-
-A successful paid response is **Milestone 1B**.
 
 ## What the endpoint returns
 
@@ -148,6 +163,8 @@ The analysis is intentionally deterministic in V0. This keeps payment debugging 
 
 See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
+The current active milestone is **Milestone 2 — Product thesis and opportunity selection**. No new paid endpoint should be added until one service hypothesis wins the qualification test defined in Product Thesis v0.1.
+
 ## Definition of done for V0.1
 
 - [x] Public GitHub repository exists
@@ -159,7 +176,9 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 - [x] settlement result is recorded
 - [x] seller receives the testnet payment
 - [x] transaction is documented in `docs/FIRST-TRANSACTION.md`
-- [ ] CI install/typecheck/test run is confirmed green after the documentation close-out
+- [x] Product Thesis v0.1 is formalized
+- [ ] first external machine purchase
+- [ ] first external repeat purchase
 
 ## First transaction
 
