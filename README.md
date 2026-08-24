@@ -1,10 +1,12 @@
 # x402-lab
 
-A public R&D experiment in becoming a real vendor in the machine economy — with one rule now governing the commercial work:
+A public R&D experiment in becoming a real vendor in the machine economy.
 
-> **Revenue before ritual. Profit before protocol.**
+Current commercial rule:
 
-## What is live
+> **Revenue before ritual. Repeat before scale. Productize what repeats.**
+
+## Live technical proof
 
 **Evidence Slice** remains live on Base Sepolia testnet:
 
@@ -13,148 +15,152 @@ A public R&D experiment in becoming a real vendor in the machine economy — wit
 - price: `$0.003` test USDC
 - payment: x402 v2
 - signup/API key: none
-- purpose now: stable protocol/payment proof + compatibility fixture
+- current role: stable protocol/payment proof + compatibility fixture
 
-Evidence Slice proved that x402-lab can expose a public paid service, return a 402 challenge, settle an automated payment, retry, fulfill the request, and advertise machine-readable discovery metadata.
+Evidence Slice proved public 402 challenge → automated payment → settlement → retry → protected fulfillment, plus machine-readable Bazaar metadata.
 
-It did **not** prove that Evidence Slice itself is a strong commercial product.
-
-The first public paid Evidence Slice transaction is preserved in this repository, along with the original `/analyze-job` payment-loop proof.
+It did **not** prove commercial demand.
 
 ## Current commercial direction
 
-The current source of truth is:
+Read these first:
 
-- [`docs/FULL-PROJECT-AUDIT-2026-08-24.md`](docs/FULL-PROJECT-AUDIT-2026-08-24.md)
-- [`docs/BUSINESS-PLAN-V0.3.md`](docs/BUSINESS-PLAN-V0.3.md)
+- [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md)
+- [`docs/PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md`](docs/PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md)
+- [`docs/BUSINESS-PLAN-V0.4.md`](docs/BUSINESS-PLAN-V0.4.md)
+- [`docs/RECRUITING-AGENT-EVAL-V0.md`](docs/RECRUITING-AGENT-EVAL-V0.md)
 - [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md)
-- [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
-Older product-discovery documents remain as historical evidence of hypotheses that were tested and rejected.
+### Leading first-revenue hypothesis
 
-### What research invalidated
+**Recruiting Agent Practitioner Eval — Human Domain Review**
+
+> **Send sanitized recruiting-agent test runs/traces. A recruiting practitioner labels what works, what fails in real recruiting, why it fails, what the agent should have done, and which cases should become regression tests.**
+
+The buyer is initially a recruiting-agent builder/product team, not necessarily an autonomous agent.
+
+The service is practitioner product-quality evaluation — **not** legal/compliance certification or a bias audit.
+
+## Why the project moved here
+
+Product discovery has deliberately rejected multiple technically buildable but commercially weak ideas:
 
 1. **Evidence Slice as the business** — weak buy-vs-build advantage.
-2. **Agency Opportunity / Recruiting Pressure** — substantial overlap with current recruiting-intelligence products.
-3. **Automated Role Reality Check** — current free/SMB tools already provide richer role-level talent-market intelligence, and public-data talent-intelligence workflows are increasingly easy to reproduce.
+2. **Recruiting Pressure / Agency Opportunity** — crowded hiring-signal market.
+3. **Automated Role Reality** — free/SMB competitors already offer richer role-market intelligence and public-data workflows are cheap to reproduce.
+4. **Search Preflight as the primary service** — useful workflow, but many recruiting-agent customers already have recruiter approvers, so an outside review can be redundant.
 
-The viability gate is working: weak products are being killed before engineering turns them into sunk-cost traps.
-
-## Current revenue experiment
-
-The next test is **service-first, productize-second**.
-
-Working service concept:
-
-> **Recruiting Search Preflight — Human Review Gate**
-
-A recruiter or recruiting agent submits one U.S. requisition plus its important constraints/search assumptions. A real recruiter reviews what is unrealistic, what is underspecified, what should be challenged, and what should change before heavy sourcing/outreach begins.
-
-The customer is buying **human recruiting judgment**, not another salary table.
-
-### Why this direction
-
-- capable agents can already obtain a lot of public labor-market data themselves
-- free and enterprise tools already cover much of generic market intelligence
-- human expert work is already purchasable by agents through x402-native marketplaces
-- the project's recruiting-domain knowledge is harder to reproduce than public wage data
-- manual fulfillment creates paid product discovery: every review teaches us what buyers repeatedly value and what deserves automation
-
-The initial service is intentionally not maximally scalable.
-
-The plan is:
+The current eval hypothesis has a better compounding path:
 
 ```text
-sell useful human judgment
+human practitioner labels
         ↓
-measure what buyers value
+recruiting failure taxonomy
         ↓
-reduce fulfillment time with internal tooling
+golden/regression cases
         ↓
-observe repeated patterns
+human-labeled benchmark
         ↓
-automate only what has earned automation
+automated evaluator calibrated to humans
         ↓
-expose proven components as machine-native paid products
+machine-native paid eval + human escalation
 ```
 
-## Tonight's engineering target
+No moat is claimed before customer labels exist.
 
-Codex should **not** add a new public paid endpoint.
+## Tonight's Codex target
 
-It should build an internal **Search Preflight Workbench** that helps a human reviewer produce consistent, source-backed draft reviews quickly.
+Do **not** add another public endpoint.
 
-Success condition:
+Build an internal **Recruiting Agent Eval Workbench** on branch:
 
-> a knowledgeable human can turn the workbench draft into a credible review in roughly 25–30 minutes or less.
+`milestone-4-5-recruiting-agent-eval-harness`
 
-If the tool does not make the reviewer faster or more consistent, stop rather than adding features.
+The workbench should:
 
-See [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
+- define eval project/scenario/run/review schemas
+- preserve explicit human practitioner judgment
+- seed a recruiting-specific failure taxonomy
+- create 15–20 synthetic non-PII scenarios
+- create synthetic fixture agent outputs
+- validate structured reviews
+- aggregate failure patterns
+- export JSON + Markdown reports
+- export selected golden/regression cases
+- preserve all existing x402 behavior/tests
 
-## Data-rights posture
+Exact plan: [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
 
-Data licensing is a product dependency.
+## Commercial validation path
 
-- **O*NET Database/content** may be used/adapted where covered by CC BY 4.0 with correct attribution and modification notices.
-- **BLS public data** is a preferred public-domain source; preserve retrieval date/source and required BLS disclaimer language for downstream analyses.
-- **CareerOneStop** registration was submitted transparently, but the click-license shown during registration contains a no-modification/alteration condition. Until written clarification exists, CareerOneStop is optional internal/validation evidence — not the foundation of a proprietary transformed commercial score.
-- No candidate PII, contact enrichment, or proprietary talent dataset is required for the current experiment.
+If the workbench/rubric passes internal review:
 
-## Machine-commerce posture
+1. create a polished 3–5-run mini-eval artifact
+2. show it to at least 3 recruiting-agent builders/product people
+3. offer a tiny free practitioner review to a very small number
+4. test `$99–$149` for ~10 runs
+5. test around `$249` for 20–25 runs + failure summary + golden cases
+6. seek the **same builder again** after a release/change
 
-x402 remains strategically relevant, but it is not the total addressable market.
+First external payment matters.
 
-The protocol now has formal Linux Foundation governance, and AWS AgentCore Payments supports autonomous discovery/payment for x402 services alongside other payment protocols. The ecosystem is real but still early and noisy; raw transaction count is not treated as adoption or TAM.
+Repeat external payment matters much more.
 
-The eventual commercial product should remain protocol-neutral and may use:
+## Safety and IP boundary
 
-- x402
-- MPP
-- MCP
-- conventional APIs
-- normal human payment channels
-- agent marketplaces for human services
+V0 uses only synthetic/public/customer-authorized sanitized material.
 
-The buyer should never need to care which payment protocol won the standards race.
+Do not require:
 
-## Product rules
+- real candidate PII
+- protected-class scoring
+- live adverse employment decisions
+- employer-confidential candidate records
+- private credentials
 
-- **first external dollar > another testnet milestone**
-- **second purchase > first purchase**
-- human time is a real variable cost
-- public/open data is not automatically a moat
-- free competitors count in buy-vs-build analysis
-- licensing/use rights are product dependencies
-- no generic AI-wrapper catalog
-- no product is saved merely because it was already spec'd
-- no LLM/premium data/frontend unless buyer evidence earns it
-- one repeated paid job-to-be-done beats twenty clever endpoints
-- earn complexity
+Do not market the service as:
+
+- employment-law advice
+- NYC Local Law 144 audit
+- algorithmic bias certification
+- legal/model-safety certification
+
+Before accepting paid work, verify applicable outside-work/conflict/IP/confidentiality obligations and use only personal equipment/accounts/time.
 
 ## Existing technical assets
 
 - Node.js + TypeScript + Express
 - x402 v2 seller/payment middleware
 - Base Sepolia public deployment
-- Bazaar discovery metadata
+- Bazaar metadata
 - Evidence Slice deterministic service
-- bounded buyer + shopper gateway/spend controls
+- bounded buyer + shopper gateway
 - public-source/SSRF safety work
-- tests + typecheck
+- tests/typecheck
 - compatibility research
 
-These are reusable infrastructure, **not proof of product-market fit**.
+These are reusable infrastructure, not product-market fit.
+
+## Machine-commerce posture
+
+x402 remains strategically useful, but the business is not tied to one protocol.
+
+A validated future evaluator could be sold through:
+
+- x402
+- MCP
+- MPP
+- conventional API billing
+- agent marketplaces
+- human payment channels
+
+The first dollar does not need to be crypto.
 
 ## Current milestone
 
-**Milestone 4.5C — First-revenue discovery / Search Preflight Workbench.**
+**Milestone 4.5C — Recruiting Agent Practitioner Eval + first revenue.**
 
-The next proof we want is not another endpoint.
-
-It is:
-
-> **somebody outside the project values a recruiting decision enough to pay for it — and ideally comes back.**
+See **Issue #14**.
 
 ## Progress
 
@@ -162,18 +168,19 @@ It is:
 - [x] automated x402 settlement
 - [x] public Base Sepolia seller
 - [x] first public paid Evidence Slice transaction
-- [x] Bazaar shelf metadata
+- [x] Bazaar metadata
 - [x] bounded buyer/shopper gateway
-- [x] viability/profit gate adopted
-- [x] Recruiting Pressure hypothesis rejected before implementation
-- [x] automated Role Reality hypothesis rejected after deeper competitive audit
-- [x] service-first Business Plan v0.3 adopted
-- [ ] build internal Search Preflight Workbench
-- [ ] generate 3–5 credible sample reviews
-- [ ] validate with external recruiters
-- [ ] first real external payment
-- [ ] first repeat payer
-- [ ] automate a component only after paid evidence
+- [x] product viability/profit gate
+- [x] Recruiting Pressure rejected
+- [x] automated Role Reality rejected
+- [x] Search Preflight downgraded to scenario family
+- [x] Recruiting Agent Practitioner Eval V0 selected
+- [ ] build eval workbench + synthetic benchmark
+- [ ] manually review first synthetic runs
+- [ ] validate mini-eval with external builders
+- [ ] first external paid eval
+- [ ] first repeat builder
+- [ ] automate one eval dimension only after labeled evidence
 
 ## License
 
