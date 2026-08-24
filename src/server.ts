@@ -31,6 +31,7 @@ const resourceServer = new x402ResourceServer(facilitatorClient).register(
 );
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json({ limit: "200kb" }));
 
 app.get("/health", (_req, res) => {
