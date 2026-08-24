@@ -3,6 +3,7 @@ import express, { type ErrorRequestHandler } from "express";
 import { paymentMiddleware, x402ResourceServer } from "@x402/express";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
+import { declareDiscoveryExtension } from "@x402/extensions/bazaar";
 import { analyzeJobDescription } from "./analyze-job.js";
 import { EvidenceSliceError } from "./evidence-error.js";
 import { extractEvidence } from "./evidence-slice.js";
@@ -11,6 +12,8 @@ const PORT = Number(process.env.PORT ?? 4021);
 const NETWORK = "eip155:84532" as const;
 const ANALYZE_JOB_PRICE = "$0.01";
 const EVIDENCE_SLICE_PRICE = "$0.003";
+const EVIDENCE_SLICE_DESCRIPTION =
+  "Extract query-relevant evidence from one public webpage. Use after search when you need supporting passages rather than an entire page. No signup or API key required.";
 const FACILITATOR_URL = "https://x402.org/facilitator";
 
 const payTo = process.env.X402_PAY_TO;
@@ -78,9 +81,56 @@ app.use(
             payTo
           }
         ],
-        description:
-          "Return up to three passages from one public page that are lexically relevant to a question.",
-        mimeType: "application/json"
+        description: EVIDENCE_SLICE_DESCRIPTION,
+        mimeType: "application/json",
+        serviceName: "x402-lab",
+        tags: ["evidence", "research", "extraction", "agents"],
+        extensions: {
+          ...declareDiscoveryExtension({
+            bodyType: "json",
+            input: {
+              url: "https://example.com/",
+              question: "What is this domain used for?"
+            },
+            inputSchema: {
+              properties: {
+                url: {
+                  type: "string",
+                  format: "uri",
+                  description: "Absolute public HTTP(S) webpage URL."
+                },
+                question: {
+                  type: "string",
+                  minLength: 1,
+                  description:
+                    "Question used to rank passages from the page for relevance."
+                }
+              },
+              required: ["url", "question"]
+            },
+            output: {
+              example: {
+                service: "x402-lab/evidence-slice",
+                network: NETWORK,
+                price: EVIDENCE_SLICE_PRICE,
+                source: {
+                  url: "https://example.com/",
+                  title: "Example Domain",
+                  retrievedAt: "2026-08-24T01:44:30.214Z",
+                  contentHash:
+                    "sha256:c98b4887d6d7251da51012d6341b698e028044d36909af5a2996b34922cb7c52"
+                },
+                question: "What is this domain used for?",
+                evidence: [
+                  {
+                    text: "This domain is for use in documentation examples without needing permission. Avoid use in operations.",
+                    score: 0.485
+                  }
+                ]
+              }
+            }
+          })
+        }
       }
     },
     resourceServer
