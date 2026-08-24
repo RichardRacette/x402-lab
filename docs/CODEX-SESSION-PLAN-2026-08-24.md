@@ -26,10 +26,11 @@ Codex must read:
 
 1. `docs/PRODUCT-THESIS.md`
 2. `docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`
-3. `docs/PRODUCT-VIABILITY-2026-08-24.md`
-4. `docs/ROADMAP.md`
-5. existing shopper/buyer implementation
-6. existing tests/package scripts
+3. `docs/MARKET-DATA-SOURCES-2026-08-24.md`
+4. `docs/PRODUCT-VIABILITY-2026-08-24.md`
+5. `docs/ROADMAP.md`
+6. existing shopper/buyer implementation
+7. existing tests/package scripts
 
 Read Recruiting Pressure, Role Reality, Search Preflight and Recruiting Agent Eval docs only as historical discovery evidence.
 
@@ -37,10 +38,40 @@ Before changing code, summarize:
 
 - why Product #2 is intentionally unknown
 - why raw transaction count is insufficient
+- why source methodology must remain visible
 - what metrics the observatory needs
-- how the existing shopper can help with research
+- how the existing shopper might help with deeper research
 - the real-money safety rule
 - what Codex is explicitly forbidden to build tonight
+
+## Source strategy
+
+Use providers in this order:
+
+1. **fixtures** — deterministic tests
+2. **x402stats free JSON/CSV** — global/raw-vs-organic baseline
+3. **manual x402scan imports** — merchant/resource qualitative detail
+4. **x402scan paid transaction-level API** — only if deeper buyer analysis is useful and a live collection is explicitly approved
+
+Do not pay for data that is already available free merely to exercise x402.
+
+### x402stats free baseline
+
+Current documented endpoints:
+
+```text
+GET https://x402stats.io/api/stats
+GET https://x402stats.io/api/stats/csv
+GET https://x402stats.io/api/facilitators
+```
+
+The provider states the free data are CC BY 4.0 and cached roughly hourly.
+
+Preserve provider attribution and methodology.
+
+Its current `organic` filter is a heuristic, not ground truth. The observatory must preserve `raw` and `organic` semantics separately.
+
+Do not relabel `organic` as proven independent commerce.
 
 ## Existing market evidence to preserve
 
@@ -48,7 +79,7 @@ Use the human-researched seed observations in `PRODUCT-DISCOVERY-ROUND-4-2026-08
 
 Do not silently present them as live data.
 
-The live collection layer must timestamp its own observations.
+Every live collection must timestamp its own observations.
 
 ## Desired architecture
 
@@ -67,7 +98,9 @@ src/market-observatory/
   providers/
     provider.ts
     fixture.ts
-    x402scan.ts
+    x402stats.ts
+    x402scan-import.ts
+    x402scan-paid.ts
 ```
 
 Use fewer files if clearer.
@@ -78,7 +111,25 @@ JSON/JSONL/CSV snapshots plus Markdown reports are enough.
 
 ## Core normalized data
 
-Design compact provider-neutral structures.
+Design compact provider-neutral structures while preserving source-specific semantics.
+
+### Global/ecosystem snapshot
+
+Prefer fields such as:
+
+- observedAt
+- source
+- sourceMethodologyVersion when available
+- sourceWindow
+- raw transaction count
+- raw volume
+- raw buyers/sellers where defined
+- organic volume/seller counts where the source defines them
+- concentration metrics already published by the source
+- facilitator share where available
+- source/provenance reference
+
+Do not force unrelated source concepts into one field.
 
 ### Merchant snapshot
 
@@ -161,10 +212,11 @@ Between two compatible snapshots:
 - buyer delta / growth
 - transaction delta / growth
 - volume delta / growth
-- resource-count delta
+- organic/raw ratio changes where the same methodology supports it
+- seller/resource-count delta
 - price/resource changes where observable
 
-Never compare incompatible windows without labeling the limitation.
+Never compare incompatible windows/methodologies without labeling the limitation.
 
 ## Demand-shape flags
 
@@ -172,33 +224,16 @@ Flags are descriptive, not product recommendations.
 
 Examples:
 
-### `BROAD_ADOPTION`
+- `BROAD_ADOPTION`
+- `CONCENTRATED_REPEAT`
+- `BROAD_AND_REPEAT`
+- `LOW_OBSERVED_DEMAND`
+- `SINGLE_BUYER_DOMINANCE`
+- `CROSS_SELLER_SHOPPER`
+- `METHODOLOGY_MISMATCH`
+- `CONCENTRATION_RISK`
 
-Relatively high unique-buyer count compared with activity.
-
-### `CONCENTRATED_REPEAT`
-
-Few buyers account for substantial repeat activity.
-
-### `BROAD_AND_REPEAT`
-
-Evidence of both breadth and repeat use.
-
-### `LOW_OBSERVED_DEMAND`
-
-Very low buyers/transactions despite being discoverable.
-
-### `SINGLE_BUYER_DOMINANCE`
-
-Transaction-level evidence shows one buyer accounts for an outsized share.
-
-### `CROSS_SELLER_SHOPPER`
-
-A buyer is observed purchasing from multiple independent sellers.
-
-Do not label a transaction as self-dealing, fake, organic or independent unless the evidence actually supports that conclusion.
-
-Use cautious wording such as `CONCENTRATION_RISK` or `POSSIBLE_INTERNAL_PATTERN` only when criteria are explicit.
+Do not label activity as self-dealing, fake, organic or independent unless the evidence actually supports that conclusion.
 
 ## Qualitative review layer
 
@@ -219,7 +254,7 @@ Create a small human-editable review record for interesting merchants/capabiliti
 }
 ```
 
-The software may scaffold the record from source metadata, but human judgment must fill the strategic conclusions.
+The software may scaffold the record from source metadata, but human judgment must fill strategic conclusions.
 
 ## Opportunity-card generator
 
@@ -254,12 +289,35 @@ Fixtures should include at least:
 4. zero-demand catalog
 5. one-buyer concentrated service
 6. multi-seller buyer example
+7. raw-vs-organic global snapshot example
 
 The fixtures test metrics; they are not live-market claims.
 
-## Provider 2 — x402scan market-data adapter
+## Provider 2 — x402stats free adapter
 
-After core tests pass, implement an **optional** adapter for x402scan's x402-paid market-data resources.
+After fixture tests pass, implement a read-only adapter for the free x402stats JSON/CSV data.
+
+Requirements:
+
+- no wallet/payment dependency
+- explicit timeout
+- validate external shapes
+- preserve attribution/methodology version/window
+- save raw source snapshot before normalization
+- do not coerce missing values
+- make disagreement with another provider visible
+
+This should give us a current ecosystem baseline at zero variable cost.
+
+## Provider 3 — manual x402scan import
+
+Support importing sanitized JSON/CSV containing merchant/resource observations from public x402scan research.
+
+This lets the human researcher add merchant descriptions, resource counts/prices/tags and aggregate activity without committing to brittle HTML scraping.
+
+## Provider 4 — optional x402scan paid market-data adapter
+
+Only after core reports are useful, implement an **optional** adapter for x402scan's x402-paid market-data resources.
 
 Current researched resources include approximately:
 
@@ -274,7 +332,7 @@ GET /api/x402/origins/{id}/resources
 
 The current observed price is roughly `$0.01` per paid call, but runtime `402` requirements are authoritative.
 
-### Important integration rule
+### Integration rule
 
 Do not reimplement x402 purchasing if the existing shopper/buyer abstraction can be reused cleanly.
 
@@ -288,11 +346,11 @@ Building an adapter is not authorization to execute a mainnet purchase.
 
 Requirements:
 
-- fixture/dry-run is default
-- live paid mode requires an explicit CLI flag such as `--execute-paid`
-- live mode must require explicit configured session budget
+- fixture/free/manual mode is default
+- live paid mode requires explicit CLI flag such as `--execute-paid`
+- live mode requires an explicit configured session budget
 - never fund a wallet automatically
-- never log/private-key output
+- never log private keys/secrets
 - reuse existing spend controls
 - check quoted/runtime price before payment
 - reject payment above per-call cap
@@ -311,26 +369,20 @@ These numbers are safety defaults, not permission to spend.
 
 If the existing shopper is testnet-only or incompatible with the provider's network, report the gap and stop. Do not silently broaden wallet/network permissions.
 
-## Optional public/manual import
-
-If x402scan paid integration cannot be exercised safely tonight, the observatory must still be useful.
-
-Support importing sanitized manually collected JSON/CSV snapshots so research is not blocked by wallet/network setup.
-
-Do not build brittle HTML scraping solely to avoid a paid API unless the source explicitly supports it and the implementation is clearly worthwhile.
-
 ## Reports
 
 Create at least three outputs.
 
-### 1. Market snapshot
+### 1. Ecosystem + merchant snapshot
 
 Markdown + JSON showing:
 
+- source/methodology/window
+- raw vs organic context where defined
 - merchants observed
 - activity/buyer/volume metrics
 - demand-shape flags
-- data window and source limitations
+- source limitations
 
 ### 2. Buyer-behavior report
 
@@ -369,7 +421,9 @@ Minimum tests:
 - transaction-level concentration correct
 - repeat-buyer share correct
 - multi-seller buyer detection correct
-- snapshot comparisons reject/flag incompatible windows
+- raw and organic values remain semantically distinct
+- source methodology/version preserved
+- snapshot comparisons reject/flag incompatible windows/methodologies
 - flags do not claim independence/organic demand without evidence
 - opportunity card defaults to `UNREVIEWED`
 - dry-run cannot execute paid fetch
@@ -391,7 +445,8 @@ Prefer a small CLI, for example:
 
 ```bash
 npm run market:fixtures
-npm run market:import -- --file path/to/snapshot.json
+npm run market:collect -- --provider x402stats
+npm run market:import -- --file path/to/x402scan-snapshot.json
 npm run market:report
 npm run market:compare -- --before ... --after ...
 npm run market:collect -- --provider x402scan --dry-run
@@ -409,16 +464,17 @@ Do not execute the paid form automatically.
 
 The first report should make it easier for a human to answer:
 
-1. Which services have the broadest unique-buyer adoption?
-2. Which have the highest repeat intensity among nontrivial buyer sets?
-3. Which are dominated by one/few buyers?
-4. Which buyers purchase across many sellers?
-5. What capability categories recur among cross-seller shoppers?
-6. What capability categories show broad adoption despite higher prices?
-7. Which giant catalogs have weak demand?
-8. Which successful services mainly abstract credentials/access?
-9. Which successful services provide genuinely fresh/scarce data?
-10. Which opportunities appear structurally outside x402-lab's ability to compete?
+1. How large is the market under raw vs current organic heuristic definitions?
+2. Which services have the broadest unique-buyer adoption?
+3. Which have the highest repeat intensity among nontrivial buyer sets?
+4. Which are dominated by one/few buyers?
+5. Which buyers purchase across many sellers?
+6. What capability categories recur among cross-seller shoppers?
+7. What capability categories show broad adoption despite higher prices?
+8. Which giant catalogs have weak demand?
+9. Which successful services mainly abstract credentials/access?
+10. Which successful services provide genuinely fresh/scarce data?
+11. Which opportunities appear structurally outside x402-lab's ability to compete?
 
 The last question matters as much as the others.
 
@@ -444,11 +500,12 @@ Preserve Evidence Slice and existing buyer/shopper behavior.
 
 ## Stop/go gate
 
-The observatory earns more work if it can produce a materially better product-discovery conversation than manually browsing x402scan.
+The observatory earns more work if it can produce a materially better product-discovery conversation than manually browsing existing dashboards.
 
 ### Pass
 
 - normalized snapshots are easy to collect/import
+- free x402stats baseline makes raw-vs-organic market context explicit
 - metrics reveal breadth vs repeat vs concentration clearly
 - transaction-level data reveals useful buyer patterns when available
 - reports surface non-obvious merchants/buyers worth manual research
@@ -457,9 +514,9 @@ The observatory earns more work if it can produce a materially better product-di
 ### Fail
 
 - output is just a prettier leaderboard
-- x402scan already provides every meaningful analysis directly
+- existing tools already provide every meaningful analysis directly
 - data quality is too incomplete to distinguish demand shapes
-- paid data cost/complexity exceeds the research value
+- paid data cost/complexity exceeds research value
 
 If it fails, preserve the lesson and return to manual discovery rather than adding features.
 
@@ -469,12 +526,13 @@ Best case:
 
 - tested observatory core
 - fixture market shapes
+- free x402stats live baseline
 - normalized snapshot format
 - metrics + concentration analysis
 - compare/report tooling
+- manual x402scan import path
 - optional x402scan paid-provider adapter behind hard spend controls
 - one dry-run showing intended paid requests/budget
-- one current manually imported or safely collected market snapshot
 - 3–5 **unreviewed/research** opportunity cards grounded in observed demand
 
 Still-successful case:
@@ -485,4 +543,4 @@ Still-successful case:
 
 ## Codex prompt for tonight
 
-> Read `docs/PRODUCT-THESIS.md`, `docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`, and `docs/CODEX-SESSION-PLAN-2026-08-24.md` before editing anything. Create branch `milestone-4-5-machine-demand-observatory`. Product #2 is intentionally unknown. Do not implement Recruiting Agent Eval, Search Preflight, Role Reality, Recruiting Pressure, or any new paid seller endpoint. Build an internal market observatory that normalizes merchant/resource/transaction snapshots, computes buyer breadth/repeat/economic/concentration metrics, compares snapshots, surfaces descriptive demand-shape flags, and scaffolds human-reviewed opportunity cards. Start with deterministic fixtures and tests. Then add an optional x402scan market-data provider behind the existing bounded buyer/shopper abstraction where cleanly possible. Default to dry-run and make real-money execution impossible without an explicit execute flag plus per-call/session spend caps; do not spend money automatically or broaden wallet/network permissions. Support manual JSON/CSV import so the work is useful without a live paid provider. Generate JSON + Markdown reports and preserve all existing x402-lab behavior. Finish with exact commands for fixture analysis, importing a snapshot, dry-running x402scan collection, and—without executing it—the command that would require explicit owner approval for a capped paid collection.
+> Read `docs/PRODUCT-THESIS.md`, `docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`, `docs/MARKET-DATA-SOURCES-2026-08-24.md`, and `docs/CODEX-SESSION-PLAN-2026-08-24.md` before editing anything. Create branch `milestone-4-5-machine-demand-observatory`. Product #2 is intentionally unknown. Do not implement Recruiting Agent Eval, Search Preflight, Role Reality, Recruiting Pressure, or any new paid seller endpoint. Build an internal market observatory that preserves source methodology, normalizes ecosystem/merchant/resource/transaction snapshots, computes buyer breadth/repeat/economic/concentration metrics, compares snapshots, surfaces descriptive demand-shape flags, and scaffolds human-reviewed opportunity cards. Start with deterministic fixtures and tests. Add a read-only x402stats free-data provider for the global/raw-vs-organic baseline, then manual x402scan JSON/CSV import. Only after the core is useful, add an optional x402scan paid-data provider behind the existing bounded buyer/shopper abstraction where cleanly possible. Default to no-spend and make real-money execution impossible without an explicit execute flag plus per-call/session spend caps; do not spend money automatically or broaden wallet/network permissions. Generate JSON + Markdown reports and preserve all existing x402-lab behavior. Finish with exact commands for fixture analysis, free x402stats collection, importing an x402scan snapshot, dry-running paid collection, and—without executing it—the command that would require explicit owner approval for a capped paid collection.
