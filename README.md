@@ -2,52 +2,74 @@
 
 A deliberately tiny public experiment in becoming a real vendor to software agents.
 
-## What has been proven
+## Live shelf
 
-> An automated client pays this service over x402, receives a useful result, and continues its task.
+**Evidence Slice** is live on Base Sepolia testnet:
 
-**Proven on 2026-08-23.** A disposable automated buyer paid `0.01` test USDC over x402 v2 on Base Sepolia, settlement succeeded, and the buyer received the protected `/analyze-job` result.
+`POST https://x402-lab-production.up.railway.app/extract-evidence`
 
-The permanent record is in [`docs/FIRST-TRANSACTION.md`](docs/FIRST-TRANSACTION.md).
+> Extract query-relevant evidence from one public webpage. Use after search when you need supporting passages rather than an entire page.
 
-## Product direction
+- input: `url`, `question`
+- output: source metadata + 0–3 relevant evidence passages
+- price: `$0.003` test USDC
+- network: Base Sepolia (`eip155:84532`)
+- payment: x402 v2
+- signup: none
+- API key: none
 
-The governing product thesis is:
-
-> **Reduce transaction friction so aggressively that choosing us becomes cheaper for the agent than thinking about alternatives.**
-
-The full governing document is [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md).
-
-The primary buyer is a software agent with a budget and a task. x402-lab competes on total decision and transaction cost — discovery, interpretation, integration, authentication, payment, execution, recovery, and trust — not nominal price alone.
-
-Early success is measured by **repeat autonomous purchases**, not endpoint count, GitHub stars, or nominal revenue.
-
-## First selected shelf item: Evidence Slice
-
-The first product hypothesis selected under Product Thesis v0.1 is **Evidence Slice**:
-
-> **Give x402-lab a public URL and a question. We return the few passages on that page that actually contain evidence relevant to the question, packaged as clean JSON.**
+An unpaid request returns HTTP `402 Payment Required`. The `payment-required` header contains the price, network, seller, canonical HTTPS resource URL, and an x402 Bazaar discovery extension with the POST body example, required input schema, and output example.
 
 Frozen V0 contract: [`docs/EVIDENCE-SLICE-V0.md`](docs/EVIDENCE-SLICE-V0.md)
 
-Planned paid endpoint:
+## What has been proven
 
-`POST /extract-evidence`
+x402-lab has completed a paid machine-to-machine transaction against the public Railway deployment.
 
-Testnet price:
+First public Evidence Slice sale:
 
-`$0.003` USDC on Base Sepolia (`eip155:84532`)
+- endpoint: `https://x402-lab-production.up.railway.app/extract-evidence`
+- price: `$0.003` / `3000` atomic test USDC
+- network: Base Sepolia (`eip155:84532`)
+- payment status: settled
+- final HTTP status: `200`
+- measured payment-to-result latency: `1317 ms`
+- transaction: `0xcf34c6d0543dab55426f4a3348501393ce7a6ee52d1ca621385583a0233eb599`
 
-Example request:
+The original payment-loop proof used `/analyze-job` and is permanently recorded in [`docs/FIRST-TRANSACTION.md`](docs/FIRST-TRANSACTION.md).
+
+## Product direction
+
+The governing product thesis is [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md), currently v0.2.
+
+> **Reduce transaction friction so aggressively that choosing us becomes cheaper for the agent than thinking about alternatives.**
+
+Economic objective:
+
+> **The lowest price that maximizes profitable repeat purchase volume.**
+
+Operating objective:
+
+> **Populate the store with high-frequency agent utilities whose price is trivial relative to the value they provide, while relentlessly driving fulfillment cost and transaction friction toward zero.**
+
+The central long-term question is:
+
+> **Can we make thousands or millions of autonomous purchases happen because each individual purchasing decision is so cheap and frictionless that the agent doesn't bother reinventing the capability?**
+
+The primary early success metric is **repeat autonomous purchases**.
+
+## Evidence Slice contract
+
+Request:
 
 ```json
 {
-  "url": "https://example.com/article",
-  "question": "When did the company announce the factory closure?"
+  "url": "https://example.com/",
+  "question": "What is this domain used for?"
 }
 ```
 
-Example response shape:
+Response shape:
 
 ```json
 {
@@ -55,124 +77,137 @@ Example response shape:
   "network": "eip155:84532",
   "price": "$0.003",
   "source": {
-    "url": "https://example.com/article",
-    "title": "Example article title",
-    "retrievedAt": "2026-08-23T22:00:00.000Z",
+    "url": "https://example.com/",
+    "title": "Example Domain",
+    "retrievedAt": "2026-08-24T01:44:30.214Z",
     "contentHash": "sha256:..."
   },
-  "question": "When did the company announce the factory closure?",
+  "question": "What is this domain used for?",
   "evidence": [
     {
-      "text": "The company announced Thursday that the plant will close...",
-      "score": 0.91
+      "text": "This domain is for use in documentation examples without needing permission. Avoid use in operations.",
+      "score": 0.485
     }
   ]
 }
 ```
 
-V0 is intentionally narrow:
+Evidence Slice V0 is intentionally narrow:
 
-- one public URL
+- one public HTTP(S) URL
 - one question
 - 0–3 passages
-- deterministic lexical ranking first
+- deterministic lexical ranking
 - clean JSON
 - source provenance + content hash
 - no LLM
 - no search engine
 - no database
 - no accounts or API keys
-- no MCP yet
+- no MCP
 - no mainnet
 
-The one area that is not allowed to be naive is URL safety: caller-supplied URLs must be restricted to public HTTP(S) resources with SSRF protections, redirect revalidation, timeout, content-type, and response-size bounds.
+Caller-supplied URLs are protected by public-address validation, redirect revalidation, DNS/IP checks, timeout, content-type limits, and response-size bounds.
+
+## Machine-readable shelf label
+
+The public `402` carries x402 v2 Bazaar metadata through `extensions.bazaar`.
+
+It advertises:
+
+- service: `x402-lab`
+- method: `POST`
+- body type: JSON
+- required inputs: `url`, `question`
+- realistic request example
+- realistic Evidence Slice output example
+- tags: `evidence`, `research`, `extraction`, `agents`
+
+Price, network, payment scheme, USDC asset, and receiving address remain authoritative in the core x402 payment requirements.
+
+## Minimal testnet buyer example
+
+This example performs a real **Base Sepolia test-USDC** payment. Use only a disposable testnet wallet and keep the private key outside source control.
+
+```ts
+import { x402Client, wrapFetchWithPayment } from "@x402/fetch";
+import { ExactEvmScheme } from "@x402/evm/exact/client";
+import { privateKeyToAccount } from "viem/accounts";
+
+const signer = privateKeyToAccount(
+  process.env.EVM_PRIVATE_KEY as `0x${string}`
+);
+
+const client = new x402Client();
+client.setSpendControls({ maxAmountPerPayment: "$0.01" });
+client.register("eip155:*", new ExactEvmScheme(signer));
+
+const paidFetch = wrapFetchWithPayment(fetch, client);
+
+const response = await paidFetch(
+  "https://x402-lab-production.up.railway.app/extract-evidence",
+  {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      url: "https://example.com/",
+      question: "What is this domain used for?"
+    })
+  }
+);
+
+console.log(response.status);
+console.log(await response.json());
+```
+
+The client encounters the `402`, signs the bounded payment, retries automatically, and receives the protected JSON response if settlement succeeds.
 
 ## Original learning product
 
-`POST /analyze-job` remains in the repository as the first learning endpoint that proved the payment loop.
+`POST /analyze-job` remains in the repository because it proved the first x402 payment loop. It is not the current product thesis and does not commit x402-lab to becoming a recruiting company.
 
-It is **not** a commitment that x402-lab must become a recruiting company.
-
-Current testnet price: `$0.01` USDC.
+Current testnet price: `$0.01` test USDC.
 
 ## Product rules
 
 - reliability is a feature
 - machine-readable beats decorative
 - no unnecessary signup, subscription, API-key, or approval gates
-- predictable tiny prices
+- pricing optimizes profitable repeat purchase volume, not nominal cheapness alone
 - clean structured outputs and errors
 - operation before abstraction
 - one excellent recurring service beats twenty unproven endpoints
 - earn complexity
 
-## Proven x402 loop
-
-```text
-buyer client
-    |
-POST /analyze-job
-    |
-402 Payment Required
-    |
-$0.01 test USDC
-    |
-automatic retry + settlement
-    |
-200 OK + structured analysis
-```
-
-First transaction:
-
-- protocol: x402 v2
-- network: Base Sepolia (`eip155:84532`)
-- amount: `0.01` test USDC
-- status: settled
-- transaction: `0xd36cf4bb86fbdb97e3ccca01acdf4ea46edf5fd20a4580bf5ae64ab1344d48be`
-
-## Safety rules
+## Safety
 
 1. **Base Sepolia only** until a separate mainnet-readiness decision is made.
-2. Use a **fresh disposable test wallet** as the automated buyer.
+2. Use a fresh disposable test wallet for automated buying.
 3. Never commit `.env`, a seed phrase, or a private key.
-4. The seller only needs a public receiving address.
-5. No candidate PII.
-6. No mainnet switch until real utility, external testing, and operational readiness earn it.
-7. Do not weaken public-URL safety to make Evidence Slice easier to demo.
+4. The deployed seller needs only the public `X402_PAY_TO` receiving address.
+5. Do not weaken Evidence Slice public-URL safety for convenience.
+6. Do not switch to mainnet until real utility, external testing, and operational readiness earn it.
 
 ## Stack
 
 - Node.js + TypeScript
 - Express
-- x402 v2 packages
+- x402 v2 packages pinned to `2.23.0`
+- `@x402/extensions` Bazaar metadata
 - Base Sepolia (`eip155:84532`)
-- Official x402 test facilitator: `https://x402.org/facilitator`
-- deterministic V0 behavior
-- separate x402 buyer client with a `$0.05` max-per-payment guardrail
+- x402.org test facilitator
+- Railway public deployment
+- deterministic Evidence Slice V0
 
-## Start locally
-
-### 1. Install
+## Run locally
 
 ```bash
 npm install
-```
-
-### 2. Configure
-
-```bash
 cp .env.example .env
-```
-
-Set `X402_PAY_TO` to an EVM wallet address you control.
-
-Keep buyer private keys only in the local gitignored `.env`.
-
-### 3. Run the seller
-
-```bash
 npm run server
 ```
+
+Set `X402_PAY_TO` to a public EVM receiving address you control. Keep any buyer private key only in the local gitignored `.env`.
 
 Free health check:
 
@@ -180,21 +215,13 @@ Free health check:
 curl http://localhost:4021/health
 ```
 
-### 4. Run the existing buyer
+## Current milestone
 
-```bash
-npm run buy
-```
+**Milestone 4 — Public testnet shelf launch.**
 
-The buyer uses the x402 client flow to handle the `402`, sign the payment, retry, and process settlement.
+See [Issue #5](https://github.com/RichardRacette/x402-lab/issues/5).
 
-## Current active milestone
-
-**Milestone 3 — Build Evidence Slice V0 locally.**
-
-See [Issue #3](https://github.com/RichardRacette/x402-lab/issues/3).
-
-The exit condition is intentionally strict: Evidence Slice must safely accept one public URL + one question, survive tests, complete one local paid x402 transaction at `$0.003`, and return useful passages before any public deployment work begins.
+The public service, paid proof, and machine-readable shelf label are complete. The next meaningful evidence is not another feature: it is an external buyer x402-lab does not control, especially one that returns and purchases again.
 
 ## Roadmap
 
@@ -204,14 +231,12 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 - [x] public repository
 - [x] seller + buyer scaffold
-- [x] first HTTP 402 challenge
 - [x] first automated x402 settlement
-- [x] first protected result returned after payment
-- [x] first transaction documented
-- [x] Product Thesis v0.1
-- [x] first product hypothesis selected: Evidence Slice
-- [ ] Evidence Slice local V0
-- [ ] public Base Sepolia deployment
+- [x] Product Thesis v0.2
+- [x] Evidence Slice V0
+- [x] public Base Sepolia deployment
+- [x] first public paid Evidence Slice transaction
+- [x] live x402 v2 Bazaar shelf label
 - [ ] first external machine purchase
 - [ ] first external repeat purchase
 
