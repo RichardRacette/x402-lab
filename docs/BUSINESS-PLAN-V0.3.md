@@ -4,120 +4,129 @@ Status: **current working commercial plan**
 
 Date: **2026-08-24**
 
-This version supersedes `BUSINESS-PLAN-V0.2.md` after a full project audit found that the proposed automated Role Reality Check is too close to current free/SMB-access talent-intelligence products to justify a paid automated launch.
+This version supersedes `BUSINESS-PLAN-V0.2.md` after a full profitability audit found that the proposed automated Role Reality Check is too close to current free/SMB-access talent-intelligence products to justify a paid automated launch.
 
 Read with:
 
 - `FULL-PROJECT-AUDIT-2026-08-24.md`
 - `PRODUCT-VIABILITY-2026-08-24.md`
 - `ROADMAP.md`
-- `AGENT-COMPATIBILITY-PRINCIPLE.md`
+- `CODEX-SESSION-PLAN-2026-08-24.md`
 
 ## Business objective
 
 > **Earn real external revenue for a useful recruiting decision, reach positive contribution after owner time, then automate the repeated parts.**
 
-The project is not optimizing for:
-
-- endpoint count
-- testnet transactions
-- protocol novelty
-- AI feature count
-- a fully automated business before customer evidence
+The project is not optimizing for endpoint count, testnet volume, protocol novelty, AI feature count, or full automation before customer evidence.
 
 ## Strategic architecture
 
 ### Layer 1 — x402-lab R&D asset
 
-Keep the repository and existing public Evidence Slice service.
-
-It proves the machine-commerce stack and remains useful for protocol/compatibility testing.
+Keep the repository and existing public Evidence Slice service. It proves the machine-commerce stack and remains useful for protocol/compatibility testing.
 
 ### Layer 2 — human-reviewed commercial experiment
 
 Working service label:
 
-**Search Calibration Review**
+**Recruiting Search Preflight — Human Review Gate**
 
 Proposition:
 
-> Send one U.S. requisition and receive a fast, source-backed, human-reviewed recruiting brief showing what to challenge, clarify, or change before heavy sourcing begins.
+> **Send one U.S. requisition plus its important search assumptions. Receive a fast recruiter review of what is unrealistic, ambiguous, contradictory, underspecified, or worth changing before heavy sourcing/outreach begins.**
+
+The buyer is purchasing recruiting judgment applied to a specific search, not access to public wage data.
 
 ### Layer 3 — internal fulfillment workbench
 
-Software is used first to make the human review faster and more consistent.
-
-Only components that repeatedly create buyer value graduate into standalone automated products.
+Software is used first to make the human review faster, more consistent, and source-aware.
 
 ### Layer 4 — machine-native automated products
 
-When a repeated component is proven, expose it through x402/MPP/MCP/conventional APIs as appropriate.
+Only components that repeatedly create paid buyer value graduate into automated x402/MPP/MCP/API products.
 
-The payment protocol remains a distribution mechanism, not the core value proposition.
+Payment technology remains a distribution mechanism, not the core value proposition.
 
-## Why v0.2 was superseded
+## Why automated Role Reality was rejected
 
-The prior automated Role Reality hypothesis assumed there was an access-model gap between enterprise talent intelligence and recruiters who wanted one role at a time.
+The previous thesis assumed a pay-per-role access gap between enterprise talent-intelligence platforms and smaller recruiters.
 
-Current research weakened that gap materially:
+Fresh 2026 research weakened that gap materially:
 
-- Glozo provides rich U.S. role-market intelligence on its free plan, including supply, demand, salary, trends, competing employers and explicit role-hireability use cases.
-- Glozo already works with browser-based AI tools and plans native MCP access.
-- Recruiting-industry guidance now teaches solo recruiters to build similar public-data talent-intelligence MCPs using free government datasets.
+- **Glozo Intelligence** provides live role-level U.S. supply, demand, salary, geographic distribution, trends, competing employers, and listing lifespan on its free plan.
+- **Findem Calibration Agent** explicitly aligns recruiters/hiring managers on a market-grounded search before sourcing.
+- **MergeSearch** sells completed, source-linked and human-checked executive-search market maps within 24 hours, at roughly `$650–$975` per map depending on plan.
+- current recruiting-industry guidance teaches solo recruiters to build talent-intelligence MCPs from public/free datasets.
 
-Therefore a $0.50 public-data Role Reality API has weak buy-vs-build and weak buy-vs-free-competitor economics.
+Therefore an automated `$0.50` public-data Role Reality packet fails both **buy-vs-build** and **buy-vs-free-competitor** tests.
 
-The role-market work is not discarded. It becomes **internal research infrastructure** for a higher-value human-reviewed service.
+Do not resurrect it because implementation would be easy.
 
-## The product being sold now
+## What we are *not* becoming
 
-### Search Calibration Review
+The Search Preflight experiment is deliberately smaller than a MergeSearch-style market map and narrower than a Findem/Glozo talent-intelligence product.
 
-The buyer is purchasing **recruiting judgment applied to one search**, not access to a wage table.
+It does **not** promise:
 
-Suggested inputs:
+- complete candidate-market mapping
+- candidate names or contact data
+- search execution
+- supply/demand modeling unless directly sourced
+- guaranteed fillability
+- employer hiring decisions
+- a multi-week consultancy report
 
-- job title
-- U.S. location
-- compensation/rate
-- work model
-- true must-haves
-- optional job description
-- optional shift/travel/industry/urgency/process context
+The question is much smaller:
 
-Suggested output:
+> **Before this search starts, what would an experienced recruiter challenge or clarify?**
 
-1. role/search-family interpretation
-2. source-backed market context
-3. compensation context where reliable
-4. requirement/constraint review
-5. 5–8 intake calibration questions
-6. alternate title/skill/search pivots
-7. reviewer priority note: what to challenge first and why
-8. source receipts, vintage and limitations
+## Why this can still be worth testing
 
-The service should be concise enough that a recruiter can use it immediately on an intake/client call.
+### 1. Human judgment is scarcer than public market data
 
-## Initial specialization
+A capable agent can fetch labor-market information. It cannot necessarily reproduce the contextual tradeoffs an experienced recruiter makes around titles, must-haves, compensation, onsite constraints, shift, travel, geography, search-plan coherence, and intake questions.
 
-Test broadly enough to avoid overfitting, but prioritize **industrial/manufacturing/supply-chain/operations** searches during early refinement.
+### 2. It can earn revenue before full automation
 
-Hypothesis:
+We do not need to prove a standalone API before learning whether the decision itself is worth money.
 
-Generic market-intelligence tools are strongest in tech/knowledge work, while industrial recruiting decisions often turn on context such as:
+### 3. Paid reviews become product discovery
+
+Every fulfilled review teaches us which judgments recur, which facts matter, what buyers trust, what they will pay for, and which steps deserve automation.
+
+### 4. Agent-native human work is now possible
+
+Current agent marketplaces support human-delivered work with machine-readable briefs, escrow, reputation, asynchronous fulfillment, and x402 settlement. This lets us test whether an AI recruiting agent will buy human recruiting judgment as an escalation step.
+
+## Initial customer segments
+
+Prioritize in this order:
+
+1. **independent/boutique recruiters** — easiest people to judge utility and pay-per-search economics
+2. **agency recruiters/account managers** — search quality directly affects capacity/revenue
+3. **AI recruiting agent builders** — machine-native escalation use case
+4. **internal recruiters** — later if the same problem repeats
+
+Do not broaden messaging to all HR until a buyer returns.
+
+## Initial specialization hypothesis
+
+Test multiple role families, but deliberately over-sample **industrial/manufacturing/supply-chain/operations** searches.
+
+Potential reason:
+
+Generic talent-intelligence tools are often strongest in tech/knowledge work, while industrial searches depend heavily on context such as:
 
 - shift
 - onsite/commute radius
 - plant environment
-- certifications
 - equipment/process experience
+- certifications/licenses
 - overtime/travel
-- local industrial employer density
-- narrow geographic supply
+- geography
+- narrow combinations of day-one experience
 
-A specialty wedge may allow human judgment to outperform generic market snapshots.
-
-Do not claim this until external tests support it.
+This is a hypothesis, not a moat claim.
 
 ## Data policy
 
@@ -125,270 +134,255 @@ Do not claim this until external tests support it.
 
 Registration has been submitted transparently.
 
-Because the click-license presented during registration restricts modification/alteration of COS Data, CareerOneStop must **not** be the foundation of a proprietary commercial score or transformed output without written clarification of the intended use.
+Because the click-license presented during registration restricts modification/alteration of COS Data, CareerOneStop must **not** become the foundation of proprietary transformed commercial scoring without written clarification.
 
-It may remain an internal/validation source subject to its license.
+It may remain optional internal/validation evidence subject to its license.
 
 ### O*NET
 
-Prefer O*NET Database/content where covered by CC BY 4.0 for taxonomy, titles, skills and occupation context, with required attribution and change notices.
+Prefer O*NET Database/content where covered by CC BY 4.0 for occupation taxonomy, titles, skills/tasks and related context. Follow attribution requirements and indicate modifications where required.
 
 ### BLS
 
-Prefer BLS data for wage/employment facts where practical. Follow BLS citation/disclaimer requirements and preserve data vintage/geography.
+Prefer BLS public data for wage/employment facts where practical. Preserve retrieval date, source/vintage/geography and required downstream disclaimer language.
 
-### Other sources
+### Premium sources
 
-Do not add a paid or proprietary data source until a real buyer identifies a missing fact worth its cost.
+Do not buy Lightcast, TalentNeuron, proprietary candidate data or another premium source to make the demo impressive.
+
+A paid source is earned only when a real buyer identifies a missing fact worth its cost and rights burden.
 
 ## Revenue model
 
-### Phase 0 — free validation
+### Phase 0 — validation samples
 
-A small number of external reviewers receive sample briefs free in exchange for direct behavioral feedback.
+Create a small number of high-quality sample reviews for external recruiters. Free is acceptable because the goal is behavioral feedback, not praise.
 
-### Phase 1 — paid concierge
+### Phase 1 — paid preflight
 
-Pilot price: **$25 per review**.
+Initial price tests:
 
-Then test **$49**.
+- `$25` pilot
+- `$49` early standard
+- `$75–$99` only if buyers show that the review materially changes a live search/intake decision or replaces meaningful research
 
-If the service materially changes a live client/intake decision, test **$75–$99**.
+### Phase 2 — repeat/bundles
 
-### Phase 2 — bundles
-
-Only after repeat demand:
+Only after a buyer returns:
 
 - 5-review pack
 - monthly credits
-- agency team pack
+- agency team allowance
 
-Do not build subscription infrastructure before this demand exists.
+Do not build billing/subscription infrastructure before demand.
 
 ### Phase 3 — automated components
 
-Components that repeatedly save time may become:
+Repeated valuable pieces may later become:
 
 - paid API calls
-- MCP tools
 - x402 endpoints
-- embedded partner functions
+- MCP tools
+- embedded recruiting-agent functions
 
 Pricing follows demonstrated value, not micropayment ideology.
 
 ## Unit economics
 
-Track per review:
+Track every paid review:
 
 ```text
 sale price
-- platform/payment fees
+- payment/marketplace fee actually charged to provider
 - paid data cost
 - model/browser cost if any
 - owner-time cost
 = contribution
 ```
 
-Use an internal owner-time value of at least **$50/hour** for decision-making.
+Use an internal owner-time value of at least **$50/hour**.
 
-At a 5% marketplace fee:
+At $50/hour:
 
-- $25 sale -> $23.75 net before owner time
-- $49 -> $46.55
-- $75 -> $71.25
+- 20 minutes = `$16.67`
+- 30 minutes = `$25.00`
+- 45 minutes = `$37.50`
 
-At $50/hour internal owner cost:
+Operating target for a `$49` review:
 
-- 20 min = $16.67
-- 30 min = $25
-- 45 min = $37.50
+> **median human finish time <=25–30 minutes**.
 
-Operating target for the $49 product:
+If fulfillment stays above 45–60 minutes, raise price, reduce scope, automate a proven step, or reject the service.
 
-> **median fulfillment <=25 minutes** after the workbench is functioning.
+### the402 fee correction
 
-If fulfillment remains >45–60 minutes, either raise price, reduce scope or reject the service.
+Do not model the402 as automatically taking 5% out of the provider's listed price.
 
-## Why a human-reviewed service can be strategically useful
+Its current public pricing page says:
 
-The initial service is intentionally not maximally scalable.
+- provider receives the price they set
+- the402 adds 5% to the buyer total
 
-It exists to discover:
+Example: provider lists `$49`; buyer would pay `$51.45` and provider receives `$49`, subject to the actual provider agreement/onboarding terms in force at transaction time.
 
-- what buyers actually ask for
-- which market facts change their decisions
-- which recruiter judgments recur
-- which sources are trusted
-- what they will pay for
-- where automation saves the most time
+Some technical/provider documentation has contained conflicting or stale language, so verify actual economics before launch.
 
-This is paid product research.
-
-A manually fulfilled product that earns $49 teaches more than a fully automated endpoint with zero buyers.
-
-## Agent-commerce distribution
+## Agent-native distribution
 
 ### the402
 
-Current marketplace capabilities include:
+Current platform capabilities include:
 
 - human services
+- fixed-price or quote-based work
 - machine-readable input schemas
 - x402 payment
 - escrow
-- agent/human buyers
+- asynchronous delivery
 - provider reputation
-- request/bidding flow
-- 5% provider fee
+- open work requests/bidding
+- MCP server access
 
-This is a concrete future channel for **human recruiting judgment purchased by an agent**.
+Its public provider/pricing pages currently say listings are free and buyers pay a 5% platform surcharge.
 
-Do not assume demand exists because the marketplace exists. The public request board may have little/no recruiting work at a given moment.
+This creates a concrete experiment:
 
-### Direct x402
+> **Will an agent purchase recruiter judgment from a human specialist?**
 
-Keep x402-lab's seller infrastructure for future automated SKUs.
+Do not overstate current demand. Marketplace availability is distribution infrastructure, not product validation.
 
-Do not force human-reviewed fulfillment into a synchronous HTTP endpoint.
+### Direct human channel
 
-### Conventional payment
+For first revenue, use whichever legitimate payment route creates the least friction for a real recruiter. Do not require a wallet merely to preserve the x402 theme.
 
-If humans want the service, add a normal purchasing path before requiring wallet adoption.
+### Existing direct x402 stack
 
-The business must survive if x402 growth disappoints.
+Keep x402-lab seller infrastructure for future automated components that earn productization.
+
+Do not force asynchronous human fulfillment into a synchronous HTTP endpoint.
 
 ## Customer validation protocol
 
-For first five external recruiters:
+For each external recruiter:
 
-Before showing the brief ask what they would research/ask on the req.
+Before showing the review, ask what they would normally research/challenge for the req.
 
-After showing it record:
+Afterward record:
 
-- did intake/search behavior change?
-- did it replace manual research?
-- what part mattered?
+- did the review change an intake/search action?
+- did it remove manual research?
+- what observation mattered?
 - what was obvious/useless?
 - what fact was missing?
 - would they send another req?
-- would they pay $25? $49? $75?
+- would they pay `$25`, `$49`, `$75`?
 
 ### Continue threshold
 
-From first 5:
+From first five:
 
-- >=3 report a concrete behavior change or meaningful manual research saved
-- >=2 request another review / recurring use
-- at least 1 is willing to pay a stated price
+- `>=3/5` report a concrete behavior change or meaningful manual research saved
+- `>=2/5` request another review / recurring use
+- at least one is willing to pay a stated price
 
-### Stronger signal
+### Stronger signals
 
-First actual external payment.
+1. first actual external payment
+2. same buyer purchases a second review
 
-### Strongest early signal
-
-Same buyer purchases a second review.
+The second event matters far more.
 
 ## Fulfillment workbench
 
-Tonight's Codex work should create an **internal** Search Calibration Workbench.
+Tonight's Codex work builds an **internal Search Preflight Workbench**.
 
 Core requirements:
 
-- input schema for req facts
+- structured req + search-plan input
 - source-neutral market-fact interfaces
-- occupation/title normalization
-- clearly licensed O*NET/BLS integration or fixture support
-- CareerOneStop only as optional experimental source pending rights clarity
-- deterministic compensation/context calculations
+- occupation/title normalization where reliable
+- O*NET/BLS or fixture support
+- CareerOneStop optional internal evidence only pending rights clarification
+- deterministic compensation/context helpers
+- constraint/search-plan contradiction detection
 - source/vintage/provenance output
 - reusable calibration-question templates
-- Markdown and JSON draft output
-- execution timing
+- Markdown + JSON draft output
+- explicit human-review layer
+- execution/review timing
 - tests
 
-The workbench is successful if it reduces the time needed to produce a credible human-reviewed brief.
+The workbench is successful if it reduces time needed to produce a credible human-reviewed preflight.
 
-It is not a customer product by default.
+It is **not** a customer product by default.
 
 ## Tonight's stop/go rule
 
-After Codex generates sample drafts across multiple role families:
+Continue if:
 
-### Continue if
-
-- draft gets a human reviewer >70% of the way to a useful deliverable
-- facts are sourced and correctly scoped
+- draft gets a human reviewer roughly `>=70%` of the way to a useful deliverable
+- facts are correctly scoped/sourced
 - industrial/non-tech roles are not systematically poor
-- finishing a review plausibly takes <=25–30 minutes
+- finishing a review plausibly takes `<=25–30 minutes`
 
-### Stop/refactor if
+Stop/refactor if:
 
-- output is mostly generic salary data
-- occupation mapping is unreliable
-- human reviewer has to rewrite most of it
-- the tool creates more checking work than it saves
+- output is mostly salary/occupation lookup
+- occupation mapping routinely misleads
+- reviewer rewrites most of the draft
+- generic template language dominates
+- tool creates more checking work than it saves
 
-Do **not** add an LLM or premium data automatically to rescue poor utility.
+Do **not** add an LLM or premium data automatically to rescue weak utility.
 
-## First revenue plan
+## First revenue sequence
 
-Once sample quality passes:
+1. build the internal workbench
+2. generate five sanitized drafts across role families
+3. human-review them and measure finish time
+4. create 3–5 credible examples
+5. show to five external recruiters
+6. offer a next real review at a stated pilot price
+7. record fulfillment time and what buyer changed
+8. seek first external payment
+9. seek second payment from the same buyer
+10. only after reliable fulfillment, test an agent-native human-service listing
 
-1. create 3–5 polished example briefs using non-confidential/public roles
-2. show to five external recruiters
-3. offer next review at pilot price ($25)
-4. record fulfillment time and what buyer changed
-5. collect payment through the simplest available channel
-6. after one real buyer exists, test a machine-native human-service listing
-7. seek a repeat purchase before broader product development
+## Moat ladder
 
-## Commercial milestones
+The initial service has a weak moat. That is acceptable for discovery.
 
-- **$1 external revenue** — crossed from experiment to commerce
-- **$100 cumulative external revenue** — non-ceremonial demand
+The objective is to earn stronger layers:
+
+1. **workflow expertise** — faster/better reviewer playbooks
+2. **specialty depth** — especially where contextual recruiting judgment matters
+3. **fulfillment tooling** — lower time and higher consistency
+4. **buyer outcome history** — what recommendations actually led to req/search changes
+5. **proprietary calibration patterns** — what combinations repeatedly create problems
+6. **automation** — encode repeated, validated judgment
+7. **machine-native products** — sell proven components autonomously
+
+Do not claim a data moat before one exists.
+
+## Commercial milestone ladder
+
+- `$1` external revenue — crossed from experiment into commerce
+- `$100` cumulative external revenue — non-ceremonial demand
 - **first repeat payer** — strongest early signal
-- **$500 monthly revenue** — tiny business signal
-- **$1,000 monthly contribution after owner time** — meaningful side-business validation
-- **$5,000 monthly contribution** — evaluate standalone commercial brand and deeper automation
+- `$500/month` revenue — tiny business signal
+- `$1,000/month` contribution after owner time — meaningful side-business validation
+- `$5,000/month` contribution — evaluate formal brand, deeper automation and deliberate acquisition
 
-These are milestones, not forecasts.
-
-## Moat roadmap
-
-### Now
-
-Human recruiting judgment + fast fulfillment.
-
-### Next
-
-Specialty-specific playbooks and better workbench tooling.
-
-### Then
-
-Anonymized outcome/calibration history:
-
-- compensation changed
-- title changed
-- must-have relaxed
-- location/remote changed
-- search started/stalled
-- buyer returned
-
-### Later
-
-Automate the proven recurring judgments and expose them as products.
-
-The long-term moat, if one emerges, should come from **observed outcomes and workflow learning**, not merely wrapping public datasets.
+These are learning milestones, not forecasts.
 
 ## Brand
 
 Do not name a company yet.
 
-`x402-lab` remains the public experiment.
+`x402-lab` remains the public R&D asset.
 
 A commercial identity is earned only after actual paid demand.
 
 ## Definition of success for Business Plan v0.3
 
-This plan succeeds if it gets the project to a real paying external buyer faster than continuing to build unvalidated automated APIs, while creating evidence about which portions of recruiting judgment deserve software productization.
+This plan succeeds if it gets the project to a real paying external buyer faster than continuing to build unvalidated automated APIs, while generating evidence about which parts of recruiting judgment deserve software productization.
