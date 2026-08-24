@@ -31,8 +31,13 @@ The project has repeatedly discovered that attractive, easy-to-build ideas had w
 
 A weak Product #2 is worse than no Product #2.
 
+Start tonight with:
+
+- [`docs/START-HERE-TONIGHT-2026-08-24.md`](docs/START-HERE-TONIGHT-2026-08-24.md)
+
 Current governing docs:
 
+- [`docs/DIRECTIVE-ALIGNMENT-2026-08-24.md`](docs/DIRECTIVE-ALIGNMENT-2026-08-24.md)
 - [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md)
 - [`docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`](docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md)
 - [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md)
@@ -68,9 +73,11 @@ Current observed demand patterns make these categories worth investigating:
 
 These are categories to study, not pre-approved products.
 
-## Tonight's Codex target
+## Machine Demand Observatory
 
-Build an internal **Machine Demand Observatory** on branch:
+The active discovery workstream is **Issue #15**.
+
+Build an internal Machine Demand Observatory on branch:
 
 `milestone-4-5-machine-demand-observatory`
 
@@ -89,7 +96,33 @@ It should support normalized JSON/CSV snapshots, Markdown reports and human-revi
 
 It must **not** autonomously choose Product #2.
 
-Exact plan: [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
+## Kiroshi Optics
+
+**Kiroshi Optics** is now an active internal companion project: **Issue #16**.
+
+It is a local read-only visual scanner over Observatory exports — not Product #2, not a commercial brand, and not another data pipeline.
+
+After the minimal Observatory core passes its usefulness gate, Kiroshi is authorized to proceed with a tightly bounded first slice:
+
+- `MARKET SCAN`
+- `TARGET SCAN`
+- `OPPORTUNITY QUEUE` when data exist
+- `BUYER TRACE` only when transaction-level evidence supports it
+
+Read:
+
+- [`docs/KIROSHI-OPTICS.md`](docs/KIROSHI-OPTICS.md)
+- [`docs/KIROSHI-OPTICS-MVP.md`](docs/KIROSHI-OPTICS-MVP.md)
+
+V0 target: local, original futuristic scanner styling, existing Node/TypeScript stack, `$0` incremental paid infrastructure, no wallet/data-provider access from the viewer.
+
+## Experiment capital
+
+Approximately **$300** of discretionary experiment capital is available for bounded evidence-generating tests.
+
+That is strategic capacity, not a spending target.
+
+Default remains `$0` spend until a test has a clear hypothesis, maximum cost, free-data gap and continue/reject criterion.
 
 ## Using our shopper as a research tool
 
@@ -140,9 +173,7 @@ These are reusable infrastructure, not product-market fit.
 
 ## Current milestone
 
-**Milestone 4.5D — Revealed-demand observatory / Product #2 discovery.**
-
-The active issue is the market-observatory workstream.
+**Milestone 4.5D — Revealed-demand observatory / Product #2 discovery**, with **Milestone 4.5E — Kiroshi Optics** as the approved companion scanner after the Observatory gate.
 
 ## Progress
 
@@ -155,11 +186,12 @@ The active issue is the market-observatory workstream.
 - [x] product viability/profit gate
 - [x] multiple weak product hypotheses rejected before large builds
 - [x] Product #2 explicitly reset to unknown
+- [x] Kiroshi Optics MVP scoped and approved after Observatory gate
 - [ ] build machine-demand observatory
 - [ ] capture normalized current market snapshot
 - [ ] analyze buyer breadth/repeat/concentration
-- [ ] identify cross-seller shopper patterns where data permits
 - [ ] create 3–5 evidence-grounded opportunity cards
+- [ ] build first Kiroshi Optics scanner slice
 - [ ] cheaply falsify the strongest candidate(s)
 - [ ] select Product #2 only after one passes the gate
 - [ ] first external paid use
