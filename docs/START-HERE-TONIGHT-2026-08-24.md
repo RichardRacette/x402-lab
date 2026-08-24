@@ -8,7 +8,9 @@ This file supersedes any older product-specific desktop handoff language.
 
 Do not work from an older local branch.
 
-Active issue: **#15 — Machine Demand Observatory / Product #2 discovery**.
+Active discovery workstream: **Issue #15 — Machine Demand Observatory / Product #2 discovery**.
+
+Active companion project: **Issue #16 — Kiroshi Optics MVP**.
 
 **Product #2 is intentionally unknown.**
 
@@ -20,10 +22,11 @@ Active issue: **#15 — Machine Demand Observatory / Product #2 discovery**.
 4. `docs/MARKET-DATA-SOURCES-2026-08-24.md`
 5. `docs/CODEX-SESSION-PLAN-2026-08-24.md`
 6. `docs/KIROSHI-OPTICS.md`
+7. `docs/KIROSHI-OPTICS-MVP.md`
 
 Older Recruiting Pressure, Role Reality, Search Preflight and Practitioner Eval docs are historical evidence only.
 
-## 3. Core Codex mission
+## 3. Phase A — Core Codex mission
 
 Create branch:
 
@@ -45,7 +48,7 @@ Target roughly **90–120 Codex minutes** before judging the core.
 
 Do not let the Observatory become a general analytics platform.
 
-## 4. Core pass/fail gate
+## 4. Phase A pass/fail gate
 
 Ask:
 
@@ -78,59 +81,72 @@ Do not rescue it with:
 
 A documented failure is a successful discovery outcome.
 
-## 5. Real-money rule
+If Phase A fails, **do not build Kiroshi yet**; it would only visualize weak evidence.
 
-Default: **no spend**.
+## 5. Real-money / capital rule
 
-Do not execute any paid x402 research request without separate explicit owner approval during the session.
+The project has approximately **$300 of experiment capital available**, but default remains **no spend**.
 
-Preparing/dry-running a capped command is allowed. Executing it is not.
+Do not execute any paid research request without explicit approval at execution time.
+
+Capital is for bounded evidence-generating tests, not UI polish or infrastructure theater.
+
+Before proposing a spend, identify:
+
+- hypothesis;
+- why free evidence is insufficient;
+- maximum cost;
+- continue/reject result;
+- recurring-cost risk.
 
 Do not broaden wallet/network permissions automatically.
 
-## 6. Kiroshi Optics — optional fun unlock
+## 6. Phase B — Kiroshi Optics
 
-Only after the Observatory core passes:
+If the Observatory core passes, **Kiroshi Optics is already authorized to proceed**. No additional strategic approval is needed.
 
-Read `docs/KIROSHI-OPTICS.md` and give Codex a separate stretch task.
+Read:
 
-Kiroshi Optics is:
+- `docs/KIROSHI-OPTICS.md`
+- `docs/KIROSHI-OPTICS-MVP.md`
+- Issue #16
+
+Kiroshi is:
 
 - local/read-only;
-- a visual lens over existing Observatory JSON;
+- a visual lens over existing Observatory exports;
 - no backend/database/auth;
 - no wallet access;
 - no new data collection;
 - no automatic product recommendations;
-- **30–45 Codex minutes maximum** for the first slice.
+- **30–45 Codex minutes** for the first slice;
+- $0 incremental paid infrastructure for V0.
 
-It is an internal codename inspired by the Cyberpunk fictional universe, not a commercial brand. Use original styling/assets only.
-
-Suggested first views:
+First views:
 
 - `MARKET SCAN`
 - `TARGET SCAN`
-- `BUYER TRACE`
-- `OPPORTUNITY QUEUE`
+- `OPPORTUNITY QUEUE` when card data exist
+- `BUYER TRACE` only when transaction-level data actually support it
 
-If it takes longer than the bounded stretch or requires architecture changes, stop.
+If it requires architecture changes or major dependency growth, stop.
 
-## 7. Exact first Codex prompt
+## 7. Exact Phase A Codex prompt
 
-> Read `docs/START-HERE-TONIGHT-2026-08-24.md`, `docs/DIRECTIVE-ALIGNMENT-2026-08-24.md`, `docs/PRODUCT-THESIS.md`, `docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`, `docs/MARKET-DATA-SOURCES-2026-08-24.md`, and `docs/CODEX-SESSION-PLAN-2026-08-24.md` before editing anything. Create branch `milestone-4-5-machine-demand-observatory`. Product #2 is intentionally unknown. Build the smallest useful internal Machine Demand Observatory; prioritize provider-neutral data structures, deterministic fixtures/tests, breadth/repeat/economic/concentration metrics, free x402stats collection, one JSON/Markdown report, and an opportunity-card scaffold. Preserve source methodologies and existing x402-lab behavior. Do not build a new seller product, frontend, database, LLM opportunity scorer, unbounded scraper, or real-money execution path. Time-box the first useful core so we can judge it rather than endlessly extend it. Finish the core and tell me whether it materially beats manual dashboard browsing. Do **not** start Kiroshi Optics yet; that is a separate stretch task only if I approve after reviewing the core.
+> Read `docs/START-HERE-TONIGHT-2026-08-24.md`, `docs/DIRECTIVE-ALIGNMENT-2026-08-24.md`, `docs/PRODUCT-THESIS.md`, `docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`, `docs/MARKET-DATA-SOURCES-2026-08-24.md`, and `docs/CODEX-SESSION-PLAN-2026-08-24.md` before editing anything. Create branch `milestone-4-5-machine-demand-observatory`. Product #2 is intentionally unknown. Build the smallest useful internal Machine Demand Observatory; prioritize provider-neutral data structures, deterministic fixtures/tests, breadth/repeat/economic/concentration metrics, free x402stats collection, one JSON/Markdown report, and an opportunity-card scaffold. Preserve source methodologies and existing x402-lab behavior. Do not build a new seller product, frontend, database, LLM opportunity scorer, unbounded scraper, or real-money execution path. Time-box the first useful core so we can judge it rather than endlessly extend it. Finish the core and tell me whether it materially beats manual dashboard browsing. If the core clearly passes, stop at the gate and summarize the exact Observatory export/interface Kiroshi Optics should consume.
 
-## 8. Kiroshi stretch prompt — use only after core approval
+## 8. Exact Phase B Kiroshi prompt
 
-> The Machine Demand Observatory core has passed its usefulness gate. Now read `docs/KIROSHI-OPTICS.md`. Build the smallest local read-only Kiroshi Optics viewer over the Observatory's existing normalized JSON outputs. Do not add a backend, database, auth, wallet access, new provider, data collection, recommendation engine, or commercial branding. Use original futuristic scanner styling; do not copy official Cyberpunk assets/logos/fonts/UI. Prioritize MARKET SCAN, TARGET SCAN, BUYER TRACE where data exists, and OPPORTUNITY QUEUE. Preserve source/methodology/observation-time/limitations prominently. Do not invent a single opportunity score. Keep this first viewer slice bounded to roughly 30–45 minutes of implementation effort and stop rather than expanding architecture.
+Use the exact prompt in `docs/KIROSHI-OPTICS-MVP.md`.
+
+The strategic approval to run it after a Phase A pass has already been given.
 
 ## 9. End-of-night outcome
 
-Best outcome is not necessarily code volume.
+Best outcomes:
 
-We want one of:
+1. useful Observatory + 3–5 disciplined research targets;
+2. useful Observatory + first functioning Kiroshi Optics scanner;
+3. documented conclusion that the Observatory itself does not improve discovery enough to justify more work.
 
-1. a useful Observatory that produces 3–5 disciplined research targets;
-2. a useful Observatory plus a tiny Kiroshi Optics scanner;
-3. a documented conclusion that the Observatory itself does not improve discovery enough to justify more work.
-
-All three are preferable to forcing Product #2.
+None of these require Product #2 to be selected tonight.
