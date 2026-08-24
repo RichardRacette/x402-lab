@@ -2,159 +2,225 @@
 
 Status: **source of truth for tonight's desktop/Codex work**
 
+This plan supersedes the earlier automated Role Reality implementation plan after a full profitability and competitor audit.
+
 ## Objective
 
-Use Codex to build a **validation-grade local Role Reality Check**, generate real sample packets if provider access is available, and stop before public paid deployment unless the output survives review.
+Build an **internal Search Preflight Workbench** that helps a knowledgeable recruiter produce a fast, high-quality, human-reviewed requisition/search-plan review.
 
-Tonight is not a feature sprint.
+Tonight does **not** create Product #2 and does **not** expose a new paid API.
 
 Tonight answers:
 
-> **Can our current stack turn open labor-market data into a recruiter decision packet that feels worth buying?**
+> **Can software get a human recruiter most of the way to a useful search-preflight deliverable, while preserving the human judgment that existing free market-intelligence tools do not sell to an agent on demand?**
+
+The immediate revenue experiment after that is a human service, not an automated endpoint.
+
+## Why the plan changed
+
+The prior automated Role Reality Check no longer passes the project's own viability gate:
+
+- Glozo currently provides rich role-level U.S. talent-market intelligence on its free plan: supply, demand, salary, trends, competing employers, geography, and listing lifespan.
+- Findem now markets a Calibration Agent for market-grounded alignment before sourcing.
+- MergeSearch sells finished, source-verified executive-search market maps within 24 hours.
+- PaynePoint/EviBrief offers pre-recruitment candidate-market validation.
+- A current recruiting-industry guide teaches solo recruiters to assemble a talent-intelligence MCP from public/free data.
+
+Therefore we should not spend tonight building a public-data market-intelligence clone.
+
+The new experiment is narrower:
+
+> **A recruiter/agent sends a requisition and its proposed search plan. A real recruiter reviews what is unrealistic, what is underspecified, what should be challenged, and what should change before money/time/outreach are spent.**
+
+The scarce input is human recruiting judgment. The software exists first to reduce fulfillment time and make that judgment consistent.
 
 ## Branch
 
 Create:
 
-`milestone-4-5-role-reality-validation`
+`milestone-4-5-search-preflight-workbench`
 
 Do not implement directly on `main`.
 
-## Read first
+## Read before editing
 
-Codex must read before changing code:
+Codex must read:
 
-1. `docs/PRODUCT-VIABILITY-2026-08-24.md`
-2. `docs/PRODUCT-DISCOVERY-ROUND-2-2026-08-24.md`
-3. `docs/ROLE-REALITY-CHECK-V0.md`
-4. `docs/CODEX-BUILD-BRIEF-2026-08-24.md` only to confirm the old plan is on HOLD
+1. `docs/FULL-PROJECT-AUDIT-2026-08-24.md`
+2. `docs/BUSINESS-PLAN-V0.3.md`
+3. `docs/PRODUCT-VIABILITY-2026-08-24.md`
+4. `docs/ROADMAP.md`
 5. `src/server.ts`
 6. `src/analyze-job.ts`
 7. `src/public-source.ts`
 8. existing tests/package scripts
 
-Before coding, Codex should summarize:
+Read `docs/ROLE-REALITY-CHECK-V0.md` and the older recruiting-pressure files only as **historical product-discovery evidence**. Do not implement those public products.
 
-- the product question
-- what is intentionally not being built
-- what data claims are allowed
-- what conditions make the session stop
+Before coding, Codex must summarize:
 
-## Desktop prerequisite: CareerOneStop access
+- why Role Reality was invalidated as an automated SKU
+- what is being built instead
+- what is explicitly not being built
+- the data-rights posture
+- the fulfillment-time stop/go test
 
-CareerOneStop Web APIs require a provider-side user ID and bearer token.
+## Commercial experiment being supported
 
-At the start of the desktop session, check whether these are available:
+Working human-service label:
 
-```text
-CAREERONESTOP_USER_ID
-CAREERONESTOP_API_TOKEN
+**Recruiting Search Preflight — Human Review Gate**
+
+Proposition:
+
+> Send one U.S. requisition plus the search assumptions/constraints. Receive a recruiter-reviewed, machine-readable preflight identifying what should be clarified, challenged, or changed before heavy sourcing/outreach begins.
+
+This is not a full market map, candidate search, or hiring recommendation.
+
+It is a narrow quality-control step before execution.
+
+Potential buyers:
+
+- AI recruiting agents that need a human review before acting
+- boutique/independent recruiters
+- agency recruiters/account managers
+- later, recruiting software that wants a human-review escalation path
+
+## Input model
+
+Build a compact internal request model, conceptually:
+
+```json
+{
+  "title": "Controls Engineer",
+  "location": "Detroit, MI",
+  "compensation": {
+    "minAnnualUsd": 95000,
+    "maxAnnualUsd": 120000
+  },
+  "workModel": "onsite",
+  "mustHaves": ["PLC", "Siemens"],
+  "context": {
+    "industry": "manufacturing",
+    "shift": "first",
+    "travelPct": 10,
+    "urgency": "high"
+  },
+  "searchPlan": {
+    "targetTitles": ["Controls Engineer", "Automation Engineer"],
+    "targetIndustries": ["automotive", "industrial automation"],
+    "notes": "optional plan generated by recruiter/agent"
+  }
+}
 ```
 
-If not available, do **not** block the coding session.
+All fields beyond title/location may be optional where reasonable.
 
-Build the provider behind an interface using deterministic mocked fixtures and leave live integration validation pending. Do not invent credentials or commit placeholders that look real.
+Do not request candidate PII.
 
-The owner can request CareerOneStop Web API data access through the official CareerOneStop developer site; the provider states its API data are open data under USDOL's Open Data Policy.
+Do not require confidential employer/client information for validation samples.
 
-## Phase 1 — pure product engine
+## Data-rights posture
 
-Build the decision logic before network integration.
+### CareerOneStop
+
+CareerOneStop registration has been submitted transparently.
+
+The click-license presented during registration includes a no-modification/alteration condition for COS Data. Until written clarification exists, CareerOneStop must remain **optional internal/experimental evidence only** and must not be the foundation of a proprietary commercial score or transformed customer claim.
+
+If credentials arrive tonight, they may be used for internal comparison/validation only after the fixture/core work is green.
+
+Never commit or log credentials.
+
+### Preferred foundations
+
+Prefer where practical:
+
+- O*NET data/content covered by CC BY 4.0, with correct attribution and disclosure of modifications
+- BLS public data, with source/access date/vintage and required BLS disclaimer treatment
+- deterministic fixtures/local sample data during development
+
+Do not add paid/proprietary talent data tonight.
+
+## Desired architecture
 
 Suggested structure:
 
 ```text
-src/role-reality/
+src/search-preflight/
   types.ts
   normalize.ts
+  market-facts.ts
   compensation.ts
-  friction.ts
+  constraints.ts
   questions.ts
+  report.ts
   service.ts
-  provider.ts
-  careeronestop.ts
+  providers/
+    provider.ts
+    onet.ts          # optional/minimal
+    bls.ts           # optional/minimal or fixture-backed
+    careeronestop.ts # optional/internal only
 ```
 
-Exact filenames can change if a smaller structure is clearer.
+Simplify if fewer files are clearer.
 
-### Provider-neutral market input
+Keep all new logic independent of x402 payment middleware.
 
-Define a compact normalized object representing only the facts V0 needs, conceptually:
+## Workbench output
 
-```ts
-type RoleMarketFacts = {
-  occupation: {
-    code: string;
-    title: string;
-    mapping: "direct" | "related" | "ambiguous";
-  };
-  wages: {
-    pct25AnnualUsd: number | null;
-    medianAnnualUsd: number | null;
-    pct75AnnualUsd: number | null;
-  };
-  demand: {
-    currentJobCount30d: number | null;
-    estimatedEmployment: number | null;
-    projectedAnnualOpenings: number | null;
-    projectedGrowthPct: number | null;
-  };
-  alternateTitles: string[];
-  marketSkills: string[];
-  provenance: unknown[];
-};
-```
+Generate both JSON and Markdown drafts.
 
-Do not let CareerOneStop response shapes leak throughout the domain logic.
+Suggested sections:
 
-## Phase 2 — deterministic decision rules
+1. **Req summary**
+2. **Role interpretation / ambiguity**
+3. **Market context** — only what sources support
+4. **Compensation context**
+5. **Constraint observations**
+6. **Search-plan observations**
+7. **Calibration questions** — 5–8 concrete questions
+8. **Possible pivots** — titles/geography/comp/requirements only where defensible
+9. **Sources / data vintage / limitations**
+10. **Human reviewer section** — explicit placeholder for the scarce judgment being sold
 
-Implement only defensible rules from `ROLE-REALITY-CHECK-V0.md`.
+The draft must never claim:
 
-### Compensation
+- guaranteed fillability
+- exact candidate supply unless directly sourced with a valid definition
+- that an employer should make a hiring decision
+- legal/compliance advice
+- that public job counts equal unique open positions or candidate scarcity
 
-Implement:
+## Deterministic helpers
 
-- below-market
-- market-range
-- above-market
-- insufficient-data
+Implement only obvious, auditable assistance that reduces reviewer work, for example:
 
-Use the stated 25th/75th percentile rules.
+- proposed max below a valid geographic wage benchmark -> compensation flag
+- ambiguous title mapping -> question to resolve title/search family
+- onsite + narrow geography -> ask whether commute/geography is truly fixed; do not assert scarcity
+- long must-have list -> ask which requirements are genuinely non-negotiable
+- conflicting searchPlan vs must-haves -> highlight inconsistency
+- search plan omits obvious alternate titles from licensed occupation data -> suggest reviewer inspect them
+- preserve source geography/vintage so reviewer can see whether evidence is actually comparable
 
-### Friction
+No synthetic 0–100 fillability score.
 
-Start conservatively.
+No LLM required tonight.
 
-Required rule:
+## Tests
 
-- if buyer-provided maximum annual compensation is below local 25th-percentile benchmark -> `high-friction` with `COMPENSATION_PRESSURE`
+Minimum:
 
-Other rules may produce `calibrate` only when directly supported.
-
-Do **not** create a synthetic demand/supply score merely because the inputs exist.
-
-### Calibration questions
-
-Template questions must be traceable to actual flags.
-
-No LLM.
-
-## Phase 3 — tests before provider calls
-
-Use synthetic fixtures.
-
-Minimum tests:
-
-- comp max below P25 -> high-friction
-- comp overlaps P25–P75 -> market-range
-- comp min above P75 -> above-market, but do not call it a problem
-- missing wage data -> insufficient compensation data
-- no compensation input -> packet still works
-- ambiguous occupation -> safe preflight behavior
-- restrictive skill terms produce questions without candidate-supply claims
-- every flag has a reason
-- `proceed` language does not promise easy fill
+- below-market comp creates a source-backed observation, not a prediction
+- missing comp still produces a usable draft
+- ambiguous occupation prevents confident market interpretation
+- geography and data vintage survive into output
+- missing source values remain unknown/null, never zero
+- many must-haves generate calibration questions without fake candidate-count claims
+- contradictory search-plan assumptions are surfaced
+- Markdown and JSON include limitations and human-review placeholder
+- existing Evidence Slice/shopper tests remain green
 
 Run:
 
@@ -163,192 +229,146 @@ npm test
 npm run typecheck
 ```
 
-Existing tests must remain green.
+## Sample set
 
-## Phase 4 — CareerOneStop adapter
-
-Only after pure tests pass.
-
-Implement a bounded provider adapter using official APIs.
-
-Prioritize the minimum useful calls, likely:
-
-1. occupation lookup / occupation details
-2. wage + projected employment data, preferably from a response that already packages them
-3. current Jobs V2 query only to retrieve `JobCount` for a fixed 30-day window
-
-Do not fetch hundreds of job records if the API returns the count directly.
-
-### Adapter requirements
-
-- explicit provider timeout
-- bounded calls
-- input URL/path encoding
-- validate external response shapes
-- no credential logging
-- structured retryable errors
-- preserve useful source metadata/citations
-- provider unconfigured state must be clear
-
-### Configuration
-
-Read provider credentials from environment only.
-
-Update `.env.example` with names, never secrets.
-
-Do not make the application unable to start when CareerOneStop is unconfigured; Evidence Slice must remain operational.
-
-This is important: the current server requires `X402_PAY_TO` at startup. The new optional provider must not create another mandatory startup failure for unrelated routes.
-
-## Phase 5 — local free validation route first
-
-Do **not** immediately add a paid route.
-
-Add a temporary/local validation surface or call the service from a validation script/test harness.
-
-Preferred approach:
-
-```bash
-npm run role-reality:sample -- --title "Controls Engineer" --location "Detroit, MI" ...
-```
-
-or another simple CLI that does not expose a public endpoint.
-
-The goal is to inspect the packet before monetizing it.
-
-If live provider credentials are unavailable, the CLI may support fixture mode explicitly labeled as synthetic.
-
-## Phase 6 — generate sample packets
-
-If live provider access works, generate at least these sample roles:
+Generate sanitized drafts for materially different role families:
 
 - Controls Engineer — Detroit, MI
+- Maintenance Technician — Dallas, TX
+- Supply Chain Manager — Columbus, OH
 - Registered Nurse — Ann Arbor, MI
 - Software Engineer — San Francisco, CA
-- Maintenance Technician — Dallas, TX
-- Human Resources Information Systems Manager — Chicago, IL
 
-Use realistic hypothetical compensation ranges, clearly labeled as test inputs rather than claims about an employer.
+Use hypothetical compensation/constraints clearly labeled as test inputs.
 
-Save sanitized outputs under:
+Prefer industrial/non-tech roles in at least three samples because that is a plausible specialty wedge.
 
-`docs/validation-samples/role-reality/`
+Save under:
 
-Each file must include:
+`docs/validation-samples/search-preflight/`
 
-- retrieval timestamp
-- input
-- source metadata
-- limitations
-- no secrets
+No secrets or confidential employer data.
 
-## Phase 7 — human product review gate
+## Human fulfillment-time test
 
-Before implementing x402 payment for the new product, review the real sample packets manually.
+After Codex generates a draft, the human reviewer must time how long it takes to make it into something genuinely useful.
 
-Ask:
+### Pass
 
-1. Does this tell a recruiter anything non-obvious?
-2. Does the market evidence support the language?
-3. Are the calibration questions actionable?
-4. Is CareerOneStop coverage good enough for modern/niche roles?
-5. Does this feel worth $0.50?
-6. Which missing fact blocks usefulness?
+- draft is >=70% useful without rewriting from scratch
+- facts are correctly scoped and sourced
+- recruiter-specific questions/observations are meaningfully useful
+- human can finish a credible review in <=25–30 minutes
 
-### Stop condition
+### Fail
 
-If sample packets feel like a dressed-up salary lookup, **stop the build**.
+- output is mostly salary/occupation lookup
+- human spends more time checking the tool than doing the review manually
+- occupation mappings routinely mislead
+- generic template language dominates
+- most of the report must be rewritten
 
-Do not save the idea by adding an LLM, scraping LinkedIn, or buying another dataset tonight.
+If it fails, stop and document why.
 
-Document the failure and return to discovery.
+Do not automatically add an LLM, premium data, browser automation, candidate scraping, or a database to rescue it.
 
-## Phase 8 — x402 route only if the sample passes
-
-If and only if the sample packet clearly passes the human review gate, add:
-
-- free `POST /role-reality/preflight`
-- paid `POST /role-reality`
-- Base Sepolia price `$0.50` test USDC
-- strong Bazaar metadata
-- stable input/output example
-- health metadata
-
-Do not deploy mainnet.
-
-Do not add MPP/MCP yet.
-
-## Payment-route acceptance criteria
-
-If Phase 8 is reached:
-
-- preflight remains outside payment middleware
-- paid route uses existing x402 V2 architecture
-- Evidence Slice and analyze-job behavior unchanged
-- provider-unavailable error semantics clear
-- no payment should be intentionally solicited for obviously unsupported input after preflight
-- `npm test` and `npm run typecheck` green
-- complete one bounded Base Sepolia self-purchase only after local correctness is established
-
-## Economics instrumentation
-
-For Role Reality requests log structurally:
-
-```text
-request id
-provider calls
-provider latency
-fulfillment latency
-known variable provider cost
-configured sale price
-outcome
-friction classification
-```
-
-No dashboard/database tonight.
-
-## Absolute non-goals
+## What Codex should NOT build tonight
 
 Do not add:
 
-- Recruiting Pressure / company-opportunity endpoint
-- company history tracking
-- database
-- candidate data
+- public `POST /role-reality`
+- Recruiting Pressure / Agency Opportunity product
+- full market map
+- candidate sourcing/ranking
 - LinkedIn scraping
-- candidate sourcing
-- email/contact enrichment
-- AI-generated outreach
-- LLM scoring
-- embeddings
-- browser automation
-- Lightcast/TalentNeuron subscription
-- JobsPipe integration
-- global data
+- contact enrichment
+- candidate PII
+- outreach automation
 - frontend/dashboard
+- production database
+- premium talent-data vendor
 - MCP
 - MPP
 - mainnet
-- rebrand
+- commercial rebrand
+
+Do not change the existing public Evidence Slice contract.
+
+## Optional CareerOneStop experiment
+
+If the registration email has arrived, CareerOneStop may be added only as an **optional internal provider** after tests pass.
+
+Requirements:
+
+- no startup dependency
+- no credentials in source/logs/output
+- preserve provider citations/source metadata
+- clearly label provider use in generated internal samples
+- no proprietary transformed COS score
+- treat commercial rights as unresolved until written clarification
+
+The already prepared adapter notes may be used for implementation mechanics but no longer govern the product direction.
+
+## Revenue path after tonight
+
+If the workbench passes its time/quality gate:
+
+1. manually finish 3–5 example Search Preflight reviews
+2. show them to external recruiters
+3. offer a real next review at a stated pilot price
+4. record whether behavior changes and how long fulfillment takes
+5. seek **one real external payment**
+6. seek a second purchase from the same buyer
+7. test an agent-native human-service listing only after the service is coherent enough to fulfill reliably
+
+### Machine-native distribution hypothesis
+
+the402 currently supports human expert services purchased by agents through x402 escrow, with machine-readable input schemas and asynchronous fulfillment.
+
+A future listing could look conceptually like:
+
+- `service_type`: `human_service`
+- `name`: `Recruiting Search Preflight — Human Review Gate`
+- `estimated_delivery`: `12h` or `24h`
+- `price`: initial fixed or quote-required pilot
+- input: requisition/search-plan fields above
+- deliverable: structured JSON + Markdown summary
+
+Do not list it tonight solely because the platform exists. First make sure we can fulfill it well.
+
+## Pricing research posture
+
+Do not anchor on $0.50 anymore.
+
+Human services on agent marketplaces commonly live in the tens to hundreds of dollars, and recruiting research ranges from inexpensive consultations to enterprise reports costing thousands.
+
+Initial external tests should explore something like:
+
+- free sample(s) for learning
+- $25 pilot
+- $49 normal early test
+- $75–$99 if the review materially changes a live search decision
+
+Price must ultimately cover human time and still be trivial relative to recruiter/search economics.
 
 ## Codex prompt for tonight
 
-> Read `docs/CODEX-SESSION-PLAN-2026-08-24.md` and every governing document it lists before editing anything. Create branch `milestone-4-5-role-reality-validation`. The former Recruiting Pressure build is explicitly on HOLD; do not implement it. Build Role Reality Check only through the gated phases in the session plan. Start with provider-neutral types, deterministic decision logic, and synthetic tests. Preserve all existing x402-lab behavior. Add CareerOneStop only behind an optional environment-configured adapter after tests pass. Generate live sample packets if credentials are available. Do not add a paid Role Reality endpoint until we manually judge the sample output to be materially more useful than a salary lookup. If the product fails that gate, stop and document why instead of adding features. Run tests and typecheck after each meaningful slice and report any contract conflict before broadening scope.
+> Read `docs/CODEX-SESSION-PLAN-2026-08-24.md`, `docs/FULL-PROJECT-AUDIT-2026-08-24.md`, and `docs/BUSINESS-PLAN-V0.3.md` before editing anything. Create branch `milestone-4-5-search-preflight-workbench`. The automated Role Reality and Recruiting Pressure products are invalidated/held; do not implement their public endpoints. Build only an internal Search Preflight Workbench that reduces the time required for a human recruiter to review a requisition/search plan. Start with provider-neutral types, deterministic helpers, Markdown/JSON drafts, and synthetic tests. Preserve all existing x402-lab public behavior. Prefer O*NET/BLS or fixtures where practical; CareerOneStop is optional internal evidence only pending commercial-rights clarification. Generate sanitized samples across multiple role families. Do not add payments, MCP, MPP, candidate data, premium vendors, or a frontend. Run tests and typecheck after each meaningful slice. The session succeeds only if the workbench makes a human reviewer faster and more consistent; if it does not, stop and document the failure rather than adding features.
 
 ## Desired end-of-night result
 
 Best case:
 
-- tested Role Reality core
-- bounded CareerOneStop integration
-- 3–5 real sample packets
-- clear evidence the packet is worth exposing as a paid Base Sepolia product
-- optional paid route only if earned
+- tested internal workbench
+- 5 sanitized draft preflights
+- human reviewer can finish each in <=25–30 minutes
+- clear reusable structure for external validation
+- no regression to existing x402 seller/buyer stack
 
 Still-successful case:
 
-- tests + adapter architecture complete
-- product is rejected after seeing real samples
-- we learned cheaply before deploying another weak SKU
+- workbench is rejected because it does not save reviewer time
+- the reason is documented
+- no weak new paid endpoint was deployed
 
-Both outcomes are progress.
+Both outcomes are preferable to shipping an economically redundant product.
