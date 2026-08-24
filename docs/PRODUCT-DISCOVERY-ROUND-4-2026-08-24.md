@@ -22,6 +22,10 @@ Practitioner Eval remains a **parked side hypothesis**, not the active engineeri
 
 The next task is to improve the quality of product discovery by observing **revealed machine purchasing behavior**.
 
+Read `DIRECTIVE-ALIGNMENT-2026-08-24.md` as a governing quality-check addendum. The Machine Demand Observatory is an internal research instrument, not a new product category, and its first useful slice is time/utility gated.
+
+`KIROSHI-OPTICS.md` defines an optional local read-only visualization layer. It is subordinate to the Observatory gate and is not Product #2 or a commercial brand.
+
 ## New active question
 
 > **What are independent buyers already paying for repeatedly in machine commerce, why is buying rational compared with reproducing the capability, and where is there a gap x402-lab can credibly exploit?**
@@ -303,6 +307,8 @@ No frontend/database is required for the first slice.
 
 JSON/CSV + Markdown reports are sufficient.
 
+The initial core is time-boxed. If a small implementation does not improve discovery over manual browsing, stop rather than building a generalized analytics platform.
+
 ## x402scan as a research supplier
 
 x402scan currently exposes paid x402 resources including approximately:
@@ -335,6 +341,21 @@ Suggested initial live research budget after explicit approval:
 - max `$0.25` per collection session
 
 These are proposed caps, not authorization to spend.
+
+## Kiroshi Optics stretch layer
+
+If and only if the Observatory core passes its usefulness gate, `KIROSHI-OPTICS.md` may be implemented as a local read-only viewer over normalized Observatory outputs.
+
+The first Kiroshi slice is intentionally bounded:
+
+- 30–45 Codex minutes maximum;
+- no new backend/database/auth;
+- no wallet or paid-fetch access;
+- no new providers/data collection;
+- no opportunity score or autonomous product selection;
+- original styling only; no official Cyberpunk assets or implication of affiliation.
+
+Kiroshi Optics is allowed to make the research fun. It is not allowed to become the reason the Observatory exists.
 
 ## Success condition for the observatory
 
