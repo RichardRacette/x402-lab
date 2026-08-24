@@ -2,9 +2,9 @@
 
 A public R&D experiment in becoming a real vendor in the machine economy.
 
-Current commercial rule:
+Current rule:
 
-> **Revenue before ritual. Repeat before scale. Productize what repeats.**
+> **Observe demand before building supply.**
 
 ## Live technical proof
 
@@ -17,122 +17,119 @@ Current commercial rule:
 - signup/API key: none
 - current role: stable protocol/payment proof + compatibility fixture
 
-Evidence Slice proved public 402 challenge → automated payment → settlement → retry → protected fulfillment, plus machine-readable Bazaar metadata.
+Evidence Slice proved public 402 challenge → automated payment → settlement → retry → protected fulfillment, plus machine-readable discovery.
 
 It did **not** prove commercial demand.
 
-## Current commercial direction
+## Current product state
 
-Read these first:
+**Product #2 is not selected.**
+
+That is intentional.
+
+The project has repeatedly discovered that attractive, easy-to-build ideas had weak buy-vs-build economics, strong free substitutes, existing competitors, or no unique x402-lab advantage.
+
+A weak Product #2 is worse than no Product #2.
+
+Current governing docs:
 
 - [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md)
-- [`docs/PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md`](docs/PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md)
-- [`docs/BUSINESS-PLAN-V0.4.md`](docs/BUSINESS-PLAN-V0.4.md)
-- [`docs/RECRUITING-AGENT-EVAL-V0.md`](docs/RECRUITING-AGENT-EVAL-V0.md)
+- [`docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`](docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md)
 - [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md)
+- [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
-### Leading first-revenue hypothesis
+Older Recruiting Pressure, Role Reality, Search Preflight and Recruiting Agent Eval documents are preserved as product-discovery history, not current implementation instructions.
 
-**Recruiting Agent Practitioner Eval — Human Domain Review**
-
-> **Send sanitized recruiting-agent test runs/traces. A recruiting practitioner labels what works, what fails in real recruiting, why it fails, what the agent should have done, and which cases should become regression tests.**
-
-The buyer is initially a recruiting-agent builder/product team, not necessarily an autonomous agent.
-
-The service is practitioner product-quality evaluation — **not** legal/compliance certification or a bias audit.
-
-## Why the project moved here
-
-Product discovery has deliberately rejected multiple technically buildable but commercially weak ideas:
+## What we learned from rejected/downgraded ideas
 
 1. **Evidence Slice as the business** — weak buy-vs-build advantage.
-2. **Recruiting Pressure / Agency Opportunity** — crowded hiring-signal market.
-3. **Automated Role Reality** — free/SMB competitors already offer richer role-market intelligence and public-data workflows are cheap to reproduce.
-4. **Search Preflight as the primary service** — useful workflow, but many recruiting-agent customers already have recruiter approvers, so an outside review can be redundant.
+2. **Recruiting Pressure / Agency Opportunity** — crowded current market.
+3. **Automated Role Reality** — strong free/SMB substitutes and easy public-data replication.
+4. **Search Preflight** — plausible service but often redundant with existing recruiter expertise.
+5. **Recruiting Agent Practitioner Eval** — plausible specialist service, but currently closer to consulting/domain labor than a demonstrated structural machine-commerce advantage.
 
-The current eval hypothesis has a better compounding path:
+These are useful failures because they happened before large implementation commitments.
 
-```text
-human practitioner labels
-        ↓
-recruiting failure taxonomy
-        ↓
-golden/regression cases
-        ↓
-human-labeled benchmark
-        ↓
-automated evaluator calibrated to humans
-        ↓
-machine-native paid eval + human escalation
-```
+## Current discovery direction
 
-No moat is claimed before customer labels exist.
+The active question is:
+
+> **What are independent machine buyers already paying for repeatedly, why is buying rational compared with reproducing the capability, and where is there a gap x402-lab can credibly exploit?**
+
+Current observed demand patterns make these categories worth investigating:
+
+- credential/access abstraction
+- scarce/fresh data
+- compute/model access
+- browser/document infrastructure
+- external actions/execution
+- payment/identity/RPC/risk infrastructure
+- genuinely specialist analysis
+
+These are categories to study, not pre-approved products.
 
 ## Tonight's Codex target
 
-Do **not** add another public endpoint.
+Build an internal **Machine Demand Observatory** on branch:
 
-Build an internal **Recruiting Agent Eval Workbench** on branch:
+`milestone-4-5-machine-demand-observatory`
 
-`milestone-4-5-recruiting-agent-eval-harness`
+The observatory should help distinguish:
 
-The workbench should:
+- unique buyer breadth
+- repeat intensity
+- economic intensity
+- buyer concentration
+- cross-seller shoppers
+- demand momentum across snapshots
+- large catalogs with weak demand
+- capability types with actual repeat purchase behavior
 
-- define eval project/scenario/run/review schemas
-- preserve explicit human practitioner judgment
-- seed a recruiting-specific failure taxonomy
-- create 15–20 synthetic non-PII scenarios
-- create synthetic fixture agent outputs
-- validate structured reviews
-- aggregate failure patterns
-- export JSON + Markdown reports
-- export selected golden/regression cases
-- preserve all existing x402 behavior/tests
+It should support normalized JSON/CSV snapshots, Markdown reports and human-reviewed opportunity cards.
+
+It must **not** autonomously choose Product #2.
 
 Exact plan: [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
 
-## Commercial validation path
+## Using our shopper as a research tool
 
-If the workbench/rubric passes internal review:
+x402scan currently sells x402 ecosystem data through paid resources such as merchant lists/stats/transaction histories.
 
-1. create a polished 3–5-run mini-eval artifact
-2. show it to at least 3 recruiting-agent builders/product people
-3. offer a tiny free practitioner review to a very small number
-4. test `$99–$149` for ~10 runs
-5. test around `$249` for 20–25 runs + failure summary + golden cases
-6. seek the **same builder again** after a release/change
+The observatory may implement an optional adapter that reuses the existing bounded shopper.
 
-First external payment matters.
+Real-money rules:
 
-Repeat external payment matters much more.
+- dry-run/fixtures by default
+- no automatic wallet funding
+- no private keys in source/logs
+- no execution without an explicit paid-execution flag
+- per-call and per-session caps mandatory
+- do not broaden network/wallet permissions silently
+- any real-money research purchase still requires explicit owner approval
 
-## Safety and IP boundary
+Building purchase capability is **not** authorization to spend.
 
-V0 uses only synthetic/public/customer-authorized sanitized material.
+## Product #2 qualification gate
 
-Do not require:
+No seller build begins until a candidate has written answers for:
 
-- real candidate PII
-- protected-class scoring
-- live adverse employment decisions
-- employer-confidential candidate records
-- private credentials
+1. observed demand
+2. repeat behavior / buyer breadth
+3. buy-vs-build advantage
+4. current free + paid competition
+5. lawful/reliable supply path
+6. plausible unit economics
+7. x402-lab-specific advantage
+8. cheapest falsification test
 
-Do not market the service as:
-
-- employment-law advice
-- NYC Local Law 144 audit
-- algorithmic bias certification
-- legal/model-safety certification
-
-Before accepting paid work, verify applicable outside-work/conflict/IP/confidentiality obligations and use only personal equipment/accounts/time.
+If those answers are vague, do not build it.
 
 ## Existing technical assets
 
 - Node.js + TypeScript + Express
 - x402 v2 seller/payment middleware
 - Base Sepolia public deployment
-- Bazaar metadata
+- Bazaar/discovery metadata
 - Evidence Slice deterministic service
 - bounded buyer + shopper gateway
 - public-source/SSRF safety work
@@ -141,26 +138,11 @@ Before accepting paid work, verify applicable outside-work/conflict/IP/confident
 
 These are reusable infrastructure, not product-market fit.
 
-## Machine-commerce posture
-
-x402 remains strategically useful, but the business is not tied to one protocol.
-
-A validated future evaluator could be sold through:
-
-- x402
-- MCP
-- MPP
-- conventional API billing
-- agent marketplaces
-- human payment channels
-
-The first dollar does not need to be crypto.
-
 ## Current milestone
 
-**Milestone 4.5C — Recruiting Agent Practitioner Eval + first revenue.**
+**Milestone 4.5D — Revealed-demand observatory / Product #2 discovery.**
 
-See **Issue #14**.
+The active issue is the market-observatory workstream.
 
 ## Progress
 
@@ -168,19 +150,20 @@ See **Issue #14**.
 - [x] automated x402 settlement
 - [x] public Base Sepolia seller
 - [x] first public paid Evidence Slice transaction
-- [x] Bazaar metadata
+- [x] machine-readable discovery metadata
 - [x] bounded buyer/shopper gateway
 - [x] product viability/profit gate
-- [x] Recruiting Pressure rejected
-- [x] automated Role Reality rejected
-- [x] Search Preflight downgraded to scenario family
-- [x] Recruiting Agent Practitioner Eval V0 selected
-- [ ] build eval workbench + synthetic benchmark
-- [ ] manually review first synthetic runs
-- [ ] validate mini-eval with external builders
-- [ ] first external paid eval
-- [ ] first repeat builder
-- [ ] automate one eval dimension only after labeled evidence
+- [x] multiple weak product hypotheses rejected before large builds
+- [x] Product #2 explicitly reset to unknown
+- [ ] build machine-demand observatory
+- [ ] capture normalized current market snapshot
+- [ ] analyze buyer breadth/repeat/concentration
+- [ ] identify cross-seller shopper patterns where data permits
+- [ ] create 3–5 evidence-grounded opportunity cards
+- [ ] cheaply falsify the strongest candidate(s)
+- [ ] select Product #2 only after one passes the gate
+- [ ] first external paid use
+- [ ] first repeat external buyer
 
 ## License
 
