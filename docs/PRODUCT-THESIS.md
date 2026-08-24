@@ -1,8 +1,10 @@
-# x402-lab Product Thesis v0.1
+# x402-lab Product Thesis v0.2
 
 Status: **governing product direction**
 
 Adopted: **2026-08-23**
+
+Revised: **2026-08-23**
 
 This document governs product decisions after completion of the first successful x402 transaction and before adding another endpoint, MCP tool, model, deployment target, or mainnet configuration.
 
@@ -13,6 +15,24 @@ This document governs product decisions after completion of the first successful
 x402-lab exists to become a path of least resistance for machine buyers.
 
 The project is not trying to win by having the most endpoints, the most sophisticated model, the lowest nominal price, or the largest marketplace. It is trying to become the easiest reliable decision an autonomous buyer can make for one recurring need.
+
+## Economic objective
+
+> **The lowest price that maximizes profitable repeat purchase volume.**
+
+Price is a strategic variable, not an end in itself. x402-lab should not pursue the lowest nominal price if that price destroys margin, reliability, or the ability to keep serving buyers.
+
+The operating objective is:
+
+> **Populate the store with high-frequency agent utilities whose price is trivial relative to the value they provide, while relentlessly driving fulfillment cost and transaction friction toward zero.**
+
+This means x402-lab should prefer products that agents can buy repeatedly with very little deliberation, while continuously reducing the cost and complexity required to fulfill each successful purchase.
+
+The central long-term question is:
+
+> **Can we make thousands or millions of autonomous purchases happen because each individual purchasing decision is so cheap and frictionless that the agent doesn't bother reinventing the capability?**
+
+A high transaction count is useful only if repeated purchases are genuinely useful to buyers and economically sustainable for the seller.
 
 ## What we are trying to prove next
 
@@ -110,11 +130,15 @@ Default against:
 
 Add a gate only when security, abuse prevention, regulation, or economics genuinely require it.
 
-### 4. Predictable tiny prices
+### 4. Price for profitable repeat volume
 
 An agent should know the price before committing and be able to compare it to a spend policy.
 
-Do not optimize early pricing for maximum margin. Optimize for an economically trivial decision that still creates a real transaction signal.
+The target is **the lowest price that maximizes profitable repeat purchase volume**, not the lowest possible nominal price and not maximum margin per call.
+
+A price should feel economically trivial relative to the utility delivered while still covering the cost and risk of reliably fulfilling the transaction.
+
+Treat early prices as experiments. Measure whether a higher or lower price materially changes purchase frequency, repeat behavior, fulfillment economics, and buyer friction before treating any price as permanent.
 
 ### 5. Clean outputs
 
@@ -137,7 +161,7 @@ Every new endpoint, model, integration, protocol surface, or infrastructure laye
 
 Do not build generic infrastructure for problems we have not personally encountered while operating a seller.
 
-Run the service, observe failures and buyer behavior, then decide whether spend controls, reputation, routing, facilitator infrastructure, or other layers deserve investment.
+Run the service, observe failures and buyer behavior, then decide whether spend controls, reputation, routing, facilitator infrastructure, scaling systems, batch settlement, or other layers deserve investment.
 
 ## Service qualification test
 
@@ -153,6 +177,7 @@ Before x402-lab adds a new paid capability, it should score well on most of thes
 8. **Differentiation:** Can x402-lab be meaningfully easier, more reliable, more focused, or better integrated than alternatives?
 9. **Operational fit:** Can we support it without creating a large company before demand exists?
 10. **Repeatability:** Would successful use plausibly cause the same agent to call it again?
+11. **Economic fit:** Can fulfillment cost stay comfortably below the price at the transaction volumes required for the product to matter?
 
 A clever idea with weak answers should not be built.
 
@@ -205,6 +230,9 @@ As the service becomes public, track:
 - repeat-buyer rate
 - calls per returning buyer
 - nominal price and total buyer friction
+- revenue per fulfilled transaction
+- variable fulfillment cost per transaction
+- contribution margin per transaction
 - external integrations completed without human support
 
 Do not optimize vanity metrics such as endpoint count, GitHub stars, social attention, or total testnet volume.
@@ -225,12 +253,13 @@ x402-lab may evolve into a trusted vendor identity for a small collection of age
 
 The long-term mental model could resemble an **agent convenience store**:
 
-- narrowly useful services
-- obvious prices
+- high-frequency, narrowly useful services
+- prices trivial relative to delivered value
 - no unnecessary membership process
 - predictable contracts
 - always available
 - known to work
+- fulfillment cost driven continuously downward
 
 This is a hypothesis, not permission to build a catalog.
 
@@ -298,9 +327,13 @@ Before writing more product code, answer:
 
 Then test that hypothesis with the smallest possible public service.
 
-## Definition of success for Product Thesis v0.1
+For each proven service, continue asking:
 
-This thesis succeeds if it prevents premature building and guides x402-lab toward one service that produces repeat autonomous purchases.
+> **Can we make thousands or millions of autonomous purchases happen because each individual purchasing decision is so cheap and frictionless that the agent doesn't bother reinventing the capability?**
+
+## Definition of success for Product Thesis v0.2
+
+This thesis succeeds if it prevents premature building and guides x402-lab toward services that produce **profitable repeat autonomous purchases at high frequency**.
 
 It should be revised when operating evidence contradicts it.
 
