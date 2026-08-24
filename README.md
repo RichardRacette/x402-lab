@@ -1,270 +1,179 @@
 # x402-lab
 
-A deliberately tiny public experiment in becoming a real vendor to software agents.
+A public R&D experiment in becoming a real vendor in the machine economy — with one rule now governing the commercial work:
 
-## Live shelf
+> **Revenue before ritual. Profit before protocol.**
 
-**Evidence Slice** is live on Base Sepolia testnet:
+## What is live
+
+**Evidence Slice** remains live on Base Sepolia testnet:
 
 `POST https://x402-lab-production.up.railway.app/extract-evidence`
 
-> Extract query-relevant evidence from one public webpage. Use after search when you need supporting passages rather than an entire page.
-
-- input: `url`, `question`
-- output: source metadata + 0–3 relevant evidence passages
 - price: `$0.003` test USDC
-- network: Base Sepolia (`eip155:84532`)
 - payment: x402 v2
-- signup: none
-- API key: none
+- signup/API key: none
+- purpose now: stable protocol/payment proof + compatibility fixture
 
-An unpaid request returns HTTP `402 Payment Required`. The `payment-required` header contains the price, network, seller, canonical HTTPS resource URL, and an x402 Bazaar discovery extension with the POST body example, required input schema, and output example.
+Evidence Slice proved that x402-lab can expose a public paid service, return a 402 challenge, settle an automated payment, retry, fulfill the request, and advertise machine-readable discovery metadata.
 
-Frozen V0 contract: [`docs/EVIDENCE-SLICE-V0.md`](docs/EVIDENCE-SLICE-V0.md)
+It did **not** prove that Evidence Slice itself is a strong commercial product.
 
-## What has been proven
+The first public paid Evidence Slice transaction is preserved in this repository, along with the original `/analyze-job` payment-loop proof.
 
-x402-lab has completed a paid machine-to-machine transaction against the public Railway deployment.
+## Current commercial direction
 
-First public Evidence Slice sale:
+The current source of truth is:
 
-- endpoint: `https://x402-lab-production.up.railway.app/extract-evidence`
-- price: `$0.003` / `3000` atomic test USDC
-- network: Base Sepolia (`eip155:84532`)
-- payment status: settled
-- final HTTP status: `200`
-- measured payment-to-result latency: `1317 ms`
-- transaction: `0xcf34c6d0543dab55426f4a3348501393ce7a6ee52d1ca621385583a0233eb599`
+- [`docs/FULL-PROJECT-AUDIT-2026-08-24.md`](docs/FULL-PROJECT-AUDIT-2026-08-24.md)
+- [`docs/BUSINESS-PLAN-V0.3.md`](docs/BUSINESS-PLAN-V0.3.md)
+- [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md)
+- [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
-The original payment-loop proof used `/analyze-job` and is permanently recorded in [`docs/FIRST-TRANSACTION.md`](docs/FIRST-TRANSACTION.md).
+Older product-discovery documents remain as historical evidence of hypotheses that were tested and rejected.
 
-Evidence Slice now serves primarily as the stable protocol/payment proof and compatibility fixture. It demonstrates that x402-lab can expose, sell, settle, and fulfill a public machine-payable service. It does **not** by itself prove that the capability is commercially strong enough for an external agent to prefer buying it over reproducing it.
+### What research invalidated
 
-## Product direction
+1. **Evidence Slice as the business** — weak buy-vs-build advantage.
+2. **Agency Opportunity / Recruiting Pressure** — substantial overlap with current recruiting-intelligence products.
+3. **Automated Role Reality Check** — current free/SMB tools already provide richer role-level talent-market intelligence, and public-data talent-intelligence workflows are increasingly easy to reproduce.
 
-The governing product thesis is [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md).
+The viability gate is working: weak products are being killed before engineering turns them into sunk-cost traps.
 
-The commercial correction and Product #2 qualification gate are defined in [`docs/PRODUCT-VIABILITY-2026-08-24.md`](docs/PRODUCT-VIABILITY-2026-08-24.md).
+## Current revenue experiment
 
-The current discovery decision is [`docs/PRODUCT-DISCOVERY-ROUND-2-2026-08-24.md`](docs/PRODUCT-DISCOVERY-ROUND-2-2026-08-24.md).
+The next test is **service-first, productize-second**.
 
-> **Reduce transaction friction so aggressively that choosing us becomes cheaper for the agent than thinking about alternatives.**
+Working service concept:
 
-The commercial objective is now explicit:
+> **Recruiting Search Preflight — Human Review Gate**
 
-> **Profitable repeat autonomous purchases.**
+A recruiter or recruiting agent submits one U.S. requisition plus its important constraints/search assumptions. A real recruiter reviews what is unrealistic, what is underspecified, what should be challenged, and what should change before heavy sourcing/outreach begins.
 
-The next product must give a capable agent a rational reason to purchase instead of reproduce the result itself. Strong candidates are expected to involve useful data/access, operational infrastructure, external actions, or multi-step orchestration rather than generic text transformation.
+The customer is buying **human recruiting judgment**, not another salary table.
 
-Market research on 2026-08-24 found stronger observed paid activity around data/enrichment access, browser/document infrastructure, specialist research, and agent-commerce data than around many broad catalogs of generic AI utilities.
+### Why this direction
 
-A company-level **Recruiting Pressure / Agency Opportunity** product was researched and then deliberately rejected before implementation because current products already cover too much of the proposed hiring-velocity, repost, first-hire, and agency-intent surface.
+- capable agents can already obtain a lot of public labor-market data themselves
+- free and enterprise tools already cover much of generic market intelligence
+- human expert work is already purchasable by agents through x402-native marketplaces
+- the project's recruiting-domain knowledge is harder to reproduce than public wage data
+- manual fulfillment creates paid product discovery: every review teaches us what buyers repeatedly value and what deserves automation
 
-The active validation candidate is now **Role Reality Check**:
+The initial service is intentionally not maximally scalable.
 
-> **Give us a U.S. role, location, proposed compensation, and key constraints. Return a source-backed market reality packet showing how the req compares with the labor market and what should be calibrated before meaningful sourcing begins.**
+The plan is:
 
-Role Reality is **not yet Product #2**. It must first survive real-data review and external recruiter validation. The working contract is [`docs/ROLE-REALITY-CHECK-V0.md`](docs/ROLE-REALITY-CHECK-V0.md), and the evening implementation gate is [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
-
-The initial provider hypothesis uses CareerOneStop/U.S. Department of Labor open data behind seller-side credentials. The hoped-for access-model wedge is **on-demand talent-market intelligence without requiring the buyer to purchase or integrate a full enterprise talent-intelligence platform**. That is a hypothesis to test, not a claimed moat.
-
-## Evidence Slice contract
-
-Request:
-
-```json
-{
-  "url": "https://example.com/",
-  "question": "What is this domain used for?"
-}
+```text
+sell useful human judgment
+        ↓
+measure what buyers value
+        ↓
+reduce fulfillment time with internal tooling
+        ↓
+observe repeated patterns
+        ↓
+automate only what has earned automation
+        ↓
+expose proven components as machine-native paid products
 ```
 
-Response shape:
+## Tonight's engineering target
 
-```json
-{
-  "service": "x402-lab/evidence-slice",
-  "network": "eip155:84532",
-  "price": "$0.003",
-  "source": {
-    "url": "https://example.com/",
-    "title": "Example Domain",
-    "retrievedAt": "2026-08-24T01:44:30.214Z",
-    "contentHash": "sha256:..."
-  },
-  "question": "What is this domain used for?",
-  "evidence": [
-    {
-      "text": "This domain is for use in documentation examples without needing permission. Avoid use in operations.",
-      "score": 0.485
-    }
-  ]
-}
-```
+Codex should **not** add a new public paid endpoint.
 
-Evidence Slice V0 is intentionally narrow:
+It should build an internal **Search Preflight Workbench** that helps a human reviewer produce consistent, source-backed draft reviews quickly.
 
-- one public HTTP(S) URL
-- one question
-- 0–3 passages
-- deterministic lexical ranking
-- clean JSON
-- source provenance + content hash
-- no LLM
-- no search engine
-- no database
-- no accounts or API keys
-- no MCP
-- no mainnet
+Success condition:
 
-Caller-supplied URLs are protected by public-address validation, redirect revalidation, DNS/IP checks, timeout, content-type limits, and response-size bounds.
+> a knowledgeable human can turn the workbench draft into a credible review in roughly 25–30 minutes or less.
 
-## Machine-readable shelf label
+If the tool does not make the reviewer faster or more consistent, stop rather than adding features.
 
-The public `402` carries x402 v2 Bazaar metadata through `extensions.bazaar`.
+See [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
 
-It advertises:
+## Data-rights posture
 
-- service: `x402-lab`
-- method: `POST`
-- body type: JSON
-- required inputs: `url`, `question`
-- realistic request example
-- realistic Evidence Slice output example
-- tags: `evidence`, `research`, `extraction`, `agents`
+Data licensing is a product dependency.
 
-Price, network, payment scheme, USDC asset, and receiving address remain authoritative in the core x402 payment requirements.
+- **O*NET Database/content** may be used/adapted where covered by CC BY 4.0 with correct attribution and modification notices.
+- **BLS public data** is a preferred public-domain source; preserve retrieval date/source and required BLS disclaimer language for downstream analyses.
+- **CareerOneStop** registration was submitted transparently, but the click-license shown during registration contains a no-modification/alteration condition. Until written clarification exists, CareerOneStop is optional internal/validation evidence — not the foundation of a proprietary transformed commercial score.
+- No candidate PII, contact enrichment, or proprietary talent dataset is required for the current experiment.
 
-## Minimal testnet buyer example
+## Machine-commerce posture
 
-This example performs a real **Base Sepolia test-USDC** payment. Use only a disposable testnet wallet and keep the private key outside source control.
+x402 remains strategically relevant, but it is not the total addressable market.
 
-```ts
-import { x402Client, wrapFetchWithPayment } from "@x402/fetch";
-import { ExactEvmScheme } from "@x402/evm/exact/client";
-import { privateKeyToAccount } from "viem/accounts";
+The protocol now has formal Linux Foundation governance, and AWS AgentCore Payments supports autonomous discovery/payment for x402 services alongside other payment protocols. The ecosystem is real but still early and noisy; raw transaction count is not treated as adoption or TAM.
 
-const signer = privateKeyToAccount(
-  process.env.EVM_PRIVATE_KEY as `0x${string}`
-);
+The eventual commercial product should remain protocol-neutral and may use:
 
-const client = new x402Client();
-client.setSpendControls({ maxAmountPerPayment: "$0.01" });
-client.register("eip155:*", new ExactEvmScheme(signer));
+- x402
+- MPP
+- MCP
+- conventional APIs
+- normal human payment channels
+- agent marketplaces for human services
 
-const paidFetch = wrapFetchWithPayment(fetch, client);
-
-const response = await paidFetch(
-  "https://x402-lab-production.up.railway.app/extract-evidence",
-  {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      url: "https://example.com/",
-      question: "What is this domain used for?"
-    })
-  }
-);
-
-console.log(response.status);
-console.log(await response.json());
-```
-
-The client encounters the `402`, signs the bounded payment, retries automatically, and receives the protected JSON response if settlement succeeds.
-
-## Original learning product
-
-`POST /analyze-job` remains in the repository because it proved the first x402 payment loop. It is not the current product thesis and does not commit x402-lab to becoming a recruiting company.
-
-Current testnet price: `$0.01` test USDC.
+The buyer should never need to care which payment protocol won the standards race.
 
 ## Product rules
 
-- reliability is a feature
-- machine-readable beats decorative
-- no unnecessary signup, subscription, API-key, or approval gates for machine buyers
-- profitable repeat purchase matters more than first-purchase novelty
-- buy-vs-build advantage must be explicit
-- licensing/upstream use rights are product dependencies
-- instrument variable fulfillment cost from the first commercial test
-- kill overlapping/weak hypotheses before coding them
-- one excellent recurring service beats twenty unproven endpoints
+- **first external dollar > another testnet milestone**
+- **second purchase > first purchase**
+- human time is a real variable cost
+- public/open data is not automatically a moat
+- free competitors count in buy-vs-build analysis
+- licensing/use rights are product dependencies
+- no generic AI-wrapper catalog
+- no product is saved merely because it was already spec'd
+- no LLM/premium data/frontend unless buyer evidence earns it
+- one repeated paid job-to-be-done beats twenty clever endpoints
 - earn complexity
 
-## Safety
+## Existing technical assets
 
-1. **Base Sepolia only** until a separate mainnet-readiness decision is made.
-2. Use a fresh disposable test wallet for automated buying.
-3. Never commit `.env`, a seed phrase, a private key, or provider API credentials.
-4. The deployed seller needs only the public `X402_PAY_TO` receiving address for the existing payment routes.
-5. Do not weaken Evidence Slice public-URL safety for convenience.
-6. Do not switch to mainnet until real utility, external testing, licensing clarity, and positive expected unit economics earn it.
+- Node.js + TypeScript + Express
+- x402 v2 seller/payment middleware
+- Base Sepolia public deployment
+- Bazaar discovery metadata
+- Evidence Slice deterministic service
+- bounded buyer + shopper gateway/spend controls
+- public-source/SSRF safety work
+- tests + typecheck
+- compatibility research
 
-## Stack
-
-- Node.js + TypeScript
-- Express
-- x402 v2 packages pinned to `2.23.0`
-- `@x402/extensions` Bazaar metadata
-- Base Sepolia (`eip155:84532`)
-- x402.org test facilitator
-- Railway public deployment
-- deterministic Evidence Slice V0
-- bounded buyer + shopper gateway
-
-The commercial product logic should remain independent of payment frontage so a future validated service can add MPP, MCP, ordinary APIs, or other machine-payment access without duplicating the product.
-
-## Run locally
-
-```bash
-npm install
-cp .env.example .env
-npm run server
-```
-
-Set `X402_PAY_TO` to a public EVM receiving address you control. Keep any buyer private key only in the local gitignored `.env`.
-
-Free health check:
-
-```bash
-curl http://localhost:4021/health
-```
+These are reusable infrastructure, **not proof of product-market fit**.
 
 ## Current milestone
 
-**Milestone 4.5B — Validate Role Reality Check before paid launch.**
+**Milestone 4.5C — First-revenue discovery / Search Preflight Workbench.**
 
-See **Issue #13** and [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
+The next proof we want is not another endpoint.
 
-The next step is intentionally **not** to add another public endpoint immediately. Build the provider-neutral decision engine and bounded CareerOneStop adapter, generate sample packets, and inspect whether the result is materially more useful than a salary lookup plus ordinary web/AI research.
+It is:
 
-If the packet fails that gate, reject the hypothesis. If it passes, then a `$0.50` Base Sepolia paid route can be earned.
-
-## Roadmap
-
-See [`docs/ROADMAP.md`](docs/ROADMAP.md).
+> **somebody outside the project values a recruiting decision enough to pay for it — and ideally comes back.**
 
 ## Progress
 
 - [x] public repository
-- [x] seller + buyer scaffold
-- [x] first automated x402 settlement
-- [x] Product Thesis
-- [x] Evidence Slice V0
-- [x] public Base Sepolia deployment
+- [x] automated x402 settlement
+- [x] public Base Sepolia seller
 - [x] first public paid Evidence Slice transaction
-- [x] live x402 v2 Bazaar shelf label
-- [x] bounded shopper gateway
-- [x] product viability/profit gate adopted
+- [x] Bazaar shelf metadata
+- [x] bounded buyer/shopper gateway
+- [x] viability/profit gate adopted
 - [x] Recruiting Pressure hypothesis rejected before implementation
-- [x] Role Reality validation contract + Codex session plan prepared
-- [ ] build Role Reality validation core
-- [ ] generate and review real sample packets
-- [ ] external recruiter validation
-- [ ] select Product #2 only if it passes the gate
-- [ ] first external machine purchase of Product #2
-- [ ] first external repeat purchase
-- [ ] first profitable mainnet sale
+- [x] automated Role Reality hypothesis rejected after deeper competitive audit
+- [x] service-first Business Plan v0.3 adopted
+- [ ] build internal Search Preflight Workbench
+- [ ] generate 3–5 credible sample reviews
+- [ ] validate with external recruiters
+- [ ] first real external payment
+- [ ] first repeat payer
+- [ ] automate a component only after paid evidence
 
 ## License
 
