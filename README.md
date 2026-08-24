@@ -44,7 +44,9 @@ Evidence Slice now serves primarily as the stable protocol/payment proof and com
 
 The governing product thesis is [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md).
 
-The current commercial correction and Product #2 qualification gate are defined in [`docs/PRODUCT-VIABILITY-2026-08-24.md`](docs/PRODUCT-VIABILITY-2026-08-24.md).
+The commercial correction and Product #2 qualification gate are defined in [`docs/PRODUCT-VIABILITY-2026-08-24.md`](docs/PRODUCT-VIABILITY-2026-08-24.md).
+
+The current discovery decision is [`docs/PRODUCT-DISCOVERY-ROUND-2-2026-08-24.md`](docs/PRODUCT-DISCOVERY-ROUND-2-2026-08-24.md).
 
 > **Reduce transaction friction so aggressively that choosing us becomes cheaper for the agent than thinking about alternatives.**
 
@@ -52,11 +54,19 @@ The commercial objective is now explicit:
 
 > **Profitable repeat autonomous purchases.**
 
-The next product must give a capable agent a rational reason to purchase instead of reproduce the result itself. Strong candidates are expected to involve scarce/fresh data, credential-gated access, operational infrastructure, external actions, or multi-step orchestration rather than generic text transformation.
+The next product must give a capable agent a rational reason to purchase instead of reproduce the result itself. Strong candidates are expected to involve useful data/access, operational infrastructure, external actions, or multi-step orchestration rather than generic text transformation.
 
-Market research on 2026-08-24 found stronger observed paid activity around data/enrichment access, browser/document infrastructure, specialist research, and agent-commerce data than around many broad catalogs of generic AI utilities. The current leading opportunity family to investigate is **data/access + domain-specific orchestration**, with workforce/company/hiring intelligence as the leading domain because it combines observed paid demand with available recruiting-domain knowledge.
+Market research on 2026-08-24 found stronger observed paid activity around data/enrichment access, browser/document infrastructure, specialist research, and agent-commerce data than around many broad catalogs of generic AI utilities.
 
-No Product #2 has been selected yet.
+A company-level **Recruiting Pressure / Agency Opportunity** product was researched and then deliberately rejected before implementation because current products already cover too much of the proposed hiring-velocity, repost, first-hire, and agency-intent surface.
+
+The active validation candidate is now **Role Reality Check**:
+
+> **Give us a U.S. role, location, proposed compensation, and key constraints. Return a source-backed market reality packet showing how the req compares with the labor market and what should be calibrated before meaningful sourcing begins.**
+
+Role Reality is **not yet Product #2**. It must first survive real-data review and external recruiter validation. The working contract is [`docs/ROLE-REALITY-CHECK-V0.md`](docs/ROLE-REALITY-CHECK-V0.md), and the evening implementation gate is [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
+
+The initial provider hypothesis uses CareerOneStop/U.S. Department of Labor open data behind seller-side credentials. The hoped-for access-model wedge is **on-demand talent-market intelligence without requiring the buyer to purchase or integrate a full enterprise talent-intelligence platform**. That is a hypothesis to test, not a claimed moat.
 
 ## Evidence Slice contract
 
@@ -172,11 +182,12 @@ Current testnet price: `$0.01` test USDC.
 
 - reliability is a feature
 - machine-readable beats decorative
-- no unnecessary signup, subscription, API-key, or approval gates
+- no unnecessary signup, subscription, API-key, or approval gates for machine buyers
 - profitable repeat purchase matters more than first-purchase novelty
 - buy-vs-build advantage must be explicit
 - licensing/upstream use rights are product dependencies
 - instrument variable fulfillment cost from the first commercial test
+- kill overlapping/weak hypotheses before coding them
 - one excellent recurring service beats twenty unproven endpoints
 - earn complexity
 
@@ -184,8 +195,8 @@ Current testnet price: `$0.01` test USDC.
 
 1. **Base Sepolia only** until a separate mainnet-readiness decision is made.
 2. Use a fresh disposable test wallet for automated buying.
-3. Never commit `.env`, a seed phrase, or a private key.
-4. The deployed seller needs only the public `X402_PAY_TO` receiving address.
+3. Never commit `.env`, a seed phrase, a private key, or provider API credentials.
+4. The deployed seller needs only the public `X402_PAY_TO` receiving address for the existing payment routes.
 5. Do not weaken Evidence Slice public-URL safety for convenience.
 6. Do not switch to mainnet until real utility, external testing, licensing clarity, and positive expected unit economics earn it.
 
@@ -201,7 +212,7 @@ Current testnet price: `$0.01` test USDC.
 - deterministic Evidence Slice V0
 - bounded buyer + shopper gateway
 
-The commercial product logic should remain independent of payment frontage so a future validated service can add MPP, MCP, or other machine-payment access without duplicating the product.
+The commercial product logic should remain independent of payment frontage so a future validated service can add MPP, MCP, ordinary APIs, or other machine-payment access without duplicating the product.
 
 ## Run locally
 
@@ -221,11 +232,13 @@ curl http://localhost:4021/health
 
 ## Current milestone
 
-**Milestone 4.5 — Product viability & profit gate.**
+**Milestone 4.5B — Validate Role Reality Check before paid launch.**
 
-The payment technology works. The current task is to identify exactly one Product #2 that has a strong buy-vs-build advantage, repeated need, external demand evidence, lawful/licensable inputs, positive expected unit economics, and a concrete external discovery path.
+See **Issue #13** and [`docs/CODEX-SESSION-PLAN-2026-08-24.md`](docs/CODEX-SESSION-PLAN-2026-08-24.md).
 
-Do not add another generic paid endpoint until that gate is passed.
+The next step is intentionally **not** to add another public endpoint immediately. Build the provider-neutral decision engine and bounded CareerOneStop adapter, generate sample packets, and inspect whether the result is materially more useful than a salary lookup plus ordinary web/AI research.
+
+If the packet fails that gate, reject the hypothesis. If it passes, then a `$0.50` Base Sepolia paid route can be earned.
 
 ## Roadmap
 
@@ -243,7 +256,12 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 - [x] live x402 v2 Bazaar shelf label
 - [x] bounded shopper gateway
 - [x] product viability/profit gate adopted
-- [ ] select Product #2
+- [x] Recruiting Pressure hypothesis rejected before implementation
+- [x] Role Reality validation contract + Codex session plan prepared
+- [ ] build Role Reality validation core
+- [ ] generate and review real sample packets
+- [ ] external recruiter validation
+- [ ] select Product #2 only if it passes the gate
 - [ ] first external machine purchase of Product #2
 - [ ] first external repeat purchase
 - [ ] first profitable mainnet sale
