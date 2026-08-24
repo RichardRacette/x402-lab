@@ -8,7 +8,10 @@ Current governing docs:
 
 - `PRODUCT-THESIS.md`
 - `PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`
+- `DIRECTIVE-ALIGNMENT-2026-08-24.md`
 - `CODEX-SESSION-PLAN-2026-08-24.md`
+- `KIROSHI-OPTICS.md`
+- `KIROSHI-OPTICS-MVP.md`
 
 Older product-discovery files are historical records, not current implementation instructions.
 
@@ -116,6 +119,49 @@ Prefer:
 - faster creation of disciplined opportunity cards
 
 Reject/refactor if the output is merely prettier x402scan rankings.
+
+### Discovery-capital posture
+
+Approximately `$300` of experiment capital is available, but default remains `$0` spend.
+
+Capital may support bounded evidence-generating tests only after the hypothesis, max cost, free-data gap and continue/reject criteria are explicit.
+
+UI polish and infrastructure theater are not approved uses.
+
+## Milestone 4.5E — Kiroshi Optics companion scanner 🔓
+
+**Status:** active companion project; implementation authorized after the minimal Observatory core passes.
+
+Issue: **#16**.
+
+Goal:
+
+> turn Observatory exports into a fast local research scanner without creating another data architecture.
+
+First slice:
+
+- MARKET SCAN
+- TARGET SCAN
+- OPPORTUNITY QUEUE when card data exist
+- BUYER TRACE only when transaction-level data genuinely support it
+- source/window/methodology/provenance always visible
+- original futuristic optical-scanner styling
+- no single opportunity score
+
+Constraints:
+
+- read-only
+- local
+- no new providers
+- no wallet/payment access
+- no database/auth/backend
+- prefer existing Node/TypeScript + vanilla HTML/CSS/TypeScript
+- `$0` incremental paid infrastructure
+- initial implementation roughly `30–45` Codex minutes
+
+Kiroshi succeeds only if it makes the same evidence faster to interpret than raw JSON/Markdown.
+
+If it is merely cool, keep it small.
 
 ## Milestone 4.6 — Current market snapshot
 
