@@ -8,6 +8,7 @@
     "dev": "tsx watch src/server.ts",
     "server": "tsx src/server.ts",
     "buy": "tsx src/client.ts",
+    "shopper": "tsx src/shopper-cli.ts",
     "test": "tsx --test src/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
