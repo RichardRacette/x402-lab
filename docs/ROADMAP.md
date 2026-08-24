@@ -1,244 +1,293 @@
-# x402-lab roadmap
+# x402-lab Roadmap
 
-The rule: **earn complexity**.
+The rule remains:
 
-The governing product direction is defined in [`PRODUCT-THESIS.md`](PRODUCT-THESIS.md).
+> **Earn complexity.**
 
-The commercial correction is defined in [`PRODUCT-VIABILITY-2026-08-24.md`](PRODUCT-VIABILITY-2026-08-24.md).
+The commercial rule is now stronger:
 
-The current product-discovery decision is defined in [`PRODUCT-DISCOVERY-ROUND-2-2026-08-24.md`](PRODUCT-DISCOVERY-ROUND-2-2026-08-24.md).
+> **Earn revenue before automating more product.**
 
-Evidence Slice remains documented in [`EVIDENCE-SLICE-V0.md`](EVIDENCE-SLICE-V0.md), but is now treated primarily as the protocol/payment proof rather than sufficient evidence of a viable commercial product.
+Current governing docs:
+
+- `FULL-PROJECT-AUDIT-2026-08-24.md`
+- `BUSINESS-PLAN-V0.3.md`
+- `PRODUCT-VIABILITY-2026-08-24.md`
+- `CODEX-SESSION-PLAN-2026-08-24.md`
+
+Older product-discovery docs are historical records, not active implementation instructions.
 
 ## Milestone 0 — Public seed ✅
 
-Goal: establish a small, legible public repository.
+Public repository established.
 
-**Status: complete.**
-
-## Milestone 1 — First testnet x402 transaction ✅
-
-Goal: prove the complete payment loop.
+## Milestone 1 — First automated x402 transaction ✅
 
 Proven flow:
 
 ```text
-buyer → 402 → signed payment → settlement → automatic retry → protected result
+buyer → 402 → signed payment → settlement → retry → protected result
 ```
 
-**Status: complete.** See [`FIRST-TRANSACTION.md`](FIRST-TRANSACTION.md).
+## Milestone 2 — Initial product exploration ✅
 
-## Milestone 2 — Initial product hypothesis ✅
+`/analyze-job` proved the first payment loop.
 
-Selected initial hypothesis: **Evidence Slice**.
-
-**Status: complete as a hypothesis-selection milestone.** Subsequent research weakened its commercial case.
+Evidence Slice was selected as the first cleaner agent-native shelf item.
 
 ## Milestone 3 — Evidence Slice V0 ✅
 
-Delivered:
+Delivered deterministic extraction, source provenance, public-URL safety, tests and paid Base Sepolia flow.
 
-- deterministic evidence extraction
-- bounded public-URL/SSRF safety
-- Base Sepolia paid flow
-- tests/typecheck
-
-**Status: complete.**
-
-## Milestone 4 — Public machine-payable shelf proof ✅
+## Milestone 4 — Public seller proof ✅
 
 Delivered:
 
-- Railway deployment
-- public Base Sepolia x402 V2 seller
+- public Railway seller
+- x402 V2
 - first public paid Evidence Slice transaction
 - Bazaar metadata
-- bounded buyer + shopper gateway
+- bounded buyer/shopper gateway
 
 What this proved:
 
-> x402-lab can expose, sell, settle, and fulfill a public machine-to-machine service.
+> x402-lab can expose, sell, settle and fulfill a machine-payable service.
 
 What it did not prove:
 
-> the product is worth buying repeatedly.
+> a commercially strong product exists.
 
-## Milestone 4.5 — Product viability & profit gate 🚧
+## Milestone 4.5 — Product viability gate 🚧
 
-Goal: identify a product worth testing commercially **before** spending significant engineering time on Product #2.
+The purpose of this phase is to reject weak commercial ideas before sunk-cost engineering.
 
-### Discovery result A — Evidence Slice
+### Discovery A — Evidence Slice
 
-**Commercial confidence: weak.**
+**Status: protocol proof, weak commercial confidence.**
 
-Keep it stable as protocol proof. Do not rescue it with features.
+Do not rescue with features.
 
-### Discovery result B — Agency Opportunity / Recruiting Pressure
+### Discovery B — Agency Opportunity / Recruiting Pressure
 
 **Status: rejected before implementation.**
 
-Reason: deeper competitive research found substantial overlap with Reqbeat, Signalbase, Recruitcha and adjacent hiring-signal products. The original implementation brief is intentionally marked HOLD.
+Reason: substantial overlap with current hiring-signal / recruiting-intelligence products.
 
-The project should treat this as evidence that the viability gate is working.
+### Discovery C — automated Role Reality Check
 
-### Discovery result C — Role Reality Check
+**Status: rejected as a paid automated SKU.**
 
-**Status: active validation candidate.**
+Reason:
 
-Working proposition:
+- current free/SMB tools already provide richer role-level market intelligence
+- market-calibration agents are already emerging
+- public-data talent-intelligence workflows are increasingly cheap to reproduce
+- CareerOneStop rights require additional clarification before transformed commercial use
 
-> Give us a U.S. role, location, proposed compensation and key constraints. Return a source-backed market reality packet showing how the req compares with the labor market and what should be calibrated before meaningful sourcing begins.
+Role Reality concepts may still be used internally as research/fulfillment helpers.
 
-Why it is being tested:
+## Milestone 4.5C — Search Preflight Workbench + first-revenue experiment 🚧
 
-- closer to the economic decision of whether/how to spend recruiter time on a requisition
-- incumbents validate the need for fillability/talent-market intelligence
-- possible access-model wedge: one role, one transparent price, no enterprise talent-intelligence subscription for the buyer
-- CareerOneStop/USDOL provides an open-data path for a cheap U.S. prototype
-- no candidate PII required
-- current x402 stack can expose it with little new infrastructure if it proves useful
+### Goal
 
-Important limitation:
+Find out whether **human recruiting judgment** can be sold as a bounded service while software reduces fulfillment time.
 
-> The open-data V0 is not a moat. Its first possible advantage is product packaging + access friction. Stronger defensibility must be earned later through better data, outcome calibration, workflow integration, or proprietary benchmarks.
+Working service:
 
-Governing contract: [`ROLE-REALITY-CHECK-V0.md`](ROLE-REALITY-CHECK-V0.md).
+> **Recruiting Search Preflight — Human Review Gate**
 
-Active implementation/validation issue: **#13**.
+The buyer supplies one requisition/search plan. A human recruiter reviews what is unclear, unrealistic, contradictory, or worth changing before heavy sourcing/outreach begins.
 
-### Milestone 4.5B validation sequence
+### Engineering task
 
-1. build provider-neutral market-fact types and deterministic decision rules
-2. test with synthetic fixtures
-3. add CareerOneStop behind optional provider credentials
-4. generate real sample packets if provider access is available
-5. manually review whether the packet is materially better than a salary lookup
-6. show useful samples to external recruiters
-7. only then expose the new product as a paid Base Sepolia endpoint
+Build an internal Search Preflight Workbench, not a paid public endpoint.
 
-### Hard stop
+It should:
 
-If Role Reality is basically a dressed-up salary lookup, reject it.
+- normalize requisition/search-plan inputs
+- organize clearly licensed/public market facts where useful
+- preserve source geography/vintage/limitations
+- surface obvious compensation/constraint inconsistencies
+- generate traceable calibration questions
+- produce Markdown + JSON drafts
+- leave an explicit human-review layer
+- measure draft generation / review time
 
-Do not add an LLM, candidate scraping, a database, or an expensive data vendor merely to rescue the idea.
+### Pass condition
 
-### Milestone 4.5 exit condition
+A knowledgeable reviewer can turn a draft into a credible deliverable in roughly **25–30 minutes or less**, without rewriting most of it.
 
-Exactly one Product #2 candidate must demonstrate:
+### Fail condition
 
-1. credible buy-vs-build advantage,
-2. recurring workflow value,
-3. lawful/licensable data path,
-4. healthy unit economics,
-5. useful real sample output,
-6. external user interest,
-7. concrete path to a payment-capable buyer.
+If the workbench is mainly salary lookup/template filler or creates more checking than it saves, stop and document why.
 
-Until then, more generic paid endpoints are out of scope.
+No LLM, premium data, candidate scraping, database, frontend, MCP or new paid endpoint is automatically allowed to rescue it.
 
-## Milestone 5 — Build and expose Product #2 minimally
+## Milestone 4.6 — External usefulness validation
 
-Goal: test the winning commercial hypothesis with the smallest implementation that can produce real evidence.
+Show 3–5 finished sample reviews to real recruiters.
 
-Rules:
+Before showing the output, ask what they would normally research/challenge on the req.
 
-- one product, not a catalog
-- reuse existing seller/payment stack
-- keep product logic independent of payment-protocol frontage
-- stable structured contract
-- instrument fulfillment cost and latency
-- publish strong machine-readable discovery metadata
-- preserve Evidence Slice as a test fixture rather than expanding it
+Continue when:
 
-Exit condition:
+- at least 3/5 report a meaningful action/research change; and
+- at least 2/5 request another review / recurring use; and
+- no systemic factual-quality problem appears.
 
-> an external machine buyer successfully purchases Product #2 for a genuinely useful task.
+Compliments do not count as demand.
 
-A first purchase proves access, not product-market fit.
+## Milestone 4.7 — First external revenue
 
-## Milestone 6 — First external repeat buyer
+Offer the next review at a stated pilot price.
 
-Goal: prove utility rather than novelty.
+Candidate learning ladder:
+
+- free samples for validation
+- `$25` pilot
+- `$49` early normal test
+- `$75–$99` only if the review materially changes a live search/intake decision
+
+Human fulfillment time is treated as a variable cost.
 
 Exit condition:
 
-> the same external buyer purchases Product #2 more than once without a human explicitly directing each individual purchase.
+> **A real external buyer pays real money for one Search Preflight review.**
 
-Track contribution margin, not just transaction count.
+Payment channel should be the easiest legitimate option for that buyer. Do not force a human buyer into crypto merely to preserve the experiment's aesthetic.
 
-## Milestone 7 — Improve access only where earned
+## Milestone 4.8 — First repeat payer
 
-Possible additions only when observed friction justifies them:
+Exit condition:
 
-- OpenAPI improvements
-- stronger Bazaar/discovery metadata
-- MCP exposure
-- MPP-native frontage
-- health/reliability signals
-- additional payment schemes
-- frozen-client V1/V2 compatibility frontage
+> **The same external buyer chooses to purchase a second review.**
 
-Protocol stance:
+This is more important than first payment and more important than additional protocol work.
 
-- x402 remains the primary laboratory
-- the eventual commercial brand must be protocol-neutral
-- alternative payment rails should be additional doors to the same useful product, not separate product logic
+Record:
 
-## Milestone 8 — Improve Product #2 only where earned
+- price
+- fulfillment minutes
+- what the buyer changed
+- what research/tooling was replaced
+- missing facts
+- whether the buyer returned
 
-Avoid databases, dashboards, broad integrations, model dependencies and premium data until buyer behavior or product failure evidence justifies them.
+## Milestone 5 — Agent-native human-service distribution
 
-## Milestone 9 — First profitable mainnet sales
+After the service can be fulfilled reliably, test an agent-native marketplace listing.
 
-Before real-money launch require:
+Candidate channel: a marketplace that allows AI agents to purchase human expert services through x402 escrow with machine-readable inputs and asynchronous delivery.
 
-- proven utility
-- external testnet interest
-- appropriate data rights
+This tests a distinctive thesis:
+
+> **Can a recruiting agent purchase human recruiter judgment as a callable escalation step?**
+
+Do not confuse listing availability with demand. Track genuine external purchases only.
+
+## Milestone 6 — Productize what repeats
+
+After paid reviews reveal repeated value, identify one component that is:
+
+- repeatedly requested
+- rule-like enough to automate safely
+- supported by appropriate data rights
+- economically useful
+- machine-consumable
+
+Only then expose that component as an automated paid SKU.
+
+Possible examples may emerge from:
+
+- title/occupation normalization
+- constraint contradiction detection
+- compensation calibration
+- search-plan completeness
+- specialty-specific intake questions
+- another repeated need discovered from buyers
+
+No component is pre-approved.
+
+## Milestone 7 — Machine-native Product #2
+
+Goal:
+
+> an external machine buyer pays for a component that was first proven inside real paid work.
+
+Reuse the existing x402 seller/payment/discovery stack.
+
+Payment frontage remains protocol-neutral at the business level.
+
+## Milestone 8 — First repeat autonomous buyer
+
+Exit condition:
+
+> the same external machine buyer purchases the validated automated component more than once without a human explicitly directing each transaction.
+
+Track contribution margin, not transaction count.
+
+## Milestone 9 — Profitable real-money automation
+
+Before mainnet/production automated sales require:
+
+- validated repeated utility
+- clear data rights
 - bounded costs
-- intentional pricing
-- production wallet/credential separation
-- threat-model review
-- transaction/accounting logging
+- production credential/wallet separation
+- failure/refund semantics
+- intentional price
+- accounting/logging
 
 Exit condition:
 
-> real external sales with positive contribution margin per fulfilled transaction.
+> real automated external sales with positive contribution per fulfilled transaction.
 
-## Milestone 10 — Repeatable profit or kill/pivot decision
+## Milestone 10 — Business decision
 
-Evaluate:
+Evaluate the whole operation on:
 
-- repeat-buyer rate
-- calls per returning buyer
+- external revenue
+- repeat payer rate
+- revenue per buyer
+- contribution after owner time
+- fulfillment time trend
 - buyer concentration
-- contribution margin
-- support/ops burden
-- upstream dependency risk
-- discovery conversion
-- payment failure rate
-- whether buyers integrate the capability into persistent workflows
+- support burden
+- acquisition channel
+- data/vendor risk
+- which work has become automatable
 
 Possible outcomes:
 
-1. double down
-2. add adjacent products requested by buyers
-3. negotiate better upstream economics
-4. create a protocol-neutral commercial brand
-5. pivot to a newly exposed bottleneck
-6. stop commercial investment if demand remains weak
+1. deepen the winning service
+2. automate a proven subcomponent
+3. build a protocol-neutral commercial brand
+4. specialize in a recruiting niche that shows stronger demand
+5. pivot to a newly exposed agent-commerce bottleneck
+6. stop commercial investment if buyers do not appear
 
-No pre-commitment to a marketplace, facilitator, router, ATS, or giant API catalog.
+## Profit milestone ladder
 
-## Ecosystem participation
+- `$1` external revenue — crossed into commerce
+- `$100` cumulative external revenue — non-ceremonial demand
+- first repeat payer — strongest early signal
+- `$500/month` revenue — tiny business signal
+- `$1,000/month` contribution after owner time — meaningful side-business validation
+- `$5,000/month` contribution — evaluate deeper automation, formal commercial brand and deliberate acquisition
 
-Where it improves discovery, learning, credibility, or buyer access:
+These are learning milestones, not forecasts.
 
-- test Coinbase Bazaar discovery
-- test payment-capable AgentCore buyers
-- evaluate Cloudflare x402/MPP access paths
-- participate in relevant x402 working-group/community activity
-- list only products that have earned public exposure
-- publish concise demonstrations and measured findings
+## Protocol posture
 
-The preferred outcome remains becoming the **path of least resistance for a recurring machine need — and getting paid profitably for it**.
+x402 remains worth learning and operating. It has formal Linux Foundation governance and production cloud support, but raw settlement volume is noisy and should not be treated as TAM.
+
+The eventual commercial product can use whichever front door makes buying easiest:
+
+- x402
+- MPP
+- MCP
+- ordinary API billing
+- agent marketplaces
+- conventional human payments
+
+The business is not loyal to a payment protocol. It is loyal to profitable customer value.
