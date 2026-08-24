@@ -2,17 +2,15 @@
 
 Rules:
 
-> **Earn complexity. Revenue before ritual. Productize what repeats.**
+> **Earn complexity. Observe demand before building supply.**
 
 Current governing docs:
 
 - `PRODUCT-THESIS.md`
-- `PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md`
-- `BUSINESS-PLAN-V0.4.md`
-- `RECRUITING-AGENT-EVAL-V0.md`
+- `PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`
 - `CODEX-SESSION-PLAN-2026-08-24.md`
 
-Older product-discovery files are historical records, not implementation instructions.
+Older product-discovery files are historical records, not current implementation instructions.
 
 ## Milestone 0 — Public seed ✅
 
@@ -39,9 +37,9 @@ Deterministic evidence extraction, provenance, URL safety, tests and paid Base S
 Delivered:
 
 - Railway deployment
-- x402 V2
+- x402 V2 seller
 - first public paid Evidence Slice transaction
-- Bazaar metadata
+- machine-readable discovery/Bazaar metadata
 - bounded buyer + shopper gateway
 
 This proved payment capability, not demand.
@@ -54,7 +52,7 @@ This proved payment capability, not demand.
 
 ### Recruiting Pressure / Agency Opportunity
 
-**Status:** rejected before implementation due competitive overlap.
+**Status:** rejected before implementation due current competition.
 
 ### Automated Role Reality
 
@@ -62,217 +60,219 @@ This proved payment capability, not demand.
 
 ### Search Preflight
 
-**Status:** useful workflow/scenario concept, but downgraded as the primary commercial offer because many recruiting-agent customers already have recruiter approvers.
+**Status:** parked service concept.
 
 ### Recruiting Agent Practitioner Eval
 
-**Status:** **leading first-revenue hypothesis.**
+**Status:** parked side hypothesis.
 
-Proposition:
+It may have consulting/service value, but it is not currently strong enough to be the project's master plan.
 
-> Send sanitized recruiting-agent runs/traces. A recruiting practitioner labels professional workflow failures, corrected behavior and golden/regression cases.
+### Product #2
 
-Why it currently leads:
+**Status:** **unknown by design.**
 
-- domain-expert AI evaluation is already a paid service class
-- recruiting agents are proliferating
-- practitioner labels can compound into a benchmark
-- no talent-data licensing dependency is required
-- repeat trigger exists with every meaningful release/tool/model/autonomy change
-- future automated evaluator can reuse the existing machine-commerce stack
+No candidate is entitled to implementation because previous ideas failed.
 
-## Milestone 4.5C — Eval Workbench + synthetic benchmark 🚧
+## Milestone 4.5D — Machine Demand Observatory 🚧
 
 ### Goal
 
-Make recruiting-practitioner evaluation fast, structured, reusable and machine-readable.
+Improve product selection using revealed machine purchasing behavior.
 
 ### Engineering task
 
-Build internal workbench on:
+Build internal observatory on:
 
-`milestone-4-5-recruiting-agent-eval-harness`
+`milestone-4-5-machine-demand-observatory`
 
-Required outputs:
+Required first-slice outputs:
 
-- eval project/scenario/run/review schemas
-- recruiting-specific rubric dimensions
-- extensible failure taxonomy
-- 15–20 synthetic non-PII scenarios
-- synthetic fixture agent outputs
-- structured human-review records
-- aggregate JSON report
-- concise Markdown report
-- golden/regression-case export
+- provider-neutral merchant/resource/transaction snapshot schemas
+- deterministic fixture provider
+- buyer breadth metrics
+- repeat-intensity metrics
+- economic-intensity metrics
+- buyer-concentration metrics where transaction data permits
+- cross-seller shopper detection where data permits
+- snapshot comparison
+- descriptive demand-shape flags
+- human-editable qualitative review records
+- opportunity-card scaffolds
+- JSON + Markdown reports
 - tests/typecheck
+- optional x402scan paid-data adapter behind strict dry-run/spend controls
 
-### Human judgment rule
+### Pass gate
 
-Software structures the review. It must never fabricate practitioner verdicts, rationales, failure labels, corrected behavior or golden-case promotion.
-
-### Internal pass gate
-
-Manually review 10 synthetic runs.
+The observatory must reveal something more useful than manually browsing a leaderboard.
 
 Prefer:
 
-- ~3–6 minutes per run after familiarization
-- meaningful recruiting-specific distinctions
-- little manual report formatting
-- reusable golden cases
+- clear distinction between broad adoption and one-buyer/high-repeat behavior
+- useful cross-seller buyer patterns
+- negative examples showing large catalogs with weak demand
+- market changes visible across snapshots
+- faster creation of disciplined opportunity cards
 
-Reject/refactor if the rubric looks like generic AI QA with recruiting vocabulary pasted on.
+Reject/refactor if the output is merely prettier x402scan rankings.
 
-## Milestone 4.6 — External builder validation
+## Milestone 4.6 — Current market snapshot
 
-Create a polished 3–5-run mini-eval artifact.
+Capture or safely import a normalized current snapshot.
 
-Show it to at least three recruiting-agent builders/product people.
+Target initial review set:
 
-Positive signals, strongest first:
+- 10–20 active merchants across different demand shapes
+- >=3 broad buyer examples
+- >=3 concentrated repeat examples
+- >=3 low/zero-demand negative controls
+- cross-seller buyer examples where data permits
 
-1. builder sends additional runs
-2. builder adds one of our cases to their regression/eval process
-3. builder requests review after a change/release
-4. builder engages deeply with/disputes practitioner labels
-5. builder says it looks useful
+Every snapshot must retain source/window/timestamp limitations.
 
-Compliments alone are weak.
+## Milestone 4.7 — Opportunity queue
 
-## Milestone 4.7 — First real paid eval
+Create 3–5 **evidence-grounded opportunity cards**.
 
-Pricing tests:
+Each card must answer:
 
-- free 3–5-run mini review for a very small number of builders
-- `$99–$149` Practitioner Smoke Eval (~10 runs)
-- around `$249` Practitioner Eval Sprint (20–25 runs + failure summary + golden cases)
+1. observed demand
+2. buyer breadth / repeat intensity
+3. concentration caveat
+4. buy-vs-build reason
+5. current free + paid substitutes
+6. lawful/reliable supply path
+7. plausible price + cost + contribution margin
+8. x402-lab-specific advantage
+9. cheapest falsification test
 
-Treat human time as a variable cost.
+Cards begin as `UNREVIEWED` or `RESEARCH`.
+
+Software does not promote them automatically.
+
+## Milestone 4.8 — Cheap falsification sprint
+
+Take the strongest candidate(s) and run the cheapest serious test before seller implementation.
+
+Possible tests may include:
+
+- manual buyer interviews
+- a one-off concierge fulfillment
+- upstream access/cost test
+- mock discovery listing
+- request-for-interest
+- a tiny local prototype
+- direct comparison against current substitutes
+
+The falsification method depends on the product.
 
 Exit condition:
 
-> **One external builder pays real money for practitioner evaluation.**
+> one candidate survives a realistic attempt to disprove its value.
 
-The payment channel should minimize legitimate friction; it does not have to be x402.
+## Milestone 5 — Select and build Product #2 minimally
 
-## Milestone 4.8 — First repeat builder
+Only now select Product #2.
+
+Required before implementation:
+
+- demand evidence
+- buy-vs-build advantage
+- competition review
+- supply/data rights
+- unit economics
+- advantage hypothesis
+- falsification result
+
+Rules:
+
+- one product, not a catalog
+- smallest useful contract
+- reuse existing seller/payment infrastructure
+- keep product logic independent of payment frontage
+- instrument fulfillment cost and failure behavior
+- no mainnet just because the code works
+
+## Milestone 6 — External purchase
 
 Exit condition:
 
-> **The same builder pays for another eval after a release/change.**
+> an external buyer pays for Product #2 for a genuinely useful task.
 
-This is the strongest early commercial signal.
+A first purchase proves access/willingness, not retention.
+
+## Milestone 7 — Repeat external buyer
+
+Exit condition:
+
+> the same external buyer purchases Product #2 again because the need recurred.
 
 Track:
 
-- price
-- runs reviewed
-- human minutes
-- recurring failure labels
-- cases adopted into buyer regressions
-- what changed between releases
+- buyer identity/address where appropriate
+- repeat interval
+- calls per buyer
+- contribution margin
+- concentration
+- support/ops burden
 
-## Milestone 5 — Build the benchmark asset
+## Milestone 8 — Broaden distribution only where earned
 
-After real customer-authorized/sanitized reviews:
+Possible additions:
 
-- refine failure taxonomy
-- curate workflow-specific golden cases
-- version rubrics
-- record inter-review ambiguity where possible
-- remove customer-identifying details from any reusable artifact unless explicit rights allow otherwise
-
-The benchmark is not a moat until enough real labeled evidence exists.
-
-## Milestone 6 — Automate one proven eval dimension
-
-Choose one repeated dimension only when:
-
-- human labels are stable enough to define correctness
-- enough examples exist to measure agreement
-- an automated evaluator can be tested against human labels
-- buyer value survives automation
-
-Possible examples may emerge around requirement drift, evidence grounding, autonomy-boundary adherence or another repeated failure.
-
-No dimension is pre-approved.
-
-## Milestone 7 — Machine-native Product #2
-
-Expose a validated automated eval component through whichever front door minimizes buyer friction:
-
-- x402
+- stronger OpenAPI/discovery
 - MCP
 - MPP
-- conventional API
+- additional payment rails
+- compatibility frontage for older clients
+- conventional billing
 
-Reuse existing x402-lab seller/payment infrastructure rather than rebuilding it.
+Distribution work follows product evidence.
+
+## Milestone 9 — First profitable mainnet sales
+
+Before mainnet require:
+
+- proven utility
+- intentional real-money price
+- bounded variable cost
+- production wallet/credential separation
+- threat-model review
+- accounting/transaction logging
+- appropriate data/supply rights
 
 Exit condition:
 
-> an external machine buyer purchases a component that was first proven against human labels.
+> real external sales with positive contribution margin.
 
-## Milestone 8 — Repeat autonomous buyer
-
-Exit condition:
-
-> the same external machine buyer purchases the validated eval more than once without human instruction per transaction.
-
-Track contribution margin, not transaction count.
-
-## Milestone 9 — Hybrid continuous QA
-
-Potential later product:
-
-```text
-automated recruiting-agent eval
-        ↓
-confidence / ambiguity gate
-        ↓
-human practitioner escalation when needed
-        ↓
-new labels feed benchmark
-```
-
-This is the strongest long-term service/product flywheel currently visible.
-
-## Milestone 10 — Business decision
+## Milestone 10 — Repeatable profit or stop
 
 Evaluate:
 
-- external revenue
-- repeat builder rate
-- contribution after owner time
-- review time trend
-- builder acquisition cost
-- benchmark reuse
-- automated-human agreement
-- marketplace/direct-channel performance
+- repeat-buyer rate
+- unique buyer growth
+- calls per returning buyer
+- revenue per buyer
+- buyer concentration
+- contribution margin
 - support burden
-- IP/data-rights risk
+- upstream dependency risk
+- distribution conversion
+- payment failure rate
+- whether the capability is becoming embedded in persistent workflows
 
 Possible outcomes:
 
-1. deepen recruiting-agent eval vertical
-2. specialize by recruiting workflow
-3. productize evaluator(s)
-4. partner with eval platforms/HR-tech builders
-5. broaden domain only after recruiting proves repeat economics
-6. stop/pivot if builders do not pay
-
-## Commercial milestone ladder
-
-- `$1` external revenue — actual commerce
-- first `$99–$149` smoke eval — pricing evidence
-- first `$249` sprint — stronger value evidence
-- **first repeat builder** — strongest early signal
-- `$1,000` cumulative eval revenue — non-ceremonial demand
-- `$1,000/month` contribution after owner time — meaningful side-business validation
-- recurring release-eval customer — business-model evidence
-- automated evaluator with measured human agreement — scalable product milestone
+1. double down
+2. negotiate better upstream economics
+3. add adjacent products requested by real buyers
+4. create a protocol-neutral commercial brand
+5. pivot to a better observed bottleneck
+6. stop commercial investment
 
 ## Protocol posture
 
-x402 remains strategically useful but is not the business identity.
+x402 remains the primary laboratory, not the permanent business identity.
 
-The project stays protocol-neutral and uses x402 when machine-native purchase genuinely reduces friction.
+The next product must deserve distribution before the project spends significant time optimizing distribution.
