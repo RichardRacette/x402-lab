@@ -6,40 +6,31 @@ Status: **start here when returning to the development desktop**
 
 Open the local `x402-lab` clone and pull today's latest strategy/docs commits.
 
-Do not begin from an older branch or prompt that treats Recruiting Pressure or automated Role Reality as active products.
+Do not begin from an older branch or prompt that treats Recruiting Pressure, Role Reality, Search Preflight or Recruiting Agent Eval as the active product.
 
-Active workstream: **Issue #14 — Milestone 4.5C: Search Preflight Workbench + first revenue**.
+Active workstream: **Issue #15 — Machine Demand Observatory / Product #2 discovery**.
 
-Issues #12 and #13 are invalidated/closed.
+**Product #2 is intentionally unknown.**
 
 ## 2. Read these three docs first
 
 In this order:
 
-1. `docs/FULL-PROJECT-AUDIT-2026-08-24.md`
-2. `docs/BUSINESS-PLAN-V0.3.md`
+1. `docs/PRODUCT-THESIS.md`
+2. `docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`
 3. `docs/CODEX-SESSION-PLAN-2026-08-24.md`
 
-Then read `docs/ROADMAP.md` if more context is needed.
+Then read `docs/ROADMAP.md` if more context is useful.
 
-Older Role Reality / Recruiting Pressure docs are historical only.
+Older product-specific docs are historical evidence only.
 
-## 3. CareerOneStop email is optional
+## 3. CareerOneStop is not tonight's dependency
 
 CareerOneStop registration has been submitted.
 
-If credentials arrive, put them only in local gitignored `.env`:
+If credentials arrive, keep them only in local gitignored `.env` and do not paste them into prompts/issues/commits/chat.
 
-```text
-CAREERONESTOP_USER_ID=...
-CAREERONESTOP_API_TOKEN=...
-```
-
-Do not paste them into Codex prompts, GitHub issues, commits, screenshots or chat.
-
-CareerOneStop is **not required tonight** and is not an approved foundation for transformed commercial scoring pending rights clarification.
-
-Prefer fixtures/O*NET/BLS for the workbench where practical.
+Do **not** spend tonight integrating CareerOneStop. Product #2 is not selected and the current observatory does not require recruiting data.
 
 ## 4. Preserve existing secrets and products
 
@@ -48,9 +39,9 @@ Do not expose:
 - wallet private keys
 - seed phrases
 - provider tokens
-- any future customer confidential data
+- confidential data
 
-Do not change the live Evidence Slice contract merely because a new internal workbench is being added.
+Do not change the live Evidence Slice contract or existing shopper behavior unless required to cleanly expose a reusable paid-fetch abstraction with tests.
 
 ## 5. Give Codex exactly one job
 
@@ -60,103 +51,124 @@ Use the exact prompt at the bottom of:
 
 Codex creates branch:
 
-`milestone-4-5-search-preflight-workbench`
+`milestone-4-5-machine-demand-observatory`
 
-The task is an **internal fulfillment tool**, not payment/deployment.
+The task is **internal product-discovery instrumentation**, not a new seller product.
 
 ## 6. Expected checkpoints
 
-### A — domain model + fixtures
+### A — observatory types + fixtures
 
-Structured req/search-plan types compile. Tests use deterministic market facts.
+Provider-neutral merchant/resource/transaction snapshots compile and fixture tests pass.
 
-### B — draft generator
+### B — metrics
 
-Workbench generates JSON + Markdown with sources/limitations and explicit human-review section.
+Reports clearly separate:
 
-### C — safety/honesty
+- buyer breadth
+- repeat intensity
+- economic intensity
+- buyer concentration
+- cross-seller shopper behavior where data permits
 
-No fake supply counts, no guaranteed fillability, no missing-data coercion, no unsupported market claims.
+### C — snapshot/report workflow
 
-### D — sample set
+Codex can import fixture/manual JSON/CSV, create normalized JSON and generate a readable Markdown report.
 
-Generate sanitized drafts for:
+### D — opportunity-card scaffold
 
-- Controls Engineer — Detroit, MI
-- Maintenance Technician — Dallas, TX
-- Supply Chain Manager — Columbus, OH
-- Registered Nurse — Ann Arbor, MI
-- Software Engineer — San Francisco, CA
+Interesting services can be turned into human-review cards with demand evidence, buy-vs-build, competition, supply, economics, advantage and falsification fields.
 
-### E — human finish-time test
+Cards default to `UNREVIEWED`; software does not select Product #2.
 
-Time how long it takes to make each draft genuinely usable.
+### E — optional x402scan adapter
 
-## 7. The key decision tonight
+Only after core tests pass.
+
+The adapter should reuse existing bounded shopper/payment abstractions where cleanly possible and remain dry-run by default.
+
+## 7. Real-money rule
+
+**Do not execute a real-money research purchase automatically.**
+
+A live x402scan data purchase requires separate explicit approval during the desktop session.
+
+The code may prepare a command with proposed caps:
+
+```text
+max per payment: $0.02
+max collection session: $0.25
+```
+
+but preparing the command is not permission to run it.
+
+If the existing shopper is testnet-only or incompatible with the provider network:
+
+- stop
+- report the exact incompatibility
+- continue using fixtures/manual import
+- do not broaden network permissions or create/fund a mainnet wallet automatically
+
+## 8. Key human decision tonight
 
 Ask:
 
-> **Does this workbench make a knowledgeable recruiter meaningfully faster and more consistent?**
+> **Does this observatory reveal meaningfully better product evidence than manually browsing x402scan?**
 
-Pass only if:
+Pass if it helps us see non-obvious distinctions such as:
 
-- draft is roughly >=70% useful
-- source/geography/vintage are trustworthy
-- reviewer-specific observations/questions add value beyond salary lookup
-- finished review is plausible in <=25–30 minutes
+- broad adoption vs one-buyer automation
+- repeat behavior vs novelty
+- high-value specialist demand vs commodity volume
+- cross-seller shopper behavior
+- giant catalogs with weak demand
+- capability classes with a clear buy-vs-build reason
 
-If **no**:
+Fail if it is merely a prettier leaderboard.
 
-- stop
-- document why
-- do not add an LLM, premium data, candidate scraping or UI to rescue it
+If it fails, stop and preserve the lesson.
 
-If **yes**:
-
-- finish sample briefs
-- prepare for external recruiter validation
-- still do **not** add a new paid x402 endpoint tonight
-
-## 8. Do not touch tonight
+## 9. Do not touch tonight
 
 Do not spend Codex time on:
 
-- public Role Reality endpoint
+- a new paid seller endpoint
+- Recruiting Agent Eval Workbench
+- Search Preflight
+- Role Reality
 - Recruiting Pressure
-- Evidence Slice upgrades
-- Talent Bench / HobbyOS
+- Evidence Slice feature upgrades
 - rebrand
-- mainnet
+- mainnet seller launch
 - MCP/MPP
-- candidate sourcing/ranking
-- LinkedIn scraping
-- contact enrichment
 - frontend/dashboard
-- production database
-- premium talent-data subscriptions
+- automatic product recommendation
+- unbounded scraping
+- automatic wallet funding
 
-## 9. End-of-session record
+## 10. End-of-session record
 
-Update **Issue #14** with:
+Update **Issue #15** with:
 
 - branch + commit
 - test/typecheck result
-- sample drafts generated
-- data-source mode used
-- average draft generation time
-- human finish time for each reviewed sample
-- useful recurring observations
-- weak/misleading sections
-- pass/fail against the 25–30 minute gate
-- exact next external-validation step
+- fixture set
+- import/report commands
+- live provider status: not attempted / dry-run / explicitly approved paid test
+- spend controls status
+- any concentration/cross-seller findings
+- report paths
+- 3–5 opportunity cards
+- observatory pass/fail decision
+- next falsification/research step
 
-## 10. Success definition
+## 11. Success definition
 
-A good night does **not** end with another public endpoint.
+A good night can end with **no Product #2**.
 
-It ends with one of:
+Success is either:
 
-1. a workbench good enough to support a real paid Search Preflight experiment, or
-2. a cheap, documented rejection before more product engineering.
+1. an observatory that materially improves our ability to identify/falsify profitable machine-commerce opportunities, or
+2. proof that existing market tools are already sufficient and we should keep discovery manual.
 
-Both reduce uncertainty and protect the path to revenue.
+Both are better than using Codex to manufacture another weak product because capacity is available.
