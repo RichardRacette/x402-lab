@@ -1,174 +1,237 @@
-# Kiroshi Optics — Internal Observatory Viewer
+# Kiroshi Optics — Machine Demand Scanner
 
-Status: **optional fun/stretch layer; not Product #2; not a commercial brand**
+Status: **active internal companion project; not Product #2; not a commercial brand**
 
 Date: **2026-08-24**
 
 ## Purpose
 
-**Kiroshi Optics** is the internal codename for a read-only visual scanner over Machine Demand Observatory outputs.
+**Kiroshi Optics** is the read-only visual scanner for the Machine Demand Observatory.
 
-It exists for two reasons:
+It has two jobs:
 
-1. make market-discovery data faster and more enjoyable to inspect;
-2. give the project a fun Cyberpunk-flavored interface without allowing UI work to replace product discovery.
+1. make revealed machine-demand evidence materially faster to inspect;
+2. make the discovery work enjoyable enough that we actually use the instrument repeatedly.
 
-It is **not** a seller product, revenue hypothesis, company name, or evidence of product-market fit.
+It is not a seller product, revenue hypothesis, company name, or evidence of product-market fit.
 
-Because the name is borrowed from the Cyberpunk fictional universe, treat it as a personal/internal project codename only. Do not use official logos, artwork, fonts, screenshots, copied UI assets, or imply affiliation/endorsement. Any future commercial product must use an original protocol-neutral brand.
+Because the codename is inspired by the Cyberpunk fictional universe, keep it internal/personal. Use original styling only. Do not copy official logos, artwork, fonts, screenshots, UI assets, or imply affiliation/endorsement. Any commercial product gets an original protocol-neutral identity.
 
-## Build gate
+## Relationship to the Observatory
 
-Do **not** build Kiroshi Optics until the Observatory core has passed all of these checks:
+The Observatory is the evidence engine.
 
-- fixture metrics/tests are green;
-- at least one real/free x402stats snapshot can be collected and normalized;
-- JSON + Markdown reports work;
-- the Observatory reveals breadth vs repeat vs concentration more clearly than manual dashboard browsing;
-- Product #2 remains explicitly unselected.
+Kiroshi is the lens.
 
-If the Observatory fails its usefulness gate, Kiroshi Optics is cancelled with it.
+```text
+market sources
+    ↓
+Machine Demand Observatory
+    ↓
+normalized snapshots + metrics + opportunity cards
+    ↓
+Kiroshi Optics
+    ↓
+human product-discovery decisions
+```
 
-## Time budget
+Kiroshi must not create a second data pipeline, second methodology, or hidden recommendation engine.
 
-Kiroshi Optics is a stretch goal, not the night's main task.
+## Implementation authorization
 
-Initial implementation target: **30–45 Codex minutes maximum** after the core Observatory gate passes.
+Kiroshi is approved to move forward **after the minimal Observatory core passes its usefulness gate**.
 
-If the viewer requires a new framework, database, auth system, deployment target, design system, or major refactor, stop.
+No additional owner approval is required to begin the first Kiroshi slice once that gate passes.
 
-## Architecture
+If the Observatory core fails, Kiroshi pauses because there is nothing trustworthy to visualize.
 
-Prefer the cheapest possible implementation:
+## V0 objective
 
+> **Turn one Observatory export into a fast local scanner that lets a human distinguish broad demand, repeated demand, concentration risk, buyer shopping behavior, and research candidates without reading raw JSON.**
+
+V0 should be useful in one sitting, not architecturally impressive.
+
+## V0 architecture
+
+Prefer the smallest implementation compatible with the existing Node/TypeScript repo:
+
+- vanilla HTML/CSS/TypeScript or similarly tiny static approach;
 - local/read-only;
-- consumes existing normalized Observatory JSON files;
+- consumes existing Observatory JSON exports;
+- imports Observatory types where practical rather than duplicating them;
 - no separate backend;
 - no database;
 - no authentication;
-- no writes to market snapshots;
 - no wallet access;
 - no paid-data execution;
-- no recommendation engine;
-- no new external data collection.
+- no new external data collection;
+- no frontend framework unless the existing implementation makes it genuinely cheaper than vanilla code;
+- no new production deployment requirement.
 
-A static HTML/TypeScript page or similarly tiny local viewer is preferred over adding a full frontend framework.
+The viewer may be served by a tiny local static command if opening the generated HTML directly is awkward.
 
-The Observatory remains the source of truth. Kiroshi Optics is only a lens.
+## V0 views
 
-## Visual concept
+### 1. MARKET SCAN
 
-The experience should feel like a futuristic optical scanner rather than a SaaS analytics dashboard, while using original visual treatment.
+Show the current evidence context before any seller ranking:
 
-Suggested screen language:
+- provider/source;
+- observation time;
+- source window;
+- methodology/version;
+- raw metrics;
+- source-defined organic/filtered metrics separately where available;
+- concentration context;
+- freshness/status;
+- limitations.
 
-### MARKET SCAN
+A user should immediately understand **what this dataset can and cannot prove**.
 
-High-level ecosystem context:
+### 2. TARGET SCAN
 
-- source + observation time;
-- raw vs source-defined organic context;
-- transaction/volume context;
-- seller concentration;
-- methodology warning;
-- freshness indicator.
+Select one merchant/service and show:
 
-### TARGET SCAN
-
-One merchant/service at a time:
-
-- what is sold;
+- name/id/origin;
+- what is sold when known;
 - unique buyers;
+- transactions;
 - transactions per buyer;
+- volume;
 - volume per buyer;
-- concentration indicators;
-- current resources/prices when known;
+- average transaction value;
+- concentration indicators when transaction-level data exists;
+- resource count and prices where known;
 - descriptive demand-shape flags;
 - source/provenance;
-- human qualitative review fields.
+- human qualitative-review fields.
 
-Never collapse these into a fake single opportunity score.
+Never collapse this into one opportunity score.
 
-### BUYER TRACE
+### 3. BUYER TRACE
 
 When transaction-level data permits:
 
 - buyer identifier;
 - distinct sellers purchased from;
 - repeated seller relationships;
-- category mix;
-- spend/activity context;
-- cross-seller shopper flag.
+- total activity/spend context;
+- category/seller mix where known;
+- cross-seller shopper indicator.
 
-This view should make real procurement-like behavior easier to spot.
+This exists to make procurement-like behavior easier to spot.
 
-### THREAT / ANOMALY PANEL
+If the current dataset lacks transaction-level buyer detail, display an explicit `INSUFFICIENT TRACE DATA` state instead of fabricating a view.
 
-Use a fun scanner-style label, but keep the semantics factual. Examples:
+### 4. OPPORTUNITY QUEUE
 
-- `CONCENTRATION RISK`
-- `SINGLE-BUYER DOMINANCE`
-- `METHODOLOGY MISMATCH`
-- `LOW OBSERVED DEMAND`
-- `PRICE / DATA UNKNOWN`
-
-Do not label sellers as fake, fraudulent, self-dealing, or manipulated without evidence.
-
-### OPPORTUNITY QUEUE
-
-Read-only rendering of human-reviewed opportunity cards:
+Render the Observatory's human-reviewed opportunity cards:
 
 - observed demand evidence;
+- breadth/repeat/concentration caveat;
 - buy-vs-build hypothesis;
 - substitutes/competition;
 - supply path;
 - economics;
 - possible advantage;
-- falsification test;
+- cheapest falsification test;
 - decision state: `UNREVIEWED | REJECT | RESEARCH | TEST`.
 
-The UI may make cards easier to compare. It must never promote a card automatically.
+Kiroshi may filter/sort these records. It may not auto-promote them.
+
+### 5. ANOMALY / THREAT PANEL
+
+Use scanner-style presentation for factual descriptive flags such as:
+
+- `CONCENTRATION RISK`
+- `SINGLE-BUYER DOMINANCE`
+- `METHODOLOGY MISMATCH`
+- `LOW OBSERVED DEMAND`
+- `PRICE UNKNOWN`
+- `TRACE DATA UNAVAILABLE`
+
+Do not label activity fake, fraudulent, self-dealing, independent, or organic beyond what source evidence supports.
+
+## V0 visual language
+
+Original cyber-optics feel, not a clone of any copyrighted game UI.
+
+Suggested qualities:
+
+- dark optical-scanner workspace;
+- high information density without becoming unreadable;
+- sharp panels and reticle-like focus states;
+- restrained glow/noise effects;
+- clear typography for numbers and provenance;
+- source/methodology warnings visually prominent;
+- subtle motion only if trivial and accessible;
+- keyboard-friendly target switching if cheap to implement.
+
+Function beats decoration.
 
 ## Useful visualizations
 
-Only include visualizations that materially improve interpretation. Candidates:
+Only add a visualization if it answers a real discovery question faster.
 
-- breadth vs repeat scatter;
-- volume per buyer vs unique buyers;
-- seller concentration bar/indicator;
-- simple cross-seller buyer network or seller-count trace;
-- snapshot delta indicators.
+Highest-value candidates:
 
-Avoid decorative charts that make weak data look more authoritative.
+1. **breadth vs repeat scatter** — unique buyers vs transactions-per-buyer;
+2. **economic demand scatter** — unique buyers vs volume-per-buyer;
+3. **buyer concentration indicator** — when transaction-level detail supports it;
+4. **cross-seller trace** — simple seller-count/network treatment for a buyer;
+5. **snapshot delta indicators** — when two compatible observations exist.
 
-## Data honesty rules
+Prefer native SVG/Canvas/simple DOM over installing a charting stack solely for V0.
 
-Kiroshi Optics must display:
+## Data-honesty requirements
+
+Every relevant screen must preserve or surface:
 
 - source;
-- observation timestamp;
+- observed-at timestamp;
 - time window;
 - methodology/version where available;
-- missing values as unknown, not zero;
-- raw and source-defined organic metrics separately;
-- limitations prominently when comparisons are incompatible.
+- missing values as unknown, never coerced to zero;
+- raw and provider-defined filtered/organic semantics separately;
+- incompatibility warnings for comparisons;
+- whether buyer-level claims come from transaction-level evidence or aggregate estimates.
 
-The viewer must not infer `organic`, `independent`, `fake`, `self-dealing`, or `real customer` beyond what evidence supports.
+## V0 acceptance test
 
-## Success test
+Kiroshi passes when a human can take the same Observatory export and answer these faster than by opening JSON/Markdown:
 
-Kiroshi Optics succeeds only if it helps a human answer faster:
+1. Is demand broad or concentrated?
+2. Is usage repeated or mostly one-off?
+3. Is economic value meaningful relative to call count?
+4. Are any buyers shopping across multiple sellers?
+5. What capability is actually being purchased?
+6. What is the strongest caveat in the evidence?
+7. Which merchant/capability deserves manual research next?
 
-- Is demand broad or concentrated?
-- Is usage repeated or mostly one-off?
-- Are buyers shopping across sellers?
-- What capability is actually being purchased?
-- What should we research next?
+If the interface merely looks cool, keep it as a toy but do not count it as discovery progress.
 
-If it merely looks cool, it is a successful toy but **not** a successful project feature. Keep it small.
+## First implementation budget
+
+After Observatory core approval:
+
+- target **30–45 minutes** for the first functioning Kiroshi slice;
+- permit another short iteration only if the first slice clearly improves interpretation;
+- stop if it requires a new framework, database, authentication, deployment stack, or major refactor.
+
+## Capital rule
+
+Kiroshi itself should require **$0 incremental paid infrastructure** for V0.
+
+The project has limited experiment capital available for evidence-generating tests, but UI polish is not an approved use of that capital.
+
+## Codex prompt — first Kiroshi slice
+
+> The minimal Machine Demand Observatory core has passed its usefulness gate, and Kiroshi Optics is authorized to proceed. Read `docs/KIROSHI-OPTICS.md` and reuse the Observatory's normalized types/exports rather than creating another data layer. Build the smallest local read-only Kiroshi Optics scanner using the existing Node/TypeScript repository and preferably vanilla HTML/CSS/TypeScript. Do not add a database, auth, wallet access, paid-data execution, new providers, external data collection, recommendation engine, production deployment, or commercial branding. Implement MARKET SCAN and TARGET SCAN first. Add BUYER TRACE only when real transaction-level fields exist, otherwise show an explicit insufficient-data state. Add OPPORTUNITY QUEUE if opportunity-card exports already exist. Preserve source, observation time, window, methodology, missing-data semantics, and limitations prominently. Use an original futuristic optical-scanner visual treatment without copying Cyberpunk assets/logos/fonts/UI. No single opportunity score. Prefer simple native visuals over new chart dependencies. Finish with one command that opens/serves the viewer against a fixture export and one against the latest Observatory export, plus tests for any nontrivial data-to-view transformation.
 
 ## Future
 
-If the Machine Demand Observatory becomes genuinely useful, Kiroshi Optics can grow modestly as the internal research console.
+If the Observatory becomes a repeatedly useful research instrument, Kiroshi may grow modestly with it.
 
-If a commercial product eventually emerges, its customer-facing UI should be independently named and designed. Do not automatically carry the Kiroshi codename into a business.
+Do not let it become a general analytics platform.
+
+A future commercial product, if discovered, is a separate decision.
