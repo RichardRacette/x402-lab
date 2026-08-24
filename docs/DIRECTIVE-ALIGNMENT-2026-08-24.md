@@ -36,9 +36,37 @@ Priority order:
 5. one readable report;
 6. manual import path / opportunity-card scaffold;
 7. only then optional deeper adapters;
-8. only after the Observatory passes, optional Kiroshi Optics viewer.
+8. once the Observatory passes, proceed with the approved Kiroshi Optics companion viewer.
 
 If items 1–5 do not produce better product-discovery insight than manual browsing, stop. Do not rescue the Observatory with a database, dashboard, AI scoring, scraping framework, or more providers.
+
+## Discovery capital
+
+The project has access to approximately **$300 of discretionary experiment capital**.
+
+This is useful strategic capacity, not a spending target and not standing authorization.
+
+Default remains **$0 spend**.
+
+Use capital only when a specific purchase materially reduces uncertainty around a candidate opportunity, for example:
+
+- bounded transaction-level market data;
+- a short upstream API/data trial;
+- compute required for a falsification test;
+- a small external service required to reproduce buyer behavior;
+- a domain or minimal deployment expense only after a real commercial test justifies it.
+
+Before spending, record:
+
+1. the hypothesis being tested;
+2. why free evidence is insufficient;
+3. the maximum amount at risk;
+4. what result would cause `CONTINUE` vs `REJECT`;
+5. whether the spend creates a recurring obligation.
+
+Do not use the experiment budget for decorative hardware, Kiroshi UI polish, broad subscriptions without a test, or infrastructure that merely makes the project feel more serious.
+
+Any real-money x402 purchase still requires explicit owner approval at execution time.
 
 ## Market-scope guardrail
 
@@ -122,10 +150,12 @@ The desired end state is:
 
 ## Kiroshi Optics
 
-`KIROSHI-OPTICS.md` defines an optional internal viewer.
+`KIROSHI-OPTICS.md` defines the now-approved internal companion viewer.
 
-It is intentionally subordinate to this directive:
+It remains subordinate to this directive:
 
 > **Build better eyes only after the underlying evidence pipeline works.**
 
-Kiroshi Optics may make the work fun. It may not become the justification for the work.
+Once the minimal Observatory core passes its usefulness gate, Kiroshi Optics is authorized to proceed without another strategic approval step.
+
+Kiroshi may make the work fun and faster. It may not become the justification for the work, a second data architecture, or a sink for experiment capital.
