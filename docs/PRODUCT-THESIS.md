@@ -4,7 +4,7 @@ Status: **governing product direction**
 
 Adopted: **2026-08-23**
 
-Revised: **2026-08-23**
+Revised: **2026-08-24**
 
 This document governs product decisions after completion of the first successful x402 transaction and before adding another endpoint, MCP tool, model, deployment target, or mainnet configuration.
 
@@ -73,6 +73,9 @@ For an agent, total transaction cost includes:
 - execution cost — is the service fast and dependable?
 - recovery cost — are failures explicit, structured, and safe to retry?
 - trust cost — does prior successful use reduce uncertainty on the next call?
+- protocol compatibility cost — can the buyer understand the seller's x402 dialect and payment challenge?
+- discovery compatibility cost — does the seller expose machine-readable metadata in a form the buyer can consume?
+- upgrade cost — would an otherwise capable buyer need to update dependencies, redeploy, or involve a human before making a trivial purchase?
 
 x402-lab should compete on **total decision and transaction cost**, not nominal price alone.
 
@@ -159,6 +162,20 @@ Do not build generic infrastructure for problems we have not personally encounte
 
 Run the service, observe failures and buyer behavior, then decide whether spend controls, reputation, routing, facilitator infrastructure, or other layers deserve investment.
 
+### 8. Compatibility is friction
+
+“AGENTS WELCOME” should eventually mean more than “latest SDK welcome.”
+
+A meaningful installed base may consist of long-lived agents running older x402 versions, pinned SDKs, frozen containers, or unattended workflows that remain deployed because they still work. This is an important hypothesis to test, not an established claim about current market share.
+
+Do not assume that the newest client's backward compatibility solves the inverse problem of an old V1-only client encountering a V2-only seller.
+
+Prefer one product with multiple compatible doors over duplicated product logic when compatibility is justified by evidence.
+
+Do not immediately support every historical protocol or SDK. Compatibility must earn complexity through representative frozen-client tests, external integration attempts, observed ecosystem usage, or other evidence that a meaningful buyer class is being excluded.
+
+The detailed operating principle and test design are recorded in [`docs/AGENT-COMPATIBILITY-PRINCIPLE.md`](./AGENT-COMPATIBILITY-PRINCIPLE.md).
+
 ## Service qualification test
 
 Before x402-lab adds a new paid capability, it should score well on most of these questions:
@@ -226,6 +243,7 @@ As the service becomes public, track:
 - calls per returning buyer
 - nominal price and total buyer friction
 - external integrations completed without human support
+- compatibility failures by protocol/client/discovery surface when observable
 - revenue per fulfilled transaction
 - variable fulfillment cost per fulfilled transaction
 - contribution margin per fulfilled transaction
@@ -254,6 +272,7 @@ The long-term mental model could resemble an **agent convenience store**:
 - predictable contracts
 - always available
 - known to work
+- accessible to a reasonable range of machine buyers without needless upgrade work
 
 This is a hypothesis, not permission to build a catalog.
 
@@ -270,8 +289,11 @@ When the service is ready for public exposure, likely high-value surfaces includ
 - structured discovery metadata
 - `.well-known` metadata where appropriate to the current protocol
 - MCP only when it materially improves agent access
-- ecosystem discovery mechanisms such as Bazaar when appropriate
+- ecosystem discovery mechanisms such as Bazaar and x402scan when appropriate
 - explicit health/reliability signals
+- compatibility/version metadata when evidence shows it reduces real buyer friction
+
+Discovery and payment compatibility must be evaluated separately. A buyer that can pay when handed an endpoint but cannot discover or interpret the product is still effectively excluded.
 
 These are distribution mechanisms, not the product itself.
 
@@ -291,6 +313,7 @@ Until demand earns them, x402-lab is **not** trying to become:
 - a spend-management platform
 - a reputation network
 - a routing layer
+- a universal protocol-translation layer
 - a dashboard-heavy SaaS product
 - a mainnet business with meaningful financial exposure
 
@@ -320,6 +343,10 @@ Before writing more product code, answer:
 > **What is the smallest recurring X that machine buyers already need, where x402-lab can make buying X easier than thinking about how else to get it?**
 
 Then test that hypothesis with the smallest possible public service.
+
+For the existing Evidence Slice product, the immediate distribution question is now also:
+
+> **Which meaningful categories of machine buyers can actually find and buy it today, and which are excluded by protocol, discovery, or SDK friction?**
 
 ## Definition of success for Product Thesis v0.2
 
