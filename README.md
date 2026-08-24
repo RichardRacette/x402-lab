@@ -38,25 +38,25 @@ First public Evidence Slice sale:
 
 The original payment-loop proof used `/analyze-job` and is permanently recorded in [`docs/FIRST-TRANSACTION.md`](docs/FIRST-TRANSACTION.md).
 
+Evidence Slice now serves primarily as the stable protocol/payment proof and compatibility fixture. It demonstrates that x402-lab can expose, sell, settle, and fulfill a public machine-payable service. It does **not** by itself prove that the capability is commercially strong enough for an external agent to prefer buying it over reproducing it.
+
 ## Product direction
 
-The governing product thesis is [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md), currently v0.2.
+The governing product thesis is [`docs/PRODUCT-THESIS.md`](docs/PRODUCT-THESIS.md).
+
+The current commercial correction and Product #2 qualification gate are defined in [`docs/PRODUCT-VIABILITY-2026-08-24.md`](docs/PRODUCT-VIABILITY-2026-08-24.md).
 
 > **Reduce transaction friction so aggressively that choosing us becomes cheaper for the agent than thinking about alternatives.**
 
-Economic objective:
+The commercial objective is now explicit:
 
-> **The lowest price that maximizes profitable repeat purchase volume.**
+> **Profitable repeat autonomous purchases.**
 
-Operating objective:
+The next product must give a capable agent a rational reason to purchase instead of reproduce the result itself. Strong candidates are expected to involve scarce/fresh data, credential-gated access, operational infrastructure, external actions, or multi-step orchestration rather than generic text transformation.
 
-> **Populate the store with high-frequency agent utilities whose price is trivial relative to the value they provide, while relentlessly driving fulfillment cost and transaction friction toward zero.**
+Market research on 2026-08-24 found stronger observed paid activity around data/enrichment access, browser/document infrastructure, specialist research, and agent-commerce data than around many broad catalogs of generic AI utilities. The current leading opportunity family to investigate is **data/access + domain-specific orchestration**, with workforce/company/hiring intelligence as the leading domain because it combines observed paid demand with available recruiting-domain knowledge.
 
-The central long-term question is:
-
-> **Can we make thousands or millions of autonomous purchases happen because each individual purchasing decision is so cheap and frictionless that the agent doesn't bother reinventing the capability?**
-
-The primary early success metric is **repeat autonomous purchases**.
+No Product #2 has been selected yet.
 
 ## Evidence Slice contract
 
@@ -173,9 +173,10 @@ Current testnet price: `$0.01` test USDC.
 - reliability is a feature
 - machine-readable beats decorative
 - no unnecessary signup, subscription, API-key, or approval gates
-- pricing optimizes profitable repeat purchase volume, not nominal cheapness alone
-- clean structured outputs and errors
-- operation before abstraction
+- profitable repeat purchase matters more than first-purchase novelty
+- buy-vs-build advantage must be explicit
+- licensing/upstream use rights are product dependencies
+- instrument variable fulfillment cost from the first commercial test
 - one excellent recurring service beats twenty unproven endpoints
 - earn complexity
 
@@ -186,7 +187,7 @@ Current testnet price: `$0.01` test USDC.
 3. Never commit `.env`, a seed phrase, or a private key.
 4. The deployed seller needs only the public `X402_PAY_TO` receiving address.
 5. Do not weaken Evidence Slice public-URL safety for convenience.
-6. Do not switch to mainnet until real utility, external testing, and operational readiness earn it.
+6. Do not switch to mainnet until real utility, external testing, licensing clarity, and positive expected unit economics earn it.
 
 ## Stack
 
@@ -198,6 +199,9 @@ Current testnet price: `$0.01` test USDC.
 - x402.org test facilitator
 - Railway public deployment
 - deterministic Evidence Slice V0
+- bounded buyer + shopper gateway
+
+The commercial product logic should remain independent of payment frontage so a future validated service can add MPP, MCP, or other machine-payment access without duplicating the product.
 
 ## Run locally
 
@@ -217,11 +221,11 @@ curl http://localhost:4021/health
 
 ## Current milestone
 
-**Milestone 4 — Public testnet shelf launch.**
+**Milestone 4.5 — Product viability & profit gate.**
 
-See [Issue #5](https://github.com/RichardRacette/x402-lab/issues/5).
+The payment technology works. The current task is to identify exactly one Product #2 that has a strong buy-vs-build advantage, repeated need, external demand evidence, lawful/licensable inputs, positive expected unit economics, and a concrete external discovery path.
 
-The public service, paid proof, and machine-readable shelf label are complete. The next meaningful evidence is not another feature: it is an external buyer x402-lab does not control, especially one that returns and purchases again.
+Do not add another generic paid endpoint until that gate is passed.
 
 ## Roadmap
 
@@ -232,13 +236,17 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 - [x] public repository
 - [x] seller + buyer scaffold
 - [x] first automated x402 settlement
-- [x] Product Thesis v0.2
+- [x] Product Thesis
 - [x] Evidence Slice V0
 - [x] public Base Sepolia deployment
 - [x] first public paid Evidence Slice transaction
 - [x] live x402 v2 Bazaar shelf label
-- [ ] first external machine purchase
+- [x] bounded shopper gateway
+- [x] product viability/profit gate adopted
+- [ ] select Product #2
+- [ ] first external machine purchase of Product #2
 - [ ] first external repeat purchase
+- [ ] first profitable mainnet sale
 
 ## License
 
