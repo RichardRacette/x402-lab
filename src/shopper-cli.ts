@@ -1,9 +1,11 @@
 import {
   createShopperConfig,
+  defaultLockRecoveryDependencies,
   defaultShopperDependencies,
   dryRunPurchase,
   executePurchase,
   formatUsdc,
+  recoverPurchaseLock,
   reconcileLedger,
   type ShopperRequest
 } from "./shopper-gateway.js";
@@ -11,12 +13,19 @@ import {
 interface CliArguments {
   execute: boolean;
   reconcile: boolean;
+  recoverLock: boolean;
   url?: string;
   question?: string;
 }
 
 function parseArguments(args: string[]): CliArguments {
-  const parsed: CliArguments = { execute: false, reconcile: false };
+  const parsed: CliArguments = {
+    execute: false,
+    reconcile: false,
+    recoverLock: false
+  };
+  let sawUrl = false;
+  let sawQuestion = false;
 
   for (let index = 0; index < args.length; index += 1) {
     const argument = args[index];
@@ -24,9 +33,13 @@ function parseArguments(args: string[]): CliArguments {
       parsed.execute = true;
     } else if (argument === "--reconcile") {
       parsed.reconcile = true;
+    } else if (argument === "--recover-lock") {
+      parsed.recoverLock = true;
     } else if (argument === "--url") {
+      sawUrl = true;
       parsed.url = args[++index];
     } else if (argument === "--question") {
+      sawQuestion = true;
       parsed.question = args[++index];
     } else {
       throw new Error(`Unknown shopper argument: ${argument}`);
@@ -36,7 +49,19 @@ function parseArguments(args: string[]): CliArguments {
   if (parsed.execute && parsed.reconcile) {
     throw new Error("--execute and --reconcile cannot be combined.");
   }
-  if (!parsed.reconcile && (!parsed.url?.trim() || !parsed.question?.trim())) {
+  if (
+    parsed.recoverLock &&
+    (parsed.execute || parsed.reconcile || sawUrl || sawQuestion)
+  ) {
+    throw new Error(
+      "--recover-lock cannot be combined with --execute, --reconcile, --url, or --question."
+    );
+  }
+  if (
+    !parsed.reconcile &&
+    !parsed.recoverLock &&
+    (!parsed.url?.trim() || !parsed.question?.trim())
+  ) {
     throw new Error("--url and --question are required for shopper evaluation.");
   }
   return parsed;
@@ -62,6 +87,38 @@ function printDryRun(result: Awaited<ReturnType<typeof dryRunPurchase>>): void {
 async function main(): Promise<void> {
   const args = parseArguments(process.argv.slice(2));
   const config = createShopperConfig();
+
+  if (args.recoverLock) {
+    console.log("SHOPPER LOCK RECOVERY");
+    try {
+      const result = await recoverPurchaseLock(
+        config.lockPath,
+        defaultLockRecoveryDependencies
+      );
+      if (result.outcome === "NO_LOCK") {
+        console.log("no lock exists");
+      } else {
+        console.log(`lock PID: ${result.pid}`);
+        console.log(
+          `process status: ${result.processStatus === "active" ? "ACTIVE" : "NOT RUNNING"}`
+        );
+        if (result.outcome === "ACTIVE") {
+          console.log("RECOVERY REFUSED");
+          process.exitCode = 1;
+        } else {
+          console.log("stale lock removed");
+        }
+      }
+    } catch (error) {
+      console.log("RECOVERY REFUSED");
+      console.log("NO PAYMENT MADE");
+      console.log("LEDGER UNCHANGED");
+      throw error;
+    }
+    console.log("NO PAYMENT MADE");
+    console.log("LEDGER UNCHANGED");
+    return;
+  }
 
   if (args.reconcile) {
     const results = await reconcileLedger(config, defaultShopperDependencies);

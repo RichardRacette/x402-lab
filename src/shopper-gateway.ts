@@ -38,6 +38,7 @@ export type ShopperGatewayErrorCode =
   | "CHALLENGE_INVALID"
   | "CONFIG_INVALID"
   | "LEDGER_INVALID"
+  | "LOCK_RECOVERY_REFUSED"
   | "PAYMENT_FAILED"
   | "POLICY_DENIED"
   | "PURCHASE_LOCKED"
@@ -540,6 +541,18 @@ export interface PurchaseLock {
   release: () => Promise<void>;
 }
 
+export type ProcessStatus = "active" | "not-running" | "unknown";
+
+export interface LockRecoveryDependencies {
+  checkProcessStatus: (pid: number) => ProcessStatus;
+}
+
+export interface LockRecoveryResult {
+  outcome: "NO_LOCK" | "ACTIVE" | "RECOVERED";
+  pid?: number;
+  processStatus?: Exclude<ProcessStatus, "unknown">;
+}
+
 export async function acquirePurchaseLock(
   lockPath: string,
   now = new Date()
@@ -573,6 +586,116 @@ export async function acquirePurchaseLock(
       await unlink(lockPath);
     }
   };
+}
+
+function parsePurchaseLock(value: unknown): { pid: number; createdAt: string } {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new ShopperGatewayError(
+      "LOCK_RECOVERY_REFUSED",
+      "The shopper lock is malformed; recovery was refused."
+    );
+  }
+
+  const record = value as Record<string, unknown>;
+  if (
+    typeof record.pid !== "number" ||
+    !Number.isSafeInteger(record.pid) ||
+    record.pid <= 0 ||
+    typeof record.createdAt !== "string"
+  ) {
+    throw new ShopperGatewayError(
+      "LOCK_RECOVERY_REFUSED",
+      "The shopper lock has invalid ownership metadata; recovery was refused."
+    );
+  }
+
+  const createdAt = new Date(record.createdAt);
+  if (
+    Number.isNaN(createdAt.getTime()) ||
+    createdAt.toISOString() !== record.createdAt
+  ) {
+    throw new ShopperGatewayError(
+      "LOCK_RECOVERY_REFUSED",
+      "The shopper lock has invalid ownership metadata; recovery was refused."
+    );
+  }
+
+  return { pid: record.pid, createdAt: record.createdAt };
+}
+
+export function defaultCheckProcessStatus(pid: number): ProcessStatus {
+  try {
+    process.kill(pid, 0);
+    return "active";
+  } catch (error) {
+    const code = (error as NodeJS.ErrnoException).code;
+    if (code === "ESRCH") return "not-running";
+    if (code === "EPERM") return "active";
+    return "unknown";
+  }
+}
+
+export const defaultLockRecoveryDependencies: LockRecoveryDependencies = {
+  checkProcessStatus: defaultCheckProcessStatus
+};
+
+export async function recoverPurchaseLock(
+  lockPath: string,
+  dependencies: LockRecoveryDependencies = defaultLockRecoveryDependencies
+): Promise<LockRecoveryResult> {
+  let text: string;
+  try {
+    text = await readFile(lockPath, "utf8");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+      return { outcome: "NO_LOCK" };
+    }
+    throw new ShopperGatewayError(
+      "LOCK_RECOVERY_REFUSED",
+      "The shopper lock ownership could not be read; recovery was refused."
+    );
+  }
+
+  let value: unknown;
+  try {
+    value = JSON.parse(text);
+  } catch {
+    throw new ShopperGatewayError(
+      "LOCK_RECOVERY_REFUSED",
+      "The shopper lock is malformed; recovery was refused."
+    );
+  }
+
+  const lock = parsePurchaseLock(value);
+  let processStatus: ProcessStatus;
+  try {
+    processStatus = dependencies.checkProcessStatus(lock.pid);
+  } catch {
+    processStatus = "unknown";
+  }
+  if (processStatus === "active") {
+    return { outcome: "ACTIVE", pid: lock.pid, processStatus };
+  }
+  if (processStatus !== "not-running") {
+    throw new ShopperGatewayError(
+      "LOCK_RECOVERY_REFUSED",
+      "The shopper lock owner status is indeterminate; recovery was refused."
+    );
+  }
+
+  try {
+    const currentText = await readFile(lockPath, "utf8");
+    if (currentText !== text) {
+      throw new Error("Shopper lock changed during recovery.");
+    }
+    await unlink(lockPath);
+  } catch {
+    throw new ShopperGatewayError(
+      "LOCK_RECOVERY_REFUSED",
+      "The confirmed-stale shopper lock could not be removed."
+    );
+  }
+  return { outcome: "RECOVERED", pid: lock.pid, processStatus };
 }
 
 export function validateStoreEndpoint(

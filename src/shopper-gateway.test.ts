@@ -16,6 +16,7 @@ import {
   executePurchase,
   loadLedger,
   parseLedger,
+  recoverPurchaseLock,
   reconcileLedger,
   validatePaymentChallenge,
   validateStoreEndpoint,
@@ -160,6 +161,15 @@ function dependencies(
 
 async function writeLedger(path: string, ledger: unknown): Promise<void> {
   await writeFile(path, `${JSON.stringify(ledger, null, 2)}\n`, "utf8");
+}
+
+async function writeTestLock(path: string, pid = 42_424): Promise<string> {
+  const text = `${JSON.stringify({
+    pid,
+    createdAt: "2026-08-24T01:00:00.000Z"
+  })}\n`;
+  await writeFile(path, text, "utf8");
+  return text;
 }
 
 function hasGatewayCode(code: string): (error: unknown) => boolean {
@@ -429,6 +439,244 @@ test("second concurrent lock acquisition is rejected", async () => {
     hasGatewayCode("PURCHASE_LOCKED")
   );
   await firstLock.release();
+});
+
+test("active lock cannot be recovered", async () => {
+  const { config } = await createTestContext();
+  const original = await writeTestLock(config.lockPath);
+
+  const result = await recoverPurchaseLock(config.lockPath, {
+    checkProcessStatus: () => "active"
+  });
+
+  assert.equal(result.outcome, "ACTIVE");
+  assert.equal(result.pid, 42_424);
+  assert.equal(await readFile(config.lockPath, "utf8"), original);
+});
+
+test("confirmed-dead stale lock can be explicitly recovered", async () => {
+  const { config } = await createTestContext();
+  await writeTestLock(config.lockPath);
+
+  const result = await recoverPurchaseLock(config.lockPath, {
+    checkProcessStatus: () => "not-running"
+  });
+
+  assert.equal(result.outcome, "RECOVERED");
+  await assert.rejects(readFile(config.lockPath, "utf8"), { code: "ENOENT" });
+});
+
+test("malformed lock fails closed and remains untouched", async () => {
+  const { config } = await createTestContext();
+  const malformed = "{not valid JSON\n";
+  await writeFile(config.lockPath, malformed, "utf8");
+
+  await assert.rejects(
+    recoverPurchaseLock(config.lockPath, {
+      checkProcessStatus: () => {
+        throw new Error("Malformed ownership must not reach PID checking.");
+      }
+    }),
+    hasGatewayCode("LOCK_RECOVERY_REFUSED")
+  );
+  assert.equal(await readFile(config.lockPath, "utf8"), malformed);
+});
+
+test("lock with invalid ownership metadata fails closed", async () => {
+  const { config } = await createTestContext();
+  const invalidLocks = [
+    { createdAt: "2026-08-24T01:00:00.000Z" },
+    { pid: 0, createdAt: "2026-08-24T01:00:00.000Z" },
+    { pid: 42_424, createdAt: "not-an-ISO-timestamp" }
+  ];
+
+  for (const invalidLock of invalidLocks) {
+    const text = `${JSON.stringify(invalidLock)}\n`;
+    await writeFile(config.lockPath, text, "utf8");
+    await assert.rejects(
+      recoverPurchaseLock(config.lockPath, {
+        checkProcessStatus: () => {
+          throw new Error("Invalid ownership must not reach PID checking.");
+        }
+      }),
+      hasGatewayCode("LOCK_RECOVERY_REFUSED")
+    );
+    assert.equal(await readFile(config.lockPath, "utf8"), text);
+  }
+});
+
+test("ambiguous PID-liveness result fails closed", async () => {
+  const { config } = await createTestContext();
+  const original = await writeTestLock(config.lockPath);
+
+  for (const checkProcessStatus of [
+    () => "unknown" as const,
+    () => {
+      throw Object.assign(new Error("Permission status unavailable."), {
+        code: "EACCES"
+      });
+    }
+  ]) {
+    await assert.rejects(
+      recoverPurchaseLock(config.lockPath, { checkProcessStatus }),
+      hasGatewayCode("LOCK_RECOVERY_REFUSED")
+    );
+    assert.equal(await readFile(config.lockPath, "utf8"), original);
+  }
+});
+
+test("no-lock recovery is harmless", async () => {
+  const { config } = await createTestContext();
+  let processChecks = 0;
+
+  const result = await recoverPurchaseLock(config.lockPath, {
+    checkProcessStatus: () => {
+      processChecks += 1;
+      return "unknown";
+    }
+  });
+
+  assert.equal(result.outcome, "NO_LOCK");
+  assert.equal(processChecks, 0);
+});
+
+test("stale-lock recovery does not mutate ledger contents", async () => {
+  const { config } = await createTestContext();
+  const ledgerText = `${JSON.stringify(
+    v2Ledger({ reservations: [reservation()] }),
+    null,
+    2
+  )}\n`;
+  await writeFile(config.ledgerPath, ledgerText, "utf8");
+  await writeTestLock(config.lockPath);
+
+  await recoverPurchaseLock(config.lockPath, {
+    checkProcessStatus: () => "not-running"
+  });
+
+  assert.equal(await readFile(config.ledgerPath, "utf8"), ledgerText);
+});
+
+test("stale-lock recovery does not load a private key", async () => {
+  const { config } = await createTestContext();
+  await writeTestLock(config.lockPath);
+  let privateKeyLoads = 0;
+  const recoveryDependencies = {
+    checkProcessStatus: () => "not-running" as const,
+    loadPrivateKey: () => {
+      privateKeyLoads += 1;
+    }
+  };
+
+  await recoverPurchaseLock(config.lockPath, recoveryDependencies);
+
+  assert.equal(privateKeyLoads, 0);
+});
+
+test("stale-lock recovery does not execute payment", async () => {
+  const { config } = await createTestContext();
+  await writeTestLock(config.lockPath);
+  let paymentExecutions = 0;
+  const recoveryDependencies = {
+    checkProcessStatus: () => "not-running" as const,
+    executePayment: () => {
+      paymentExecutions += 1;
+    }
+  };
+
+  await recoverPurchaseLock(config.lockPath, recoveryDependencies);
+
+  assert.equal(paymentExecutions, 0);
+});
+
+test("reconcile can acquire the lock after stale-lock recovery", async () => {
+  const { config } = await createTestContext();
+  await writeLedger(config.ledgerPath, v2Ledger());
+  await writeTestLock(config.lockPath);
+
+  await recoverPurchaseLock(config.lockPath, {
+    checkProcessStatus: () => "not-running"
+  });
+  const results = await reconcileLedger(config, dependencies());
+
+  assert.deepEqual(results, []);
+  await assert.rejects(readFile(config.lockPath, "utf8"), { code: "ENOENT" });
+});
+
+test("confirmed successful reservation reconciles after lock recovery", async () => {
+  const { config } = await createTestContext();
+  await writeLedger(
+    config.ledgerPath,
+    v2Ledger({
+      reservations: [
+        reservation({
+          transaction: SECOND_TRANSACTION,
+          state: "settlement-recorded"
+        })
+      ]
+    })
+  );
+  await writeTestLock(config.lockPath);
+
+  await recoverPurchaseLock(config.lockPath, {
+    checkProcessStatus: () => "not-running"
+  });
+  const results = await reconcileLedger(
+    config,
+    dependencies({ getReceipt: async () => "success" })
+  );
+  const finalLedger = await loadLedger(config.ledgerPath, config);
+
+  assert.equal(results[0]?.outcome, "COMMITTED");
+  assert.equal(finalLedger.ledger.committedSpendAtomic, "6000");
+  assert.equal(finalLedger.ledger.reservations.length, 0);
+});
+
+test("ambiguous reservation remains blocked after lock recovery", async () => {
+  const { config } = await createTestContext();
+  await writeLedger(
+    config.ledgerPath,
+    v2Ledger({ reservations: [reservation()] })
+  );
+  await writeTestLock(config.lockPath);
+
+  await recoverPurchaseLock(config.lockPath, {
+    checkProcessStatus: () => "not-running"
+  });
+  const results = await reconcileLedger(config, dependencies());
+  const finalLedger = await loadLedger(config.ledgerPath, config);
+  const decision = evaluatePurchasePolicy(
+    finalLedger.ledger,
+    3_000n,
+    997_000n,
+    config
+  );
+
+  assert.equal(results[0]?.outcome, "AMBIGUOUS");
+  assert.equal(finalLedger.ledger.reservations.length, 1);
+  assert.equal(decision.allowed, false);
+});
+
+test("ordinary operations do not silently delete a stale lock", async () => {
+  const { config } = await createTestContext();
+  await writeLedger(config.ledgerPath, v1Ledger());
+  const lockText = await writeTestLock(config.lockPath);
+
+  const dryRun = await dryRunPurchase(request, config, dependencies());
+  assert.equal(dryRun.allowed, true);
+  assert.equal(await readFile(config.lockPath, "utf8"), lockText);
+
+  await assert.rejects(
+    executePurchase(request, config, dependencies()),
+    hasGatewayCode("PURCHASE_LOCKED")
+  );
+  assert.equal(await readFile(config.lockPath, "utf8"), lockText);
+
+  await assert.rejects(
+    reconcileLedger(config, dependencies()),
+    hasGatewayCode("PURCHASE_LOCKED")
+  );
+  assert.equal(await readFile(config.lockPath, "utf8"), lockText);
 });
 
 test("an unresolved reservation blocks spending", async () => {
