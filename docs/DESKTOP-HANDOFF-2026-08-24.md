@@ -2,153 +2,161 @@
 
 Status: **start here when returning to the development desktop**
 
-## 1. Pull the latest project state
+## 1. Pull latest `main`
 
-Open the local `x402-lab` clone and make sure `main` contains today's strategy/docs commits.
+Open the local `x402-lab` clone and pull today's latest strategy/docs commits.
 
-Do not begin from an older local branch that still treats Recruiting Pressure as the active product.
+Do not begin from an older branch or prompt that treats Recruiting Pressure or automated Role Reality as active products.
 
-The active product-validation issue is **#13**.
+Active workstream: **Issue #14 — Milestone 4.5C: Search Preflight Workbench + first revenue**.
 
-The company-level Recruiting Pressure plan is invalidated and its old Codex brief is marked HOLD.
+Issues #12 and #13 are invalidated/closed.
 
-## 2. Read only these four decision docs first
+## 2. Read these three docs first
 
 In this order:
 
-1. `docs/PRODUCT-DISCOVERY-ROUND-2-2026-08-24.md`
-2. `docs/ROLE-REALITY-CHECK-V0.md`
+1. `docs/FULL-PROJECT-AUDIT-2026-08-24.md`
+2. `docs/BUSINESS-PLAN-V0.3.md`
 3. `docs/CODEX-SESSION-PLAN-2026-08-24.md`
-4. `docs/ROLE-REALITY-VALIDATION-PROTOCOL.md`
 
-The rest are supporting references.
+Then read `docs/ROADMAP.md` if more context is needed.
 
-## 3. Check CareerOneStop developer access
+Older Role Reality / Recruiting Pressure docs are historical only.
 
-Role Reality V0 uses CareerOneStop/USDOL data.
+## 3. CareerOneStop email is optional
 
-The provider requires:
+CareerOneStop registration has been submitted.
+
+If credentials arrive, put them only in local gitignored `.env`:
 
 ```text
-CAREERONESTOP_USER_ID
-CAREERONESTOP_API_TOKEN
+CAREERONESTOP_USER_ID=...
+CAREERONESTOP_API_TOKEN=...
 ```
 
-If credentials are already available, place them only in the local gitignored `.env`.
+Do not paste them into Codex prompts, GitHub issues, commits, screenshots or chat.
 
-If not, request CareerOneStop Web API data access through the official CareerOneStop developer Web API page.
+CareerOneStop is **not required tonight** and is not an approved foundation for transformed commercial scoring pending rights clarification.
 
-**Do not delay the Codex session if access is pending.**
+Prefer fixtures/O*NET/BLS for the workbench where practical.
 
-The session plan explicitly supports fixture mode and an optional provider adapter.
+## 4. Preserve existing secrets and products
 
-## 4. Confirm existing x402 secrets remain separate
+Do not expose:
 
-Existing seller/buyer secrets stay where they already belong.
-
-Never paste into prompts, issues, commits or validation samples:
-
-- private keys
+- wallet private keys
 - seed phrases
-- API tokens
-- wallet secrets
+- provider tokens
+- any future customer confidential data
 
-CareerOneStop credentials are provider-side credentials and receive the same treatment.
+Do not change the live Evidence Slice contract merely because a new internal workbench is being added.
 
-## 5. Give Codex one job
+## 5. Give Codex exactly one job
 
 Use the exact prompt at the bottom of:
 
 `docs/CODEX-SESSION-PLAN-2026-08-24.md`
 
-Codex must create:
+Codex creates branch:
 
-`milestone-4-5-role-reality-validation`
+`milestone-4-5-search-preflight-workbench`
 
-The first work is domain logic + tests, **not** payment or deployment.
+The task is an **internal fulfillment tool**, not payment/deployment.
 
 ## 6. Expected checkpoints
 
-### Checkpoint A
+### A — domain model + fixtures
 
-Pure types/rules compile and synthetic tests pass.
+Structured req/search-plan types compile. Tests use deterministic market facts.
 
-### Checkpoint B
+### B — draft generator
 
-CareerOneStop adapter is bounded and optional; existing Evidence Slice still works when CareerOneStop is unconfigured.
+Workbench generates JSON + Markdown with sources/limitations and explicit human-review section.
 
-### Checkpoint C
+### C — safety/honesty
 
-At least one sample packet can be inspected in fixture mode.
+No fake supply counts, no guaranteed fillability, no missing-data coercion, no unsupported market claims.
 
-### Checkpoint D
+### D — sample set
 
-If credentials work, generate real packets for multiple role families.
+Generate sanitized drafts for:
 
-### Checkpoint E
+- Controls Engineer — Detroit, MI
+- Maintenance Technician — Dallas, TX
+- Supply Chain Manager — Columbus, OH
+- Registered Nurse — Ann Arbor, MI
+- Software Engineer — San Francisco, CA
 
-Manually inspect the packets before allowing Codex to add a paid route.
+### E — human finish-time test
 
-## 7. The key human decision tonight
+Time how long it takes to make each draft genuinely usable.
+
+## 7. The key decision tonight
 
 Ask:
 
-> **Is this materially more useful than a salary lookup plus ordinary web/AI research?**
+> **Does this workbench make a knowledgeable recruiter meaningfully faster and more consistent?**
+
+Pass only if:
+
+- draft is roughly >=70% useful
+- source/geography/vintage are trustworthy
+- reviewer-specific observations/questions add value beyond salary lookup
+- finished review is plausible in <=25–30 minutes
 
 If **no**:
 
 - stop
-- preserve tests/research if useful
-- document what is missing
-- do not add an LLM or premium data tonight
+- document why
+- do not add an LLM, premium data, candidate scraping or UI to rescue it
 
 If **yes**:
 
-- continue through the payment-gated phase in the session plan
-- expose `$0.50` only on Base Sepolia
-- keep mainnet out of scope
+- finish sample briefs
+- prepare for external recruiter validation
+- still do **not** add a new paid x402 endpoint tonight
 
-## 8. What not to touch
+## 8. Do not touch tonight
 
-Do not spend the session on:
+Do not spend Codex time on:
 
-- Talent Bench
-- HobbyOS
-- a new brand/name
-- MPP
-- MCP
-- mainnet
-- website/UI polish
+- public Role Reality endpoint
+- Recruiting Pressure
 - Evidence Slice upgrades
-- company hiring-pressure signals
+- Talent Bench / HobbyOS
+- rebrand
+- mainnet
+- MCP/MPP
+- candidate sourcing/ranking
 - LinkedIn scraping
-- candidate/person data
-- databases
-
-The night's scarce resource is the quality of one product test.
+- contact enrichment
+- frontend/dashboard
+- production database
+- premium talent-data subscriptions
 
 ## 9. End-of-session record
 
-Before stopping for the night, update Issue #13 with:
+Update **Issue #14** with:
 
-- branch/commit
-- tests/typecheck status
-- provider status: fixture-only or live
-- sample roles generated
-- what looked genuinely useful
-- what looked weak/misleading
-- whether the paid-route gate was passed
-- exact next step
-
-Do not mark Product #2 selected merely because implementation completed.
+- branch + commit
+- test/typecheck result
+- sample drafts generated
+- data-source mode used
+- average draft generation time
+- human finish time for each reviewed sample
+- useful recurring observations
+- weak/misleading sections
+- pass/fail against the 25–30 minute gate
+- exact next external-validation step
 
 ## 10. Success definition
 
-A successful evening ends with **less uncertainty**.
+A good night does **not** end with another public endpoint.
 
-That can mean:
+It ends with one of:
 
-- Role Reality clearly earns a paid testnet experiment, or
-- real data exposes that the product is too weak and we reject it before wasting more engineering time.
+1. a workbench good enough to support a real paid Search Preflight experiment, or
+2. a cheap, documented rejection before more product engineering.
 
-Both are better than shipping another endpoint because Codex made it easy.
+Both reduce uncertainty and protect the path to revenue.
