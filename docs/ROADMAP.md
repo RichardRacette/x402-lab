@@ -1,21 +1,18 @@
 # x402-lab Roadmap
 
-The rule remains:
+Rules:
 
-> **Earn complexity.**
-
-The commercial rule is now stronger:
-
-> **Earn revenue before automating more product.**
+> **Earn complexity. Revenue before ritual. Productize what repeats.**
 
 Current governing docs:
 
-- `FULL-PROJECT-AUDIT-2026-08-24.md`
-- `BUSINESS-PLAN-V0.3.md`
-- `PRODUCT-VIABILITY-2026-08-24.md`
+- `PRODUCT-THESIS.md`
+- `PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md`
+- `BUSINESS-PLAN-V0.4.md`
+- `RECRUITING-AGENT-EVAL-V0.md`
 - `CODEX-SESSION-PLAN-2026-08-24.md`
 
-Older product-discovery docs are historical records, not active implementation instructions.
+Older product-discovery files are historical records, not implementation instructions.
 
 ## Milestone 0 — Public seed ✅
 
@@ -23,7 +20,7 @@ Public repository established.
 
 ## Milestone 1 — First automated x402 transaction ✅
 
-Proven flow:
+Proven:
 
 ```text
 buyer → 402 → signed payment → settlement → retry → protected result
@@ -31,263 +28,251 @@ buyer → 402 → signed payment → settlement → retry → protected result
 
 ## Milestone 2 — Initial product exploration ✅
 
-`/analyze-job` proved the first payment loop.
-
-Evidence Slice was selected as the first cleaner agent-native shelf item.
+`/analyze-job` proved the payment loop. Evidence Slice became the cleaner agent-native shelf experiment.
 
 ## Milestone 3 — Evidence Slice V0 ✅
 
-Delivered deterministic extraction, source provenance, public-URL safety, tests and paid Base Sepolia flow.
+Deterministic evidence extraction, provenance, URL safety, tests and paid Base Sepolia flow.
 
-## Milestone 4 — Public seller proof ✅
+## Milestone 4 — Public machine-payable seller proof ✅
 
 Delivered:
 
-- public Railway seller
+- Railway deployment
 - x402 V2
 - first public paid Evidence Slice transaction
 - Bazaar metadata
-- bounded buyer/shopper gateway
+- bounded buyer + shopper gateway
 
-What this proved:
+This proved payment capability, not demand.
 
-> x402-lab can expose, sell, settle and fulfill a machine-payable service.
+## Milestone 4.5 — Product viability discovery 🚧
 
-What it did not prove:
+### Evidence Slice
 
-> a commercially strong product exists.
+**Status:** keep as protocol proof; weak commercial confidence.
 
-## Milestone 4.5 — Product viability gate 🚧
+### Recruiting Pressure / Agency Opportunity
 
-The purpose of this phase is to reject weak commercial ideas before sunk-cost engineering.
+**Status:** rejected before implementation due competitive overlap.
 
-### Discovery A — Evidence Slice
+### Automated Role Reality
 
-**Status: protocol proof, weak commercial confidence.**
+**Status:** rejected before implementation after free/SMB competitive audit and weak buy-vs-build economics.
 
-Do not rescue with features.
+### Search Preflight
 
-### Discovery B — Agency Opportunity / Recruiting Pressure
+**Status:** useful workflow/scenario concept, but downgraded as the primary commercial offer because many recruiting-agent customers already have recruiter approvers.
 
-**Status: rejected before implementation.**
+### Recruiting Agent Practitioner Eval
 
-Reason: substantial overlap with current hiring-signal / recruiting-intelligence products.
+**Status:** **leading first-revenue hypothesis.**
 
-### Discovery C — automated Role Reality Check
+Proposition:
 
-**Status: rejected as a paid automated SKU.**
+> Send sanitized recruiting-agent runs/traces. A recruiting practitioner labels professional workflow failures, corrected behavior and golden/regression cases.
 
-Reason:
+Why it currently leads:
 
-- current free/SMB tools already provide richer role-level market intelligence
-- market-calibration agents are already emerging
-- public-data talent-intelligence workflows are increasingly cheap to reproduce
-- CareerOneStop rights require additional clarification before transformed commercial use
+- domain-expert AI evaluation is already a paid service class
+- recruiting agents are proliferating
+- practitioner labels can compound into a benchmark
+- no talent-data licensing dependency is required
+- repeat trigger exists with every meaningful release/tool/model/autonomy change
+- future automated evaluator can reuse the existing machine-commerce stack
 
-Role Reality concepts may still be used internally as research/fulfillment helpers.
-
-## Milestone 4.5C — Search Preflight Workbench + first-revenue experiment 🚧
+## Milestone 4.5C — Eval Workbench + synthetic benchmark 🚧
 
 ### Goal
 
-Find out whether **human recruiting judgment** can be sold as a bounded service while software reduces fulfillment time.
-
-Working service:
-
-> **Recruiting Search Preflight — Human Review Gate**
-
-The buyer supplies one requisition/search plan. A human recruiter reviews what is unclear, unrealistic, contradictory, or worth changing before heavy sourcing/outreach begins.
+Make recruiting-practitioner evaluation fast, structured, reusable and machine-readable.
 
 ### Engineering task
 
-Build an internal Search Preflight Workbench, not a paid public endpoint.
+Build internal workbench on:
 
-It should:
+`milestone-4-5-recruiting-agent-eval-harness`
 
-- normalize requisition/search-plan inputs
-- organize clearly licensed/public market facts where useful
-- preserve source geography/vintage/limitations
-- surface obvious compensation/constraint inconsistencies
-- generate traceable calibration questions
-- produce Markdown + JSON drafts
-- leave an explicit human-review layer
-- measure draft generation / review time
+Required outputs:
 
-### Pass condition
+- eval project/scenario/run/review schemas
+- recruiting-specific rubric dimensions
+- extensible failure taxonomy
+- 15–20 synthetic non-PII scenarios
+- synthetic fixture agent outputs
+- structured human-review records
+- aggregate JSON report
+- concise Markdown report
+- golden/regression-case export
+- tests/typecheck
 
-A knowledgeable reviewer can turn a draft into a credible deliverable in roughly **25–30 minutes or less**, without rewriting most of it.
+### Human judgment rule
 
-### Fail condition
+Software structures the review. It must never fabricate practitioner verdicts, rationales, failure labels, corrected behavior or golden-case promotion.
 
-If the workbench is mainly salary lookup/template filler or creates more checking than it saves, stop and document why.
+### Internal pass gate
 
-No LLM, premium data, candidate scraping, database, frontend, MCP or new paid endpoint is automatically allowed to rescue it.
+Manually review 10 synthetic runs.
 
-## Milestone 4.6 — External usefulness validation
+Prefer:
 
-Show 3–5 finished sample reviews to real recruiters.
+- ~3–6 minutes per run after familiarization
+- meaningful recruiting-specific distinctions
+- little manual report formatting
+- reusable golden cases
 
-Before showing the output, ask what they would normally research/challenge on the req.
+Reject/refactor if the rubric looks like generic AI QA with recruiting vocabulary pasted on.
 
-Continue when:
+## Milestone 4.6 — External builder validation
 
-- at least 3/5 report a meaningful action/research change; and
-- at least 2/5 request another review / recurring use; and
-- no systemic factual-quality problem appears.
+Create a polished 3–5-run mini-eval artifact.
 
-Compliments do not count as demand.
+Show it to at least three recruiting-agent builders/product people.
 
-## Milestone 4.7 — First external revenue
+Positive signals, strongest first:
 
-Offer the next review at a stated pilot price.
+1. builder sends additional runs
+2. builder adds one of our cases to their regression/eval process
+3. builder requests review after a change/release
+4. builder engages deeply with/disputes practitioner labels
+5. builder says it looks useful
 
-Candidate learning ladder:
+Compliments alone are weak.
 
-- free samples for validation
-- `$25` pilot
-- `$49` early normal test
-- `$75–$99` only if the review materially changes a live search/intake decision
+## Milestone 4.7 — First real paid eval
 
-Human fulfillment time is treated as a variable cost.
+Pricing tests:
+
+- free 3–5-run mini review for a very small number of builders
+- `$99–$149` Practitioner Smoke Eval (~10 runs)
+- around `$249` Practitioner Eval Sprint (20–25 runs + failure summary + golden cases)
+
+Treat human time as a variable cost.
 
 Exit condition:
 
-> **A real external buyer pays real money for one Search Preflight review.**
+> **One external builder pays real money for practitioner evaluation.**
 
-Payment channel should be the easiest legitimate option for that buyer. Do not force a human buyer into crypto merely to preserve the experiment's aesthetic.
+The payment channel should minimize legitimate friction; it does not have to be x402.
 
-## Milestone 4.8 — First repeat payer
+## Milestone 4.8 — First repeat builder
 
 Exit condition:
 
-> **The same external buyer chooses to purchase a second review.**
+> **The same builder pays for another eval after a release/change.**
 
-This is more important than first payment and more important than additional protocol work.
+This is the strongest early commercial signal.
 
-Record:
+Track:
 
 - price
-- fulfillment minutes
-- what the buyer changed
-- what research/tooling was replaced
-- missing facts
-- whether the buyer returned
+- runs reviewed
+- human minutes
+- recurring failure labels
+- cases adopted into buyer regressions
+- what changed between releases
 
-## Milestone 5 — Agent-native human-service distribution
+## Milestone 5 — Build the benchmark asset
 
-After the service can be fulfilled reliably, test an agent-native marketplace listing.
+After real customer-authorized/sanitized reviews:
 
-Candidate channel: a marketplace that allows AI agents to purchase human expert services through x402 escrow with machine-readable inputs and asynchronous delivery.
+- refine failure taxonomy
+- curate workflow-specific golden cases
+- version rubrics
+- record inter-review ambiguity where possible
+- remove customer-identifying details from any reusable artifact unless explicit rights allow otherwise
 
-This tests a distinctive thesis:
+The benchmark is not a moat until enough real labeled evidence exists.
 
-> **Can a recruiting agent purchase human recruiter judgment as a callable escalation step?**
+## Milestone 6 — Automate one proven eval dimension
 
-Do not confuse listing availability with demand. Track genuine external purchases only.
+Choose one repeated dimension only when:
 
-## Milestone 6 — Productize what repeats
+- human labels are stable enough to define correctness
+- enough examples exist to measure agreement
+- an automated evaluator can be tested against human labels
+- buyer value survives automation
 
-After paid reviews reveal repeated value, identify one component that is:
+Possible examples may emerge around requirement drift, evidence grounding, autonomy-boundary adherence or another repeated failure.
 
-- repeatedly requested
-- rule-like enough to automate safely
-- supported by appropriate data rights
-- economically useful
-- machine-consumable
-
-Only then expose that component as an automated paid SKU.
-
-Possible examples may emerge from:
-
-- title/occupation normalization
-- constraint contradiction detection
-- compensation calibration
-- search-plan completeness
-- specialty-specific intake questions
-- another repeated need discovered from buyers
-
-No component is pre-approved.
+No dimension is pre-approved.
 
 ## Milestone 7 — Machine-native Product #2
 
-Goal:
+Expose a validated automated eval component through whichever front door minimizes buyer friction:
 
-> an external machine buyer pays for a component that was first proven inside real paid work.
+- x402
+- MCP
+- MPP
+- conventional API
 
-Reuse the existing x402 seller/payment/discovery stack.
-
-Payment frontage remains protocol-neutral at the business level.
-
-## Milestone 8 — First repeat autonomous buyer
+Reuse existing x402-lab seller/payment infrastructure rather than rebuilding it.
 
 Exit condition:
 
-> the same external machine buyer purchases the validated automated component more than once without a human explicitly directing each transaction.
+> an external machine buyer purchases a component that was first proven against human labels.
+
+## Milestone 8 — Repeat autonomous buyer
+
+Exit condition:
+
+> the same external machine buyer purchases the validated eval more than once without human instruction per transaction.
 
 Track contribution margin, not transaction count.
 
-## Milestone 9 — Profitable real-money automation
+## Milestone 9 — Hybrid continuous QA
 
-Before mainnet/production automated sales require:
+Potential later product:
 
-- validated repeated utility
-- clear data rights
-- bounded costs
-- production credential/wallet separation
-- failure/refund semantics
-- intentional price
-- accounting/logging
+```text
+automated recruiting-agent eval
+        ↓
+confidence / ambiguity gate
+        ↓
+human practitioner escalation when needed
+        ↓
+new labels feed benchmark
+```
 
-Exit condition:
-
-> real automated external sales with positive contribution per fulfilled transaction.
+This is the strongest long-term service/product flywheel currently visible.
 
 ## Milestone 10 — Business decision
 
-Evaluate the whole operation on:
+Evaluate:
 
 - external revenue
-- repeat payer rate
-- revenue per buyer
+- repeat builder rate
 - contribution after owner time
-- fulfillment time trend
-- buyer concentration
+- review time trend
+- builder acquisition cost
+- benchmark reuse
+- automated-human agreement
+- marketplace/direct-channel performance
 - support burden
-- acquisition channel
-- data/vendor risk
-- which work has become automatable
+- IP/data-rights risk
 
 Possible outcomes:
 
-1. deepen the winning service
-2. automate a proven subcomponent
-3. build a protocol-neutral commercial brand
-4. specialize in a recruiting niche that shows stronger demand
-5. pivot to a newly exposed agent-commerce bottleneck
-6. stop commercial investment if buyers do not appear
+1. deepen recruiting-agent eval vertical
+2. specialize by recruiting workflow
+3. productize evaluator(s)
+4. partner with eval platforms/HR-tech builders
+5. broaden domain only after recruiting proves repeat economics
+6. stop/pivot if builders do not pay
 
-## Profit milestone ladder
+## Commercial milestone ladder
 
-- `$1` external revenue — crossed into commerce
-- `$100` cumulative external revenue — non-ceremonial demand
-- first repeat payer — strongest early signal
-- `$500/month` revenue — tiny business signal
+- `$1` external revenue — actual commerce
+- first `$99–$149` smoke eval — pricing evidence
+- first `$249` sprint — stronger value evidence
+- **first repeat builder** — strongest early signal
+- `$1,000` cumulative eval revenue — non-ceremonial demand
 - `$1,000/month` contribution after owner time — meaningful side-business validation
-- `$5,000/month` contribution — evaluate deeper automation, formal commercial brand and deliberate acquisition
-
-These are learning milestones, not forecasts.
+- recurring release-eval customer — business-model evidence
+- automated evaluator with measured human agreement — scalable product milestone
 
 ## Protocol posture
 
-x402 remains worth learning and operating. It has formal Linux Foundation governance and production cloud support, but raw settlement volume is noisy and should not be treated as TAM.
+x402 remains strategically useful but is not the business identity.
 
-The eventual commercial product can use whichever front door makes buying easiest:
-
-- x402
-- MPP
-- MCP
-- ordinary API billing
-- agent marketplaces
-- conventional human payments
-
-The business is not loyal to a payment protocol. It is loyal to profitable customer value.
+The project stays protocol-neutral and uses x402 when machine-native purchase genuinely reduces friction.
