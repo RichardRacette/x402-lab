@@ -87,7 +87,6 @@ app.use(
         tags: ["evidence", "research", "extraction", "agents"],
         extensions: {
           ...declareDiscoveryExtension({
-            method: "POST",
             bodyType: "json",
             input: {
               url: "https://example.com/",
