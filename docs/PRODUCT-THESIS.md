@@ -1,357 +1,231 @@
-# x402-lab Product Thesis v0.2
+# x402-lab Product Thesis v0.3
 
 Status: **governing product direction**
 
-Adopted: **2026-08-23**
-
-Revised: **2026-08-24**
-
-This document governs product decisions after completion of the first successful x402 transaction and before adding another endpoint, MCP tool, model, deployment target, or mainnet configuration.
+Adopted: **2026-08-24**
 
 ## Governing thesis
 
-> **Reduce transaction friction so aggressively that choosing us becomes cheaper for the agent than thinking about alternatives.**
+> **Find a recurring machine-economy need worth paying for, learn it with the cheapest credible human/software combination, and automate only the portion that earns repeat demand.**
 
-x402-lab exists to become a path of least resistance for machine buyers.
+x402-lab remains a laboratory for machine-native commerce, but the project no longer assumes the first revenue-producing offer must itself be a synchronous automated API.
 
-The project is not trying to win by having the most endpoints, the most sophisticated model, the lowest nominal price, or the largest marketplace. It is trying to become the easiest reliable decision an autonomous buyer can make for one recurring need.
+## Commercial objective
 
-## Economic objective
+> **Profitable repeat external purchases.**
 
-> **The lowest price that maximizes profitable repeat purchase volume.**
+Near-term evidence hierarchy:
 
-Price is a strategic variable, not an end in itself. x402-lab should not pursue the lowest nominal price if that price destroys margin, reliability, or the ability to keep serving buyers.
+1. external buyer pays real money for useful work
+2. same buyer returns after a meaningful change/new task
+3. fulfilled work has positive contribution after owner time and variable cost
+4. repeated valuable steps become identifiable
+5. those steps can be automated without destroying quality
+6. automated buyers purchase the resulting component repeatedly
 
-The operating objective is:
+The eventual machine-native metric remains **repeat autonomous purchase**, but it is now a downstream productization milestone rather than a prerequisite for learning what is worth selling.
 
-> **Populate the store with high-frequency agent utilities whose price is trivial relative to the value they provide, while relentlessly driving fulfillment cost and transaction friction toward zero.**
+## Long-term economic objective
 
-This means x402-lab should prefer products that agents can buy repeatedly with very little deliberation, while continuously reducing the cost and complexity required to fulfill each successful purchase.
+For an automated SKU:
 
-The central long-term question is:
+> **Choose the price that maximizes profitable repeat purchase volume.**
 
-> **Can we make thousands or millions of autonomous purchases happen because each individual purchasing decision is so cheap and frictionless that the agent doesn't bother reinventing the capability?**
+Do not confuse low nominal price with low buyer friction or good economics.
 
-A high transaction count is useful only if repeated purchases are genuinely useful to buyers and economically sustainable for the seller.
+A `$249` expert evaluation can be economically easier to justify than a `$0.003` commodity transformation if the former prevents expensive product failures and the latter is trivial to reproduce.
 
-## What we are trying to prove next
+## What has already been proven
 
-Milestone 1 proved protocol capability:
-
-> an automated client can discover a payment requirement, pay x402-lab, receive a useful result, and continue its task.
-
-The next product question is different:
-
-> **Can x402-lab provide one small capability that an external agent chooses to purchase more than once because buying it is easier than evaluating or reproducing alternatives?**
-
-A single external payment proves access.
-
-A repeat autonomous purchase begins to prove utility.
-
-Repeated independent purchases from multiple agents begin to prove product-market signal.
-
-## The buyer
-
-The primary customer is a **software agent with a budget and a task**, not a human browsing a SaaS dashboard.
-
-The agent should be able to understand the offer and transact with minimal or no human intervention.
-
-Human developers, operators, and companies may configure or fund those agents, but the product experience should optimize for the machine buyer at the moment of selection and purchase.
-
-## What “transaction friction” means
-
-Price is only one component of cost.
-
-For an agent, total transaction cost includes:
-
-- discovery cost — can the service be found when needed?
-- interpretation cost — is it immediately clear what the service does?
-- integration cost — are inputs and outputs structured and predictable?
-- authentication cost — are accounts, API keys, subscriptions, or manual approval required?
-- payment cost — can the agent pay natively with a clear price and bounded spend?
-- decision cost — does the agent have enough evidence to choose the service without extended comparison?
-- execution cost — is the service fast and dependable?
-- recovery cost — are failures explicit, structured, and safe to retry?
-- trust cost — does prior successful use reduce uncertainty on the next call?
-- protocol compatibility cost — can the buyer understand the seller's x402 dialect and payment challenge?
-- discovery compatibility cost — does the seller expose machine-readable metadata in a form the buyer can consume?
-- upgrade cost — would an otherwise capable buyer need to update dependencies, redeploy, or involve a human before making a trivial purchase?
-
-x402-lab should compete on **total decision and transaction cost**, not nominal price alone.
-
-A competitor can be cheaper in dollars and still be more expensive for an agent to use.
-
-## Desired agent experience
-
-The ideal interaction is:
+x402-lab has proven protocol capability:
 
 ```text
-agent needs X
-    ↓
-finds x402-lab
-    ↓
-understands capability + price + schema immediately
-    ↓
-knows the spend is within policy
-    ↓
-pays without signup or subscription
-    ↓
-receives clean structured output
-    ↓
-service behaves exactly as advertised
-    ↓
-next time: use x402-lab again
+buyer → 402 → signed payment → settlement → retry → protected result
 ```
 
-The goal is to drive the time between **“I need X”** and **“call x402-lab”** toward zero.
+Evidence Slice proved that a public seller, payment middleware, Bazaar metadata, bounded buyer and protected fulfillment can work.
+
+That technical proof is complete enough. More payment demos are not the next business milestone.
+
+## What the project is trying to prove now
+
+Current commercial question:
+
+> **Will a recruiting-agent builder pay for independent practitioner evaluation of agent behavior, and return when the agent changes?**
+
+If yes, the project should learn which human judgments recur and which can become a benchmark/automated evaluator.
+
+If no, reject the niche and return to product discovery.
+
+## Buyer model
+
+The current first-revenue buyer is a **human/team building or operating recruiting agents**, not necessarily the autonomous agent itself.
+
+The long-term buyer may be:
+
+- the builder/team
+- an orchestration agent
+- an evaluation pipeline
+- the recruiting agent itself requesting evaluation/escalation
+
+Do not force the buyer identity to become autonomous before value is established.
+
+## Buy-vs-build rule
+
+Before building or selling a product, answer:
+
+> **Why is buying this materially easier, safer, faster, or more valuable than reproducing it with tools the buyer already has?**
+
+Count free competitors.
+
+Count internal human expertise.
+
+Count commodity model/browser/search capability.
+
+A clean API contract is not itself a moat.
 
 ## Product principles
 
-### 1. Reliability is a feature
+### 1. Revenue before ritual
 
-The endpoint that works every time can beat a more capable endpoint that creates uncertainty.
+Do not perform protocol milestones merely because they are technically available.
 
-Prefer stable behavior, deterministic contracts, bounded latency, explicit errors, and reproducible outcomes over novelty.
+### 2. Repeat before scale
 
-### 2. Machine-readable beats human-friendly decoration
+A second purchase from the same external buyer is more valuable than many self-generated transactions.
 
-For the target buyer, a precise schema is more valuable than a polished landing page.
+### 3. Human work can be instrumentation
 
-Discovery metadata, OpenAPI definitions, clear descriptions, stable response shapes, health signals, and structured errors are product surfaces.
+Manual or human-reviewed fulfillment is acceptable when it teaches what the buyer values and creates reusable labeled artifacts.
 
-### 3. No unnecessary gates
+The purpose is not to build a labor-intensive consultancy forever. The purpose is to discover the product with paid evidence.
 
-Default against:
+### 4. Productize what repeats
 
-- account creation
-- subscriptions
-- API-key provisioning
-- email verification
-- sales contact
-- manual approval
-- hidden pricing
+Automate after repeated use shows stable rules, valuable outcomes and acceptable data rights.
 
-Add a gate only when security, abuse prevention, regulation, or economics genuinely require it.
+### 5. Machine-readable still matters
 
-### 4. Predictable tiny prices
+Even human-delivered services should prefer structured inputs/outputs so they can later be invoked, evaluated and paid for by agents.
 
-An agent should know the price before committing and be able to compare it to a spend policy.
+### 6. Reliability and auditability are features
 
-Do not optimize early pricing for maximum margin. Optimize for an economically trivial decision that still creates a real transaction signal.
+Prefer explicit contracts, bounded behavior, source/evidence links, structured errors and reproducible evaluation artifacts.
 
-### 5. Clean outputs
+### 7. No unnecessary gates for automated products
 
-Responses should be concise, structured, documented, and useful without another interpretation step.
+When a capability becomes machine-native, default against signup, subscription, API-key provisioning, hidden pricing and manual approval unless economics/security/regulation require them.
 
-If a request fails, return an explicit machine-readable reason and whether retrying makes sense.
+### 8. Earn complexity
 
-### 6. Earn complexity
+No LLM, database, browser automation, premium data, MCP, MPP, new payment scheme or dashboard is entitled to exist because it is interesting.
 
-No feature is entitled to exist because it is technically interesting.
+### 9. Data rights are product dependencies
 
-Every new endpoint, model, integration, protocol surface, or infrastructure layer must either:
+Public accessibility is not the same as commercial transformation rights.
 
-- reduce meaningful agent friction,
-- improve the usefulness or reliability of a proven need,
-- improve discovery of a proven service, or
-- produce evidence that helps us choose the next direction.
+### 10. Compatibility is friction
 
-### 7. Operation before abstraction
+The installed base may include older/pinned clients. V1/V2 compatibility research remains useful, but compatibility work is not a commercial priority until a validated automated product has buyers to reach.
 
-Do not build generic infrastructure for problems we have not personally encountered while operating a seller.
+See `AGENT-COMPATIBILITY-PRINCIPLE.md`.
 
-Run the service, observe failures and buyer behavior, then decide whether spend controls, reputation, routing, facilitator infrastructure, or other layers deserve investment.
+## Current product-discovery sequence
 
-### 8. Compatibility is friction
+### Evidence Slice
 
-“AGENTS WELCOME” should eventually mean more than “latest SDK welcome.”
+Status: protocol/payment proof; weak commercial confidence.
 
-A meaningful installed base may consist of long-lived agents running older x402 versions, pinned SDKs, frozen containers, or unattended workflows that remain deployed because they still work. This is an important hypothesis to test, not an established claim about current market share.
+### Recruiting Pressure / Agency Opportunity
 
-Do not assume that the newest client's backward compatibility solves the inverse problem of an old V1-only client encountering a V2-only seller.
+Status: rejected before implementation due competitive overlap.
 
-Prefer one product with multiple compatible doors over duplicated product logic when compatibility is justified by evidence.
+### Automated Role Reality
 
-Do not immediately support every historical protocol or SDK. Compatibility must earn complexity through representative frozen-client tests, external integration attempts, observed ecosystem usage, or other evidence that a meaningful buyer class is being excluded.
+Status: rejected before implementation after deeper free/SMB competitive audit.
 
-The detailed operating principle and test design are recorded in [`docs/AGENT-COMPATIBILITY-PRINCIPLE.md`](./AGENT-COMPATIBILITY-PRINCIPLE.md).
+### Search Preflight human review
 
-## Service qualification test
+Status: useful scenario concept, but downgraded as the primary product because many recruiting-agent customers already employ recruiter approvers.
 
-Before x402-lab adds a new paid capability, it should score well on most of these questions:
+### Recruiting Agent Practitioner Eval
 
-1. **Recurring need:** Do agents need this repeatedly rather than once?
-2. **Buy-vs-build advantage:** Is purchasing the result easier or cheaper than reproducing it locally?
-3. **Machine fit:** Can the input and output be expressed cleanly as structured data?
-4. **Low decision cost:** Can an agent understand what it gets, for what price, without ambiguity?
-5. **Tiny transaction viability:** Can the service be economically offered at fractions of a dollar per call?
-6. **Reliability potential:** Can we operate it with predictable behavior and bounded failure modes?
-7. **Observable demand:** Is there evidence that agents or agent builders actually need or pay for this class of capability?
-8. **Differentiation:** Can x402-lab be meaningfully easier, more reliable, more focused, or better integrated than alternatives?
-9. **Operational fit:** Can we support it without creating a large company before demand exists?
-10. **Repeatability:** Would successful use plausibly cause the same agent to call it again?
+Status: **leading first-revenue hypothesis**.
 
-A clever idea with weak answers should not be built.
+The scarce input being tested is human recruiting-domain judgment applied to agent behavior, converted into failure labels, corrected behavior and golden/regression cases.
+
+## Current moat hypothesis
+
+The V0 moat is weak: practitioner expertise.
+
+The compounding asset, if buyers appear, is stronger:
+
+```text
+human recruiting labels
+    ↓
+failure taxonomy
+    ↓
+golden/regression cases
+    ↓
+human-labeled benchmark corpus
+    ↓
+automated evaluator calibrated against humans
+    ↓
+machine-native paid eval + human escalation
+```
+
+Do not claim a benchmark moat until real labeled customer work exists.
 
 ## Evidence hierarchy
 
-When choosing what to build next, prefer evidence in this order:
+When choosing what to do next, prefer:
 
-1. repeat purchases by external agents
-2. multiple independent external purchases for the same need
-3. requests or integration attempts from agent builders
-4. observed paid usage patterns in the x402 ecosystem
-5. repeated friction encountered while operating x402-lab
-6. strong adjacent evidence from agent tooling markets
-7. our own intuition
+1. repeat paid external use
+2. first paid external use
+3. customer-provided additional runs/tasks
+4. customer adoption of our cases into their regression process
+5. observed professional workflow pain
+6. current market spend on adjacent solutions
+7. our intuition
 
-Ideas are useful. Transactions are stronger evidence.
+GitHub activity, endpoint count and testnet volume are not evidence of demand.
 
-## Success metrics
+## Safety / scope
 
-### Primary early metric
+The current eval experiment is **practitioner workflow-quality feedback**, not:
 
-**Repeat autonomous purchases.**
+- employment-law advice
+- algorithmic bias audit
+- NYC Local Law 144 audit
+- legal compliance certification
+- approval for autonomous adverse employment decisions
 
-The strongest early event is not “an agent paid us.” It is:
+Use synthetic/public/customer-authorized sanitized data in V0. Avoid real candidate PII.
 
-> **the same external agent chose to pay us again without a human explicitly directing that individual purchase.**
+## Mainnet / production payment principle
 
-### Milestone ladder
+Do not launch another automated mainnet SKU until:
 
-```text
-first successful x402 transaction          ✅
-    ↓
-first external machine purchase
-    ↓
-first external repeat purchase
-    ↓
-multiple repeat buyers for the same need
-    ↓
-measurable preference / default behavior
-```
+- repeated utility is demonstrated
+- data/use rights are clear
+- costs and failure modes are bounded
+- pricing is intentional
+- production credentials/wallet/accounting are ready
 
-### Supporting metrics
+Human-service payments may use the lowest-friction legitimate channel during commercial discovery; x402 is not mandatory for the first dollar.
 
-As the service becomes public, track:
+## Brand principle
 
-- successful paid-call rate
-- payment-to-result latency
-- retry/failure rate
-- structured-error rate by cause
-- repeat-buyer rate
-- calls per returning buyer
-- nominal price and total buyer friction
-- external integrations completed without human support
-- compatibility failures by protocol/client/discovery surface when observable
-- revenue per fulfilled transaction
-- variable fulfillment cost per fulfilled transaction
-- contribution margin per fulfilled transaction
+Keep `x402-lab` as the public R&D asset.
 
-Do not optimize vanity metrics such as endpoint count, GitHub stars, social attention, or total testnet volume.
+Do not create a commercial brand until paying repeat demand makes the product family clearer.
 
-## Role of `/analyze-job`
-
-`POST /analyze-job` is the first learning product.
-
-It proved the payment loop using a problem domain where output quality could be evaluated easily.
-
-It does **not** commit x402-lab to becoming a recruiting company.
-
-Recruiting remains a valid candidate domain because there is domain knowledge available to judge usefulness, but future investment must earn its place using the same evidence standard as any other opportunity.
-
-## Brand hypothesis
-
-x402-lab may evolve into a trusted vendor identity for a small collection of agent-native utilities.
-
-The long-term mental model could resemble an **agent convenience store**:
-
-- narrowly useful services
-- obvious prices
-- no unnecessary membership process
-- predictable contracts
-- always available
-- known to work
-- accessible to a reasonable range of machine buyers without needless upgrade work
-
-This is a hypothesis, not permission to build a catalog.
-
-One excellent recurring service is more valuable than twenty unproven endpoints.
-
-## Discovery and distribution hypothesis
-
-For machine buyers, the “billboard” is machine-readable.
-
-When the service is ready for public exposure, likely high-value surfaces include:
-
-- clear x402 payment requirements
-- OpenAPI
-- structured discovery metadata
-- `.well-known` metadata where appropriate to the current protocol
-- MCP only when it materially improves agent access
-- ecosystem discovery mechanisms such as Bazaar and x402scan when appropriate
-- explicit health/reliability signals
-- compatibility/version metadata when evidence shows it reduces real buyer friction
-
-Discovery and payment compatibility must be evaluated separately. A buyer that can pay when handed an endpoint but cannot discover or interpret the product is still effectively excluded.
-
-These are distribution mechanisms, not the product itself.
-
-Do not add them ahead of the service-selection decision simply because they exist.
-
-## Anti-goals for the current phase
-
-Until demand earns them, x402-lab is **not** trying to become:
-
-- a generic x402 directory
-- a marketplace of arbitrary APIs
-- a full recruiting platform
-- an ATS
-- a general-purpose AI wrapper
-- an x402 facilitator
-- an agent wallet product
-- a spend-management platform
-- a reputation network
-- a routing layer
-- a universal protocol-translation layer
-- a dashboard-heavy SaaS product
-- a mainnet business with meaningful financial exposure
-
-Any of these may become rational later. None is currently assumed.
-
-## Mainnet principle
-
-Mainnet is not the next milestone simply because testnet worked.
-
-Real-money operation should begin only after:
-
-- the service itself has a clear reason to exist,
-- its failure and abuse modes are understood,
-- pricing is intentional,
-- seller credentials are properly separated,
-- limits and logging are adequate,
-- an external buyer is ready to purchase something genuinely useful.
-
-The objective is not to prove that x402 can move real USDC. Milestone 1 already proved the protocol loop.
-
-The objective is to exchange real value for real utility.
+The eventual brand should be protocol-neutral.
 
 ## Current decision rule
 
-Before writing more product code, answer:
+Before spending meaningful engineering time, ask:
 
-> **What is the smallest recurring X that machine buyers already need, where x402-lab can make buying X easier than thinking about how else to get it?**
+> **Does this work increase the probability of an external paid eval, a repeat eval, or a reusable benchmark asset?**
 
-Then test that hypothesis with the smallest possible public service.
-
-For the existing Evidence Slice product, the immediate distribution question is now also:
-
-> **Which meaningful categories of machine buyers can actually find and buy it today, and which are excluded by protocol, discovery, or SDK friction?**
-
-## Definition of success for Product Thesis v0.2
-
-This thesis succeeds if it prevents premature building and guides x402-lab toward one or more services that produce profitable repeat autonomous purchases.
-
-It should be revised when operating evidence contradicts it.
-
-It should not be revised merely because a new technical possibility looks exciting.
+If not, it is probably not tonight's priority.
