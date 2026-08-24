@@ -4,7 +4,9 @@ The rule: **earn complexity**.
 
 The governing product direction is defined in [`PRODUCT-THESIS.md`](PRODUCT-THESIS.md).
 
-The selected first product hypothesis is defined in [`EVIDENCE-SLICE-V0.md`](EVIDENCE-SLICE-V0.md).
+The current commercial correction is defined in [`PRODUCT-VIABILITY-2026-08-24.md`](PRODUCT-VIABILITY-2026-08-24.md).
+
+Evidence Slice remains documented in [`EVIDENCE-SLICE-V0.md`](EVIDENCE-SLICE-V0.md), but is now treated primarily as the protocol/payment proof rather than sufficient evidence of a viable commercial product.
 
 ## Milestone 0 — Public seed ✅
 
@@ -30,165 +32,244 @@ Exit condition: a buyer program paid a seller program and received the protected
 
 ## Milestone 2 — Product thesis and first recurring X ✅
 
-Goal: move from “x402 works” to “we know what tiny recurring need we want to serve.”
+Goal: move from “x402 works” to an initial product hypothesis.
 
-### 2A — Product Thesis v0.1
-
-Product Thesis v0.1 defines the machine buyer, transaction friction, product principles, evidence hierarchy, anti-goals, and repeat autonomous purchase as the primary early signal.
-
-### 2B — Select the first recurring X
-
-Selected hypothesis: **Evidence Slice**.
+Selected initial hypothesis: **Evidence Slice**.
 
 > Give x402-lab a public URL and a question. Return the few passages on that page that actually contain evidence relevant to the question, packaged as clean JSON.
 
-Exit condition: exactly one hypothesis selected with price, contract, repeat-purchase rationale, and falsification conditions.
+**Status: complete as a hypothesis-selection milestone.** Subsequent market research weakened the commercial case for Evidence Slice itself; see the product viability addendum.
 
-**Status: complete.** See [`EVIDENCE-SLICE-V0.md`](EVIDENCE-SLICE-V0.md).
-
-## Milestone 3 — Build Evidence Slice V0 locally
+## Milestone 3 — Build Evidence Slice V0 locally ✅
 
 Goal: make the selected shelf item work safely before exposing it publicly.
 
-- implement `POST /extract-evidence`
+Delivered:
+
+- `POST /extract-evidence`
 - one public URL + one question
-- return 0–3 relevant passages
-- deterministic lexical ranking first
+- deterministic lexical ranking
 - source metadata + SHA-256 content hash
-- Base Sepolia price: `$0.003` test USDC
-- enforce public-URL/SSRF safety boundary
-- keep `/analyze-job` intact
-- typecheck and tests green
-- complete one local paid x402 Evidence Slice transaction
+- bounded public-URL/SSRF safety controls
+- Base Sepolia paid flow
+- typecheck/tests
+- local paid x402 transaction
 
-Hard non-goals:
+**Status: complete.**
 
-- no model/LLM
-- no embeddings/vector database
-- no search engine
-- no multi-URL input
-- no fact checking
-- no answer generation
-- no PDF/browser rendering
-- no accounts/API keys
-- no MCP
-- no public deployment
-- no mainnet
+## Milestone 4 — Put Evidence Slice on the public testnet shelf ✅
 
-Exit condition: Evidence Slice safely works locally end-to-end as a paid x402 service and returns useful passages from a real public page.
+Goal: prove x402-lab can operate a real public machine-payable service.
 
-**Active issue: [#3](https://github.com/RichardRacette/x402-lab/issues/3).**
+Delivered:
 
-## Milestone 4 — Put Evidence Slice on the public testnet shelf
+- public Railway deployment
+- Base Sepolia x402 V2 payment flow
+- first public paid Evidence Slice transaction
+- machine-readable Bazaar metadata
+- stable request/response contract
+- bounded buyer and shopper gateway
 
-Goal: make Evidence Slice reachable by another machine over the internet.
+**Status: complete.**
 
-Only after Milestone 3 succeeds:
+What this proved:
 
-- deploy the seller on Base Sepolia
-- expose the frozen Evidence Slice contract
-- add only the minimum machine-readable discovery information required for an external test
-- make price/schema obvious
-- verify an external buyer can complete a payment
-- record latency, failures, settlement behavior, and integration friction
+> x402-lab can expose, sell, settle, and fulfill a public machine-to-machine service.
 
-Exit condition: a client outside the local machine can discover enough about Evidence Slice to purchase it successfully.
+What this did **not** prove:
 
-## Milestone 5 — First external repeat buyer
+> an external agent has a sufficiently strong reason to buy Evidence Slice rather than reproduce the capability itself.
 
-Goal: prove utility rather than novelty.
+## Milestone 4.5 — Product viability & profit gate 🚧
 
-- obtain a purchase from an external machine buyer
-- observe whether it purchases again
-- preserve stable price/input/output contracts unless evidence requires change
-- fix only friction exposed by real integrations
+Goal: identify a product worth testing commercially **before** spending significant engineering time on Product #2.
+
+Governing document: [`PRODUCT-VIABILITY-2026-08-24.md`](PRODUCT-VIABILITY-2026-08-24.md).
+
+### Market findings already incorporated
+
+Observed x402 demand is materially stronger for:
+
+- credential-gated or licensed data access
+- B2B/person/company/job enrichment
+- browser/PDF/visual infrastructure
+- specialized high-value research
+- agent-commerce data/infrastructure
+
+Observed demand is much weaker for many broad catalogs of generic text/AI utilities.
+
+### Current leading opportunity family
+
+**Data/access + domain-specific orchestration**, with workforce/company/hiring intelligence as the leading domain to investigate because it combines observed paid demand with founder recruiting-domain knowledge.
+
+No product has been selected yet.
+
+### Required Product #2 proposal
+
+Before Codex builds Product #2, document:
+
+- buyer
+- recurring job
+- why buy instead of build
+- exact input/output contract
+- upstream dependencies
+- licensing basis
+- expected variable cost
+- proposed price
+- contribution margin
+- existing demand evidence
+- discovery channel
+- falsification condition
+- smallest possible implementation
+
+### Exit condition
+
+Exactly one Product #2 candidate passes the viability gate with:
+
+1. strong buy-vs-build advantage,
+2. repeated need,
+3. observable external demand evidence,
+4. a lawful/licensable data or infrastructure path,
+5. credible positive unit economics,
+6. a concrete path to an external payment-capable buyer.
+
+Until this exit condition is met, more generic paid endpoints are explicitly out of scope.
+
+## Milestone 5 — Build and expose Product #2 minimally
+
+Goal: test the winning commercial hypothesis with the smallest implementation that can produce real evidence.
+
+Rules:
+
+- one product, not a catalog
+- reuse the existing seller/payment stack
+- keep product logic independent of payment-protocol frontage
+- stable structured contract
+- instrument variable fulfillment cost
+- instrument success/failure/retry behavior
+- publish strong Bazaar metadata
+- list/register on relevant x402 discovery surfaces
+- preserve Evidence Slice as a test fixture rather than expanding it
 
 Exit condition:
 
-> the same external agent purchases Evidence Slice more than once without a human explicitly directing each individual purchase.
+> an external machine buyer successfully discovers and purchases Product #2 for a genuinely useful task.
+
+A first purchase proves access, not product-market fit.
+
+## Milestone 6 — First external repeat buyer
+
+Goal: prove utility rather than novelty.
+
+- observe whether the external buyer returns
+- preserve stable price/input/output contracts unless evidence requires change
+- fix only friction exposed by real integrations
+- track contribution margin, not only transaction count
+
+Exit condition:
+
+> the same external agent purchases Product #2 more than once without a human explicitly directing each individual purchase.
 
 This is the first strong product signal.
 
-## Milestone 6 — Improve access only where earned
+## Milestone 7 — Improve access only where earned
 
-Goal: make a proven capability easier for agents to discover and invoke.
+Goal: make a proven capability easier for agents to discover, invoke, and pay for.
 
 Possible additions only when justified by observed friction:
 
 - OpenAPI improvements
-- structured discovery metadata
-- `.well-known/x402` or successor convention where appropriate
-- Bazaar participation
+- stronger Bazaar/discovery metadata
 - MCP exposure
 - explicit health/reliability signals
+- MPP-native seller frontage
+- additional supported payment schemes such as `upto`
+- frozen-client V1/V2 compatibility frontage where representative testing proves a meaningful buyer class is excluded
 
-MCP is not a milestone by itself. It is a distribution surface that should be added only when it reduces buyer friction.
+Protocol stance:
 
-Exit condition: an access change measurably reduces integration or decision cost for external agents.
+- x402 remains the current primary implementation and laboratory
+- the commercial brand should not be tied permanently to x402
+- MPP and future machine-payment rails may become additional front doors to the same product logic
 
-## Milestone 7 — Improve Evidence Slice only where earned
+Exit condition: an access change measurably reduces integration, payment, compatibility, or decision cost for external agents.
+
+## Milestone 8 — Improve Product #2 only where earned
 
 Goal: increase usefulness without losing the low-friction contract.
 
-Potential future upgrades must be earned by buyer evidence, for example:
+Potential upgrades must be earned by buyer behavior or failure evidence.
 
-- better passage segmentation
-- better deterministic ranking
-- stronger provenance metadata
-- optional semantic ranking
-- multi-source evidence packets
-- support/contradict evidence classification
+Avoid databases, dashboards, broad integrations, and model dependencies unless measured usage justifies them.
 
-None of these is pre-approved.
+Exit condition: measured usefulness, repeat usage, or contribution margin improves without materially increasing buyer friction.
 
-Avoid databases, dashboards, broad integrations, and model dependencies until measured usage justifies them.
+## Milestone 9 — First profitable mainnet sales
 
-Exit condition: measured usefulness or repeat usage improves without materially increasing buyer friction.
-
-## Milestone 8 — First mainnet sale
-
-Goal: exchange real value for real utility.
+Goal: exchange real value for real utility with positive unit economics.
 
 Before switching:
 
-- Evidence Slice or its evidence-backed successor has a clear reason to exist
+- Product #2 has a clear reason to exist
 - external testnet buyer behavior supports the hypothesis
+- upstream licensing/use rights are appropriate
 - endpoint threat model is reviewed
 - request/rate limits are intentional
 - seller wallet and credentials are dedicated appropriately
-- mainnet facilitator is chosen intentionally
-- pricing is deliberate
+- production facilitator is chosen intentionally
+- pricing exceeds expected variable cost by an intentional margin
 - transaction logging and accounting implications are understood
 
 Then:
 
-- Base mainnet
-- USDC
-- one real external buyer
-- one successful sale for genuinely useful output
+- production payment rail
+- real external buyer
+- real fulfilled utility
+- record sale price, variable cost, and contribution margin
 
-Exit condition: real value moves from an external buyer to x402-lab in exchange for real utility.
+Exit condition:
 
-## Milestone 9 — Ecosystem participation and larger-business decision
+> x402-lab completes real external sales where each fulfilled transaction has positive contribution margin.
 
-Only where it improves discovery, learning, credibility, or buyer access:
+The objective is not merely to move real USDC.
+
+## Milestone 10 — Repeatable profit or kill/pivot decision
+
+Goal: determine whether this is a business rather than a technically successful experiment.
+
+Evaluate:
+
+- repeat-buyer rate
+- calls per returning buyer
+- buyer concentration
+- gross contribution margin
+- support/ops burden
+- upstream dependency risk
+- discovery conversion
+- protocol/payment failure rate
+- whether buyers integrate the capability into persistent workflows
+
+Possible outcomes:
+
+1. double down on the winning paid capability
+2. add closely adjacent products requested by existing buyers
+3. negotiate better upstream economics/reseller terms
+4. create a protocol-neutral commercial brand around the validated product family
+5. pivot to a newly exposed bottleneck
+6. stop commercial investment if demand remains weak
+
+No pre-commitment to becoming a generic marketplace, facilitator, router, ATS, or API catalog.
+
+## Ecosystem participation
+
+Where it improves discovery, learning, credibility, or buyer access:
 
 - participate in x402 community channels
-- attend relevant working-group/TSC sessions
+- test Coinbase Bazaar discovery
+- test external buyers such as Amazon Bedrock AgentCore payment-capable agents
+- evaluate Cloudflare x402/MPP access paths
+- attend relevant working-group/TSC sessions when useful
 - submit the project to appropriate ecosystem listings
-- publish a short demonstration
-- evaluate grants if current and strategically useful
+- publish concise demonstrations and measured findings
 
-After operating the service and observing real buyers, evaluate whether a larger opportunity has emerged, such as:
-
-1. a focused family of agent-native paid utilities
-2. evidence/provenance infrastructure
-3. specialist recruiting tools
-4. agent spend-policy / observability
-5. service quality / reputation / routing
-6. payment infrastructure
-7. something discovered from actual buyer behavior
-
-No pre-commitment.
-
-The preferred outcome is discovering a place where x402-lab becomes the **path of least resistance for a recurring machine need**.
+The preferred outcome remains discovering a place where the project becomes the **path of least resistance for a recurring machine need — and gets paid profitably for it**.
