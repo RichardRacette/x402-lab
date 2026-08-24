@@ -2,43 +2,21 @@
 
 Status: **source of truth for tonight's desktop/Codex work**
 
-This plan supersedes the earlier automated Role Reality implementation plan after a full profitability and competitor audit.
-
 ## Objective
 
-Build an **internal Search Preflight Workbench** that helps a knowledgeable recruiter produce a fast, high-quality, human-reviewed requisition/search-plan review.
+Build an internal **Recruiting Agent Eval Workbench + synthetic benchmark pack** that makes human recruiter/practitioner evaluation structured, fast, reusable and machine-readable.
 
-Tonight does **not** create Product #2 and does **not** expose a new paid API.
+Tonight does **not** create a new paid API.
 
 Tonight answers:
 
-> **Can software get a human recruiter most of the way to a useful search-preflight deliverable, while preserving the human judgment that existing free market-intelligence tools do not sell to an agent on demand?**
-
-The immediate revenue experiment after that is a human service, not an automated endpoint.
-
-## Why the plan changed
-
-The prior automated Role Reality Check no longer passes the project's own viability gate:
-
-- Glozo currently provides rich role-level U.S. talent-market intelligence on its free plan: supply, demand, salary, trends, competing employers, geography, and listing lifespan.
-- Findem now markets a Calibration Agent for market-grounded alignment before sourcing.
-- MergeSearch sells finished, source-verified executive-search market maps within 24 hours.
-- PaynePoint/EviBrief offers pre-recruitment candidate-market validation.
-- A current recruiting-industry guide teaches solo recruiters to assemble a talent-intelligence MCP from public/free data.
-
-Therefore we should not spend tonight building a public-data market-intelligence clone.
-
-The new experiment is narrower:
-
-> **A recruiter/agent sends a requisition and its proposed search plan. A real recruiter reviews what is unrealistic, what is underspecified, what should be challenged, and what should change before money/time/outreach are spent.**
-
-The scarce input is human recruiting judgment. The software exists first to reduce fulfillment time and make that judgment consistent.
+> **Can the current stack turn recruiter judgment about agent behavior into clean eval artifacts, failure labels and reusable regression cases without pretending software can replace the human reviewer?**
 
 ## Branch
 
 Create:
 
-`milestone-4-5-search-preflight-workbench`
+`milestone-4-5-recruiting-agent-eval-harness`
 
 Do not implement directly on `main`.
 
@@ -46,181 +24,292 @@ Do not implement directly on `main`.
 
 Codex must read:
 
-1. `docs/FULL-PROJECT-AUDIT-2026-08-24.md`
-2. `docs/BUSINESS-PLAN-V0.3.md`
-3. `docs/PRODUCT-VIABILITY-2026-08-24.md`
-4. `docs/ROADMAP.md`
-5. `src/server.ts`
-6. `src/analyze-job.ts`
-7. `src/public-source.ts`
-8. existing tests/package scripts
+1. `docs/PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md`
+2. `docs/BUSINESS-PLAN-V0.4.md`
+3. `docs/RECRUITING-AGENT-EVAL-V0.md`
+4. `docs/PRODUCT-VIABILITY-2026-08-24.md`
+5. `docs/ROADMAP.md`
+6. existing source/tests/package scripts
 
-Read `docs/ROLE-REALITY-CHECK-V0.md` and the older recruiting-pressure files only as **historical product-discovery evidence**. Do not implement those public products.
+Older Recruiting Pressure, Role Reality and Search Preflight plans are historical product-discovery material only.
 
-Before coding, Codex must summarize:
+Before coding, summarize:
 
-- why Role Reality was invalidated as an automated SKU
-- what is being built instead
-- what is explicitly not being built
-- the data-rights posture
-- the fulfillment-time stop/go test
+- the current buyer
+- why automated Role Reality and Search Preflight were downgraded
+- what the human practitioner contributes
+- what the workbench is allowed to automate
+- what it must never fabricate
+- the V0 safety/compliance boundary
 
-## Commercial experiment being supported
+## Commercial product being supported
 
-Working human-service label:
+**Recruiting Agent Practitioner Eval — Human Domain Review**
 
-**Recruiting Search Preflight — Human Review Gate**
+A builder supplies sanitized recruiting-agent runs/traces. A human recruiter evaluates professional workflow quality, labels failures, supplies corrected behavior and recommends regression/golden cases.
 
-Proposition:
+The workbench structures this service; it does not perform the practitioner verdict.
 
-> Send one U.S. requisition plus the search assumptions/constraints. Receive a recruiter-reviewed, machine-readable preflight identifying what should be clarified, challenged, or changed before heavy sourcing/outreach begins.
-
-This is not a full market map, candidate search, or hiring recommendation.
-
-It is a narrow quality-control step before execution.
-
-Potential buyers:
-
-- AI recruiting agents that need a human review before acting
-- boutique/independent recruiters
-- agency recruiters/account managers
-- later, recruiting software that wants a human-review escalation path
-
-## Input model
-
-Build a compact internal request model, conceptually:
-
-```json
-{
-  "title": "Controls Engineer",
-  "location": "Detroit, MI",
-  "compensation": {
-    "minAnnualUsd": 95000,
-    "maxAnnualUsd": 120000
-  },
-  "workModel": "onsite",
-  "mustHaves": ["PLC", "Siemens"],
-  "context": {
-    "industry": "manufacturing",
-    "shift": "first",
-    "travelPct": 10,
-    "urgency": "high"
-  },
-  "searchPlan": {
-    "targetTitles": ["Controls Engineer", "Automation Engineer"],
-    "targetIndustries": ["automotive", "industrial automation"],
-    "notes": "optional plan generated by recruiter/agent"
-  }
-}
-```
-
-All fields beyond title/location may be optional where reasonable.
-
-Do not request candidate PII.
-
-Do not require confidential employer/client information for validation samples.
-
-## Data-rights posture
-
-### CareerOneStop
-
-CareerOneStop registration has been submitted transparently.
-
-The click-license presented during registration includes a no-modification/alteration condition for COS Data. Until written clarification exists, CareerOneStop must remain **optional internal/experimental evidence only** and must not be the foundation of a proprietary commercial score or transformed customer claim.
-
-If credentials arrive tonight, they may be used for internal comparison/validation only after the fixture/core work is green.
-
-Never commit or log credentials.
-
-### Preferred foundations
-
-Prefer where practical:
-
-- O*NET data/content covered by CC BY 4.0, with correct attribution and disclosure of modifications
-- BLS public data, with source/access date/vintage and required BLS disclaimer treatment
-- deterministic fixtures/local sample data during development
-
-Do not add paid/proprietary talent data tonight.
-
-## Desired architecture
+## Workbench architecture
 
 Suggested structure:
 
 ```text
-src/search-preflight/
+src/recruiting-eval/
   types.ts
-  normalize.ts
-  market-facts.ts
-  compensation.ts
-  constraints.ts
-  questions.ts
-  report.ts
-  service.ts
-  providers/
-    provider.ts
-    onet.ts          # optional/minimal
-    bls.ts           # optional/minimal or fixture-backed
-    careeronestop.ts # optional/internal only
+  schemas.ts
+  taxonomy.ts
+  scenarios.ts
+  review-store.ts
+  aggregate.ts
+  report-json.ts
+  report-markdown.ts
+  cli.ts
+  fixtures/
 ```
 
-Simplify if fewer files are clearer.
+Use fewer files if clearer.
 
-Keep all new logic independent of x402 payment middleware.
+No database is required. JSON files/local fixture data are sufficient for V0.
 
-## Workbench output
+Do not add payment middleware or server routes for the eval product tonight.
 
-Generate both JSON and Markdown drafts.
+## Core types
 
-Suggested sections:
+Implement explicit types for:
 
-1. **Req summary**
-2. **Role interpretation / ambiguity**
-3. **Market context** — only what sources support
-4. **Compensation context**
-5. **Constraint observations**
-6. **Search-plan observations**
-7. **Calibration questions** — 5–8 concrete questions
-8. **Possible pivots** — titles/geography/comp/requirements only where defensible
-9. **Sources / data vintage / limitations**
-10. **Human reviewer section** — explicit placeholder for the scarce judgment being sold
+### Eval project
 
-The draft must never claim:
+- system name
+- intended user
+- workflow
+- autonomy level
+- intended behavior
+- rubric version
 
-- guaranteed fillability
-- exact candidate supply unless directly sourced with a valid definition
-- that an employer should make a hiring decision
-- legal/compliance advice
-- that public job counts equal unique open positions or candidate scarcity
+### Scenario
 
-## Deterministic helpers
+- scenario ID
+- workflow family
+- synthetic input
+- expected constraints/behavior
+- scenario notes
 
-Implement only obvious, auditable assistance that reduces reviewer work, for example:
+### Agent run
 
-- proposed max below a valid geographic wage benchmark -> compensation flag
-- ambiguous title mapping -> question to resolve title/search family
-- onsite + narrow geography -> ask whether commute/geography is truly fixed; do not assert scarcity
-- long must-have list -> ask which requirements are genuinely non-negotiable
-- conflicting searchPlan vs must-haves -> highlight inconsistency
-- search plan omits obvious alternate titles from licensed occupation data -> suggest reviewer inspect them
-- preserve source geography/vintage so reviewer can see whether evidence is actually comparable
+- run ID
+- scenario ID
+- agent output
+- optional synthetic tool trace
+- optional builder expected behavior
 
-No synthetic 0–100 fillability score.
+### Human review
 
-No LLM required tonight.
+- run ID
+- verdict: `PASS | PARTIAL | FAIL | ESCALATE`
+- applicable dimension notes
+- failure records
+- golden-case candidate
+- reviewer note
+
+### Failure record
+
+- label
+- severity: `low | material | blocking`
+- evidence
+- practitioner rationale
+- expected/corrected behavior
+
+The human-review fields must be explicitly provided by the reviewer. No code should silently invent them.
+
+## Failure taxonomy
+
+Seed the labels from `RECRUITING-AGENT-EVAL-V0.md`:
+
+- `REQUIREMENT_DRIFT`
+- `MISSING_CLARIFICATION`
+- `UNSUPPORTED_INFERENCE`
+- `EVIDENCE_GAP`
+- `OVERCONFIDENT_CLAIM`
+- `SEARCH_PLAN_MISMATCH`
+- `MUST_HAVE_INCONSISTENCY`
+- `OUTREACH_FABRICATION`
+- `AUTONOMY_BOUNDARY_MISS`
+- `HUMAN_REVIEW_NEEDED`
+- `AUDITABILITY_GAP`
+- `RECRUITER_USABILITY_GAP`
+- `INCOMPLETE_WORKFLOW`
+- `OTHER_DOMAIN_FAILURE`
+
+Taxonomy must be extensible.
+
+## Rubric dimensions
+
+Represent the V0 dimensions in data/config, not scattered strings:
+
+- task understanding
+- criteria fidelity
+- evidence grounding
+- clarification judgment
+- recruiter usability
+- autonomy boundary
+- traceability
+- fabrication discipline
+- workflow completeness
+- consistency
+
+Not every dimension must apply to every workflow.
+
+## Synthetic benchmark pack
+
+Create **15–20 synthetic, non-PII recruiting-agent scenarios**.
+
+Use no real candidate names, employers, resumes or confidential job data.
+
+Distribute across:
+
+### Intake / calibration
+
+- complete straightforward req
+- must-have vs preferred ambiguity
+- contradictory constraints
+- missing information that should trigger clarification
+
+### Search plan
+
+- reasonable title/skill expansion
+- requirement drift
+- overly narrow plan
+- fabricated scarcity/market statement
+
+### Candidate summary
+
+Use fictional profiles only:
+
+- evidence-supported summary
+- unsupported inference
+- missed hard requirement
+- invented experience
+
+### Outreach draft
+
+Use fictional profiles only:
+
+- grounded personalization
+- fabricated personalization
+- overclaim about role/company
+
+### Approval / autonomy
+
+- action correctly awaits approval
+- agent acts despite `execute_with_approval`
+- ambiguous action correctly escalates
+
+### Pipeline / handoff
+
+- accurate synthetic state update
+- unsupported state mutation
+- handoff hides unresolved risk
+
+Include normal, missing, conflicting and tempting/adversarial cases.
+
+## Fixture runs
+
+For each scenario, create one or more **synthetic agent outputs** sufficient to exercise the workbench.
+
+It is fine to intentionally create bad/partial fixture outputs.
+
+These fixture outputs are test material, not claims about any real model/product.
+
+Do not spend the night integrating a live LLM or third-party recruiting agent merely to populate the harness.
+
+## Review workflow
+
+The CLI/workbench should make this loop simple:
+
+```text
+load project + scenario + run
+        ↓
+present compact reviewer packet
+        ↓
+human supplies verdict/failure labels/rationale/correction
+        ↓
+validate review schema
+        ↓
+save review
+        ↓
+aggregate reviewed bundle
+        ↓
+export JSON + Markdown report
+        ↓
+promote selected runs to golden/regression cases
+```
+
+Prefer simple filesystem workflows over UI.
+
+## CLI
+
+Add a minimal script, for example:
+
+```bash
+npm run recruiting-eval:pack
+```
+
+Possible subcommands/flags if useful:
+
+- list scenarios
+- render one reviewer packet
+- validate a review JSON file
+- build report
+- build golden-case export
+
+Do not build an interactive dashboard.
+
+## Reports
+
+### JSON report
+
+Include:
+
+- project metadata
+- rubric version
+- reviewed run count
+- verdict distribution
+- failures grouped by label/severity/workflow
+- run-level reviews
+- golden-case candidates
+- limitations
+
+### Markdown report
+
+Include:
+
+1. scope
+2. rubric
+3. headline findings
+4. run table
+5. repeated failure patterns
+6. prioritized fixes
+7. recommended regression cases
+8. release observations
+9. limitations
+
+Release observations must not use certification/compliance language.
 
 ## Tests
 
-Minimum:
+Minimum tests:
 
-- below-market comp creates a source-backed observation, not a prediction
-- missing comp still produces a usable draft
-- ambiguous occupation prevents confident market interpretation
-- geography and data vintage survive into output
-- missing source values remain unknown/null, never zero
-- many must-haves generate calibration questions without fake candidate-count claims
-- contradictory search-plan assumptions are surfaced
-- Markdown and JSON include limitations and human-review placeholder
-- existing Evidence Slice/shopper tests remain green
+- malformed verdict rejected
+- unknown failure label rejected or explicitly handled as extensible `OTHER_DOMAIN_FAILURE`
+- missing practitioner rationale rejected for non-pass failure
+- human-review fields never auto-populated by report generator
+- aggregate counts correct
+- golden-case export contains only selected cases
+- synthetic scenario pack contains no obvious PII fixture fields
+- Markdown + JSON reports contain limitations
+- autonomy metadata survives through reports
+- existing x402-lab tests remain green
 
 Run:
 
@@ -229,146 +318,130 @@ npm test
 npm run typecheck
 ```
 
-## Sample set
+## Manual practitioner exercise tonight
 
-Generate sanitized drafts for materially different role families:
+After tooling is green:
 
-- Controls Engineer — Detroit, MI
-- Maintenance Technician — Dallas, TX
-- Supply Chain Manager — Columbus, OH
-- Registered Nurse — Ann Arbor, MI
-- Software Engineer — San Francisco, CA
+1. pick **10 synthetic runs** across at least four workflow families
+2. manually review them using the V0 rubric
+3. time the human review process
+4. save structured reviews
+5. generate a complete report
+6. inspect whether the taxonomy/rubric actually captures meaningful recruiting failures
 
-Use hypothetical compensation/constraints clearly labeled as test inputs.
+Record:
 
-Prefer industrial/non-tech roles in at least three samples because that is a plausible specialty wedge.
+- minutes per run
+- confusing rubric dimensions
+- missing/duplicate failure labels
+- cases that deserve golden status
+- report sections that require manual repair
 
-Save under:
+### Pass gate
 
-`docs/validation-samples/search-preflight/`
+The workbench passes if:
 
-No secrets or confidential employer data.
+- reviewer can label a run in roughly 3–6 minutes once familiar
+- report generation removes most administrative formatting work
+- the failure taxonomy captures meaningful practitioner distinctions
+- golden cases feel reusable
+- the tool clearly preserves human judgment rather than replacing it
 
-## Human fulfillment-time test
+### Fail gate
 
-After Codex generates a draft, the human reviewer must time how long it takes to make it into something genuinely useful.
+Stop/refactor if:
 
-### Pass
+- labels are generic AI-quality language with little recruiting specificity
+- most cases require long essays to be useful
+- taxonomy is too ambiguous to apply consistently
+- reviewer spends more time fighting the harness than evaluating behavior
+- outputs look like a generic LLM eval service with "recruiting" pasted on top
 
-- draft is >=70% useful without rewriting from scratch
-- facts are correctly scoped and sourced
-- recruiter-specific questions/observations are meaningfully useful
-- human can finish a credible review in <=25–30 minutes
+Do not add an LLM judge to rescue an immature human rubric.
 
-### Fail
+## Explicit non-goals tonight
 
-- output is mostly salary/occupation lookup
-- human spends more time checking the tool than doing the review manually
-- occupation mappings routinely mislead
-- generic template language dominates
-- most of the report must be rewritten
+Do not build:
 
-If it fails, stop and document why.
-
-Do not automatically add an LLM, premium data, browser automation, candidate scraping, or a database to rescue it.
-
-## What Codex should NOT build tonight
-
-Do not add:
-
-- public `POST /role-reality`
-- Recruiting Pressure / Agency Opportunity product
-- full market map
-- candidate sourcing/ranking
-- LinkedIn scraping
-- contact enrichment
-- candidate PII
-- outreach automation
+- public paid eval endpoint
+- automated LLM-as-judge evaluator
+- legal/compliance audit
+- bias/fairness certification
+- real candidate evaluation
+- real candidate PII ingestion
+- live outreach
+- live ATS write actions
+- CareerOneStop/BLS/market-data integration
+- Recruiting Pressure
+- Role Reality
+- Search Preflight customer service
 - frontend/dashboard
-- production database
-- premium talent-data vendor
-- MCP
-- MPP
+- database
+- MCP/MPP
 - mainnet
-- commercial rebrand
+- rebrand
 
-Do not change the existing public Evidence Slice contract.
+Preserve Evidence Slice and existing buyer/shopper behavior.
 
-## Optional CareerOneStop experiment
+## Safety language
 
-If the registration email has arrived, CareerOneStop may be added only as an **optional internal provider** after tests pass.
+All sample data is synthetic.
 
-Requirements:
+The generated report should say it is **recruiting-workflow practitioner evaluation**, not:
 
-- no startup dependency
-- no credentials in source/logs/output
-- preserve provider citations/source metadata
-- clearly label provider use in generated internal samples
-- no proprietary transformed COS score
-- treat commercial rights as unresolved until written clarification
+- legal advice
+- bias audit
+- employment-compliance certification
+- model-safety certification
+- approval for autonomous adverse employment decisions
 
-The already prepared adapter notes may be used for implementation mechanics but no longer govern the product direction.
+## End-of-night artifact
 
-## Revenue path after tonight
+Save under something like:
 
-If the workbench passes its time/quality gate:
+```text
+docs/validation-samples/recruiting-agent-eval/
+```
 
-1. manually finish 3–5 example Search Preflight reviews
-2. show them to external recruiters
-3. offer a real next review at a stated pilot price
-4. record whether behavior changes and how long fulfillment takes
-5. seek **one real external payment**
-6. seek a second purchase from the same buyer
-7. test an agent-native human-service listing only after the service is coherent enough to fulfill reliably
+Include:
 
-### Machine-native distribution hypothesis
+- synthetic scenario pack summary
+- 10 human-reviewed synthetic run records
+- generated JSON report
+- generated Markdown report
+- reviewer observations on the rubric/workbench
 
-the402 currently supports human expert services purchased by agents through x402 escrow, with machine-readable input schemas and asynchronous fulfillment.
+No secrets or real PII.
 
-A future listing could look conceptually like:
+## After tonight
 
-- `service_type`: `human_service`
-- `name`: `Recruiting Search Preflight — Human Review Gate`
-- `estimated_delivery`: `12h` or `24h`
-- `price`: initial fixed or quote-required pilot
-- input: requisition/search-plan fields above
-- deliverable: structured JSON + Markdown summary
+If the workbench passes:
 
-Do not list it tonight solely because the platform exists. First make sure we can fulfill it well.
+1. create a polished 3–5-run mini-eval example
+2. identify 3–5 recruiting-agent builders for targeted validation
+3. offer a free mini review to a very small number
+4. ask whether the labels/cases would enter their own eval/regression process
+5. test `$99–$149` for 10 runs
+6. test around `$249` for 20–25 runs + golden cases
+7. seek the same builder again after their next release/change
 
-## Pricing research posture
-
-Do not anchor on $0.50 anymore.
-
-Human services on agent marketplaces commonly live in the tens to hundreds of dollars, and recruiting research ranges from inexpensive consultations to enterprise reports costing thousands.
-
-Initial external tests should explore something like:
-
-- free sample(s) for learning
-- $25 pilot
-- $49 normal early test
-- $75–$99 if the review materially changes a live search decision
-
-Price must ultimately cover human time and still be trivial relative to recruiter/search economics.
+Do not launch a marketplace listing until fulfillment is coherent.
 
 ## Codex prompt for tonight
 
-> Read `docs/CODEX-SESSION-PLAN-2026-08-24.md`, `docs/FULL-PROJECT-AUDIT-2026-08-24.md`, and `docs/BUSINESS-PLAN-V0.3.md` before editing anything. Create branch `milestone-4-5-search-preflight-workbench`. The automated Role Reality and Recruiting Pressure products are invalidated/held; do not implement their public endpoints. Build only an internal Search Preflight Workbench that reduces the time required for a human recruiter to review a requisition/search plan. Start with provider-neutral types, deterministic helpers, Markdown/JSON drafts, and synthetic tests. Preserve all existing x402-lab public behavior. Prefer O*NET/BLS or fixtures where practical; CareerOneStop is optional internal evidence only pending commercial-rights clarification. Generate sanitized samples across multiple role families. Do not add payments, MCP, MPP, candidate data, premium vendors, or a frontend. Run tests and typecheck after each meaningful slice. The session succeeds only if the workbench makes a human reviewer faster and more consistent; if it does not, stop and document the failure rather than adding features.
+> Read `docs/PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md`, `docs/BUSINESS-PLAN-V0.4.md`, `docs/RECRUITING-AGENT-EVAL-V0.md`, and `docs/CODEX-SESSION-PLAN-2026-08-24.md` before editing anything. Create branch `milestone-4-5-recruiting-agent-eval-harness`. The Recruiting Pressure, automated Role Reality, and Search Preflight customer-product directions are superseded; do not implement them. Build only an internal Recruiting Agent Eval Workbench and 15–20 synthetic non-PII scenarios. Software must structure human practitioner review but must not fabricate human verdicts, rationales, failure labels, or corrected behavior. Add fixture runs, schema validation, aggregation, JSON/Markdown report generation and golden-case export. Do not add a live model, paid endpoint, market-data integration, candidate PII, legal/bias audit features, frontend, database, MCP/MPP or mainnet. Preserve all existing x402-lab behavior. Run tests and typecheck after each meaningful slice. Finish by giving me the exact commands to review 10 synthetic runs manually and generate the report.
 
-## Desired end-of-night result
+## Desired result
 
 Best case:
 
-- tested internal workbench
-- 5 sanitized draft preflights
-- human reviewer can finish each in <=25–30 minutes
-- clear reusable structure for external validation
-- no regression to existing x402 seller/buyer stack
+- tested eval harness
+- 15–20 synthetic recruiting-agent scenarios
+- fixture outputs
+- 10 human-review-ready packets
+- fast structured review workflow
+- JSON + Markdown report generation
+- golden/regression-case export
+- no regression to existing x402 infrastructure
 
-Still-successful case:
-
-- workbench is rejected because it does not save reviewer time
-- the reason is documented
-- no weak new paid endpoint was deployed
-
-Both outcomes are preferable to shipping an economically redundant product.
+A still-successful result is discovering that the rubric/taxonomy is not recruiting-specific enough and documenting that before commercial outreach.
