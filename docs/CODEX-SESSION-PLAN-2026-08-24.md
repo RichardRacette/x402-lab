@@ -4,19 +4,19 @@ Status: **source of truth for tonight's desktop/Codex work**
 
 ## Objective
 
-Build an internal **Recruiting Agent Eval Workbench + synthetic benchmark pack** that makes human recruiter/practitioner evaluation structured, fast, reusable and machine-readable.
+Build an internal **Machine Demand Observatory** that uses current x402 ecosystem evidence to improve Product #2 selection.
 
-Tonight does **not** create a new paid API.
+Tonight does **not** choose Product #2 and does **not** add another seller endpoint.
 
 Tonight answers:
 
-> **Can the current stack turn recruiter judgment about agent behavior into clean eval artifacts, failure labels and reusable regression cases without pretending software can replace the human reviewer?**
+> **Can we turn observed merchant/buyer/transaction data into a repeatable evidence process that tells us what machines actually buy, how broad or concentrated that demand is, and which capability gaps deserve a cheap product test?**
 
 ## Branch
 
 Create:
 
-`milestone-4-5-recruiting-agent-eval-harness`
+`milestone-4-5-machine-demand-observatory`
 
 Do not implement directly on `main`.
 
@@ -24,292 +24,359 @@ Do not implement directly on `main`.
 
 Codex must read:
 
-1. `docs/PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md`
-2. `docs/BUSINESS-PLAN-V0.4.md`
-3. `docs/RECRUITING-AGENT-EVAL-V0.md`
-4. `docs/PRODUCT-VIABILITY-2026-08-24.md`
-5. `docs/ROADMAP.md`
-6. existing source/tests/package scripts
+1. `docs/PRODUCT-THESIS.md`
+2. `docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`
+3. `docs/PRODUCT-VIABILITY-2026-08-24.md`
+4. `docs/ROADMAP.md`
+5. existing shopper/buyer implementation
+6. existing tests/package scripts
 
-Older Recruiting Pressure, Role Reality and Search Preflight plans are historical product-discovery material only.
+Read Recruiting Pressure, Role Reality, Search Preflight and Recruiting Agent Eval docs only as historical discovery evidence.
 
-Before coding, summarize:
+Before changing code, summarize:
 
-- the current buyer
-- why automated Role Reality and Search Preflight were downgraded
-- what the human practitioner contributes
-- what the workbench is allowed to automate
-- what it must never fabricate
-- the V0 safety/compliance boundary
+- why Product #2 is intentionally unknown
+- why raw transaction count is insufficient
+- what metrics the observatory needs
+- how the existing shopper can help with research
+- the real-money safety rule
+- what Codex is explicitly forbidden to build tonight
 
-## Commercial product being supported
+## Existing market evidence to preserve
 
-**Recruiting Agent Practitioner Eval — Human Domain Review**
+Use the human-researched seed observations in `PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md` only as fixtures/reference examples.
 
-A builder supplies sanitized recruiting-agent runs/traces. A human recruiter evaluates professional workflow quality, labels failures, supplies corrected behavior and recommends regression/golden cases.
+Do not silently present them as live data.
 
-The workbench structures this service; it does not perform the practitioner verdict.
+The live collection layer must timestamp its own observations.
 
-## Workbench architecture
+## Desired architecture
 
 Suggested structure:
 
 ```text
-src/recruiting-eval/
+src/market-observatory/
   types.ts
-  schemas.ts
-  taxonomy.ts
-  scenarios.ts
-  review-store.ts
-  aggregate.ts
-  report-json.ts
-  report-markdown.ts
+  normalize.ts
+  metrics.ts
+  compare.ts
+  flags.ts
+  report.ts
+  opportunity-card.ts
   cli.ts
-  fixtures/
+  providers/
+    provider.ts
+    fixture.ts
+    x402scan.ts
 ```
 
 Use fewer files if clearer.
 
-No database is required. JSON files/local fixture data are sufficient for V0.
+No frontend or production database is required.
 
-Do not add payment middleware or server routes for the eval product tonight.
+JSON/JSONL/CSV snapshots plus Markdown reports are enough.
 
-## Core types
+## Core normalized data
 
-Implement explicit types for:
+Design compact provider-neutral structures.
 
-### Eval project
+### Merchant snapshot
 
-- system name
-- intended user
-- workflow
-- autonomy level
-- intended behavior
-- rubric version
+Prefer fields such as:
 
-### Scenario
+- observedAt
+- merchant/server identifier
+- address(es) where available
+- origin/name/description where available
+- tags/categories where supplied by source
+- resource count
+- transactions in source window
+- payment volume in source window
+- unique buyers in source window
+- latest activity
+- chain/facilitator metadata where available
+- source reference/provenance
 
-- scenario ID
-- workflow family
-- synthetic input
-- expected constraints/behavior
-- scenario notes
+### Resource snapshot
 
-### Agent run
+Where available:
 
-- run ID
-- scenario ID
-- agent output
-- optional synthetic tool trace
-- optional builder expected behavior
+- merchant/server identifier
+- resource path/name
+- method
+- description
+- price or price range
+- tags/category
+- protocol/version/network
+- public/paid/auth state
 
-### Human review
+### Transaction snapshot
 
-- run ID
-- verdict: `PASS | PARTIAL | FAIL | ESCALATE`
-- applicable dimension notes
-- failure records
-- golden-case candidate
-- reviewer note
+Where permitted by the source:
 
-### Failure record
+- transaction id/hash
+- buyer address/identifier
+- seller/recipient address
+- amount
+- timestamp
+- chain
+- facilitator
+- source reference
 
-- label
-- severity: `low | material | blocking`
-- evidence
-- practitioner rationale
-- expected/corrected behavior
+Do not infer missing values as zero.
 
-The human-review fields must be explicitly provided by the reviewer. No code should silently invent them.
+## Metrics
 
-## Failure taxonomy
+Implement explicit metrics with documented semantics.
 
-Seed the labels from `RECRUITING-AGENT-EVAL-V0.md`:
+### Merchant-level
 
-- `REQUIREMENT_DRIFT`
-- `MISSING_CLARIFICATION`
-- `UNSUPPORTED_INFERENCE`
-- `EVIDENCE_GAP`
-- `OVERCONFIDENT_CLAIM`
-- `SEARCH_PLAN_MISMATCH`
-- `MUST_HAVE_INCONSISTENCY`
-- `OUTREACH_FABRICATION`
-- `AUTONOMY_BOUNDARY_MISS`
-- `HUMAN_REVIEW_NEEDED`
-- `AUDITABILITY_GAP`
-- `RECRUITER_USABILITY_GAP`
-- `INCOMPLETE_WORKFLOW`
-- `OTHER_DOMAIN_FAILURE`
+- `transactionsPerBuyer`
+- `volumePerBuyer`
+- `averageTransactionValue`
+- `buyersPer100Transactions`
 
-Taxonomy must be extensible.
+When transaction-level data exists:
 
-## Rubric dimensions
+- repeat-buyer count/share
+- top buyer share of transactions
+- top buyer share of volume
+- top-3/top-5 buyer concentration
+- median transactions per buyer
 
-Represent the V0 dimensions in data/config, not scattered strings:
+### Buyer-level
 
-- task understanding
-- criteria fidelity
-- evidence grounding
-- clarification judgment
-- recruiter usability
-- autonomy boundary
-- traceability
-- fabrication discipline
-- workflow completeness
-- consistency
+When data permits:
 
-Not every dimension must apply to every workflow.
+- distinct sellers purchased from
+- total transactions
+- total spend
+- seller/category mix
+- repeated purchases by seller
 
-## Synthetic benchmark pack
+### Snapshot comparison
 
-Create **15–20 synthetic, non-PII recruiting-agent scenarios**.
+Between two compatible snapshots:
 
-Use no real candidate names, employers, resumes or confidential job data.
+- buyer delta / growth
+- transaction delta / growth
+- volume delta / growth
+- resource-count delta
+- price/resource changes where observable
 
-Distribute across:
+Never compare incompatible windows without labeling the limitation.
 
-### Intake / calibration
+## Demand-shape flags
 
-- complete straightforward req
-- must-have vs preferred ambiguity
-- contradictory constraints
-- missing information that should trigger clarification
+Flags are descriptive, not product recommendations.
 
-### Search plan
+Examples:
 
-- reasonable title/skill expansion
-- requirement drift
-- overly narrow plan
-- fabricated scarcity/market statement
+### `BROAD_ADOPTION`
 
-### Candidate summary
+Relatively high unique-buyer count compared with activity.
 
-Use fictional profiles only:
+### `CONCENTRATED_REPEAT`
 
-- evidence-supported summary
-- unsupported inference
-- missed hard requirement
-- invented experience
+Few buyers account for substantial repeat activity.
 
-### Outreach draft
+### `BROAD_AND_REPEAT`
 
-Use fictional profiles only:
+Evidence of both breadth and repeat use.
 
-- grounded personalization
-- fabricated personalization
-- overclaim about role/company
+### `LOW_OBSERVED_DEMAND`
 
-### Approval / autonomy
+Very low buyers/transactions despite being discoverable.
 
-- action correctly awaits approval
-- agent acts despite `execute_with_approval`
-- ambiguous action correctly escalates
+### `SINGLE_BUYER_DOMINANCE`
 
-### Pipeline / handoff
+Transaction-level evidence shows one buyer accounts for an outsized share.
 
-- accurate synthetic state update
-- unsupported state mutation
-- handoff hides unresolved risk
+### `CROSS_SELLER_SHOPPER`
 
-Include normal, missing, conflicting and tempting/adversarial cases.
+A buyer is observed purchasing from multiple independent sellers.
 
-## Fixture runs
+Do not label a transaction as self-dealing, fake, organic or independent unless the evidence actually supports that conclusion.
 
-For each scenario, create one or more **synthetic agent outputs** sufficient to exercise the workbench.
+Use cautious wording such as `CONCENTRATION_RISK` or `POSSIBLE_INTERNAL_PATTERN` only when criteria are explicit.
 
-It is fine to intentionally create bad/partial fixture outputs.
+## Qualitative review layer
 
-These fixture outputs are test material, not claims about any real model/product.
+Do not create an opaque automated “opportunity score.”
 
-Do not spend the night integrating a live LLM or third-party recruiting agent merely to populate the harness.
+Create a small human-editable review record for interesting merchants/capabilities:
 
-## Review workflow
+```json
+{
+  "merchantId": "...",
+  "whatIsPurchased": "...",
+  "buyVsBuildReason": "...",
+  "scarceInput": "credentials|data|compute|infrastructure|external_action|trust|other",
+  "freeSubstitutes": [],
+  "paidSubstitutes": [],
+  "replicationDifficulty": "low|medium|high|unknown",
+  "notes": "..."
+}
+```
 
-The CLI/workbench should make this loop simple:
+The software may scaffold the record from source metadata, but human judgment must fill the strategic conclusions.
+
+## Opportunity-card generator
+
+Generate a Markdown/JSON scaffold for a candidate product hypothesis containing:
+
+- observed demand evidence
+- representative merchants/resources
+- buyer breadth
+- repeat intensity
+- concentration caveat
+- current price bands
+- buy-vs-build hypothesis
+- required upstream capability
+- current competitors/substitutes — human research field
+- lawful supply path — human research field
+- rough unit economics — human research field
+- possible x402-lab advantage — human research field
+- cheapest falsification test — human research field
+- decision: `UNREVIEWED | REJECT | RESEARCH | TEST`
+
+Do not auto-promote a candidate to `TEST`.
+
+## Provider 1 — deterministic fixtures
+
+Build and test the observatory first against fixtures based on the seed market shapes in the Round 4 document.
+
+Fixtures should include at least:
+
+1. broad + high-repeat service
+2. few-buyer/high-repeat service
+3. broad/low-repeat service
+4. zero-demand catalog
+5. one-buyer concentrated service
+6. multi-seller buyer example
+
+The fixtures test metrics; they are not live-market claims.
+
+## Provider 2 — x402scan market-data adapter
+
+After core tests pass, implement an **optional** adapter for x402scan's x402-paid market-data resources.
+
+Current researched resources include approximately:
 
 ```text
-load project + scenario + run
-        ↓
-present compact reviewer packet
-        ↓
-human supplies verdict/failure labels/rationale/correction
-        ↓
-validate review schema
-        ↓
-save review
-        ↓
-aggregate reviewed bundle
-        ↓
-export JSON + Markdown report
-        ↓
-promote selected runs to golden/regression cases
+GET /api/x402/merchants
+GET /api/x402/merchants/{address}/stats
+GET /api/x402/merchants/{address}/transactions
+GET /api/x402/facilitators
+GET /api/x402/facilitators/stats
+GET /api/x402/origins/{id}/resources
 ```
 
-Prefer simple filesystem workflows over UI.
+The current observed price is roughly `$0.01` per paid call, but runtime `402` requirements are authoritative.
 
-## CLI
+### Important integration rule
 
-Add a minimal script, for example:
+Do not reimplement x402 purchasing if the existing shopper/buyer abstraction can be reused cleanly.
 
-```bash
-npm run recruiting-eval:pack
+The observatory provider should depend on a narrow paid-fetch interface rather than private-key logic spread through analytics code.
+
+## Real-money safety — absolute requirement
+
+**Default mode must not spend real money.**
+
+Building an adapter is not authorization to execute a mainnet purchase.
+
+Requirements:
+
+- fixture/dry-run is default
+- live paid mode requires an explicit CLI flag such as `--execute-paid`
+- live mode must require explicit configured session budget
+- never fund a wallet automatically
+- never log/private-key output
+- reuse existing spend controls
+- check quoted/runtime price before payment
+- reject payment above per-call cap
+- track committed + reserved session spend
+- stop when session budget is exhausted
+- every paid research request produces an audit record
+
+Suggested caps **only after explicit owner approval**:
+
+```text
+max per payment: $0.02
+max research session: $0.25
 ```
 
-Possible subcommands/flags if useful:
+These numbers are safety defaults, not permission to spend.
 
-- list scenarios
-- render one reviewer packet
-- validate a review JSON file
-- build report
-- build golden-case export
+If the existing shopper is testnet-only or incompatible with the provider's network, report the gap and stop. Do not silently broaden wallet/network permissions.
 
-Do not build an interactive dashboard.
+## Optional public/manual import
+
+If x402scan paid integration cannot be exercised safely tonight, the observatory must still be useful.
+
+Support importing sanitized manually collected JSON/CSV snapshots so research is not blocked by wallet/network setup.
+
+Do not build brittle HTML scraping solely to avoid a paid API unless the source explicitly supports it and the implementation is clearly worthwhile.
 
 ## Reports
 
-### JSON report
+Create at least three outputs.
 
-Include:
+### 1. Market snapshot
 
-- project metadata
-- rubric version
-- reviewed run count
-- verdict distribution
-- failures grouped by label/severity/workflow
-- run-level reviews
-- golden-case candidates
-- limitations
+Markdown + JSON showing:
 
-### Markdown report
+- merchants observed
+- activity/buyer/volume metrics
+- demand-shape flags
+- data window and source limitations
 
-Include:
+### 2. Buyer-behavior report
 
-1. scope
-2. rubric
-3. headline findings
-4. run table
-5. repeated failure patterns
-6. prioritized fixes
-7. recommended regression cases
-8. release observations
-9. limitations
+When transaction-level data supports it:
 
-Release observations must not use certification/compliance language.
+- repeat buyers
+- concentrated buyers
+- cross-seller shoppers
+- sellers/categories they purchase from
+
+### 3. Product-discovery queue
+
+A short list of **human-review candidates**, not product recommendations.
+
+Prioritize unusual combinations such as:
+
+- broad buyers + strong repeat
+- high value per buyer
+- clearly scarce/access-gated capability
+- multi-seller shopper usage
+- high demand with surprisingly few sellers/resources
+
+Also include negative controls:
+
+- large catalog + weak buyers
+- commodity capability + weak demand
 
 ## Tests
 
 Minimum tests:
 
-- malformed verdict rejected
-- unknown failure label rejected or explicitly handled as extensible `OTHER_DOMAIN_FAILURE`
-- missing practitioner rationale rejected for non-pass failure
-- human-review fields never auto-populated by report generator
-- aggregate counts correct
-- golden-case export contains only selected cases
-- synthetic scenario pack contains no obvious PII fixture fields
-- Markdown + JSON reports contain limitations
-- autonomy metadata survives through reports
-- existing x402-lab tests remain green
+- missing buyers does not become zero buyers
+- division-by-zero handled explicitly
+- transactions-per-buyer correct
+- volume-per-buyer correct
+- transaction-level concentration correct
+- repeat-buyer share correct
+- multi-seller buyer detection correct
+- snapshot comparisons reject/flag incompatible windows
+- flags do not claim independence/organic demand without evidence
+- opportunity card defaults to `UNREVIEWED`
+- dry-run cannot execute paid fetch
+- session budget blocks over-budget paid fetch
+- per-call cap blocks unexpected price
+- audit record contains no private key/secret
+- all existing x402-lab tests remain green
 
 Run:
 
@@ -318,130 +385,104 @@ npm test
 npm run typecheck
 ```
 
-## Manual practitioner exercise tonight
+## CLI
 
-After tooling is green:
+Prefer a small CLI, for example:
 
-1. pick **10 synthetic runs** across at least four workflow families
-2. manually review them using the V0 rubric
-3. time the human review process
-4. save structured reviews
-5. generate a complete report
-6. inspect whether the taxonomy/rubric actually captures meaningful recruiting failures
+```bash
+npm run market:fixtures
+npm run market:import -- --file path/to/snapshot.json
+npm run market:report
+npm run market:compare -- --before ... --after ...
+npm run market:collect -- --provider x402scan --dry-run
+```
 
-Record:
+A paid form may exist only with explicit execution and budget flags, for example:
 
-- minutes per run
-- confusing rubric dimensions
-- missing/duplicate failure labels
-- cases that deserve golden status
-- report sections that require manual repair
+```bash
+npm run market:collect -- --provider x402scan --execute-paid --budget-usdc 0.25
+```
 
-### Pass gate
+Do not execute the paid form automatically.
 
-The workbench passes if:
+## Initial analysis questions
 
-- reviewer can label a run in roughly 3–6 minutes once familiar
-- report generation removes most administrative formatting work
-- the failure taxonomy captures meaningful practitioner distinctions
-- golden cases feel reusable
-- the tool clearly preserves human judgment rather than replacing it
+The first report should make it easier for a human to answer:
 
-### Fail gate
+1. Which services have the broadest unique-buyer adoption?
+2. Which have the highest repeat intensity among nontrivial buyer sets?
+3. Which are dominated by one/few buyers?
+4. Which buyers purchase across many sellers?
+5. What capability categories recur among cross-seller shoppers?
+6. What capability categories show broad adoption despite higher prices?
+7. Which giant catalogs have weak demand?
+8. Which successful services mainly abstract credentials/access?
+9. Which successful services provide genuinely fresh/scarce data?
+10. Which opportunities appear structurally outside x402-lab's ability to compete?
 
-Stop/refactor if:
+The last question matters as much as the others.
 
-- labels are generic AI-quality language with little recruiting specificity
-- most cases require long essays to be useful
-- taxonomy is too ambiguous to apply consistently
-- reviewer spends more time fighting the harness than evaluating behavior
-- outputs look like a generic LLM eval service with "recruiting" pasted on top
-
-Do not add an LLM judge to rescue an immature human rubric.
-
-## Explicit non-goals tonight
+## Absolute non-goals tonight
 
 Do not build:
 
-- public paid eval endpoint
-- automated LLM-as-judge evaluator
-- legal/compliance audit
-- bias/fairness certification
-- real candidate evaluation
-- real candidate PII ingestion
-- live outreach
-- live ATS write actions
-- CareerOneStop/BLS/market-data integration
-- Recruiting Pressure
+- Recruiting Agent Eval Workbench
+- Search Preflight customer product
 - Role Reality
-- Search Preflight customer service
-- frontend/dashboard
-- database
+- Recruiting Pressure
+- a new seller endpoint
+- a new commercial brand
+- mainnet seller deployment
 - MCP/MPP
-- mainnet
-- rebrand
+- frontend/dashboard
+- recommendation engine that autonomously selects Product #2
+- unbounded scraper
+- automatic wallet funding
+- automatic real-money execution
 
 Preserve Evidence Slice and existing buyer/shopper behavior.
 
-## Safety language
+## Stop/go gate
 
-All sample data is synthetic.
+The observatory earns more work if it can produce a materially better product-discovery conversation than manually browsing x402scan.
 
-The generated report should say it is **recruiting-workflow practitioner evaluation**, not:
+### Pass
 
-- legal advice
-- bias audit
-- employment-compliance certification
-- model-safety certification
-- approval for autonomous adverse employment decisions
+- normalized snapshots are easy to collect/import
+- metrics reveal breadth vs repeat vs concentration clearly
+- transaction-level data reveals useful buyer patterns when available
+- reports surface non-obvious merchants/buyers worth manual research
+- creating opportunity cards becomes faster and more disciplined
 
-## End-of-night artifact
+### Fail
 
-Save under something like:
+- output is just a prettier leaderboard
+- x402scan already provides every meaningful analysis directly
+- data quality is too incomplete to distinguish demand shapes
+- paid data cost/complexity exceeds the research value
 
-```text
-docs/validation-samples/recruiting-agent-eval/
-```
+If it fails, preserve the lesson and return to manual discovery rather than adding features.
 
-Include:
-
-- synthetic scenario pack summary
-- 10 human-reviewed synthetic run records
-- generated JSON report
-- generated Markdown report
-- reviewer observations on the rubric/workbench
-
-No secrets or real PII.
-
-## After tonight
-
-If the workbench passes:
-
-1. create a polished 3–5-run mini-eval example
-2. identify 3–5 recruiting-agent builders for targeted validation
-3. offer a free mini review to a very small number
-4. ask whether the labels/cases would enter their own eval/regression process
-5. test `$99–$149` for 10 runs
-6. test around `$249` for 20–25 runs + golden cases
-7. seek the same builder again after their next release/change
-
-Do not launch a marketplace listing until fulfillment is coherent.
-
-## Codex prompt for tonight
-
-> Read `docs/PRODUCT-DISCOVERY-ROUND-3-2026-08-24.md`, `docs/BUSINESS-PLAN-V0.4.md`, `docs/RECRUITING-AGENT-EVAL-V0.md`, and `docs/CODEX-SESSION-PLAN-2026-08-24.md` before editing anything. Create branch `milestone-4-5-recruiting-agent-eval-harness`. The Recruiting Pressure, automated Role Reality, and Search Preflight customer-product directions are superseded; do not implement them. Build only an internal Recruiting Agent Eval Workbench and 15–20 synthetic non-PII scenarios. Software must structure human practitioner review but must not fabricate human verdicts, rationales, failure labels, or corrected behavior. Add fixture runs, schema validation, aggregation, JSON/Markdown report generation and golden-case export. Do not add a live model, paid endpoint, market-data integration, candidate PII, legal/bias audit features, frontend, database, MCP/MPP or mainnet. Preserve all existing x402-lab behavior. Run tests and typecheck after each meaningful slice. Finish by giving me the exact commands to review 10 synthetic runs manually and generate the report.
-
-## Desired result
+## End-of-night target
 
 Best case:
 
-- tested eval harness
-- 15–20 synthetic recruiting-agent scenarios
-- fixture outputs
-- 10 human-review-ready packets
-- fast structured review workflow
-- JSON + Markdown report generation
-- golden/regression-case export
-- no regression to existing x402 infrastructure
+- tested observatory core
+- fixture market shapes
+- normalized snapshot format
+- metrics + concentration analysis
+- compare/report tooling
+- optional x402scan paid-provider adapter behind hard spend controls
+- one dry-run showing intended paid requests/budget
+- one current manually imported or safely collected market snapshot
+- 3–5 **unreviewed/research** opportunity cards grounded in observed demand
 
-A still-successful result is discovering that the rubric/taxonomy is not recruiting-specific enough and documenting that before commercial outreach.
+Still-successful case:
+
+- observatory is rejected because it adds little beyond existing tools
+- no Product #2 is forced
+- no unnecessary real-money spend occurs
+
+## Codex prompt for tonight
+
+> Read `docs/PRODUCT-THESIS.md`, `docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`, and `docs/CODEX-SESSION-PLAN-2026-08-24.md` before editing anything. Create branch `milestone-4-5-machine-demand-observatory`. Product #2 is intentionally unknown. Do not implement Recruiting Agent Eval, Search Preflight, Role Reality, Recruiting Pressure, or any new paid seller endpoint. Build an internal market observatory that normalizes merchant/resource/transaction snapshots, computes buyer breadth/repeat/economic/concentration metrics, compares snapshots, surfaces descriptive demand-shape flags, and scaffolds human-reviewed opportunity cards. Start with deterministic fixtures and tests. Then add an optional x402scan market-data provider behind the existing bounded buyer/shopper abstraction where cleanly possible. Default to dry-run and make real-money execution impossible without an explicit execute flag plus per-call/session spend caps; do not spend money automatically or broaden wallet/network permissions. Support manual JSON/CSV import so the work is useful without a live paid provider. Generate JSON + Markdown reports and preserve all existing x402-lab behavior. Finish with exact commands for fixture analysis, importing a snapshot, dry-running x402scan collection, and—without executing it—the command that would require explicit owner approval for a capped paid collection.
