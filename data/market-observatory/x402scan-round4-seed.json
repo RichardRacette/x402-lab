@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "machine-demand-manual/v1",
+  "source": {
+    "id": "x402scan-round4-manual-2026-08-24",
+    "provider": "x402scan public pages — manual research seed",
+    "dataMode": "manual",
+    "observedAt": "2026-08-24T00:00:00.000Z",
+    "window": {
+      "kind": "rolling",
+      "label": "approximately 30-day public dashboard observations",
+      "days": 30,
+      "end": "2026-08-24"
+    },
+    "methodology": {
+      "name": "human-researched public x402scan observations",
+      "version": "round-4-2026-08-24",
+      "notes": [
+        "Values were transcribed as approximate public dashboard observations during Product Discovery Round 4.",
+        "Seller/server, receiving-wallet, buyer, and transaction meanings remain those of the source pages.",
+        "This file is a dated manual seed and is not a live collection."
+      ]
+    },
+    "references": [
+      "docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md",
+      "https://www.x402scan.com/"
+    ],
+    "limitations": [
+      "Approximate values may have changed since observation.",
+      "Aggregate pages do not expose enough evidence to calculate buyer concentration or prove buyer independence.",
+      "Missing volume, resource, price, network, and facilitator values remain unknown rather than zero.",
+      "Use current source pages or authorized transaction-level evidence before making a product decision."
+    ]
+  },
+  "merchants": [
+    {
+      "id": "round4-blockrun",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "name": "BlockRun",
+      "description": "Model and compute routing with machine payment built in.",
+      "categories": ["compute", "model-access"],
+      "transactions": 8000000,
+      "volumeUsd": 196000,
+      "uniqueBuyers": 625,
+      "notes": ["Approximate values captured in the Round 4 research document."]
+    },
+    {
+      "id": "round4-stableenrich",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "name": "StableEnrich",
+      "description": "Pay-per-request access to enrichment, search, crawl, maps, and related upstream APIs without separate buyer credentials.",
+      "categories": ["credential-access", "data", "search"],
+      "transactions": 53000,
+      "volumeUsd": 1600,
+      "uniqueBuyers": 501,
+      "notes": ["Approximate values captured in the Round 4 research document."]
+    },
+    {
+      "id": "round4-people-data-labs",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "name": "People Data Labs x402 access",
+      "description": "Machine-payable person and company data access.",
+      "categories": ["credential-access", "people-data", "company-data"],
+      "transactions": 1150,
+      "volumeUsd": 29,
+      "uniqueBuyers": 7,
+      "notes": ["Approximate values captured in the Round 4 research document."]
+    },
+    {
+      "id": "round4-x402scan-data-api",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "name": "x402scan paid market-data API",
+      "description": "Merchant, facilitator, transaction, origin, and resource market data sold through x402.",
+      "categories": ["market-data", "agent-infrastructure"],
+      "transactions": 1000,
+      "volumeUsd": 11,
+      "uniqueBuyers": 51,
+      "notes": ["Approximate values captured in the Round 4 research document."]
+    },
+    {
+      "id": "round4-402utils",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "name": "402utils",
+      "description": "Catalog of deterministic utility endpoints.",
+      "categories": ["utility", "infrastructure"],
+      "resourceCount": 50,
+      "transactions": 218,
+      "uniqueBuyers": 22,
+      "notes": [
+        "The source document records total volume only as less than $1, so volumeUsd is intentionally omitted."
+      ]
+    },
+    {
+      "id": "round4-agenticfi",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "name": "AgenticFi",
+      "description": "Observed service with relatively broad buyer count and low repeat intensity.",
+      "categories": ["agent-finance"],
+      "transactions": 96,
+      "uniqueBuyers": 34,
+      "notes": ["Volume was not recorded in the Round 4 seed and remains unknown."]
+    },
+    {
+      "id": "round4-generic-utility-negative-control",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "name": "Generic judgment/search/scrape utility catalog",
+      "description": "Negative control representing a researched generic utility catalog with no observed purchasing.",
+      "categories": ["generic-research", "search", "classification"],
+      "transactions": 0,
+      "uniqueBuyers": 0,
+      "notes": [
+        "This is a category-level manual research observation, not a permanent claim about every generic utility seller."
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "round4-x402scan-merchant-transactions",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "merchantId": "round4-x402scan-data-api",
+      "name": "Merchant transaction history",
+      "path": "/api/x402/merchants/{address}/transactions",
+      "method": "GET",
+      "categories": ["market-data"],
+      "priceUsd": 0.01,
+      "access": "paid"
+    }
+  ],
+  "transactions": []
+}

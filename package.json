@@ -9,6 +9,8 @@
     "server": "tsx src/server.ts",
     "buy": "tsx src/client.ts",
     "shopper": "tsx src/shopper-cli.ts",
+    "market:fixtures": "tsx src/market-observatory/cli.ts fixtures",
+    "market:collect": "tsx src/market-observatory/cli.ts collect-x402stats",
     "test": "tsx --test src/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
