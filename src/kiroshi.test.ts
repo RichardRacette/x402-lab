@@ -5,6 +5,7 @@ import { resolve } from "node:path";
 import { createBuyerTracePreflight } from "./buyer-trace-preflight.js";
 import { correlateReadings } from "./kiroshi/correlate.js";
 import {
+  assertRenderableSnapshot,
   normalizeBuyerTracePreflightReading,
   normalizeMarketReading,
 } from "./kiroshi/normalize.js";
@@ -113,6 +114,33 @@ test("provenance classification never presents manual or fixture evidence as liv
     classifyEvidence(source("fixture", "2026-08-25T00:00:00.000Z"), now)
       .evidenceState,
     "SYNTHETIC_FIXTURE",
+  );
+});
+
+test("renderable snapshots require both source provenance and merchant analyses", () => {
+  const renderable = {
+    market: {
+      sources: [source("fixture", "2026-08-25T00:00:00.000Z")],
+      targets: [{}],
+    },
+  } as unknown as Parameters<typeof assertRenderableSnapshot>[0];
+
+  assert.doesNotThrow(() => assertRenderableSnapshot(renderable));
+  assert.throws(
+    () =>
+      assertRenderableSnapshot({
+        ...renderable,
+        market: { ...renderable.market, sources: [] },
+      }),
+    /without source provenance/u,
+  );
+  assert.throws(
+    () =>
+      assertRenderableSnapshot({
+        ...renderable,
+        market: { ...renderable.market, targets: [] },
+      }),
+    /without merchant analyses/u,
   );
 });
 
