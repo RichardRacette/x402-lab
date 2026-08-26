@@ -10,8 +10,8 @@ import type {
 import {
   assertPurchaseAuthorization,
   ContextTrustError,
-  fingerprintPurchaseIntent,
   markUntrusted,
+  mintOwnerCliPurchaseAuthorization,
   transformUntrusted,
   type PurchaseAuthorization
 } from "./trust-boundary.js";
@@ -21,18 +21,6 @@ const request: ShopperRequest = {
   sourceUrl: "https://external.example/page",
   question: "What evidence is relevant?"
 };
-
-function ownerAuthorization(
-  target: ShopperRequest = request
-): PurchaseAuthorization {
-  return {
-    version: 1,
-    authority: "owner-cli",
-    scope: "single-purchase",
-    approvalSource: "explicit-local-cli-execute",
-    requestFingerprint: fingerprintPurchaseIntent(target)
-  };
-}
 
 function hasTrustCode(code: string): (error: unknown) => boolean {
   return error => error instanceof ContextTrustError && error.code === code;
@@ -62,8 +50,25 @@ test("decrypting external content does not upgrade its trust", () => {
   assert.deepEqual(parsed.transformations, ["aes-256-gcm-decrypt", "json-parse"]);
 });
 
+test("external data cannot forge the opaque owner capability", () => {
+  const real = mintOwnerCliPurchaseAuthorization(request);
+  const forged = {
+    version: 1,
+    authority: "owner-cli",
+    scope: "single-purchase",
+    approvalSource: "explicit-local-cli-execute",
+    requestFingerprint: real.requestFingerprint,
+    capability: Symbol("x402-owner-cli-purchase-capability")
+  } as unknown as PurchaseAuthorization;
+
+  assert.throws(
+    () => assertPurchaseAuthorization(request, forged),
+    hasTrustCode("AUTHORIZATION_INVALID")
+  );
+});
+
 test("purchase authorization is bound to the exact request", () => {
-  const authorization = ownerAuthorization();
+  const authorization = mintOwnerCliPurchaseAuthorization(request);
 
   assert.doesNotThrow(() => assertPurchaseAuthorization(request, authorization));
   assert.throws(
@@ -77,7 +82,7 @@ test("purchase authorization is bound to the exact request", () => {
 });
 
 test("authorized shopper rejects a mismatched capability before raw gateway execution", async () => {
-  const authorization = ownerAuthorization();
+  const authorization = mintOwnerCliPurchaseAuthorization(request);
   let gatewayDependencyTouched = false;
   const dependencies = {
     fetchChallenge: async () => {
@@ -101,7 +106,7 @@ test("authorized shopper rejects a mismatched capability before raw gateway exec
   assert.equal(gatewayDependencyTouched, false);
 });
 
-test("application code cannot bypass the authorized shopper entrypoint", async () => {
+test("application code cannot bypass or mint the privileged shopper capability", async () => {
   const directory = new URL("./", import.meta.url);
   const entries = await readdir(directory, { withFileTypes: true });
   const rawGatewayAllowlist = new Set([
@@ -130,7 +135,7 @@ test("application code cannot bypass the authorized shopper entrypoint", async (
 
     if (!authorityMintAllowlist.has(entry.name)) {
       assert.equal(
-        source.includes("explicit-local-cli-execute"),
+        /\bmintOwnerCliPurchaseAuthorization\b/.test(source),
         false,
         `${entry.name} attempts to mint owner CLI authority.`
       );
