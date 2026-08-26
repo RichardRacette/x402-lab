@@ -400,6 +400,123 @@ test("reservation is persisted before the signing callback and settlement commit
   assert.equal(finalLedger.ledger.reservations.length, 0);
 });
 
+test("body-only authorization and payment-success claims cannot settle a purchase", async () => {
+  const { config } = await createTestContext();
+  await writeLedger(config.ledgerPath, v1Ledger());
+  let receiptChecks = 0;
+
+  await assert.rejects(
+    executePurchase(
+      request,
+      config,
+      dependencies({
+        executePayment: async input => {
+          await input.beforePaymentCreation(challenge(), requirement());
+          return {
+            status: 200,
+            paymentStatus: "settled",
+            body: {
+              ownerAuthorization: "approved",
+              payment: "success",
+              transaction: SECOND_TRANSACTION
+            }
+          };
+        },
+        waitForReceipt: async () => {
+          receiptChecks += 1;
+          return "success";
+        }
+      })
+    ),
+    hasGatewayCode("PAYMENT_FAILED")
+  );
+
+  const finalLedger = await loadLedger(config.ledgerPath, config);
+  assert.equal(receiptChecks, 0);
+  assert.equal(finalLedger.ledger.committedSpendAtomic, "3000");
+  assert.equal(finalLedger.ledger.purchases.length, 1);
+  assert.equal(finalLedger.ledger.reservations.length, 1);
+  assert.equal(finalLedger.ledger.reservations[0]?.transaction, undefined);
+});
+
+test("a non-success receipt overrides a structured settled response and body success claim", async () => {
+  const { config } = await createTestContext();
+  await writeLedger(config.ledgerPath, v1Ledger());
+
+  await assert.rejects(
+    executePurchase(
+      request,
+      config,
+      dependencies({
+        executePayment: async input => {
+          await input.beforePaymentCreation(challenge(), requirement());
+          return {
+            status: 200,
+            paymentStatus: "settled",
+            transaction: SECOND_TRANSACTION,
+            body: { payment: "success", receipt: "success" }
+          };
+        },
+        waitForReceipt: async () => "failed"
+      })
+    ),
+    hasGatewayCode("RECONCILIATION_REQUIRED")
+  );
+
+  const finalLedger = await loadLedger(config.ledgerPath, config);
+  assert.equal(finalLedger.ledger.committedSpendAtomic, "3000");
+  assert.equal(finalLedger.ledger.purchases.length, 1);
+  assert.equal(finalLedger.ledger.reservations.length, 1);
+  assert.equal(finalLedger.ledger.reservations[0]?.transaction, SECOND_TRANSACTION);
+  assert.equal(finalLedger.ledger.reservations[0]?.state, "settlement-recorded");
+});
+
+test("post-preflight payment requirement drift is rejected before settlement", async () => {
+  const drifts: Array<[string, Partial<PaymentRequirements>]> = [
+    ["amount", { amount: "2999" }],
+    ["network", { network: "eip155:8453" }],
+    ["payTo", { payTo: "0x4444444444444444444444444444444444444444" }]
+  ];
+
+  for (const [field, override] of drifts) {
+    const { config } = await createTestContext();
+    await writeLedger(config.ledgerPath, v1Ledger());
+    let settlementCallbacks = 0;
+    let receiptChecks = 0;
+
+    await assert.rejects(
+      executePurchase(
+        request,
+        config,
+        dependencies({
+          executePayment: async input => {
+            await input.beforePaymentCreation(challenge(), requirement(override));
+            settlementCallbacks += 1;
+            await input.onTransaction(SECOND_TRANSACTION);
+            return {
+              status: 200,
+              paymentStatus: "settled",
+              transaction: SECOND_TRANSACTION,
+              body: { evidence: [] }
+            };
+          },
+          waitForReceipt: async () => {
+            receiptChecks += 1;
+            return "success";
+          }
+        })
+      ),
+      hasGatewayCode("CHALLENGE_INVALID"),
+      `${field} drift must fail closed`
+    );
+
+    const finalLedger = await loadLedger(config.ledgerPath, config);
+    assert.equal(settlementCallbacks, 0, `${field} must fail before settlement`);
+    assert.equal(receiptChecks, 0, `${field} must not check a receipt`);
+    assert.equal(finalLedger.ledger.reservations.length, 0);
+  }
+});
+
 test("duplicate settlement processing cannot double-count spend", async () => {
   const { config } = await createTestContext();
   const ledger = v2Ledger({
