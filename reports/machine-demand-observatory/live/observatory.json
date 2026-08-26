@@ -1,0 +1,4524 @@
+{
+  "schemaVersion": "machine-demand-observatory/v1",
+  "generatedAt": "2026-08-24T23:54:28.642Z",
+  "dataset": {
+    "schemaVersion": "machine-demand-observatory/v1",
+    "generatedAt": "2026-08-24T23:54:28.642Z",
+    "sources": [
+      {
+        "id": "x402stats-2026-08-24T23:54:28.642Z",
+        "provider": "x402stats",
+        "dataMode": "live",
+        "observedAt": "2026-08-24T23:54:28.642Z",
+        "window": {
+          "kind": "rolling",
+          "label": "30-day snapshot ending 2026-08-24",
+          "days": 30,
+          "start": "2026-07-26",
+          "end": "2026-08-24"
+        },
+        "methodology": {
+          "name": "x402stats raw and organic heuristic",
+          "version": "2026-07-01.v1",
+          "notes": [
+            "Raw and organic-heuristic values remain separate.",
+            "Organic is the provider's heuristic, not proof of independent commerce.",
+            "Raw transaction count is summed from daily series in the published snapshot window.",
+            "The free aggregate feed does not publish a deduplicated 30-day raw buyer count."
+          ]
+        },
+        "references": [
+          "https://x402stats.io/api/stats",
+          "https://x402stats.io/data"
+        ],
+        "attribution": "x402stats — State of x402, x402stats.io",
+        "license": "CC BY 4.0",
+        "limitations": [
+          "Buyer counts in the daily series are per-day and are not summed into a unique window buyer count.",
+          "Cross-seller buyer overlap and merchant-level transaction histories are unavailable in this feed.",
+          "Organic classification is a heuristic and may include sophisticated self-dealing or inherit indexer gaps."
+        ]
+      },
+      {
+        "id": "x402scan-round4-manual-2026-08-24",
+        "provider": "x402scan public pages — manual research seed",
+        "dataMode": "manual",
+        "observedAt": "2026-08-24T00:00:00.000Z",
+        "window": {
+          "kind": "rolling",
+          "label": "approximately 30-day public dashboard observations",
+          "days": 30,
+          "end": "2026-08-24"
+        },
+        "methodology": {
+          "name": "human-researched public x402scan observations",
+          "version": "round-4-2026-08-24",
+          "notes": [
+            "Values were transcribed as approximate public dashboard observations during Product Discovery Round 4.",
+            "Seller/server, receiving-wallet, buyer, and transaction meanings remain those of the source pages.",
+            "This file is a dated manual seed and is not a live collection."
+          ]
+        },
+        "references": [
+          "docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md",
+          "https://www.x402scan.com/"
+        ],
+        "limitations": [
+          "Approximate values may have changed since observation.",
+          "Aggregate pages do not expose enough evidence to calculate buyer concentration or prove buyer independence.",
+          "Missing volume, resource, price, network, and facilitator values remain unknown rather than zero.",
+          "Use current source pages or authorized transaction-level evidence before making a product decision."
+        ]
+      },
+      {
+        "id": "fixture-demand-shapes-v1",
+        "provider": "deterministic-fixture",
+        "dataMode": "fixture",
+        "observedAt": "2026-08-24T00:00:00.000Z",
+        "window": {
+          "kind": "rolling",
+          "label": "synthetic 30-day window",
+          "days": 30
+        },
+        "methodology": {
+          "name": "deterministic-demand-shapes",
+          "version": "1",
+          "notes": [
+            "Synthetic records exercise breadth, repeat, economics, concentration, and cross-seller behavior.",
+            "Fixture values are not live-market claims."
+          ]
+        },
+        "references": [
+          "docs/PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md"
+        ],
+        "limitations": [
+          "Synthetic fixture only; use it to verify analytics, never as market evidence."
+        ]
+      }
+    ],
+    "ecosystems": [
+      {
+        "id": "x402stats-ecosystem-2026-08-24",
+        "sourceId": "x402stats-2026-08-24T23:54:28.642Z",
+        "raw": {
+          "transactions": 13143968,
+          "volumeUsd": 1241037.7051823789,
+          "sellers": 28621
+        },
+        "organicHeuristic": {
+          "label": "x402stats organic heuristic 2026-07-01.v1",
+          "volumeUsd": 1010013.4051130003,
+          "sellers": 74
+        },
+        "publishedEconomics": {
+          "averagePaymentUsd": 0.09309958060568693,
+          "medianSellerRevenueUsd": 0.01
+        },
+        "publishedConcentration": {
+          "top10VolumeShare": 0.7610283036647985
+        },
+        "facilitatorShares": [
+          {
+            "facilitator": "coinbase",
+            "volumeUsd": 754117.169440145,
+            "share": 0.5180810405526055
+          },
+          {
+            "facilitator": "mrdn",
+            "volumeUsd": 270031.433121,
+            "share": 0.1855125059108508
+          },
+          {
+            "facilitator": "payAI",
+            "volumeUsd": 250406.01290801234,
+            "share": 0.17202977598868877
+          },
+          {
+            "facilitator": "fluxa",
+            "volumeUsd": 124958.65048100152,
+            "share": 0.0858470146161882
+          },
+          {
+            "facilitator": "figment-facilitator",
+            "volumeUsd": 31966.581176,
+            "share": 0.02196114915519888
+          },
+          {
+            "facilitator": "dexter",
+            "volumeUsd": 11862.911162999835,
+            "share": 0.008149860006334048
+          },
+          {
+            "facilitator": "anyspend",
+            "volumeUsd": 5346,
+            "share": 0.0036727200427626116
+          },
+          {
+            "facilitator": "three-ws",
+            "volumeUsd": 1698.2519479999992,
+            "share": 0.0011667048198803303
+          },
+          {
+            "facilitator": "primer",
+            "volumeUsd": 1471.2135589999998,
+            "share": 0.0010107286803822321
+          },
+          {
+            "facilitator": "daydreams",
+            "volumeUsd": 1376.3581749999998,
+            "share": 0.0009455627114370875
+          }
+        ]
+      },
+      {
+        "id": "fixture-ecosystem",
+        "sourceId": "fixture-demand-shapes-v1",
+        "raw": {
+          "transactions": 1000000,
+          "volumeUsd": 100000,
+          "buyers": 10000,
+          "sellers": 2000
+        },
+        "organicHeuristic": {
+          "label": "fixture organic heuristic",
+          "volumeUsd": 55000,
+          "sellers": 125
+        },
+        "publishedConcentration": {
+          "top10VolumeShare": 0.72
+        }
+      }
+    ],
+    "merchants": [
+      {
+        "id": "round4-blockrun",
+        "sourceId": "x402scan-round4-manual-2026-08-24",
+        "name": "BlockRun",
+        "description": "Model and compute routing with machine payment built in.",
+        "categories": [
+          "compute",
+          "model-access"
+        ],
+        "transactions": 8000000,
+        "volumeUsd": 196000,
+        "uniqueBuyers": 625,
+        "notes": [
+          "Approximate values captured in the Round 4 research document."
+        ]
+      },
+      {
+        "id": "round4-stableenrich",
+        "sourceId": "x402scan-round4-manual-2026-08-24",
+        "name": "StableEnrich",
+        "description": "Pay-per-request access to enrichment, search, crawl, maps, and related upstream APIs without separate buyer credentials.",
+        "categories": [
+          "credential-access",
+          "data",
+          "search"
+        ],
+        "transactions": 53000,
+        "volumeUsd": 1600,
+        "uniqueBuyers": 501,
+        "notes": [
+          "Approximate values captured in the Round 4 research document."
+        ]
+      },
+      {
+        "id": "round4-people-data-labs",
+        "sourceId": "x402scan-round4-manual-2026-08-24",
+        "name": "People Data Labs x402 access",
+        "description": "Machine-payable person and company data access.",
+        "categories": [
+          "credential-access",
+          "people-data",
+          "company-data"
+        ],
+        "transactions": 1150,
+        "volumeUsd": 29,
+        "uniqueBuyers": 7,
+        "notes": [
+          "Approximate values captured in the Round 4 research document."
+        ]
+      },
+      {
+        "id": "round4-x402scan-data-api",
+        "sourceId": "x402scan-round4-manual-2026-08-24",
+        "name": "x402scan paid market-data API",
+        "description": "Merchant, facilitator, transaction, origin, and resource market data sold through x402.",
+        "categories": [
+          "market-data",
+          "agent-infrastructure"
+        ],
+        "transactions": 1000,
+        "volumeUsd": 11,
+        "uniqueBuyers": 51,
+        "notes": [
+          "Approximate values captured in the Round 4 research document."
+        ]
+      },
+      {
+        "id": "round4-402utils",
+        "sourceId": "x402scan-round4-manual-2026-08-24",
+        "name": "402utils",
+        "description": "Catalog of deterministic utility endpoints.",
+        "categories": [
+          "utility",
+          "infrastructure"
+        ],
+        "resourceCount": 50,
+        "transactions": 218,
+        "uniqueBuyers": 22,
+        "notes": [
+          "The source document records total volume only as less than $1, so volumeUsd is intentionally omitted."
+        ]
+      },
+      {
+        "id": "round4-agenticfi",
+        "sourceId": "x402scan-round4-manual-2026-08-24",
+        "name": "AgenticFi",
+        "description": "Observed service with relatively broad buyer count and low repeat intensity.",
+        "categories": [
+          "agent-finance"
+        ],
+        "transactions": 96,
+        "uniqueBuyers": 34,
+        "notes": [
+          "Volume was not recorded in the Round 4 seed and remains unknown."
+        ]
+      },
+      {
+        "id": "round4-generic-utility-negative-control",
+        "sourceId": "x402scan-round4-manual-2026-08-24",
+        "name": "Generic judgment/search/scrape utility catalog",
+        "description": "Negative control representing a researched generic utility catalog with no observed purchasing.",
+        "categories": [
+          "generic-research",
+          "search",
+          "classification"
+        ],
+        "transactions": 0,
+        "uniqueBuyers": 0,
+        "notes": [
+          "This is a category-level manual research observation, not a permanent claim about every generic utility seller."
+        ]
+      },
+      {
+        "id": "fixture-broad-repeat",
+        "sourceId": "fixture-demand-shapes-v1",
+        "name": "Fixture — broad credential access",
+        "description": "Synthetic broad and repeated purchasing of credential-gated upstream access.",
+        "categories": [
+          "credential-access",
+          "data"
+        ],
+        "resourceCount": 4,
+        "transactions": 120,
+        "volumeUsd": 120,
+        "uniqueBuyers": 24
+      },
+      {
+        "id": "fixture-few-buyer-repeat",
+        "sourceId": "fixture-demand-shapes-v1",
+        "name": "Fixture — few-buyer scarce data",
+        "description": "Synthetic high-repeat purchasing from a small buyer set.",
+        "categories": [
+          "scarce-data"
+        ],
+        "resourceCount": 2,
+        "transactions": 60,
+        "volumeUsd": 300,
+        "uniqueBuyers": 3
+      },
+      {
+        "id": "fixture-broad-low-repeat",
+        "sourceId": "fixture-demand-shapes-v1",
+        "name": "Fixture — broad low-repeat infrastructure",
+        "description": "Synthetic broad trial behavior with little repeat intensity.",
+        "categories": [
+          "infrastructure"
+        ],
+        "resourceCount": 3,
+        "transactions": 30,
+        "volumeUsd": 75,
+        "uniqueBuyers": 25
+      },
+      {
+        "id": "fixture-zero-demand-catalog",
+        "sourceId": "fixture-demand-shapes-v1",
+        "name": "Fixture — large zero-demand catalog",
+        "description": "Synthetic negative control: many resources without observed purchasing.",
+        "categories": [
+          "generic-utility"
+        ],
+        "resourceCount": 120,
+        "transactions": 0,
+        "volumeUsd": 0,
+        "uniqueBuyers": 0
+      },
+      {
+        "id": "fixture-single-buyer",
+        "sourceId": "fixture-demand-shapes-v1",
+        "name": "Fixture — single-buyer automation",
+        "description": "Synthetic concentrated automation with one buyer producing every call.",
+        "categories": [
+          "automation"
+        ],
+        "resourceCount": 1,
+        "transactions": 40,
+        "volumeUsd": 80,
+        "uniqueBuyers": 1
+      }
+    ],
+    "resources": [
+      {
+        "id": "round4-x402scan-merchant-transactions",
+        "sourceId": "x402scan-round4-manual-2026-08-24",
+        "merchantId": "round4-x402scan-data-api",
+        "name": "Merchant transaction history",
+        "path": "/api/x402/merchants/{address}/transactions",
+        "method": "GET",
+        "categories": [
+          "market-data"
+        ],
+        "priceUsd": 0.01,
+        "access": "paid"
+      },
+      {
+        "id": "fixture-resource-access",
+        "sourceId": "fixture-demand-shapes-v1",
+        "merchantId": "fixture-broad-repeat",
+        "name": "Credential-gated data call",
+        "priceUsd": 1,
+        "categories": [
+          "credential-access"
+        ],
+        "access": "paid"
+      },
+      {
+        "id": "fixture-resource-scarce-data",
+        "sourceId": "fixture-demand-shapes-v1",
+        "merchantId": "fixture-few-buyer-repeat",
+        "name": "Scarce data lookup",
+        "priceUsd": 5,
+        "categories": [
+          "scarce-data"
+        ],
+        "access": "paid"
+      },
+      {
+        "id": "fixture-resource-infrastructure",
+        "sourceId": "fixture-demand-shapes-v1",
+        "merchantId": "fixture-broad-low-repeat",
+        "name": "Infrastructure task",
+        "priceUsd": 2.5,
+        "categories": [
+          "infrastructure"
+        ],
+        "access": "paid"
+      },
+      {
+        "id": "fixture-resource-generic",
+        "sourceId": "fixture-demand-shapes-v1",
+        "merchantId": "fixture-zero-demand-catalog",
+        "name": "Representative generic utility",
+        "priceUsd": 0.001,
+        "categories": [
+          "generic-utility"
+        ],
+        "access": "paid"
+      }
+    ],
+    "transactions": [
+      {
+        "id": "fixture-transaction-1",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-cross-seller-buyer",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:59:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-2",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-cross-seller-buyer",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:58:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-3",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-cross-seller-buyer",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:57:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-4",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-cross-seller-buyer",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:56:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-5",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-cross-seller-buyer",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:55:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-6",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-1",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:54:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-7",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-1",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:53:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-8",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-1",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:52:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-9",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-1",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:51:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-10",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-1",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:50:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-11",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-2",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:49:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-12",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-2",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:48:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-13",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-2",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:47:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-14",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-2",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:46:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-15",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-2",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:45:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-16",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-3",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:44:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-17",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-3",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:43:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-18",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-3",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:42:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-19",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-3",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:41:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-20",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-3",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:40:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-21",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-4",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:39:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-22",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-4",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:38:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-23",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-4",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:37:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-24",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-4",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:36:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-25",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-4",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:35:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-26",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-5",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:34:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-27",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-5",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:33:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-28",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-5",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:32:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-29",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-5",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:31:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-30",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-5",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:30:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-31",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-6",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:29:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-32",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-6",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:28:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-33",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-6",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:27:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-34",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-6",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:26:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-35",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-6",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:25:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-36",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-7",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:24:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-37",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-7",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:23:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-38",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-7",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:22:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-39",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-7",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:21:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-40",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-7",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:20:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-41",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-8",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:19:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-42",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-8",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:18:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-43",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-8",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:17:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-44",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-8",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:16:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-45",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-8",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:15:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-46",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-9",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:14:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-47",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-9",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:13:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-48",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-9",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:12:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-49",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-9",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:11:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-50",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-9",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:10:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-51",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-10",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:09:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-52",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-10",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:08:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-53",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-10",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:07:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-54",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-10",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:06:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-55",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-10",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:05:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-56",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-11",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:04:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-57",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-11",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:03:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-58",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-11",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:02:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-59",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-11",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:01:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-60",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-11",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T23:00:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-61",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-12",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:59:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-62",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-12",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:58:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-63",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-12",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:57:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-64",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-12",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:56:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-65",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-12",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:55:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-66",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-13",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:54:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-67",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-13",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:53:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-68",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-13",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:52:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-69",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-13",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:51:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-70",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-13",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:50:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-71",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-14",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:49:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-72",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-14",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:48:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-73",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-14",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:47:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-74",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-14",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:46:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-75",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-14",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:45:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-76",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-15",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:44:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-77",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-15",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:43:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-78",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-15",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:42:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-79",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-15",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:41:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-80",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-15",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:40:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-81",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-16",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:39:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-82",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-16",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:38:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-83",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-16",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:37:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-84",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-16",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:36:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-85",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-16",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:35:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-86",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-17",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:34:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-87",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-17",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:33:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-88",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-17",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:32:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-89",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-17",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:31:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-90",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-17",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:30:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-91",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-18",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:29:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-92",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-18",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:28:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-93",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-18",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:27:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-94",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-18",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:26:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-95",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-18",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:25:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-96",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-19",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:24:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-97",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-19",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:23:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-98",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-19",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:22:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-99",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-19",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:21:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-100",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-19",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:20:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-101",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-20",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:19:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-102",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-20",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:18:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-103",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-20",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:17:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-104",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-20",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:16:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-105",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-20",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:15:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-106",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-21",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:14:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-107",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-21",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:13:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-108",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-21",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:12:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-109",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-21",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:11:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-110",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-21",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:10:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-111",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-22",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:09:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-112",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-22",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:08:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-113",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-22",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:07:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-114",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-22",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:06:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-115",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-22",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:05:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-116",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-23",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:04:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-117",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-23",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:03:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-118",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-23",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:02:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-119",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-23",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:01:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-120",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-broad-buyer-23",
+        "sellerId": "fixture-broad-repeat",
+        "amountUsd": 1,
+        "timestamp": "2026-08-23T22:00:00.000Z",
+        "chain": "fixture-chain",
+        "category": "credential-access"
+      },
+      {
+        "id": "fixture-transaction-121",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:59:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-122",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:58:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-123",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:57:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-124",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:56:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-125",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:55:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-126",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:54:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-127",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:53:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-128",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:52:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-129",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:51:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-130",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:50:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-131",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:49:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-132",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:48:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-133",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:47:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-134",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:46:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-135",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:45:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-136",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:44:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-137",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:43:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-138",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:42:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-139",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:41:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-140",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-1",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:40:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-141",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:39:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-142",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:38:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-143",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:37:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-144",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:36:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-145",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:35:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-146",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:34:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-147",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:33:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-148",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:32:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-149",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:31:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-150",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:30:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-151",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:29:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-152",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:28:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-153",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:27:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-154",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:26:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-155",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:25:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-156",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:24:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-157",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:23:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-158",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:22:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-159",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:21:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-160",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-2",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:20:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-161",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:19:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-162",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:18:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-163",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:17:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-164",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:16:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-165",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:15:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-166",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:14:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-167",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:13:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-168",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:12:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-169",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:11:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-170",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:10:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-171",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:09:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-172",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:08:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-173",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:07:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-174",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:06:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-175",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:05:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-176",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:04:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-177",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:03:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-178",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:02:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-179",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:01:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-180",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-repeat-buyer-3",
+        "sellerId": "fixture-few-buyer-repeat",
+        "amountUsd": 5,
+        "timestamp": "2026-08-23T21:00:00.000Z",
+        "chain": "fixture-chain",
+        "category": "scarce-data"
+      },
+      {
+        "id": "fixture-transaction-181",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-cross-seller-buyer",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:59:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-182",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-cross-seller-buyer",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:58:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-183",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-1",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:57:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-184",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-1",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:56:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-185",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-2",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:55:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-186",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-2",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:54:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-187",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-3",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:53:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-188",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-3",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:52:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-189",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-4",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:51:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-190",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-4",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:50:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-191",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-5",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:49:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-192",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-6",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:48:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-193",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-7",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:47:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-194",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-8",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:46:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-195",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-9",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:45:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-196",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-10",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:44:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-197",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-11",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:43:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-198",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-12",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:42:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-199",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-13",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:41:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-200",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-14",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:40:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-201",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-15",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:39:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-202",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-16",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:38:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-203",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-17",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:37:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-204",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-18",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:36:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-205",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-19",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:35:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-206",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-20",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:34:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-207",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-21",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:33:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-208",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-22",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:32:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-209",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-23",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:31:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-210",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-low-repeat-buyer-24",
+        "sellerId": "fixture-broad-low-repeat",
+        "amountUsd": 2.5,
+        "timestamp": "2026-08-23T20:30:00.000Z",
+        "chain": "fixture-chain",
+        "category": "infrastructure"
+      },
+      {
+        "id": "fixture-transaction-211",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:29:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-212",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:28:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-213",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:27:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-214",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:26:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-215",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:25:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-216",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:24:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-217",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:23:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-218",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:22:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-219",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:21:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-220",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:20:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-221",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:19:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-222",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:18:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-223",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:17:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-224",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:16:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-225",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:15:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-226",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:14:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-227",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:13:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-228",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:12:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-229",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:11:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-230",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:10:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-231",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:09:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-232",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:08:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-233",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:07:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-234",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:06:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-235",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:05:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-236",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:04:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-237",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:03:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-238",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:02:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-239",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:01:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-240",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T20:00:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-241",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:59:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-242",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:58:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-243",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:57:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-244",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:56:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-245",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:55:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-246",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:54:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-247",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:53:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-248",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:52:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-249",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:51:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      },
+      {
+        "id": "fixture-transaction-250",
+        "sourceId": "fixture-demand-shapes-v1",
+        "buyerId": "fixture-single-buyer-client",
+        "sellerId": "fixture-single-buyer",
+        "amountUsd": 2,
+        "timestamp": "2026-08-23T19:50:00.000Z",
+        "chain": "fixture-chain",
+        "category": "automation"
+      }
+    ]
+  },
+  "merchantAnalyses": [
+    {
+      "merchantId": "round4-blockrun",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 12800
+        },
+        "volumePerBuyer": {
+          "availability": "available",
+          "value": 313.6
+        },
+        "averageTransactionValue": {
+          "availability": "available",
+          "value": 0.0245
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 0.0078125
+        }
+      },
+      "transactionMetrics": {
+        "availability": "missing-input",
+        "reason": "No transaction-level records were supplied for this merchant."
+      },
+      "flags": [
+        "BROAD_ADOPTION",
+        "BROAD_AND_REPEAT"
+      ]
+    },
+    {
+      "merchantId": "round4-stableenrich",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 105.78842315369262
+        },
+        "volumePerBuyer": {
+          "availability": "available",
+          "value": 3.193612774451098
+        },
+        "averageTransactionValue": {
+          "availability": "available",
+          "value": 0.03018867924528302
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 0.9452830188679244
+        }
+      },
+      "transactionMetrics": {
+        "availability": "missing-input",
+        "reason": "No transaction-level records were supplied for this merchant."
+      },
+      "flags": [
+        "BROAD_ADOPTION",
+        "BROAD_AND_REPEAT"
+      ]
+    },
+    {
+      "merchantId": "round4-people-data-labs",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 164.28571428571428
+        },
+        "volumePerBuyer": {
+          "availability": "available",
+          "value": 4.142857142857143
+        },
+        "averageTransactionValue": {
+          "availability": "available",
+          "value": 0.025217391304347827
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 0.6086956521739131
+        }
+      },
+      "transactionMetrics": {
+        "availability": "missing-input",
+        "reason": "No transaction-level records were supplied for this merchant."
+      },
+      "flags": [
+        "CONCENTRATED_REPEAT"
+      ]
+    },
+    {
+      "merchantId": "round4-x402scan-data-api",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 19.607843137254903
+        },
+        "volumePerBuyer": {
+          "availability": "available",
+          "value": 0.21568627450980393
+        },
+        "averageTransactionValue": {
+          "availability": "available",
+          "value": 0.011
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 5.1
+        }
+      },
+      "transactionMetrics": {
+        "availability": "missing-input",
+        "reason": "No transaction-level records were supplied for this merchant."
+      },
+      "flags": [
+        "BROAD_ADOPTION",
+        "BROAD_AND_REPEAT"
+      ]
+    },
+    {
+      "merchantId": "round4-402utils",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 9.909090909090908
+        },
+        "volumePerBuyer": {
+          "availability": "missing-input",
+          "value": null,
+          "reason": "Missing volume."
+        },
+        "averageTransactionValue": {
+          "availability": "missing-input",
+          "value": null,
+          "reason": "Missing volume."
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 10.091743119266056
+        }
+      },
+      "transactionMetrics": {
+        "availability": "missing-input",
+        "reason": "No transaction-level records were supplied for this merchant."
+      },
+      "flags": [
+        "BROAD_ADOPTION",
+        "BROAD_AND_REPEAT"
+      ]
+    },
+    {
+      "merchantId": "round4-agenticfi",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 2.823529411764706
+        },
+        "volumePerBuyer": {
+          "availability": "missing-input",
+          "value": null,
+          "reason": "Missing volume."
+        },
+        "averageTransactionValue": {
+          "availability": "missing-input",
+          "value": null,
+          "reason": "Missing volume."
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 35.41666666666667
+        }
+      },
+      "transactionMetrics": {
+        "availability": "missing-input",
+        "reason": "No transaction-level records were supplied for this merchant."
+      },
+      "flags": [
+        "BROAD_ADOPTION"
+      ]
+    },
+    {
+      "merchantId": "round4-generic-utility-negative-control",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "zero-denominator",
+          "value": null,
+          "reason": "unique buyers is zero."
+        },
+        "volumePerBuyer": {
+          "availability": "missing-input",
+          "value": null,
+          "reason": "Missing volume."
+        },
+        "averageTransactionValue": {
+          "availability": "missing-input",
+          "value": null,
+          "reason": "Missing volume."
+        },
+        "buyersPer100Transactions": {
+          "availability": "zero-denominator",
+          "value": null,
+          "reason": "transactions is zero."
+        }
+      },
+      "transactionMetrics": {
+        "availability": "missing-input",
+        "reason": "No transaction-level records were supplied for this merchant."
+      },
+      "flags": [
+        "LOW_OBSERVED_DEMAND"
+      ]
+    },
+    {
+      "merchantId": "fixture-broad-repeat",
+      "sourceId": "fixture-demand-shapes-v1",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 5
+        },
+        "volumePerBuyer": {
+          "availability": "available",
+          "value": 5
+        },
+        "averageTransactionValue": {
+          "availability": "available",
+          "value": 1
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 20
+        }
+      },
+      "transactionMetrics": {
+        "availability": "available",
+        "observedTransactions": 120,
+        "observedBuyers": 24,
+        "repeatBuyerCount": 24,
+        "repeatBuyerShare": 1,
+        "topBuyerTransactionShare": 0.041666666666666664,
+        "topBuyerVolumeShare": 0.041666666666666664,
+        "top3BuyerTransactionShare": 0.125,
+        "top5BuyerTransactionShare": 0.20833333333333334,
+        "medianTransactionsPerBuyer": 5
+      },
+      "flags": [
+        "BROAD_ADOPTION",
+        "BROAD_AND_REPEAT"
+      ]
+    },
+    {
+      "merchantId": "fixture-few-buyer-repeat",
+      "sourceId": "fixture-demand-shapes-v1",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 20
+        },
+        "volumePerBuyer": {
+          "availability": "available",
+          "value": 100
+        },
+        "averageTransactionValue": {
+          "availability": "available",
+          "value": 5
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 5
+        }
+      },
+      "transactionMetrics": {
+        "availability": "available",
+        "observedTransactions": 60,
+        "observedBuyers": 3,
+        "repeatBuyerCount": 3,
+        "repeatBuyerShare": 1,
+        "topBuyerTransactionShare": 0.3333333333333333,
+        "topBuyerVolumeShare": 0.3333333333333333,
+        "top3BuyerTransactionShare": 1,
+        "top5BuyerTransactionShare": 1,
+        "medianTransactionsPerBuyer": 20
+      },
+      "flags": [
+        "CONCENTRATED_REPEAT"
+      ]
+    },
+    {
+      "merchantId": "fixture-broad-low-repeat",
+      "sourceId": "fixture-demand-shapes-v1",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 1.2
+        },
+        "volumePerBuyer": {
+          "availability": "available",
+          "value": 3
+        },
+        "averageTransactionValue": {
+          "availability": "available",
+          "value": 2.5
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 83.33333333333334
+        }
+      },
+      "transactionMetrics": {
+        "availability": "available",
+        "observedTransactions": 30,
+        "observedBuyers": 25,
+        "repeatBuyerCount": 5,
+        "repeatBuyerShare": 0.2,
+        "topBuyerTransactionShare": 0.06666666666666667,
+        "topBuyerVolumeShare": 0.06666666666666667,
+        "top3BuyerTransactionShare": 0.2,
+        "top5BuyerTransactionShare": 0.3333333333333333,
+        "medianTransactionsPerBuyer": 1
+      },
+      "flags": [
+        "BROAD_ADOPTION"
+      ]
+    },
+    {
+      "merchantId": "fixture-zero-demand-catalog",
+      "sourceId": "fixture-demand-shapes-v1",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "zero-denominator",
+          "value": null,
+          "reason": "unique buyers is zero."
+        },
+        "volumePerBuyer": {
+          "availability": "zero-denominator",
+          "value": null,
+          "reason": "unique buyers is zero."
+        },
+        "averageTransactionValue": {
+          "availability": "zero-denominator",
+          "value": null,
+          "reason": "transactions is zero."
+        },
+        "buyersPer100Transactions": {
+          "availability": "zero-denominator",
+          "value": null,
+          "reason": "transactions is zero."
+        }
+      },
+      "transactionMetrics": {
+        "availability": "missing-input",
+        "reason": "No transaction-level records were supplied for this merchant."
+      },
+      "flags": [
+        "LOW_OBSERVED_DEMAND"
+      ]
+    },
+    {
+      "merchantId": "fixture-single-buyer",
+      "sourceId": "fixture-demand-shapes-v1",
+      "metrics": {
+        "transactionsPerBuyer": {
+          "availability": "available",
+          "value": 40
+        },
+        "volumePerBuyer": {
+          "availability": "available",
+          "value": 80
+        },
+        "averageTransactionValue": {
+          "availability": "available",
+          "value": 2
+        },
+        "buyersPer100Transactions": {
+          "availability": "available",
+          "value": 2.5
+        }
+      },
+      "transactionMetrics": {
+        "availability": "available",
+        "observedTransactions": 40,
+        "observedBuyers": 1,
+        "repeatBuyerCount": 1,
+        "repeatBuyerShare": 1,
+        "topBuyerTransactionShare": 1,
+        "topBuyerVolumeShare": 1,
+        "top3BuyerTransactionShare": 1,
+        "top5BuyerTransactionShare": 1,
+        "medianTransactionsPerBuyer": 40
+      },
+      "flags": [
+        "CONCENTRATED_REPEAT",
+        "SINGLE_BUYER_DOMINANCE",
+        "CONCENTRATION_RISK"
+      ]
+    }
+  ],
+  "buyerAnalyses": [
+    {
+      "buyerId": "fixture-broad-buyer-1",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-10",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-11",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-12",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-13",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-14",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-15",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-16",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-17",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-18",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-19",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-2",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-20",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-21",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-22",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-23",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-3",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-4",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-5",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-6",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-7",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-8",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-broad-buyer-9",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 5,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-cross-seller-buyer",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 2,
+      "totalTransactions": 7,
+      "totalSpendUsd": 10,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 2,
+          "spendUsd": 5
+        },
+        {
+          "sellerId": "fixture-broad-repeat",
+          "transactions": 5,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "credential-access",
+        "infrastructure"
+      ],
+      "flags": [
+        "CROSS_SELLER_SHOPPER"
+      ]
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-1",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 2,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 2,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-10",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-11",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-12",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-13",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-14",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-15",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-16",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-17",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-18",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-19",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-2",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 2,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 2,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-20",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-21",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-22",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-23",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-24",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-3",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 2,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 2,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-4",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 2,
+      "totalSpendUsd": 5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 2,
+          "spendUsd": 5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-5",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-6",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-7",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-8",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-low-repeat-buyer-9",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 1,
+      "totalSpendUsd": 2.5,
+      "sellers": [
+        {
+          "sellerId": "fixture-broad-low-repeat",
+          "transactions": 1,
+          "spendUsd": 2.5
+        }
+      ],
+      "categories": [
+        "infrastructure"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-repeat-buyer-1",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 20,
+      "totalSpendUsd": 100,
+      "sellers": [
+        {
+          "sellerId": "fixture-few-buyer-repeat",
+          "transactions": 20,
+          "spendUsd": 100
+        }
+      ],
+      "categories": [
+        "scarce-data"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-repeat-buyer-2",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 20,
+      "totalSpendUsd": 100,
+      "sellers": [
+        {
+          "sellerId": "fixture-few-buyer-repeat",
+          "transactions": 20,
+          "spendUsd": 100
+        }
+      ],
+      "categories": [
+        "scarce-data"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-repeat-buyer-3",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 20,
+      "totalSpendUsd": 100,
+      "sellers": [
+        {
+          "sellerId": "fixture-few-buyer-repeat",
+          "transactions": 20,
+          "spendUsd": 100
+        }
+      ],
+      "categories": [
+        "scarce-data"
+      ],
+      "flags": []
+    },
+    {
+      "buyerId": "fixture-single-buyer-client",
+      "sourceIds": [
+        "fixture-demand-shapes-v1"
+      ],
+      "distinctSellers": 1,
+      "totalTransactions": 40,
+      "totalSpendUsd": 80,
+      "sellers": [
+        {
+          "sellerId": "fixture-single-buyer",
+          "transactions": 40,
+          "spendUsd": 80
+        }
+      ],
+      "categories": [
+        "automation"
+      ],
+      "flags": []
+    }
+  ],
+  "opportunityCards": [
+    {
+      "id": "opportunity-round4-blockrun",
+      "merchantId": "round4-blockrun",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "title": "BlockRun",
+      "observedDemandEvidence": [
+        "Observed transactions: 8000000.",
+        "Observed unique buyers: 625.",
+        "Observed volume: $196000.00.",
+        "Descriptive flags: BROAD_ADOPTION, BROAD_AND_REPEAT."
+      ],
+      "representativeResources": [],
+      "buyerBreadth": "625 source-defined unique buyers in the stated window",
+      "repeatIntensity": "12800.00",
+      "concentrationCaveat": "UNKNOWN — aggregate observations do not expose transaction-level buyer concentration.",
+      "currentPriceBand": "UNKNOWN — human research required",
+      "buyVsBuildHypothesis": "HUMAN_REVIEW_REQUIRED",
+      "requiredUpstreamCapability": "HUMAN_REVIEW_REQUIRED",
+      "competitorsAndSubstitutes": "HUMAN_REVIEW_REQUIRED",
+      "lawfulSupplyPath": "HUMAN_REVIEW_REQUIRED",
+      "roughUnitEconomics": "HUMAN_REVIEW_REQUIRED",
+      "possibleX402LabAdvantage": "HUMAN_REVIEW_REQUIRED",
+      "cheapestFalsificationTest": "HUMAN_REVIEW_REQUIRED",
+      "decision": "UNREVIEWED"
+    },
+    {
+      "id": "opportunity-round4-stableenrich",
+      "merchantId": "round4-stableenrich",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "title": "StableEnrich",
+      "observedDemandEvidence": [
+        "Observed transactions: 53000.",
+        "Observed unique buyers: 501.",
+        "Observed volume: $1600.00.",
+        "Descriptive flags: BROAD_ADOPTION, BROAD_AND_REPEAT."
+      ],
+      "representativeResources": [],
+      "buyerBreadth": "501 source-defined unique buyers in the stated window",
+      "repeatIntensity": "105.79",
+      "concentrationCaveat": "UNKNOWN — aggregate observations do not expose transaction-level buyer concentration.",
+      "currentPriceBand": "UNKNOWN — human research required",
+      "buyVsBuildHypothesis": "HUMAN_REVIEW_REQUIRED",
+      "requiredUpstreamCapability": "HUMAN_REVIEW_REQUIRED",
+      "competitorsAndSubstitutes": "HUMAN_REVIEW_REQUIRED",
+      "lawfulSupplyPath": "HUMAN_REVIEW_REQUIRED",
+      "roughUnitEconomics": "HUMAN_REVIEW_REQUIRED",
+      "possibleX402LabAdvantage": "HUMAN_REVIEW_REQUIRED",
+      "cheapestFalsificationTest": "HUMAN_REVIEW_REQUIRED",
+      "decision": "UNREVIEWED"
+    },
+    {
+      "id": "opportunity-round4-people-data-labs",
+      "merchantId": "round4-people-data-labs",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "title": "People Data Labs x402 access",
+      "observedDemandEvidence": [
+        "Observed transactions: 1150.",
+        "Observed unique buyers: 7.",
+        "Observed volume: $29.00.",
+        "Descriptive flags: CONCENTRATED_REPEAT."
+      ],
+      "representativeResources": [],
+      "buyerBreadth": "7 source-defined unique buyers in the stated window",
+      "repeatIntensity": "164.29",
+      "concentrationCaveat": "UNKNOWN — aggregate observations do not expose transaction-level buyer concentration.",
+      "currentPriceBand": "UNKNOWN — human research required",
+      "buyVsBuildHypothesis": "HUMAN_REVIEW_REQUIRED",
+      "requiredUpstreamCapability": "HUMAN_REVIEW_REQUIRED",
+      "competitorsAndSubstitutes": "HUMAN_REVIEW_REQUIRED",
+      "lawfulSupplyPath": "HUMAN_REVIEW_REQUIRED",
+      "roughUnitEconomics": "HUMAN_REVIEW_REQUIRED",
+      "possibleX402LabAdvantage": "HUMAN_REVIEW_REQUIRED",
+      "cheapestFalsificationTest": "HUMAN_REVIEW_REQUIRED",
+      "decision": "UNREVIEWED"
+    },
+    {
+      "id": "opportunity-round4-x402scan-data-api",
+      "merchantId": "round4-x402scan-data-api",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "title": "x402scan paid market-data API",
+      "observedDemandEvidence": [
+        "Observed transactions: 1000.",
+        "Observed unique buyers: 51.",
+        "Observed volume: $11.00.",
+        "Descriptive flags: BROAD_ADOPTION, BROAD_AND_REPEAT."
+      ],
+      "representativeResources": [
+        "Merchant transaction history"
+      ],
+      "buyerBreadth": "51 source-defined unique buyers in the stated window",
+      "repeatIntensity": "19.61",
+      "concentrationCaveat": "UNKNOWN — aggregate observations do not expose transaction-level buyer concentration.",
+      "currentPriceBand": "$0.0100",
+      "buyVsBuildHypothesis": "HUMAN_REVIEW_REQUIRED",
+      "requiredUpstreamCapability": "HUMAN_REVIEW_REQUIRED",
+      "competitorsAndSubstitutes": "HUMAN_REVIEW_REQUIRED",
+      "lawfulSupplyPath": "HUMAN_REVIEW_REQUIRED",
+      "roughUnitEconomics": "HUMAN_REVIEW_REQUIRED",
+      "possibleX402LabAdvantage": "HUMAN_REVIEW_REQUIRED",
+      "cheapestFalsificationTest": "HUMAN_REVIEW_REQUIRED",
+      "decision": "UNREVIEWED"
+    },
+    {
+      "id": "opportunity-round4-402utils",
+      "merchantId": "round4-402utils",
+      "sourceId": "x402scan-round4-manual-2026-08-24",
+      "title": "402utils",
+      "observedDemandEvidence": [
+        "Observed transactions: 218.",
+        "Observed unique buyers: 22.",
+        "Observed volume: UNKNOWN.",
+        "Descriptive flags: BROAD_ADOPTION, BROAD_AND_REPEAT."
+      ],
+      "representativeResources": [],
+      "buyerBreadth": "22 source-defined unique buyers in the stated window",
+      "repeatIntensity": "9.91",
+      "concentrationCaveat": "UNKNOWN — aggregate observations do not expose transaction-level buyer concentration.",
+      "currentPriceBand": "UNKNOWN — human research required",
+      "buyVsBuildHypothesis": "HUMAN_REVIEW_REQUIRED",
+      "requiredUpstreamCapability": "HUMAN_REVIEW_REQUIRED",
+      "competitorsAndSubstitutes": "HUMAN_REVIEW_REQUIRED",
+      "lawfulSupplyPath": "HUMAN_REVIEW_REQUIRED",
+      "roughUnitEconomics": "HUMAN_REVIEW_REQUIRED",
+      "possibleX402LabAdvantage": "HUMAN_REVIEW_REQUIRED",
+      "cheapestFalsificationTest": "HUMAN_REVIEW_REQUIRED",
+      "decision": "UNREVIEWED"
+    }
+  ],
+  "methodologyNotes": [
+    "No single opportunity score is calculated.",
+    "Flags describe demand shapes; they do not prove buyer independence or product viability.",
+    "BROAD_ADOPTION means at least 20 source-defined unique buyers; BROAD_AND_REPEAT additionally requires at least 5 transactions per buyer.",
+    "CONCENTRATED_REPEAT means fewer than 20 source-defined buyers and at least 10 transactions per buyer.",
+    "SINGLE_BUYER_DOMINANCE and CONCENTRATION_RISK require transaction-level records and top-buyer shares of at least 80% and 50%, respectively.",
+    "Missing source values remain unknown and are not converted to zero.",
+    "Live, manual, and fixture sources remain visibly distinct.",
+    "Opportunity cards begin UNREVIEWED and require human competition, supply, economics, advantage, and falsification work."
+  ]
+}

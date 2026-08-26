@@ -9,6 +9,11 @@
     "server": "tsx src/server.ts",
     "buy": "tsx src/client.ts",
     "shopper": "tsx src/shopper-cli.ts",
+    "kiroshi:scan": "tsx src/kiroshi/scan.ts",
+    "kiroshi": "tsx src/kiroshi/serve.ts",
+    "buyer-trace:preflight": "tsx src/buyer-trace-preflight-cli.ts",
+    "market:fixtures": "tsx src/market-observatory/cli.ts fixtures",
+    "market:collect": "tsx src/market-observatory/cli.ts collect-x402stats",
     "test": "tsx --test src/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
