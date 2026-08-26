@@ -7,6 +7,10 @@ import type {
   OpportunityCard,
   ResourceSnapshot,
 } from "../market-observatory/types.js";
+import type {
+  BuyerTracePreflight,
+  BuyerTraceTargetManifest,
+} from "../buyer-trace-preflight.js";
 
 export const KIROSHI_SCHEMA_VERSION = "kiroshi-optics/mk1" as const;
 
@@ -26,7 +30,7 @@ export type EvidenceState =
 
 export interface SensorReading<T> {
   sensorId: string;
-  module: "MARKET" | "QUEST" | "SENSOR_BAY";
+  module: "MARKET" | "QUEST" | "SENSOR_BAY" | "BUYER_TRACE_PREFLIGHT";
   observedAt: string;
   source: string;
   sourceVersion?: string;
@@ -77,6 +81,34 @@ export interface MarketView {
   };
 }
 
+export interface BuyerTracePreflightView {
+  schemaVersion: BuyerTracePreflight["schemaVersion"];
+  observedAt: string;
+  mode: BuyerTracePreflight["mode"];
+  reviewState: "READY_FOR_REVIEW" | "INCOMPLETE_PREFLIGHT";
+  executionState:
+    | "NOT_EXECUTED_NOT_PURCHASED"
+    | "EXECUTION_STATE_REQUIRES_REVIEW";
+  evidenceState: "PREFLIGHT_ONLY_NO_PAID_RESPONSE";
+  actualSpendUsd: BuyerTracePreflight["actualSpendUsd"];
+  paymentExecutionAvailable: BuyerTracePreflight["paymentExecutionAvailable"];
+  recommendedExperiment: {
+    target: BuyerTraceTargetManifest | null;
+    proposedPaidRequestCount: number;
+    hardMaximumCostUsd: number;
+    requiresSeparateOwnerApproval: boolean;
+  };
+  paymentReview: {
+    resourceTemplate: string;
+    unpaidResponse: BuyerTracePreflight["x402scan"]["unpaidResponse"];
+    requirement: BuyerTracePreflight["x402scan"]["paymentRequirement"];
+    pagination: BuyerTracePreflight["x402scan"]["pagination"];
+  };
+  compatibility: BuyerTracePreflight["currentClientCompatibility"];
+  expectedResponse: BuyerTracePreflight["x402scan"]["expectedSuccessfulResponse"];
+  insufficientOrUnknown: string[];
+}
+
 export interface QuestData {
   branch: string | null;
   head: string | null;
@@ -124,8 +156,10 @@ export interface KiroshiSnapshot {
   generatedAt: string;
   pipeline: ["SENSOR", "NORMALIZE", "CORRELATE", "RENDER"];
   marketReading: SensorReading<MarketSensorData>;
+  buyerTracePreflightReading: SensorReading<BuyerTracePreflight>;
   questReading: SensorReading<QuestData>;
   sensorBayReading: SensorReading<SensorBayData>;
   market: MarketView;
+  buyerTracePreflight: BuyerTracePreflightView;
   signals: CorrelatedSignal[];
 }

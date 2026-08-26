@@ -85,6 +85,7 @@ export async function scanSensorBay(
       futureCategories: [
         { category: "MARKET_DEMAND", state: "PRESENT" },
         { category: "PROJECT_STATE", state: "PRESENT" },
+        { category: "BUYER_TRACE_PREFLIGHT", state: "PRESENT" },
         { category: "BUYER_TRACE", state: "ABSENT" },
         { category: "RUNTIME_TELEMETRY", state: "ABSENT" },
         { category: "DEPENDENCY_POSTURE", state: "ABSENT" },

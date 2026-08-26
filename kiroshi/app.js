@@ -42,10 +42,17 @@ function dateTime(value) {
 }
 
 function displayToken(value) {
-  if (value === "HUMAN_REVIEW_REQUIRED") return "NEEDS REVIEW";
-  if (value === "AVAILABLE_NOT_RUN") return "AVAILABLE — NOT RUN";
-  if (value === "INSUFFICIENT_DATA") return "INSUFFICIENT DATA";
-  return value ?? "UNKNOWN";
+  const tokens = {
+    HUMAN_REVIEW_REQUIRED: "NEEDS REVIEW",
+    AVAILABLE_NOT_RUN: "AVAILABLE — NOT RUN",
+    INSUFFICIENT_DATA: "INSUFFICIENT DATA",
+    READY_FOR_REVIEW: "READY FOR REVIEW",
+    INCOMPLETE_PREFLIGHT: "INCOMPLETE PREFLIGHT",
+    NOT_EXECUTED_NOT_PURCHASED: "NOT EXECUTED / NOT PURCHASED",
+    EXECUTION_STATE_REQUIRES_REVIEW: "EXECUTION STATE REQUIRES REVIEW",
+    PREFLIGHT_ONLY_NO_PAID_RESPONSE: "PREFLIGHT ONLY / NO PAID RESPONSE",
+  };
+  return tokens[value] ?? value ?? "UNKNOWN";
 }
 
 function evidenceDescriptor(source) {
@@ -143,10 +150,16 @@ function evidenceGaps(target, snapshot) {
 
 function renderStatus(snapshot) {
   const rail = node("section", "status-rail");
+  const buyerTraceReviewState = snapshot.buyerTracePreflight?.reviewState ?? "UNAVAILABLE";
   const values = [
     ["OPTICAL STATE", snapshot.marketReading.status, "live"],
     ["OBSERVATORY SCHEMA", snapshot.marketReading.sourceVersion, "live"],
     ["SNAPSHOT GENERATED", dateTime(snapshot.generatedAt), ""],
+    [
+      "BUYER TRACE PREFLIGHT",
+      displayToken(buyerTraceReviewState),
+      buyerTraceReviewState === "READY_FOR_REVIEW" ? "manual" : "insufficient",
+    ],
     [
       "LIVE BUYER TRACE",
       snapshot.market.transactionEvidence.state === "AVAILABLE" ? "AVAILABLE" : "INSUFFICIENT DATA",
@@ -157,6 +170,195 @@ function renderStatus(snapshot) {
     append(rail, append(node("div", `status-cell ${state}`.trim()), node("small", "", label), node("strong", "", value)));
   });
   return rail;
+}
+
+function textList(items, className = "") {
+  const list = node("ul", `preflight-list ${className}`.trim());
+  if (!items.length) {
+    list.append(node("li", "", "UNKNOWN — no evidence supplied."));
+    return list;
+  }
+  items.forEach((item) => list.append(node("li", "", item)));
+  return list;
+}
+
+function renderBuyerTracePreflight(snapshot) {
+  const preflight = snapshot.buyerTracePreflight;
+  const panel = node("section", "panel buyer-trace-preflight");
+  panel.id = "buyer-trace-preflight";
+  const inner = node("div", "panel-inner");
+  if (!preflight) {
+    append(
+      inner,
+      title(
+        "BUYER TRACE PREFLIGHT OPTIC / READ-ONLY",
+        "Preflight observation unavailable",
+        "This compatible snapshot predates the Buyer Trace preflight observation.",
+      ),
+      node(
+        "p",
+        "preflight-warning",
+        "PREFLIGHT UNAVAILABLE / NOT EXECUTED — no purchase state or Buyer Trace evidence is present in this snapshot.",
+      ),
+    );
+    panel.append(inner);
+    return panel;
+  }
+  const recommendation = preflight.recommendedExperiment;
+  const target = recommendation.target;
+  const payment = preflight.paymentReview;
+  const requirement = payment.requirement;
+  const response = preflight.expectedResponse;
+  const executionStateDisplay =
+    preflight.executionState === "NOT_EXECUTED_NOT_PURCHASED"
+      ? `NO — ${displayToken(preflight.executionState)}`
+      : `REVIEW REQUIRED — ${displayToken(preflight.executionState)}`;
+  append(
+    inner,
+    title(
+      "BUYER TRACE PREFLIGHT OPTIC / READ-ONLY",
+      "Proposed paid experiment review",
+      "Repository preflight facts only. This is not purchased Buyer Trace evidence.",
+    ),
+  );
+
+  const boundary = node("div", "preflight-boundary");
+  append(
+    boundary,
+    append(
+      node("div", "preflight-state review"),
+      node("small", "", "PREFLIGHT REVIEW STATE"),
+      node("strong", "", displayToken(preflight.reviewState)),
+      node("p", "", displayToken(preflight.evidenceState)),
+    ),
+    append(
+      node("div", "preflight-state execution"),
+      node("small", "", "EXECUTED / PURCHASED"),
+      node("strong", "", executionStateDisplay),
+      node("p", "", "No paid response was fetched and no Buyer Trace evidence was collected."),
+    ),
+  );
+  append(
+    inner,
+    boundary,
+    node(
+      "p",
+      "preflight-warning",
+      "PREFLIGHT / NOT EXECUTED — readiness means the proposal can be reviewed. It does not mean the experiment ran, a payment occurred, or evidence was purchased.",
+    ),
+  );
+
+  const metrics = node("div", "metric-grid preflight-metrics");
+  append(
+    metrics,
+    metric("MODE", displayToken(preflight.mode), "source-model state"),
+    metric("PREFLIGHT OBSERVED", dateTime(preflight.observedAt), "repository model timestamp"),
+    metric("ACTUAL SPEND", money(preflight.actualSpendUsd), "measured preflight spend"),
+    metric(
+      "PAYMENT EXECUTION",
+      preflight.paymentExecutionAvailable ? "AVAILABLE — REVIEW CONFLICT" : "UNAVAILABLE",
+      "no execution path in Kiroshi",
+      preflight.paymentExecutionAvailable ? "insufficient" : "",
+    ),
+    metric("RECOMMENDED TARGET", target?.name ?? "UNKNOWN", target?.id ?? "target manifest missing", target ? "" : "unknown"),
+    metric("PROPOSED REQUEST COUNT", compact(recommendation.proposedPaidRequestCount), "proposal only"),
+    metric("HARD MAXIMUM COST", money(recommendation.hardMaximumCostUsd), "not spent"),
+    metric(
+      "SEPARATE OWNER APPROVAL",
+      recommendation.requiresSeparateOwnerApproval ? "REQUIRED" : "NOT REQUIRED",
+      "purchase remains outside this viewer",
+      recommendation.requiresSeparateOwnerApproval ? "review" : "insufficient",
+    ),
+  );
+  inner.append(metrics);
+
+  const requestPaymentGrid = node("div", "preflight-grid");
+  const requestPanel = node("section", "subpanel");
+  append(
+    requestPanel,
+    node("h3", "", "RECOMMENDED REQUEST / DISPLAY ONLY"),
+    keyValue("Target", target?.name ?? "UNKNOWN", target ? "" : "unknown"),
+    keyValue("Target compatibility", target?.compatibilityStatus ?? "UNKNOWN", target ? "review" : "unknown"),
+    keyValue("Merchant address", target?.merchantAddress ?? "UNKNOWN", target ? "" : "unknown"),
+    keyValue(
+      "Proposed request",
+      target ? `${target.proposedRequest.method} ${target.proposedRequest.url}` : "UNKNOWN",
+      target ? "" : "unknown",
+    ),
+    keyValue("Request sends payment", target?.proposedRequest.sendsPayment === false ? "NO — DESCRIPTION ONLY" : "UNKNOWN", "review"),
+    keyValue("Proposed requests", compact(recommendation.proposedPaidRequestCount)),
+    keyValue("Hard maximum", money(recommendation.hardMaximumCostUsd)),
+    keyValue("Owner approval", recommendation.requiresSeparateOwnerApproval ? "REQUIRED" : "NOT REQUIRED", "review"),
+  );
+
+  const paymentPanel = node("section", "subpanel");
+  append(
+    paymentPanel,
+    node("h3", "", "CURRENT X402 PAYMENT REQUIREMENT"),
+    keyValue("Resource", payment.resourceTemplate),
+    keyValue("Unpaid response", `HTTP ${payment.unpaidResponse.status} // ${payment.unpaidResponse.metadataHeader} // BODY ${payment.unpaidResponse.body}`),
+    keyValue("Protocol", `x402 v${requirement.x402Version} // ${requirement.scheme}`),
+    keyValue("Network", requirement.network),
+    keyValue("Price", `${money(requirement.priceUsd)} // ${requirement.amountAtomic} atomic ${requirement.assetName}`),
+    keyValue("Asset", `${requirement.asset} // ${requirement.assetName} v${requirement.assetVersion} // ${requirement.assetDecimals} decimals`),
+    keyValue("Pay to", requirement.payTo),
+    keyValue("Maximum timeout", `${requirement.maxTimeoutSeconds}s`),
+    keyValue("Facilitator", requirement.facilitator, requirement.facilitator.startsWith("UNAVAILABLE") ? "unknown" : ""),
+    keyValue(
+      "Pagination",
+      `${payment.pagination.style} // default ${payment.pagination.defaultPageSize} // maximum ${payment.pagination.maximumPageSize} // total count ${payment.pagination.totalCountAvailable ? "AVAILABLE" : "UNAVAILABLE"}`,
+      payment.pagination.totalCountAvailable ? "" : "unknown",
+    ),
+    keyValue("Pagination response fields", payment.pagination.responseFields.join(", ")),
+  );
+  append(requestPaymentGrid, requestPanel, paymentPanel);
+  inner.append(requestPaymentGrid);
+
+  const compatibilityGrid = node("div", "preflight-grid compatibility-grid");
+  const shopper = node("section", "subpanel compatibility-panel");
+  append(
+    shopper,
+    node("h3", "", "SHOPPER GATEWAY COMPATIBILITY"),
+    stateChip(preflight.compatibility.shopperGateway.status, "insufficient"),
+    textList(preflight.compatibility.shopperGateway.gaps),
+  );
+  const legacy = node("section", "subpanel compatibility-panel");
+  append(
+    legacy,
+    node("h3", "", "LEGACY BUYER COMPATIBILITY"),
+    stateChip(preflight.compatibility.legacyBuyer.status, "insufficient"),
+    node("p", "preflight-subhead", "COMPATIBLE ELEMENTS"),
+    textList(preflight.compatibility.legacyBuyer.compatibleElements, "compatible"),
+    node("p", "preflight-subhead", "RELEVANT GAPS"),
+    textList(preflight.compatibility.legacyBuyer.gaps),
+  );
+  append(compatibilityGrid, shopper, legacy);
+  inner.append(compatibilityGrid);
+
+  const analysisGrid = node("div", "preflight-grid analysis-grid");
+  const support = node("section", "subpanel");
+  append(
+    support,
+    node("h3", "", "EXPECTED RESPONSE ANALYSIS SUPPORT"),
+    keyValue("Buyer concentration", response.analysisSupport.buyerConcentration),
+    keyValue("Repeat buyer share", response.analysisSupport.repeatBuyerShare),
+    keyValue("Cross-seller analysis", response.analysisSupport.crossSellerAnalysis, "review"),
+    keyValue("Expected envelope", `data ${response.envelope.data} // pagination ${response.envelope.pagination}`),
+    keyValue("Expected fields", response.transactionFields.join(", ")),
+    keyValue("Amount interpretation", response.amountInterpretation),
+    node("p", "note", response.basis),
+  );
+  const unknowns = node("section", "subpanel unknown-panel");
+  append(
+    unknowns,
+    node("h3", "", "INSUFFICIENT / UNKNOWN — REMAINS UNRESOLVED"),
+    textList(preflight.insufficientOrUnknown),
+  );
+  append(analysisGrid, support, unknowns);
+  inner.append(analysisGrid);
+
+  panel.append(inner);
+  return panel;
 }
 
 function renderSources(snapshot) {
@@ -660,6 +862,7 @@ function render(snapshot) {
   const targetController = createTargetController(snapshot);
   root.append(
     renderStatus(snapshot),
+    renderBuyerTracePreflight(snapshot),
     renderMarket(snapshot),
     targetController.panel,
     renderCompare(snapshot, targetController),

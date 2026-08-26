@@ -42,6 +42,6 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`Kiroshi Optics Mk.1.1 Calibration: http://${HOST}:${PORT}`);
+  console.log(`Kiroshi Optics Mk.1.2 Buyer Trace Preflight: http://${HOST}:${PORT}`);
   console.log("Read-only local viewer. Press Ctrl+C to stop.");
 });

@@ -2,8 +2,13 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { correlateReadings } from "./correlate.js";
-import { assertRenderableSnapshot, normalizeMarketReading } from "./normalize.js";
+import {
+  assertRenderableSnapshot,
+  normalizeBuyerTracePreflightReading,
+  normalizeMarketReading,
+} from "./normalize.js";
 import { scanSensorBay } from "./sensors/availability.js";
+import { scanBuyerTracePreflight } from "./sensors/buyer-trace-preflight.js";
 import { scanObservatory } from "./sensors/observatory.js";
 import { scanQuest } from "./sensors/quest-local.js";
 import {
@@ -19,21 +24,38 @@ export const DEFAULT_SNAPSHOT_PATH = resolve("artifacts/kiroshi/snapshot.json");
 export async function buildKiroshiSnapshot(
   observatoryPath = DEFAULT_OBSERVATORY_PATH,
 ): Promise<KiroshiSnapshot> {
-  const [marketReading, questReading, sensorBayReading] = await Promise.all([
+  const [
+    marketReading,
+    buyerTracePreflightReading,
+    questReading,
+    sensorBayReading,
+  ] = await Promise.all([
     scanObservatory(observatoryPath),
+    scanBuyerTracePreflight(),
     scanQuest(resolve("package.json")),
     scanSensorBay(),
   ]);
   const market = normalizeMarketReading(marketReading);
+  const buyerTracePreflight = normalizeBuyerTracePreflightReading(
+    buyerTracePreflightReading,
+  );
   const snapshot: KiroshiSnapshot = {
     schemaVersion: KIROSHI_SCHEMA_VERSION,
     generatedAt: new Date().toISOString(),
     pipeline: ["SENSOR", "NORMALIZE", "CORRELATE", "RENDER"],
     marketReading,
+    buyerTracePreflightReading,
     questReading,
     sensorBayReading,
     market,
-    signals: correlateReadings(market, questReading, sensorBayReading),
+    buyerTracePreflight,
+    signals: correlateReadings(
+      market,
+      buyerTracePreflightReading,
+      buyerTracePreflight,
+      questReading,
+      sensorBayReading,
+    ),
   };
   assertRenderableSnapshot(snapshot);
   return snapshot;

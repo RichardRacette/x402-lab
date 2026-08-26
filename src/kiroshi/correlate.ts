@@ -1,13 +1,17 @@
 import type {
+  BuyerTracePreflightView,
   CorrelatedSignal,
   MarketView,
   QuestData,
   SensorBayData,
   SensorReading,
 } from "./types.js";
+import type { BuyerTracePreflight } from "../buyer-trace-preflight.js";
 
 export function correlateReadings(
   market: MarketView,
+  buyerTraceReading: SensorReading<BuyerTracePreflight>,
+  buyerTrace: BuyerTracePreflightView,
   quest: SensorReading<QuestData>,
   sensorBay: SensorReading<SensorBayData>,
 ): CorrelatedSignal[] {
@@ -44,6 +48,20 @@ export function correlateReadings(
       evidenceRefs: ["observatory.dataset.transactions"],
     });
   }
+
+  signals.push({
+    id: "buyer-trace-preflight-not-evidence",
+    severity: "NOTICE",
+    title: buyerTrace.reviewState === "READY_FOR_REVIEW"
+      ? "BUYER TRACE READY FOR REVIEW — NOT EXECUTED"
+      : "BUYER TRACE PREFLIGHT INCOMPLETE — NOT EXECUTED",
+    detail:
+      `${buyerTrace.reviewState.replaceAll("_", " ")}. `
+      + `${buyerTrace.executionState.replaceAll("_", " ")}. `
+      + `Actual spend is $${buyerTrace.actualSpendUsd.toFixed(2)} and payment execution is unavailable. `
+      + "No paid Buyer Trace response or purchased evidence has been collected.",
+    evidenceRefs: [buyerTraceReading.evidenceRef],
+  });
 
   if (quest.data.worktree === "DIRTY") {
     signals.push({
