@@ -63,13 +63,18 @@ export interface PurchaseIntent {
   question: string;
 }
 
+const OWNER_CLI_CAPABILITY = Symbol("x402-owner-cli-purchase-capability");
+
 /**
  * V0 purchase capability.
  *
- * This is deliberately minted only at the explicit local CLI --execute
- * boundary. It is not a statement that sourceUrl/question are trusted; they
- * remain data. It states that the owner explicitly authorized paying for this
- * exact request tuple.
+ * The opaque symbol cannot be reconstructed from JSON, model output, tool
+ * output, decrypted plaintext, or other external data. Only the explicit
+ * local minting path can obtain the in-process capability.
+ *
+ * This is not a statement that sourceUrl/question are trusted; they remain
+ * data. It states that the owner explicitly authorized paying for this exact
+ * request tuple.
  */
 export interface PurchaseAuthorizationV1 {
   version: 1;
@@ -77,6 +82,7 @@ export interface PurchaseAuthorizationV1 {
   scope: "single-purchase";
   approvalSource: "explicit-local-cli-execute";
   requestFingerprint: string;
+  readonly capability: typeof OWNER_CLI_CAPABILITY;
 }
 
 export type PurchaseAuthorization = PurchaseAuthorizationV1;
@@ -111,20 +117,40 @@ export function fingerprintPurchaseIntent(intent: PurchaseIntent): string {
   return `sha256:${digest}`;
 }
 
+/**
+ * Privileged V0 mint. Application-source tests restrict this function to the
+ * explicit local shopper CLI. Future autonomous/mainnet use must move minting
+ * outside the untrusted agent's writable/executable trust domain.
+ */
+export function mintOwnerCliPurchaseAuthorization(
+  intent: PurchaseIntent
+): PurchaseAuthorization {
+  return {
+    version: 1,
+    authority: "owner-cli",
+    scope: "single-purchase",
+    approvalSource: "explicit-local-cli-execute",
+    requestFingerprint: fingerprintPurchaseIntent(intent),
+    capability: OWNER_CLI_CAPABILITY
+  };
+}
+
 export function assertPurchaseAuthorization(
   intent: PurchaseIntent,
-  authorization: PurchaseAuthorization
+  authorization: PurchaseAuthorization | undefined
 ): void {
   if (
+    !authorization ||
     authorization.version !== 1 ||
     authorization.authority !== "owner-cli" ||
     authorization.scope !== "single-purchase" ||
     authorization.approvalSource !== "explicit-local-cli-execute" ||
+    authorization.capability !== OWNER_CLI_CAPABILITY ||
     !/^sha256:[a-f0-9]{64}$/.test(authorization.requestFingerprint)
   ) {
     throw new ContextTrustError(
       "AUTHORIZATION_INVALID",
-      "Purchase authorization is missing, malformed, or not owner-issued."
+      "Purchase authorization is missing, malformed, forged, or not owner-issued."
     );
   }
 
