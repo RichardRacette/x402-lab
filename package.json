@@ -2,7 +2,7 @@
   "name": "x402-lab",
   "version": "0.1.0",
   "private": false,
-  "description": "A tiny x402 vendor lab: one paid job-analysis API, one buyer client, one path to a real machine-to-machine transaction.",
+  "description": "Experimental x402 machine-commerce lab for paid agent APIs, bounded autonomous purchasing, demand research, and security tooling.",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -14,7 +14,7 @@
     "buyer-trace:preflight": "tsx src/buyer-trace-preflight-cli.ts",
     "market:fixtures": "tsx src/market-observatory/cli.ts fixtures",
     "market:collect": "tsx src/market-observatory/cli.ts collect-x402stats",
-    "test": "tsx --test src/*.test.ts",
+    "test": "tsx --test \"src/**/*.test.ts\"",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
