@@ -1,10 +1,32 @@
 # x402-lab
 
-A public R&D experiment in becoming a real vendor in the machine economy.
+[![CI](https://github.com/RichardRacette/x402-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/RichardRacette/x402-lab/actions/workflows/ci.yml)
+
+Experimental x402 machine-commerce lab for paid agent APIs, bounded autonomous purchasing, revealed-demand research, and security tooling.
+
+This is a public R&D experiment in becoming a real vendor in the machine economy. Technical proof is treated separately from evidence of commercial demand.
 
 Current rule:
 
 > **Observe demand before building supply.**
+
+## Development
+
+Requirements: Node.js 22+ and npm.
+
+```bash
+npm ci
+npm run typecheck
+npm test
+```
+
+Run the local server with:
+
+```bash
+npm run dev
+```
+
+Repository changes should be developed on a scoped branch, proposed through a pull request, and merged only after CI passes. Tests and CI must not execute real payments. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the repository workflow and payment-safety invariants.
 
 ## Live technical proof
 
