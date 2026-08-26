@@ -9,7 +9,7 @@ import {
   type ShopperRequest
 } from "./shopper-gateway.js";
 import { executeAuthorizedPurchase } from "./authorized-shopper.js";
-import { fingerprintPurchaseIntent } from "./trust-boundary.js";
+import { mintOwnerCliPurchaseAuthorization } from "./trust-boundary.js";
 
 interface CliArguments {
   execute: boolean;
@@ -150,19 +150,13 @@ async function main(): Promise<void> {
     return;
   }
 
-  // The authority is created only because the owner explicitly supplied the
-  // local --execute flag. External content is data, not authority. The digest
-  // binds this one approval to this exact endpoint/source/question tuple.
+  // The capability is minted only because the owner explicitly supplied the
+  // local --execute flag. External content is data, not authority. The mint
+  // also binds this one approval to this exact endpoint/source/question tuple.
   const result = await executeAuthorizedPurchase(
     {
       ...request,
-      authorization: {
-        version: 1,
-        authority: "owner-cli",
-        scope: "single-purchase",
-        approvalSource: "explicit-local-cli-execute",
-        requestFingerprint: fingerprintPurchaseIntent(request)
-      }
+      authorization: mintOwnerCliPurchaseAuthorization(request)
     },
     config,
     defaultShopperDependencies
