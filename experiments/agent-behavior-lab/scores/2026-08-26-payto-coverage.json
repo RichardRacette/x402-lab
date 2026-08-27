@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "mechanism": "npm exec -- tsx --test --experimental-test-coverage src/*.test.ts",
+  "before": {
+    "testsPassed": true,
+    "testCount": 87,
+    "lines": 85.21,
+    "branches": 71.78,
+    "functions": 84.46
+  },
+  "after": {
+    "testsPassed": true,
+    "testCount": 95,
+    "lines": 85.38,
+    "branches": 73.13,
+    "functions": 84.46
+  }
+}
