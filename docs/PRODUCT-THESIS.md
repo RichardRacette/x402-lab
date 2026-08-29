@@ -1,4 +1,4 @@
-# x402-lab Product Thesis v0.5
+# x402-lab Product Thesis v0.6
 
 Status: **governing product direction**
 
@@ -8,13 +8,15 @@ Updated: **2026-08-29**
 
 ## Governing thesis
 
-> **Observe what machines already pay for, identify a recurring need with a real buy-vs-build advantage, falsify it cheaply, and only then build the seller. Prefer opportunities where x402-lab becomes more valuable because buyers receive more recurring value.**
+> **Observe what machines already pay for, identify a recurring need with a real buy-vs-build advantage, falsify it cheaply, and only then build the seller. Prefer opportunities where x402-lab becomes more valuable because buyers receive more recurring value, and where the underlying value survives rapidly falling intelligence costs.**
 
 x402-lab is a laboratory for machine-native commerce.
 
 It has already proven that the payment loop works. The current bottleneck is **product selection**, not payment engineering.
 
-The project also adopts `POSITIVE-SUM-PRODUCT-DOCTRINE.md` as a governing product doctrine.
+The project adopts `POSITIVE-SUM-PRODUCT-DOCTRINE.md` as governing product doctrine and operates with the posture of a **small institution with enormous leverage**.
+
+The project should use AI to expand research, engineering, falsification and institutional memory while deliberately accumulating assets it meaningfully owns.
 
 ## Current state
 
@@ -59,12 +61,14 @@ For an eventual automated SKU, the strongest early evidence is:
 4. buyer concentration is understood rather than hidden by transaction count
 5. the capability remains rational to buy after accounting for free substitutes and commodity tools
 6. x402-lab's upside is structurally aligned with a useful buyer outcome
+7. the capability remains valuable as generic AI intelligence becomes cheaper and stronger
+8. x402-lab retains meaningful ownership or control of the compounding value it creates
 
 ## Discovery objective
 
 Before building Product #2, answer:
 
-> **What are independent machine buyers already purchasing repeatedly, why is buying easier than reproducing the capability, where can x402-lab develop a legitimate advantage, and why would buyers rationally want that seller to keep succeeding?**
+> **What are independent machine buyers already purchasing repeatedly, why is buying easier than reproducing the capability, where can x402-lab develop a legitimate advantage, what remains scarce if intelligence becomes abundant, and why would buyers rationally want that seller to keep succeeding?**
 
 Use revealed purchasing behavior before founder intuition whenever possible.
 
@@ -162,6 +166,28 @@ Count:
 
 A clean API contract and x402 support are distribution advantages, not sufficient product differentiation.
 
+## Intelligence-abundance rule
+
+Every candidate must be stress-tested against substantially cheaper and more capable generic AI.
+
+Ask:
+
+> **If model intelligence became 10x more capable and 90% cheaper, what part of this product would still be scarce enough to buy?**
+
+Prefer value rooted in assets such as:
+
+- scarce/fresh/proprietary data
+- authorized access
+- accumulated memory or workflow state
+- trusted provenance
+- real-world actions and execution
+- credentials or regulated capability
+- distribution
+- durable relationships
+- reliability/latency guarantees difficult for the buyer to reproduce
+
+Be skeptical of businesses whose only meaningful scarcity is model intelligence.
+
 ## Positive-sum alignment rule
 
 No product build proceeds without a concrete answer to:
@@ -181,6 +207,45 @@ Inspect explicitly:
 A candidate does not pass merely because it sounds socially useful. Demand and economics remain mandatory.
 
 See `POSITIVE-SUM-PRODUCT-DOCTRINE.md`.
+
+## Gates-era product gate
+
+In addition to demand, economics and alignment, every opportunity card must answer:
+
+1. **Intelligence abundance:** Does this remain valuable as generic AI becomes dramatically stronger and cheaper?
+2. **Scarcity:** What can this product own, access, preserve, coordinate or execute that intelligence alone cannot cheaply reproduce?
+3. **Human authority:** Which decisions or relationships should remain meaningfully human even if AI could technically replace them?
+4. **Transition benefit:** Does usage increase user agency/capability or encourage dispossession, dependency and skill atrophy?
+5. **Ownership:** If this succeeds, do we retain enough ownership/control of the productive asset to participate meaningfully in the upside?
+
+The project should explicitly track **protected-greenhouse risk**: whether an AI product becomes so accommodating and substitutive that users lose judgment, real-world capability, disagreement, external feedback or genuine human relationships.
+
+Protected-greenhouse risk is distinct from **deceptive alignment**, a technical alignment concern in which a system may strategically appear aligned while pursuing another objective.
+
+## Ownership principle
+
+The project should retain meaningful ownership or control of compounding assets it originates unless there is a deliberate documented reason not to.
+
+Ownership is not limited to source code. It may include:
+
+- IP
+- equity
+- distribution
+- proprietary data/workflow state
+- customer relationships
+- operational knowledge
+- institutional memory
+- brand and reputation
+
+Open source, collaboration, licensing and employment constraints remain legitimate when deliberately chosen. Accidental forfeiture of durable upside is not a strategy.
+
+## Human-relationship principle
+
+Do not assume every human relationship is merely latency waiting to be automated away.
+
+Where relationships carry trust, context, accountability, consent, development or legitimacy, prefer AI that strengthens human preparation, memory, judgment and communication over AI whose primary objective is to eliminate the relationship itself.
+
+A capable system should often send users back into real-world interaction better prepared.
 
 ## High-interest machine-commerce archetypes
 
@@ -210,6 +275,10 @@ Treat these skeptically until buyers prove otherwise:
 - products differentiated mainly by x402 support
 - products whose economics depend primarily on buyer confusion, captivity or hidden risk transfer
 - provenance or confidence claims stronger than the available evidence
+- products whose value collapses as generic intelligence gets cheaper
+- products that weaken user judgment or real-world agency as engagement increases
+- automation that destroys relationship value rather than administrative friction
+- systems that create durable value while x402-lab retains no meaningful ownership of what compounds
 
 ## Opportunity qualification gate
 
@@ -222,6 +291,10 @@ What observed behavior says buyers want this?
 ### Buy vs build
 
 Why can a competent agent not simply reproduce it cheaply?
+
+### Intelligence abundance and scarcity
+
+What remains scarce and valuable if generic model capability improves dramatically and costs fall?
 
 ### Competition
 
@@ -243,6 +316,14 @@ Why can x402-lab plausibly become better or easier to buy from?
 
 What does the buyer concretely gain when x402-lab succeeds, what makes our revenue rise, who bears downside risk, and would customers have a rational reason to want this seller to keep succeeding?
 
+### Human authority and greenhouse risk
+
+What remains human, why, and does the system strengthen or weaken judgment, agency, relationships and contact with external reality?
+
+### Ownership
+
+What compounding asset is created, and what meaningful part of it does x402-lab own or control?
+
 ### Falsification
 
 What cheap test could kill the idea before meaningful engineering time?
@@ -251,11 +332,11 @@ If the answers are vague, do not build it.
 
 ## Role of Codex
 
-Codex is an **execution and instrumentation multiplier**, not the authority that chooses the business.
+Codex is an **execution, research and instrumentation multiplier**, not the authority that chooses the business.
 
 Current Codex priority:
 
-> **Build a bounded Market Observatory that helps us inspect revealed machine demand and produce disciplined opportunity cards.**
+> **Build a bounded Market Observatory that helps us inspect revealed machine demand and produce disciplined opportunity cards hardened against intelligence abundance.**
 
 Codex should not create a new seller SKU during this discovery milestone.
 
@@ -272,6 +353,8 @@ It should:
 - surface interesting sellers and buyers for human review
 - support opportunity-card creation
 - preserve provenance and distinguish observation from inference
+- identify the scarce asset underlying observed paid demand
+- distinguish intelligence-dependent value from intelligence-resilient value
 
 It should not:
 
@@ -301,11 +384,13 @@ Any real-money market-research purchase requires explicit owner approval, per-pa
 
 Revenue remains the end goal, but **we do not maximize probability of first revenue by inventing a consulting service every time an API idea fails**.
 
-The project should search for a business with both:
+The project should search for a business with:
 
 - a credible route to real payment
 - a credible route to scalable/defensible value
 - a credible reason for buyer value and seller value to rise together
+- identifiable scarcity that survives cheaper intelligence
+- meaningful ownership of the compounding asset
 
 A service experiment remains allowed when it is the cheapest falsification method, but it is not automatically the business model.
 
@@ -349,8 +434,12 @@ Before spending meaningful engineering time, ask:
 
 > **Does this work increase our ability to identify or falsify a genuinely profitable machine-commerce opportunity?**
 
-and
-
 > **If this succeeds at scale, will customers have a rational reason to be glad that we succeeded?**
 
-If either answer is weak, it is probably not tonight's priority.
+> **If intelligence becomes dramatically cheaper, what remains scarce and valuable?**
+
+> **Does this strengthen human agency, judgment and real-world capability rather than substituting for them unnecessarily?**
+
+> **What compounding value are we creating, and do we meaningfully own it?**
+
+If the answers are weak, it is probably not tonight's priority.
