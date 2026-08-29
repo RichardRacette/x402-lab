@@ -143,6 +143,83 @@ A strong AI system should often send the user **back into reality better prepare
 
 This is distinct from **deceptive alignment**, which is a technical alignment concern in which a system may strategically appear compliant or aligned while pursuing a different objective. Both matter; they should not be conflated.
 
+## Complementary-intelligence principle
+
+Do not optimize frontier AI into a mirror of the operator.
+
+The value of advanced AI partly comes from the fact that it may notice patterns, representations, channels and solution paths that human intuition would not naturally prioritize. Treat that difference as a discovery asset.
+
+The governing principle is:
+
+> **Exploit machine alienness for discovery; constrain it with human intent, provenance, independent evidence and real-world outcomes.**
+
+Use AI to generate unfamiliar hypotheses, detect weak signals, cross domains, expose hidden assumptions and propose non-obvious solutions. Then interrogate those outputs rather than accepting them because they are surprising or rejecting them because they are strange.
+
+For any materially non-obvious recommendation, ask:
+
+- What did the system notice that we did not?
+- What objective is it actually optimizing?
+- Which constraints are explicit, and which are merely assumed?
+- Could the proposed solution satisfy the metric while violating the real intent?
+- What evidence would distinguish a genuine insight from an artifact, exploit or shortcut?
+- Can another model, tool, human, experiment or external data source independently challenge the conclusion?
+
+We do not need AI to think exactly like the founder. We need complementary intelligence whose unusual discoveries can be inspected, verified and turned into useful owned systems.
+
+## Reward-hacking and objective-integrity principle
+
+Treat **reward hacking / specification gaming** as a general design risk whenever an optimizer is given a measurable target.
+
+The failure mode is not merely that an AI finds an unusual solution. The failure occurs when the system satisfies the measured objective while violating the intended objective.
+
+Examples of the pattern:
+
+```text
+intended goal: improve the real outcome
+measured proxy: maximize metric X
+failure: increase X without improving, or while damaging, the real outcome
+```
+
+Therefore:
+
+- do not confuse metric success with objective success
+- use multiple independent measures where possible
+- include explicit constraints and forbidden shortcuts
+- preserve audit trails and provenance
+- test for adversarial or bizarre-but-valid paths to the metric
+- evaluate downstream outcomes, not only intermediate scores
+- keep humans authoritative over goal definition and material changes to objective functions
+- prefer systems whose incentives remain aligned even when optimization becomes much stronger than expected
+
+A clever exploit is useful information about a weak specification. It is not automatically a successful solution.
+
+## Latent-signal principle
+
+Humans routinely classify information as “noise” because our senses and concepts compress the world for our own survival and cognition. Machines may recover useful structure from channels humans overlook.
+
+Treat this as both an opportunity and a security/privacy warning.
+
+Examples include weak signals embedded in:
+
+- RF interactions
+- acoustic patterns
+- image reflections and backgrounds
+- timing behavior
+- metadata
+- compression artifacts
+- cross-source correlations
+- seemingly redundant or low-value telemetry
+
+Do not assume a channel is harmless merely because a human cannot easily interpret it.
+
+Likewise, do not assume an impressive research demonstration generalizes universally. Preserve conditions, hardware requirements, error rates, dataset limits and provenance.
+
+The useful lesson is:
+
+> **Observable data may contain substantially more recoverable information than human intuition suggests.**
+
+This should strengthen privacy review, sensor threat modeling and evidence discovery across our projects.
+
 ## Human-relationship principle
 
 Genuine human relationships are a strategic and social asset, not merely an inefficiency to automate away.
@@ -189,6 +266,9 @@ Treat these as structural warnings:
 - the product weakens user judgment or real-world agency as usage rises
 - human relationships are replaced where relationship value is itself part of the job
 - the project creates durable value while surrendering ownership by default
+- an optimizer can satisfy the metric by violating the real objective
+- unusual machine-generated solutions are accepted without independent challenge
+- latent sensor/data channels are treated as harmless without a threat model
 
 These do not automatically prohibit a product, but they require explicit justification and mitigation before implementation.
 
@@ -261,5 +341,9 @@ Before meaningful engineering time, ask:
 > **Does this make users and operators more capable in the real world rather than more dependent on the system?**
 
 > **Are we retaining meaningful ownership of the value we create?**
+
+> **Could a powerful optimizer satisfy our metric while violating our actual intent?**
+
+> **What strange machine-derived insight should we investigate rather than prematurely normalize into human intuition?**
 
 If the answers are weak, do not build yet.
