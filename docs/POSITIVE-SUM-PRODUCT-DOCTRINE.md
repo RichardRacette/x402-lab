@@ -10,6 +10,42 @@ Adopted: **2026-08-29**
 
 This doctrine does not replace profit as an objective. It defines the preferred mechanism by which profit is earned.
 
+## Institutional-leverage posture
+
+Operate like a **small institution with enormous leverage**.
+
+Frontier AI lowers the cost of research, engineering, analysis, coordination and experimentation. The project should use that leverage to perform work that previously required a much larger organization while remaining disciplined about what deserves to be built.
+
+Do not use powerful AI merely to produce more output. Use it to:
+
+- investigate questions that previously required a research team
+- build and test systems that previously required larger engineering teams
+- instrument decisions that previously depended on intuition
+- preserve institutional memory
+- increase the quality and speed of falsification
+- create compounding assets instead of disposable activity
+
+As intelligence becomes cheaper, **judgment, ownership, trust, provenance, accumulated memory, scarce access, distribution and genuine human relationships become more important, not less.**
+
+## Ownership rule
+
+The project should retain **meaningful ownership or control of the compounding assets it originates** unless there is a deliberate, documented reason not to.
+
+Prefer to accumulate:
+
+- owned software and IP
+- product equity
+- reusable data structures and workflows
+- trusted distribution
+- durable customer relationships
+- proprietary operational knowledge
+- reputation earned through repeated usefulness
+- institutional memory
+
+Do not casually trade durable ownership for short-term convenience, vanity, or one-time compensation.
+
+“Own what we create” does not require refusing collaboration, open source, employment obligations, licensing, or fair exchange. It means ownership should be an explicit strategic decision rather than an accidental forfeiture.
+
 ## Positive-sum rule
 
 Prefer products where:
@@ -52,6 +88,75 @@ For every opportunity card, answer:
 
 A candidate is stronger when repeat purchase is evidence that the buyer repeatedly receives value, rather than evidence that the buyer is trapped.
 
+## Gates-era product questions
+
+Every serious product candidate must also answer five questions designed for an era of rapidly falling intelligence costs.
+
+### 1. Intelligence abundance
+
+> **Does this remain valuable if generic AI capability becomes dramatically better and cheaper?**
+
+Be suspicious of products whose primary scarce input is model intelligence that competitors or customers can soon reproduce cheaply.
+
+### 2. Scarcity
+
+> **What does this product own, access, preserve, coordinate or execute that intelligence alone cannot cheaply reproduce?**
+
+Examples may include scarce/fresh data, authorized access, accumulated memory, trusted provenance, distribution, real-world execution, credentials, relationships, regulated capability or proprietary workflow state.
+
+### 3. Human authority
+
+> **Which decisions or relationships should remain meaningfully human even if AI becomes technically capable of replacing them?**
+
+Human authority must not be ceremonial. Preserve it where accountability, consent, relationships, dignity, contextual judgment or real-world legitimacy matter.
+
+### 4. Transition benefit
+
+> **Does the user primarily experience this system as increased agency and capability, or as dispossession, dependency and loss of skill?**
+
+Prefer products that make people more capable of acting in the world rather than merely more dependent on the system.
+
+### 5. Ownership
+
+> **If this system becomes valuable, do we retain enough ownership of the productive asset to participate meaningfully in the upside?**
+
+Do not build compounding value that is structurally owned by someone else without consciously choosing that trade.
+
+These questions are additional gates, not substitutes for evidence, demand, economics, competition, rights or falsification.
+
+## Protected-greenhouse risk
+
+AI can create a **protected greenhouse**: a comfortable environment that is always available, highly accommodating and increasingly capable of replacing difficult contact with reality, other people, uncertainty and skill-building.
+
+Treat this as a product and personal-system risk.
+
+Ask:
+
+- Does the system strengthen or atrophy user judgment?
+- Does it increase or reduce meaningful human contact?
+- Does it prepare the user to act in the real world or encourage indefinite simulation?
+- Does it preserve disagreement, falsification and external feedback?
+- Does convenience become dependency?
+- Does the user retain the ability to function when the system is absent or wrong?
+
+A strong AI system should often send the user **back into reality better prepared**, not make reality increasingly optional.
+
+This is distinct from **deceptive alignment**, which is a technical alignment concern in which a system may strategically appear compliant or aligned while pursuing a different objective. Both matter; they should not be conflated.
+
+## Human-relationship principle
+
+Genuine human relationships are a strategic and social asset, not merely an inefficiency to automate away.
+
+Where products touch recruiting, care, collaboration, trust, negotiation, community, family or other relationship-heavy domains, prefer AI that:
+
+- improves preparation
+- preserves memory and context
+- reduces administrative friction
+- improves evidence and judgment
+- helps humans communicate and decide better
+
+Be skeptical of designs whose main value proposition is replacing the relationship itself when the relationship carries meaningful trust, accountability or human development.
+
 ## Allowed hard edges
 
 Positive-sum does **not** mean timid.
@@ -80,6 +185,10 @@ Treat these as structural warnings:
 - provenance or uncertainty is presented as certainty
 - marketing claims exceed what the evidence can support
 - product economics work mainly because harms or costs are externalized
+- the product becomes obsolete as generic intelligence gets cheaper
+- the product weakens user judgment or real-world agency as usage rises
+- human relationships are replaced where relationship value is itself part of the job
+- the project creates durable value while surrendering ownership by default
 
 These do not automatically prohibit a product, but they require explicit justification and mitigation before implementation.
 
@@ -133,19 +242,24 @@ Product #2 is still intentionally unselected.
 
 The positive-sum doctrine does **not** lower the existing evidence bar. A noble-sounding idea with weak demand is still a weak product.
 
-A candidate must satisfy both:
+A candidate must satisfy all of:
 
-1. **commercial evidence** — recurring demand, buy-vs-build advantage, acceptable economics, lawful/reliable supply and falsification survival; and
-2. **alignment evidence** — x402-lab’s upside increases primarily when the buyer receives genuine recurring value.
+1. **commercial evidence** — recurring demand, buy-vs-build advantage, acceptable economics, lawful/reliable supply and falsification survival;
+2. **alignment evidence** — x402-lab’s upside increases primarily when the buyer receives genuine recurring value; and
+3. **Gates-era resilience** — the product retains value under intelligence abundance, rests on identifiable scarcity, preserves appropriate human authority and agency, and leaves us with meaningful ownership of what compounds.
 
 ## Decision rule
 
-Before meaningful engineering time, ask both:
+Before meaningful engineering time, ask:
 
 > **Does this increase our ability to identify or falsify a genuinely profitable machine-commerce opportunity?**
 
-and
-
 > **If this succeeds at scale, will customers have a reason to be glad that we succeeded?**
 
-If either answer is weak, do not build yet.
+> **If intelligence becomes dramatically cheaper, what remains scarce and valuable here?**
+
+> **Does this make users and operators more capable in the real world rather than more dependent on the system?**
+
+> **Are we retaining meaningful ownership of the value we create?**
+
+If the answers are weak, do not build yet.
