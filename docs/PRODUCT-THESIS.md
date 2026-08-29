@@ -1,16 +1,20 @@
-# x402-lab Product Thesis v0.4
+# x402-lab Product Thesis v0.5
 
 Status: **governing product direction**
 
 Adopted: **2026-08-24**
 
+Updated: **2026-08-29**
+
 ## Governing thesis
 
-> **Observe what machines already pay for, identify a recurring need with a real buy-vs-build advantage, falsify it cheaply, and only then build the seller.**
+> **Observe what machines already pay for, identify a recurring need with a real buy-vs-build advantage, falsify it cheaply, and only then build the seller. Prefer opportunities where x402-lab becomes more valuable because buyers receive more recurring value.**
 
 x402-lab is a laboratory for machine-native commerce.
 
 It has already proven that the payment loop works. The current bottleneck is **product selection**, not payment engineering.
+
+The project also adopts `POSITIVE-SUM-PRODUCT-DOCTRINE.md` as a governing product doctrine.
 
 ## Current state
 
@@ -37,6 +41,7 @@ It also has:
 - a shopper gateway
 - spend controls
 - compatibility research
+- context-provenance and purchase-authority boundaries
 
 Evidence Slice remains a stable protocol/payment proof and test fixture.
 
@@ -44,7 +49,7 @@ More self-generated payment demos are not the next business milestone.
 
 ## Commercial objective
 
-> **Build toward profitable repeat external purchases.**
+> **Build toward profitable repeat external purchases where repeat purchase is primarily evidence of recurring buyer value rather than lock-in, confusion or hidden transferred cost.**
 
 For an eventual automated SKU, the strongest early evidence is:
 
@@ -53,12 +58,13 @@ For an eventual automated SKU, the strongest early evidence is:
 3. the service has positive contribution margin
 4. buyer concentration is understood rather than hidden by transaction count
 5. the capability remains rational to buy after accounting for free substitutes and commodity tools
+6. x402-lab's upside is structurally aligned with a useful buyer outcome
 
 ## Discovery objective
 
 Before building Product #2, answer:
 
-> **What are independent machine buyers already purchasing repeatedly, why is buying easier than reproducing the capability, and where can x402-lab develop a legitimate advantage?**
+> **What are independent machine buyers already purchasing repeatedly, why is buying easier than reproducing the capability, where can x402-lab develop a legitimate advantage, and why would buyers rationally want that seller to keep succeeding?**
 
 Use revealed purchasing behavior before founder intuition whenever possible.
 
@@ -156,6 +162,26 @@ Count:
 
 A clean API contract and x402 support are distribution advantages, not sufficient product differentiation.
 
+## Positive-sum alignment rule
+
+No product build proceeds without a concrete answer to:
+
+> **What does the buyer gain when x402-lab wins, and is the mechanism that increases our revenue substantially the same mechanism that increases buyer value?**
+
+Inspect explicitly:
+
+- buyer outcome improved
+- seller revenue driver
+- downside bearer
+- switching/lock-in dependence
+- information asymmetry
+- uncertainty and provenance claims
+- externalized cost or harm
+
+A candidate does not pass merely because it sounds socially useful. Demand and economics remain mandatory.
+
+See `POSITIVE-SUM-PRODUCT-DOCTRINE.md`.
+
 ## High-interest machine-commerce archetypes
 
 Current revealed-demand research makes these categories worth investigating:
@@ -182,6 +208,8 @@ Treat these skeptically until buyers prove otherwise:
 - public-data wrappers with strong free substitutes
 - tiny price used as a substitute for real utility
 - products differentiated mainly by x402 support
+- products whose economics depend primarily on buyer confusion, captivity or hidden risk transfer
+- provenance or confidence claims stronger than the available evidence
 
 ## Opportunity qualification gate
 
@@ -211,6 +239,10 @@ What are plausible price, variable cost, contribution margin and operations burd
 
 Why can x402-lab plausibly become better or easier to buy from?
 
+### Alignment
+
+What does the buyer concretely gain when x402-lab succeeds, what makes our revenue rise, who bears downside risk, and would customers have a rational reason to want this seller to keep succeeding?
+
 ### Falsification
 
 What cheap test could kill the idea before meaningful engineering time?
@@ -223,7 +255,7 @@ Codex is an **execution and instrumentation multiplier**, not the authority that
 
 Current Codex priority:
 
-> **Build a bounded Market Observatory that helps us inspect revealed machine demand.**
+> **Build a bounded Market Observatory that helps us inspect revealed machine demand and produce disciplined opportunity cards.**
 
 Codex should not create a new seller SKU during this discovery milestone.
 
@@ -239,12 +271,14 @@ It should:
 - compare snapshots over time
 - surface interesting sellers and buyers for human review
 - support opportunity-card creation
+- preserve provenance and distinguish observation from inference
 
 It should not:
 
 - declare a product winner automatically
 - use one opaque opportunity score
 - infer independent demand from transaction count alone
+- treat protocol/tool adoption as payment demand without evidence
 - spend real money without explicit approval
 
 ## Using x402 to research x402
@@ -271,6 +305,7 @@ The project should search for a business with both:
 
 - a credible route to real payment
 - a credible route to scalable/defensible value
+- a credible reason for buyer value and seller value to rise together
 
 A service experiment remains allowed when it is the cheapest falsification method, but it is not automatically the business model.
 
@@ -314,4 +349,8 @@ Before spending meaningful engineering time, ask:
 
 > **Does this work increase our ability to identify or falsify a genuinely profitable machine-commerce opportunity?**
 
-If not, it is probably not tonight's priority.
+and
+
+> **If this succeeds at scale, will customers have a rational reason to be glad that we succeeded?**
+
+If either answer is weak, it is probably not tonight's priority.
