@@ -15,6 +15,8 @@
     "market:fixtures": "tsx src/market-observatory/cli.ts fixtures",
     "market:collect": "tsx src/market-observatory/cli.ts collect-x402stats",
     "test": "tsx --test \"src/**/*.test.ts\"",
+    "test:retrieval": "tsx --test \"src/retrieval-*.test.ts\" && node -e \"console.log('Retrieval provider test suite passed')\"",
+    "benchmark:retrieval": "tsx src/retrieval-benchmark-cli.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

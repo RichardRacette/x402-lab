@@ -6,7 +6,10 @@ export type EvidenceErrorCode =
   | "TOO_MANY_REDIRECTS"
   | "SOURCE_TOO_LARGE"
   | "UNSUPPORTED_CONTENT_TYPE"
-  | "NO_READABLE_CONTENT";
+  | "NO_READABLE_CONTENT"
+  | "PROVIDER_NOT_CONFIGURED"
+  | "PROVIDER_FAILED"
+  | "PROVIDER_RESPONSE_INVALID";
 
 const STATUS_BY_CODE: Record<EvidenceErrorCode, number> = {
   INVALID_INPUT: 400,
@@ -16,8 +19,12 @@ const STATUS_BY_CODE: Record<EvidenceErrorCode, number> = {
   TOO_MANY_REDIRECTS: 502,
   SOURCE_TOO_LARGE: 413,
   UNSUPPORTED_CONTENT_TYPE: 415,
-  NO_READABLE_CONTENT: 422
+  NO_READABLE_CONTENT: 422,
+  PROVIDER_NOT_CONFIGURED: 503,
+  PROVIDER_FAILED: 502,
+  PROVIDER_RESPONSE_INVALID: 502
 };
+
 
 export class EvidenceSliceError extends Error {
   readonly code: EvidenceErrorCode;

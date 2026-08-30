@@ -1,0 +1,47 @@
+[
+  {
+    "id": "static-article",
+    "url": "https://fixture.example/static",
+    "question": "When was the factory closure announced?",
+    "expectedPhrase": "announced on Thursday",
+    "native": { "contentType": "text/html", "text": "<title>Static update</title><main><p>The factory closure was announced on Thursday after an operational review.</p></main>" },
+    "firecrawlMarkdown": "# Static update\n\nThe factory closure was announced on Thursday after an operational review.",
+    "expected": { "native-fixture": true, "simple-fixture": true, "firecrawl-mock": true }
+  },
+  {
+    "id": "long-article",
+    "url": "https://fixture.example/long",
+    "question": "What follows the factory closure?",
+    "expectedPhrase": "worker retraining begins in November",
+    "native": { "contentType": "text/html", "text": "<main><p>The background section describes several years of production history and regional demand. The operational review considered logistics, suppliers, maintenance, and future capacity. Following the factory closure, worker retraining begins in November and customer deliveries continue from another site.</p></main>" },
+    "firecrawlMarkdown": "Following the factory closure, worker retraining begins in November and customer deliveries continue from another site.",
+    "expected": { "native-fixture": true, "simple-fixture": true, "firecrawl-mock": true }
+  },
+  {
+    "id": "navigation-heavy",
+    "url": "https://fixture.example/navigation",
+    "question": "What renewable project was approved?",
+    "expectedPhrase": "solar storage project was approved",
+    "native": { "contentType": "text/html", "text": "<nav>Home Products Pricing Careers News Contact</nav><main><p>The municipal solar storage project was approved after the public hearing.</p></main><footer>Home Products Pricing</footer>" },
+    "firecrawlMarkdown": "The municipal solar storage project was approved after the public hearing.",
+    "expected": { "native-fixture": true, "simple-fixture": true, "firecrawl-mock": true }
+  },
+  {
+    "id": "javascript-shell",
+    "url": "https://fixture.example/javascript",
+    "question": "When does the battery pilot start?",
+    "expectedPhrase": "battery pilot starts in October",
+    "native": { "contentType": "text/html", "text": "<html><head><script>renderApplication()</script></head><body><div id=\"app\"></div></body></html>" },
+    "firecrawlMarkdown": "The grid battery pilot starts in October after permit approval.",
+    "expected": { "native-fixture": false, "simple-fixture": false, "firecrawl-mock": true }
+  },
+  {
+    "id": "upstream-failure",
+    "url": "https://fixture.example/failure",
+    "question": "What happened?",
+    "expectedPhrase": "",
+    "nativeError": "FETCH_FAILED",
+    "expected": { "native-fixture": false, "simple-fixture": false, "firecrawl-mock": false }
+  }
+]
+

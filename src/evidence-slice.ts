@@ -2,9 +2,12 @@ import { createHash } from "node:crypto";
 import { parseDocument } from "htmlparser2";
 import { EvidenceSliceError } from "./evidence-error.js";
 import {
-  fetchPublicSource,
   type PublicSourceOptions
 } from "./public-source.js";
+import {
+  nativeHttpRetrievalProvider,
+  type RetrievalProvider
+} from "./retrieval-provider.js";
 
 const MAX_PASSAGES = 3;
 const MIN_PASSAGE_LENGTH = 40;
@@ -112,6 +115,7 @@ export interface EvidenceSliceResult {
 
 export interface ExtractEvidenceOptions {
   source?: PublicSourceOptions;
+  retrievalProvider?: RetrievalProvider;
   now?: () => Date;
 }
 
@@ -340,7 +344,12 @@ export async function extractEvidence(
   }
 
   const normalizedQuestion = question.trim();
-  const fetched = await fetchPublicSource(inputUrl.trim(), options.source);
+  const fetched = await (
+    options.retrievalProvider ?? nativeHttpRetrievalProvider
+  ).retrieve({
+    url: inputUrl.trim(),
+    ...(options.source ? { source: options.source } : {})
+  });
   const extracted = extractSourceText(fetched.text, fetched.contentType, fetched.url);
   const contentHash = createHash("sha256")
     .update(extracted.normalizedContent)
@@ -349,7 +358,7 @@ export async function extractEvidence(
   return {
     source: {
       url: fetched.url,
-      title: extracted.title,
+      title: fetched.title ?? extracted.title,
       retrievedAt: (options.now ?? (() => new Date()))().toISOString(),
       contentHash: `sha256:${contentHash}`
     },
