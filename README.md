@@ -98,46 +98,24 @@ These are categories to study, not pre-approved products.
 
 ## Machine Demand Observatory
 
-The active discovery workstream is **Issue #15**.
+The core discovery workstream tracked in [Issue #15](https://github.com/RichardRacette/x402-lab/issues/15) is implemented on `main` by [PR #18](https://github.com/RichardRacette/x402-lab/pull/18).
 
-Build an internal Machine Demand Observatory on branch:
+It provides provider-neutral snapshots, deterministic fixtures, breadth/repeat/economic metrics, explicit unknown concentration and cross-seller states, snapshot comparison, demand-shape flags, human review records, opportunity cards, manual import, and JSON/Markdown reports. It improves discovery without selecting Product #2 autonomously.
 
-`milestone-4-5-machine-demand-observatory`
-
-The observatory should help distinguish:
-
-- unique buyer breadth
-- repeat intensity
-- economic intensity
-- buyer concentration
-- cross-seller shoppers
-- demand momentum across snapshots
-- large catalogs with weak demand
-- capability types with actual repeat purchase behavior
-
-It should support normalized JSON/CSV snapshots, Markdown reports and human-reviewed opportunity cards.
-
-It must **not** autonomously choose Product #2.
+PR #18 also added Buyer Trace preflight. It did **not** add or authorize a paid Buyer Trace execution path. The one remaining engineering slice is [Issue #27](https://github.com/RichardRacette/x402-lab/issues/27), which remains dry-run and $0 by default.
 
 ## Kiroshi Optics
 
-**Kiroshi Optics** is now an active internal companion project: **Issue #16**.
+**Kiroshi Optics**, tracked in [Issue #16](https://github.com/RichardRacette/x402-lab/issues/16), is implemented on `main` by [PR #18](https://github.com/RichardRacette/x402-lab/pull/18).
 
-It is a local read-only visual scanner over Observatory exports — not Product #2, not a commercial brand, and not another data pipeline.
+It is a local read-only visual scanner over Observatory exports — not Product #2, not a commercial brand, and not another data pipeline. The merged slice includes the Sensor → Normalize → Correlate → Render spine, MARKET OPTIC, TARGET SCAN, QUEST OPTIC, SENSOR BAY, explicit unknown/stale states, source provenance, and Buyer Trace preflight.
 
-After the minimal Observatory core passes its usefulness gate, Kiroshi is authorized to proceed with a tightly bounded first slice:
-
-- `MARKET SCAN`
-- `TARGET SCAN`
-- `OPPORTUNITY QUEUE` when data exist
-- `BUYER TRACE` only when transaction-level evidence supports it
+`BUYER TRACE` is currently preflight-only. Live paid execution is neither implemented nor authorized; [Issue #27](https://github.com/RichardRacette/x402-lab/issues/27) is the single follow-up.
 
 Read:
 
 - [`docs/KIROSHI-OPTICS.md`](docs/KIROSHI-OPTICS.md)
 - [`docs/KIROSHI-OPTICS-MVP.md`](docs/KIROSHI-OPTICS-MVP.md)
-
-V0 target: local, original futuristic scanner styling, existing Node/TypeScript stack, `$0` incremental paid infrastructure, no wallet/data-provider access from the viewer.
 
 ## Experiment capital
 
