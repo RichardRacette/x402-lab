@@ -2,11 +2,12 @@
 
 Rules:
 
-> **Earn complexity. Observe demand before building supply.**
+> **Earn complexity. Observe demand before building supply. Build where seller upside rises with buyer value.**
 
 Current governing docs:
 
 - `PRODUCT-THESIS.md`
+- `POSITIVE-SUM-PRODUCT-DOCTRINE.md`
 - `PRODUCT-DISCOVERY-ROUND-4-2026-08-24.md`
 - `DIRECTIVE-ALIGNMENT-2026-08-24.md`
 - `CODEX-SESSION-PLAN-2026-08-24.md`
@@ -117,6 +118,7 @@ Prefer:
 - negative examples showing large catalogs with weak demand
 - market changes visible across snapshots
 - faster creation of disciplined opportunity cards
+- provenance-visible evidence that distinguishes observation, inference and third-party claims
 
 Reject/refactor if the output is merely prettier x402scan rankings.
 
@@ -157,7 +159,6 @@ Constraints:
 - no database/auth/backend
 - prefer existing Node/TypeScript + vanilla HTML/CSS/TypeScript
 - `$0` incremental paid infrastructure
-- initial implementation roughly `30–45` Codex minutes
 
 Kiroshi succeeds only if it makes the same evidence faster to interpret than raw JSON/Markdown.
 
@@ -191,7 +192,10 @@ Each card must answer:
 6. lawful/reliable supply path
 7. plausible price + cost + contribution margin
 8. x402-lab-specific advantage
-9. cheapest falsification test
+9. **buyer gain when x402-lab succeeds**
+10. **revenue driver and whether it rises with buyer value**
+11. **who bears downside risk / whether economics depend on confusion, lock-in or hidden transferred cost**
+12. cheapest falsification test
 
 Cards begin as `UNREVIEWED` or `RESEARCH`.
 
@@ -215,7 +219,7 @@ The falsification method depends on the product.
 
 Exit condition:
 
-> one candidate survives a realistic attempt to disprove its value.
+> one candidate survives a realistic attempt to disprove both its commercial value and its positive-sum alignment.
 
 ## Milestone 5 — Select and build Product #2 minimally
 
@@ -229,6 +233,7 @@ Required before implementation:
 - supply/data rights
 - unit economics
 - advantage hypothesis
+- positive-sum alignment analysis
 - falsification result
 
 Rules:
@@ -238,6 +243,7 @@ Rules:
 - reuse existing seller/payment infrastructure
 - keep product logic independent of payment frontage
 - instrument fulfillment cost and failure behavior
+- instrument evidence needed to tell whether buyer value and seller revenue actually move together
 - no mainnet just because the code works
 
 ## Milestone 6 — External purchase
@@ -252,7 +258,7 @@ A first purchase proves access/willingness, not retention.
 
 Exit condition:
 
-> the same external buyer purchases Product #2 again because the need recurred.
+> the same external buyer purchases Product #2 again because the need recurred and the previous purchase created enough value to justify another.
 
 Track:
 
@@ -262,6 +268,7 @@ Track:
 - contribution margin
 - concentration
 - support/ops burden
+- buyer-value evidence where measurable
 
 ## Milestone 8 — Broaden distribution only where earned
 
@@ -287,10 +294,11 @@ Before mainnet require:
 - threat-model review
 - accounting/transaction logging
 - appropriate data/supply rights
+- no unresolved material misrepresentation/provenance issue
 
 Exit condition:
 
-> real external sales with positive contribution margin.
+> real external sales with positive contribution margin and credible buyer value.
 
 ## Milestone 10 — Repeatable profit or stop
 
@@ -307,6 +315,7 @@ Evaluate:
 - distribution conversion
 - payment failure rate
 - whether the capability is becoming embedded in persistent workflows
+- whether seller growth remains aligned with buyer outcomes
 
 Possible outcomes:
 
