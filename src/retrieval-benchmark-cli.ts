@@ -20,4 +20,3 @@ if (!process.argv.includes("--fixtures")) {
     console.log("Retrieval benchmark passed");
   }
 }
-

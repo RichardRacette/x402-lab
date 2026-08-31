@@ -42,6 +42,5 @@
     "expectedPhrase": "",
     "nativeError": "FETCH_FAILED",
     "expected": { "native-fixture": false, "simple-fixture": false, "firecrawl-mock": false }
-  }
+}
 ]
-

@@ -15,7 +15,6 @@ export interface RetrievalBenchmarkFixture {
   nativeError?: EvidenceErrorCode;
   expected: Record<string, boolean>;
 }
-
 export interface RetrievalBenchmarkCase {
   fixtureId: string;
   providerId: string;
@@ -170,4 +169,3 @@ export async function runRetrievalBenchmark(
     })
   };
 }
-
