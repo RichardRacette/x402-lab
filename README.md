@@ -4,6 +4,9 @@
 
 Experimental x402 machine-commerce lab for paid agent APIs, bounded autonomous purchasing, revealed-demand research, and security tooling.
 
+New agent or maintainer: read [HANDOFF.md](HANDOFF.md) for the verified deployment state,
+completed experiments, safety boundaries, and continuation point.
+
 This is a public R&D experiment in becoming a real vendor in the machine economy. Technical proof is treated separately from evidence of commercial demand.
 
 Current rule:
@@ -188,11 +191,11 @@ These are reusable infrastructure, not product-market fit.
 - [x] multiple weak product hypotheses rejected before large builds
 - [x] Product #2 explicitly reset to unknown
 - [x] Kiroshi Optics MVP scoped and approved after Observatory gate
-- [ ] build machine-demand observatory
-- [ ] capture normalized current market snapshot
-- [ ] analyze buyer breadth/repeat/concentration
-- [ ] create 3–5 evidence-grounded opportunity cards
-- [ ] build first Kiroshi Optics scanner slice
+- [x] build machine-demand observatory
+- [x] capture normalized current market snapshot
+- [x] analyze buyer breadth/repeat/concentration with explicit unknown-data states
+- [x] create five evidence-grounded, unreviewed opportunity cards
+- [x] build first Kiroshi Optics scanner slice
 - [ ] cheaply falsify the strongest candidate(s)
 - [ ] select Product #2 only after one passes the gate
 - [ ] first external paid use
