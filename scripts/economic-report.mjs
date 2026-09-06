@@ -159,8 +159,9 @@ function receiptMoney(rows, coverageComplete = true) {
   return Object.fromEntries(['USD', 'USDC'].map(currency => {
     const list = settled.filter(r => r.payment.currency === currency);
     const unallocated = settled.filter(r => r.payment.currency === null).length;
-    const grossMissing = list.filter(r => r.payment.amount === null).length + unallocated;
-    const netMissing = list.filter(r => r.payment.refunded === null || r.payment.amount === null).length + unallocated;
+    const unknownSettlement = rows.filter(r => r.payment.state === 'unknown' && (r.payment.currency === null || r.payment.currency === currency)).length;
+    const grossMissing = list.filter(r => r.payment.amount === null).length + unallocated + unknownSettlement;
+    const netMissing = list.filter(r => r.payment.refunded === null || r.payment.amount === null).length + unallocated + unknownSettlement;
     const gross = list.reduce((s, r) => s + (r.payment.amount === null ? 0n : micros(r.payment.amount)), 0n);
     const netKnown = list.reduce((s, r) => s + (r.payment.amount !== null && r.payment.refunded !== null ? micros(r.payment.amount) - micros(r.payment.refunded) : 0n), 0n);
     return [currency, { settled_records: list.length, gross_known: decimal(gross), gross_total: grossMissing || !coverageComplete ? null : decimal(gross),
@@ -193,7 +194,7 @@ export function compile(input, inputHash = hash(canonical(input))) {
   const ids = new Map(); for (const r of paid) if (r.counterparty.id !== null) ids.set(r.counterparty.id, (ids.get(r.counterparty.id) || 0) + 1);
   const unknownIds = paid.filter(r => r.counterparty.id === null).length;
   const failures = sellers.filter(r => r.fulfillment === 'failed');
-  const paidUnfulfilled = sellers.filter(r => r.payment.state === 'settled' && r.fulfillment !== 'succeeded');
+  const paidUnfulfilled = sellers.filter(r => r.payment.state === 'settled' && r.payment.amount !== null && micros(r.payment.amount) > 0n && r.fulfillment !== 'succeeded');
   const unresolved = dispositions.filter(r => ['UNKNOWN_PRODUCTION_NETWORK', 'UNVERIFIED_SOURCE', 'UNKNOWN_CUSTOMER_RELATIONSHIP'].includes(r.disposition));
   const covered = input.coverage.state === 'complete' && input.coverage.evidence.status !== 'UNVERIFIED' && unresolved.length === 0;
   const metric = (value, missing = false) => ({ value: missing || !covered ? null : value, known_subset: value });

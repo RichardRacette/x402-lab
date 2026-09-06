@@ -259,3 +259,13 @@ test('missing fulfillment suppresses exact success/failure claims rather than pa
   assert.equal(r.report.seller.paid_fulfillments.value, null); assert.equal(r.report.seller.fulfillment_failures.value, null);
   assert.equal(signals(r).paid_fulfillments, undefined); assert.equal(signals(r).fulfillment_failures, undefined);
 });
+test('unknown settlement cannot be presented as a complete zero-cash total', () => {
+  const d = input(); Object.assign(d.records[0].payment, { state: 'unknown', reference: null, settled_at: null, refunded: null });
+  const r = compile(d); assert.equal(r.report.seller.receipts.USD.gross_known, '0.000000');
+  assert.equal(r.report.seller.receipts.USD.gross_total, null); assert.equal(r.report.seller.receipts.USD.net_total, null);
+});
+test('zero-valued settlement is not falsely labeled as a paid failed operation', () => {
+  const d = input(); d.records[0].payment.amount = '0'; d.records[0].fulfillment = 'failed';
+  const r = compile(d); assert.deepEqual(r.report.seller.paid_unfulfilled_operation_ids, []);
+  assert.equal(r.report.next_review.code, 'REVIEW_FULFILLMENT_FAILURES');
+});
