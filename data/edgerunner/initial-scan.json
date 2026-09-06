@@ -1,0 +1,197 @@
+{
+  "schema": "edgerunner.scan/1",
+  "captured_at": "2026-09-06T01:29:27Z",
+  "classification": "PUBLIC_RESEARCH",
+  "coverage": {
+    "checked_source_ids": [
+      "openai-automations",
+      "openai-exec",
+      "openai-sdk",
+      "openai-astra",
+      "openai-skills",
+      "ollama-codex",
+      "mcp-roadmap",
+      "firecrawl-pricing",
+      "openhands-docs"
+    ],
+    "failed_source_ids": [],
+    "limitations": [
+      "Initial curated baseline, not exhaustive surveillance or proof each capability was released today.",
+      "Maintainer/provider documentation was read; none of the candidate tools/features was installed or functionally reproduced.",
+      "Unvisited registry seeds remain future research leads. No actual buyer interviews, revenue verification, or account-specific capability checks were performed.",
+      "Exact source publication dates are unknown where null. Last-checked time is not publication time.",
+      "The existing x402 watcher and Daily Signal Brief inventories were not accessible; no scheduling or delivery deduplication across those services is claimed."
+    ]
+  },
+  "signals": [
+    {
+      "id": "supported-frontier-orchestration",
+      "title": "Reuse supported frontier orchestration before building a replacement",
+      "recommendation": "REUSE",
+      "review_state": "UNREVIEWED",
+      "fact": "OpenAI documents scheduled tasks with skills and local project/worktree support, plus codex exec JSON events and schema-shaped final output. The SDK documents programmatic local threads.",
+      "inference": "Compare these supported surfaces with any proposed frontier dispatcher. A native deterministic Lawn timer still has a different role: it need not spend frontier credits or keep the app open.",
+      "applies_to": [
+        "Lawn Inspector",
+        "Odysseus",
+        "Edgerunner"
+      ],
+      "next_test": "Read installed client version and account features without changing them; compare one existing supported scheduling/exec interface to the next proposed custom component.",
+      "stop_if": "The needed capability is unavailable in this account/version, cannot satisfy the permission boundary, or costs more attention than the existing deterministic path.",
+      "runtime_fit": "No runtime used. Local app tasks require computer/app availability; cloud tasks do not gain access to a home folder automatically. Subscription usage is not unlimited API capacity.",
+      "reuse_notes": "Reuse documented interfaces. Do not copy authentication stores, change current Lawn scheduling work, or assume docs establish local acceptance.",
+      "commercial_evidence": {
+        "status": "NONE",
+        "detail": "No external demand, revenue, or measured time saving established by these documentation reads."
+      },
+      "sources": [
+        {
+          "registry_id": "openai-automations",
+          "url": "https://developers.openai.com/codex/app/automations",
+          "basis": "PRIMARY_DOCUMENTATION",
+          "published_at": null,
+          "checked_at": "2026-09-06T01:29:27Z",
+          "reproduced": false
+        },
+        {
+          "registry_id": "openai-exec",
+          "url": "https://developers.openai.com/codex/noninteractive",
+          "basis": "PRIMARY_DOCUMENTATION",
+          "published_at": null,
+          "checked_at": "2026-09-06T01:29:27Z",
+          "reproduced": false
+        },
+        {
+          "registry_id": "openai-sdk",
+          "url": "https://developers.openai.com/codex/sdk",
+          "basis": "PRIMARY_DOCUMENTATION",
+          "published_at": null,
+          "checked_at": "2026-09-06T01:29:27Z",
+          "reproduced": false
+        }
+      ]
+    },
+    {
+      "id": "astra-cross-context-continuity",
+      "title": "Check the new built-in context continuity before writing another memory layer",
+      "recommendation": "TEST",
+      "review_state": "UNREVIEWED",
+      "fact": "The Astra launch page describes notes across context windows and retrieval of earlier context windows in Codex, presented as an experimental configuration feature.",
+      "inference": "This may address long-run continuity in the frontier client. It does not replace a durable, human-reviewed Ledger or local-worker journals.",
+      "applies_to": [
+        "Frontier orchestration",
+        "Odysseus",
+        "Proof of Work Ledger"
+      ],
+      "next_test": "After the active job finishes, inspect the official linked configuration reference and installed version; propose a separate low-risk continuity check only if the feature is actually available.",
+      "stop_if": "The feature is unavailable, adds unintended data exposure, or the proposed memory work solves a different durable-evidence requirement.",
+      "runtime_fit": "Not enabled or tested here; availability and reliability remain unverified for the owner's installation.",
+      "reuse_notes": "Use supported configuration only after review. Do not copy another agent's private context or claim benchmark improvements from a launch article.",
+      "commercial_evidence": {
+        "status": "NONE",
+        "detail": "No external demand, revenue, or measured time saving established by these documentation reads."
+      },
+      "sources": [
+        {
+          "registry_id": "openai-astra",
+          "url": "https://openai.com/index/gpt-6-astra/",
+          "basis": "PRIMARY_RELEASE",
+          "published_at": null,
+          "checked_at": "2026-09-06T01:29:27Z",
+          "reproduced": false
+        }
+      ]
+    },
+    {
+      "id": "ollama-codex-fit",
+      "title": "Ollama already integrates with Codex; hardware and egress fit still matter",
+      "recommendation": "WATCH",
+      "review_state": "UNREVIEWED",
+      "fact": "Ollama documents Codex CLI integration and recommends at least 64K context. Its current page also describes a signed-in web-search service for Codex requests using the Ollama profile.",
+      "inference": "An existing integration is worth knowing about, but it is not evidence that an 8 GB node should replace frontier orchestration or that all behavior stays local.",
+      "applies_to": [
+        "Odysseus",
+        "Local-compute workers"
+      ],
+      "next_test": "Before any later integration proposal, compare installed versions, memory/context needs and web-search behavior with the approved local-only worker configuration.",
+      "stop_if": "It needs larger hardware, changes the current profile unexpectedly, or crosses the unresolved runtime/privacy boundary.",
+      "runtime_fit": "The current 4K worker experiments are not a 64K Codex-agent qualification. No model was downloaded or invoked.",
+      "reuse_notes": "Configuration examples are reference material, not commands for the scout to execute. Retain existing local worker and frontier profiles.",
+      "commercial_evidence": {
+        "status": "NONE",
+        "detail": "No external demand, revenue, or measured time saving established by these documentation reads."
+      },
+      "sources": [
+        {
+          "registry_id": "ollama-codex",
+          "url": "https://docs.ollama.com/integrations/codex",
+          "basis": "PRIMARY_DOCUMENTATION",
+          "published_at": null,
+          "checked_at": "2026-09-06T01:29:27Z",
+          "reproduced": false
+        }
+      ]
+    },
+    {
+      "id": "mcp-july-spec-august-roadmap",
+      "title": "Keep protocol integration version-aware rather than coding against an old roadmap",
+      "recommendation": "WATCH",
+      "review_state": "UNREVIEWED",
+      "fact": "MCP maintainers' August 22 roadmap summarizes the July 28 specification changes and places agentic messaging, identity and result contracts among the next priorities; Tasks remain described as an extension.",
+      "inference": "Future delegation/discovery adapters should check the pinned client/server versions and released extension status, not assume an old implementation matches today's roadmap.",
+      "applies_to": [
+        "Odysseus",
+        "x402 paid MCP",
+        "Agent interoperability"
+      ],
+      "next_test": "At the next actual MCP integration change, map required capabilities against installed versions and current official spec; do not upgrade the working environment solely because the roadmap changed.",
+      "stop_if": "No current integration needs the capability, or migration would disrupt a working pinned runtime without measured benefit.",
+      "runtime_fit": "Roadmap/specification evidence only, not compatibility testing against either home node.",
+      "reuse_notes": "Read maintained specifications and implementations at exact versions. Code license review is still required before copying implementation.",
+      "commercial_evidence": {
+        "status": "NONE",
+        "detail": "No external demand, revenue, or measured time saving established by these documentation reads."
+      },
+      "sources": [
+        {
+          "registry_id": "mcp-roadmap",
+          "url": "https://blog.modelcontextprotocol.io/posts/mcp-roadmap/",
+          "basis": "PRIMARY_RELEASE",
+          "published_at": "2026-08-22",
+          "checked_at": "2026-09-06T01:29:27Z",
+          "reproduced": false
+        }
+      ]
+    },
+    {
+      "id": "generic-extraction-substitute",
+      "title": "Reject more generic extraction investment until a customer advantage survives comparison",
+      "recommendation": "REJECT",
+      "review_state": "UNREVIEWED",
+      "fact": "Firecrawl's current pricing page advertises 1,000 free credits per month and 1 credit per scraped page, with additional-feature costs. A listed price/free tier is not evidence of revenue or buyer retention.",
+      "inference": "A generic extract-text API is not an attractive default next product merely because payment infrastructure exists. Test a narrower buyer problem or avoid the build; this is a strategic inference, not proof that all extraction products are unviable.",
+      "applies_to": [
+        "x402 product discovery",
+        "Economic-output flywheel"
+      ],
+      "next_test": "Use the existing opportunity-card gate to compare one real buyer task against this substitute and the no-build option. Seek a concrete repeat-use advantage before proposing a new paid endpoint.",
+      "stop_if": "An existing free/cheap tool performs the buyer task adequately, or no external user values the proposed difference.",
+      "runtime_fit": "No signup, paid request, customer contact or competitive performance test occurred. Pricing is a mutable September 5 Michigan-date observation.",
+      "reuse_notes": "Learn the product packaging and pricing pattern; do not copy code or assets without inspecting applicable licenses. Do not revive a previously rejected product based only on this card.",
+      "commercial_evidence": {
+        "status": "PRICING_ONLY",
+        "detail": "Provider-published pricing only. External customer usage, willingness to pay, our margin and revenue remain unknown."
+      },
+      "sources": [
+        {
+          "registry_id": "firecrawl-pricing",
+          "url": "https://www.firecrawl.dev/pricing",
+          "basis": "PROVIDER_PRICING",
+          "published_at": null,
+          "checked_at": "2026-09-06T01:29:27Z",
+          "reproduced": false
+        }
+      ]
+    }
+  ]
+}

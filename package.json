@@ -14,8 +14,10 @@
     "buyer-trace:preflight": "tsx src/buyer-trace-preflight-cli.ts",
     "market:fixtures": "tsx src/market-observatory/cli.ts fixtures",
     "market:collect": "tsx src/market-observatory/cli.ts collect-x402stats",
-    "test": "tsx --test \"src/**/*.test.ts\"",
-    "typecheck": "tsc --noEmit"
+    "test": "tsx --test \"src/**/*.test.ts\" && node --test scripts/edgerunner.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "edgerunner:report": "node scripts/edgerunner.mjs",
+    "test:edgerunner": "node --test scripts/edgerunner.test.mjs"
   },
   "dependencies": {
     "@x402/core": "2.23.0",
