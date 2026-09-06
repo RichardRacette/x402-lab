@@ -1,0 +1,22 @@
+{
+  "schema": "x402.activity-input/1",
+  "dataset_id": "empty-input-template",
+  "service_id": "unconfigured-service",
+  "as_of": "2026-09-06T00:00:00Z",
+  "window": {
+    "start": "2026-09-05T00:00:00Z",
+    "end": "2026-09-06T00:00:00Z"
+  },
+  "classification": "project_safe",
+  "reviewed_for_local_analysis": true,
+  "coverage": {
+    "state": "unknown",
+    "expected_records": null,
+    "evidence": {
+      "ref": "template:no-observations",
+      "sha256": "ccd1cd41a1874f86e97177b7a44fbd5c5e791d8d9735b5a80433226b3acafcd1",
+      "status": "UNVERIFIED"
+    }
+  },
+  "records": []
+}

@@ -14,8 +14,10 @@
     "buyer-trace:preflight": "tsx src/buyer-trace-preflight-cli.ts",
     "market:fixtures": "tsx src/market-observatory/cli.ts fixtures",
     "market:collect": "tsx src/market-observatory/cli.ts collect-x402stats",
-    "test": "tsx --test \"src/**/*.test.ts\"",
-    "typecheck": "tsc --noEmit"
+    "test": "tsx --test \"src/**/*.test.ts\" && node --test scripts/economic-report.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "economics:report": "node scripts/economic-report.mjs",
+    "economics:test": "node --test scripts/economic-report.test.mjs"
   },
   "dependencies": {
     "@x402/core": "2.23.0",
