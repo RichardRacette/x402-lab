@@ -35,13 +35,14 @@ async function fixture() {
     createPayment: async requirement => {
       walletCalls++;
       assert.deepEqual(requirement, createBuyerTracePlan().requirement);
-      const reservation = JSON.parse(await readFile(sessionFile, "utf8"));
+      const reservation = JSON.parse((await readFile(sessionFile, "utf8")).split("\n")[0]);
       assert.equal(reservation.reservedAtomic, "10000");
       return "SYNTHETIC_PAYMENT_NOT_A_SIGNATURE";
     }
   };
-  const options = { execute: true, sessionFile,
-    authorization: mintOwnerCliPurchaseAuthorization(buyerTraceIntent(plan, sessionFile)) };
+  const expiresAt = Date.now()+600_000;
+  const options = { execute: true, sessionFile, expiresAt,
+    authorization: mintOwnerCliPurchaseAuthorization(buyerTraceIntent(plan, sessionFile, expiresAt)) };
   return { plan, challenge, body, dependencies, options, requests, sessionFile,
     walletCalls: () => walletCalls };
 }
@@ -161,7 +162,7 @@ test("atomic persistent reservation blocks simultaneous calls and replay with fr
   ]);
   assert.equal(results.filter(r => r.status === "fulfilled").length, 1);
   assert.equal(f.walletCalls(), 1);
-  const fresh = { ...f.options, authorization: mintOwnerCliPurchaseAuthorization(buyerTraceIntent(f.plan, f.sessionFile)) };
+  const fresh = { ...f.options, authorization: mintOwnerCliPurchaseAuthorization(buyerTraceIntent(f.plan, f.sessionFile, f.options.expiresAt)) };
   await assert.rejects(runBuyerTrace(f.plan, fresh, f.dependencies), code("SESSION_REFUSED"));
   assert.equal(f.requests.length, 2);
 });

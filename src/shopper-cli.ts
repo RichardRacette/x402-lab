@@ -1,3 +1,8 @@
+import { createInterface } from "node:readline/promises";
+import { fingerprintPurchaseIntent } from "./trust-boundary.js";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import type { PurchaseIntent } from "./trust-boundary.js";
 import {
   createShopperConfig,
   defaultLockRecoveryDependencies,
@@ -43,7 +48,7 @@ function parseArguments(args: string[]): CliArguments {
       sawQuestion = true;
       parsed.question = args[++index];
     } else {
-      throw new Error(`Unknown shopper argument: ${argument}`);
+      throw new Error("Unknown shopper argument.");
     }
   }
 
@@ -168,7 +173,22 @@ async function main(): Promise<void> {
   console.log(JSON.stringify(result.body, null, 2));
 }
 
-main().catch(error => {
+/** Review JSON is proposal data; the new command requires a fresh owner decision. */
+export async function authorizeReviewedBuyerTrace(intent: PurchaseIntent, expiresAt: number) {
+  if (!Number.isSafeInteger(expiresAt) || expiresAt <= Date.now() || expiresAt > Date.now()+900_000) throw new Error("APPROVAL_EXPIRED_OR_INVALID");
+  if (!process.stdin.isTTY || !process.stderr.isTTY) throw new Error("OWNER_APPROVAL_REQUIRED");
+  const expected = `APPROVE ${fingerprintPurchaseIntent(intent)} UNTIL ${new Date(expiresAt).toISOString()}`;
+  const terminal = createInterface({input:process.stdin,output:process.stderr});
+  try {
+    const review = JSON.parse(intent.question);
+    const terms = review[5];
+    process.stderr.write(`Reviewed request: ${intent.endpoint}\nNetwork: ${terms[1]}; asset: ${terms[2]}; recipient: ${terms[3]}; amount: ${terms[4]} atomic USDC; one acquisition.\n`);
+    if (await terminal.question(`Type ${expected}\n`) !== expected || expiresAt <= Date.now()) throw new Error("OWNER_APPROVAL_REQUIRED");
+    return mintOwnerCliPurchaseAuthorization(intent);
+  } finally { terminal.close(); }
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(error => {
   const message = error instanceof Error ? error.message : "Unknown shopper error.";
   console.error("SHOPPER GATEWAY ERROR");
   console.error(message);
