@@ -11,6 +11,45 @@ import {
 } from "./buyer-trace-adapter.js";
 import { mintOwnerCliPurchaseAuthorization, type PurchaseAuthorization } from "./trust-boundary.js";
 
+function currentBazaarExtension(
+  inputType = "http",
+  method = "GET",
+  schemaUri = "https://json-schema.org/draft/2020-12/schema"
+): Record<string, unknown> {
+  return {
+    bazaar: {
+      info: { input: { type: inputType, method, queryParams: {} } },
+      schema: {
+        $schema: schemaUri,
+        type: "object",
+        properties: {
+          input: {
+            type: "object",
+            properties: {
+              type: { type: "string", const: "http" },
+              method: { type: "string", enum: ["GET", "HEAD", "DELETE"] },
+              queryParams: {
+                type: "object",
+                properties: {
+                  page: { type: "integer", minimum: 0 },
+                  page_size: { type: "integer", minimum: 1, maximum: 100 },
+                  sort_by: { type: "string", enum: ["time", "amount"] },
+                  sort_order: { type: "string", enum: ["asc", "desc"] }
+                },
+                required: ["page", "page_size", "sort_by", "sort_order"],
+                additionalProperties: false
+              }
+            },
+            required: ["type", "method"],
+            additionalProperties: false
+          }
+        },
+        required: ["input"]
+      }
+    }
+  };
+}
+
 async function fixture() {
   const directory = await mkdtemp(join(tmpdir(), "buyer-trace-fixture-"));
   const sessionFile = join(directory, "one-call.json");
@@ -83,6 +122,15 @@ test("one fake payment constructs the exact GET and preserves untrusted provenan
   assert.doesNotMatch(await readFile(f.sessionFile, "utf8"), /SYNTHETIC_PAYMENT|synthetic-buyer/u);
 });
 
+test("one recognized GET Bazaar declaration is inert and accepted", async () => {
+  const f = await fixture();
+  f.challenge.extensions = currentBazaarExtension();
+  const result = await runBuyerTrace(f.plan, f.options, f.dependencies);
+  assert.equal(result.mode, "response-received");
+  assert.equal(f.walletCalls(), 1);
+  assert.equal(f.requests.length, 2);
+});
+
 for (const kind of ["missing", "forged", "different-session"] as const) {
   test(`approval ${kind} is refused before any dependency`, async () => {
     const f = await fixture();
@@ -110,7 +158,11 @@ const drifts: [string, (challenge: PaymentRequired) => void][] = [
   ["asset-domain", c => { c.accepts[0].extra!.name = "Other Coin"; }],
   ["extra-signing-field", c => { c.accepts[0].extra!.spender = "SYNTHETIC_UNAPPROVED"; }],
   ["ambiguous-alternative", c => { c.accepts.push(structuredClone(c.accepts[0])); }],
-  ["extension", c => { c.extensions = { instruction: "SYNTHETIC_SECRET" }; }]
+  ["extension", c => { c.extensions = { instruction: "SYNTHETIC_SECRET" }; }],
+  ["bazaar-non-http", c => { c.extensions = currentBazaarExtension("mcp"); }],
+  ["bazaar-wrong-method", c => { c.extensions = currentBazaarExtension("http", "POST"); }],
+  ["bazaar-wrong-schema", c => { c.extensions = currentBazaarExtension("http", "GET", "https://example.invalid/schema"); }],
+  ["bazaar-plus-extension", c => { c.extensions = { ...currentBazaarExtension(), other: {} }; }]
 ];
 for (const [name, drift] of drifts) {
   test(`runtime ${name} drift is refused before signing`, async () => {

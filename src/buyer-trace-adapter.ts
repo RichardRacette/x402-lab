@@ -2,6 +2,7 @@ import { open } from "node:fs/promises";
 import { resolve } from "node:path";
 import { decodePaymentRequiredHeader, decodePaymentResponseHeader } from "@x402/core/http";
 import type { PaymentRequirements } from "@x402/core/types";
+import { validateDiscoveryExtensionSpec } from "@x402/extensions/bazaar";
 import { createBuyerTracePreflight } from "./buyer-trace-preflight.js";
 import {
   assertPurchaseAuthorization, markUntrusted, transformUntrusted,
@@ -54,6 +55,24 @@ export function createBuyerTracePlan(pageSize = 100): BuyerTracePlan {
 function terms(requirement: PaymentRequirements): unknown[] {
   return [requirement.scheme, requirement.network, requirement.asset, requirement.payTo,
     requirement.amount, requirement.maxTimeoutSeconds, requirement.extra?.name, requirement.extra?.version];
+}
+
+/** Bazaar is optional discovery metadata, not payment authority. Accept only a
+ * single, recognized HTTP GET declaration with the standard schema wrapper.
+ * The declaration is intentionally omitted from payment construction.
+ */
+function hasOnlyIgnorableBazaarExtension(extensions: Record<string, unknown> | null | undefined): boolean {
+  if (!extensions || Object.keys(extensions).length === 0) return true;
+  if (Object.keys(extensions).join(",") !== "bazaar") return false;
+  const value = extensions.bazaar;
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const declaration = value as Record<string, unknown>;
+  if (Object.keys(declaration).sort().join(",") !== "info,schema") return false;
+  if (!validateDiscoveryExtensionSpec(declaration).valid) return false;
+  const info = declaration.info as { input?: { type?: unknown; method?: unknown } } | undefined;
+  const schema = declaration.schema as { $schema?: unknown; type?: unknown } | undefined;
+  return info?.input?.type === "http" && info.input.method === "GET" &&
+    schema?.$schema === "https://json-schema.org/draft/2020-12/schema" && schema.type === "object";
 }
 
 function validatePlan(plan: BuyerTracePlan): void {
@@ -197,7 +216,7 @@ export async function runBuyerTrace(
         !challenge.accepts[0] ||
         JSON.stringify(terms(challenge.accepts[0])) !== JSON.stringify(terms(plan.requirement)) ||
         Object.keys(challenge.accepts[0].extra ?? {}).sort().join(",") !== "name,version" ||
-        (challenge.extensions && Object.keys(challenge.extensions).length > 0)) {
+        !hasOnlyIgnorableBazaarExtension(challenge.extensions)) {
       throw new BuyerTraceError("CHALLENGE_DRIFT");
     }
     // Pass only the reviewed terms, never arbitrary challenge metadata, to the wallet.
