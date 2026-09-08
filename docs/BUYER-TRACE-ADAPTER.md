@@ -8,6 +8,31 @@ bounded native HTTP, the pinned x402/viem signer interface, response validation
 and a durable audit journal. It has no unconditional not-implemented refusal.
 The historical Round 1 section below describes the prerequisite commit only.
 
+### Current Bazaar discovery compatibility (2026-09-08)
+
+A fresh, unpaid request to the exact reviewed x402scan URL returned HTTP 402
+with the expected one-cent Base USDC payment terms and one additional top-level
+`bazaar` extension. The previous blanket extension refusal therefore stopped
+the run before credential loading or signing. That fail-closed result spent
+$0.00 and is recorded in issue 42.
+
+The adapter now treats only one recognized Bazaar HTTP `GET` discovery
+declaration as inert metadata. It requires the extension package's discovery
+spec validation, the standard draft-2020-12 object schema wrapper, no sibling
+extension, and no extra top-level Bazaar fields. It deliberately reconstructs
+the payment request without extensions, so the Bazaar declaration cannot enter
+the signer or payment payload. Malformed Bazaar data, another method or input
+type, an unknown extension, and mixed extensions still produce
+`CHALLENGE_DRIFT` before credential loading or signing.
+
+The provider's current Bazaar `info.input.queryParams` example is empty while
+its attached schema marks the four reviewed query values as required. The
+top-level declaration passes `validateDiscoveryExtensionSpec`, but the complete
+example fails `validateDiscoveryExtension`. Since x402 clients may omit optional
+extensions and this adapter does so, the inconsistency is retained only as
+untrusted provenance; it does not expand payment authority. This compatibility
+change does not authorize or execute the live purchase.
+
 ### Future operator commands
 
 These commands are implemented but are **not approval to execute a purchase**:
@@ -70,7 +95,8 @@ cannot start signing after the caller has timed out.
 
 One initial 402 request plus one approved signed GET is one acquisition. There
 is no SDK fetch wrapper, automatic payment retry, recovery acquisition, chain
-RPC or unadvertised extension. Redirects, additional challenge alternatives,
+RPC or signer extension. A single recognized Bazaar GET discovery declaration
+may be ignored as described above. Redirects, additional challenge alternatives,
 binding drift and pagination drift are refused. Signing uses installed
 `@x402/evm` 2.23.0 `ExactEvmScheme` and `@x402/core` 2.23.0 `x402Client`, with
 viem's account signer. The installed SDK's EIP-3009 source was inspected:
