@@ -10,10 +10,45 @@ import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { encodePaymentRequiredHeader, encodePaymentResponseHeader, decodePaymentSignatureHeader } from "@x402/core/http";
+import type { PaymentRequired } from "@x402/core/types";
 import { createBuyerTracePlan } from "./buyer-trace-adapter.js";
 
 const plan=createBuyerTracePlan();
 const wallet="0x1111111111111111111111111111111111111111";
+function currentBazaarExtension(): Record<string, unknown> {
+  return {
+    bazaar: {
+      info: { input: { type: "http", method: "GET", queryParams: {} } },
+      schema: {
+        $schema: "https://json-schema.org/draft/2020-12/schema",
+        type: "object",
+        properties: {
+          input: {
+            type: "object",
+            properties: {
+              type: { type: "string", const: "http" },
+              method: { type: "string", enum: ["GET", "HEAD", "DELETE"] },
+              queryParams: {
+                type: "object",
+                properties: {
+                  page: { type: "integer", minimum: 0 },
+                  page_size: { type: "integer", minimum: 1, maximum: 100 },
+                  sort_by: { type: "string", enum: ["time", "amount"] },
+                  sort_order: { type: "string", enum: ["asc", "desc"] }
+                },
+                required: ["page", "page_size", "sort_by", "sort_order"],
+                additionalProperties: false
+              }
+            },
+            required: ["type", "method"],
+            additionalProperties: false
+          }
+        },
+        required: ["input"]
+      }
+    }
+  };
+}
 if(process.argv[2]==="--fixture-child") {
   const origin=new URL(process.argv[3]);
   if(origin.hostname!=="127.0.0.1" || origin.protocol!=="http:") throw new Error("Fixture requires loopback");
@@ -67,7 +102,7 @@ if(process.argv[2]==="--fixture-child") {
       if(scenario==="redirect") {response.writeHead(302,{location:"https://example.invalid/SYNTHETIC_SECRET"});response.end();return;}
       if((scenario==="timeout-before"&&!paid)||(scenario==="timeout-after"&&paid)) return;
       if(!paid) {
-        const challenge={x402Version:2,resource:{url:plan.url,description:"fixture",mimeType:"application/json"},accepts:[structuredClone(plan.requirement)]};
+        const challenge: PaymentRequired={x402Version:2,resource:{url:plan.url,description:"fixture",mimeType:"application/json"},accepts:[structuredClone(plan.requirement)],extensions:currentBazaarExtension()};
         const terms=challenge.accepts[0];
         if(scenario==="price") terms.amount="10001";
         if(scenario==="network") terms.network="eip155:84532";
@@ -77,6 +112,8 @@ if(process.argv[2]==="--fixture-child") {
         if(scenario==="query") challenge.resource.url+="&page=1";
         if(scenario==="alternative") challenge.accepts.push(structuredClone(terms));
         if(scenario==="domain") terms.extra.name="Synthetic Coin";
+        if(scenario==="bazaar-method") ((challenge.extensions!.bazaar as {info:{input:{method:string}}}).info.input.method)="POST";
+        if(scenario==="multiple-extension") challenge.extensions!.other={};
         response.writeHead(402,{"PAYMENT-REQUIRED":scenario==="malformed"?"bad":encodePaymentRequiredHeader(challenge),
           ...(scenario==="expiry-during-challenge"?{"x-fixture-expire":"yes"}:{})});
         response.end();return;
@@ -84,6 +121,7 @@ if(process.argv[2]==="--fixture-child") {
       const payload=decodePaymentSignatureHeader(String(request.headers["payment-signature"]));
       assert.deepEqual(payload.accepted,plan.requirement);
       assert.equal(payload.x402Version,2);
+      assert.equal(payload.extensions,undefined);
       if(scenario==="recovery") {response.writeHead(402,{"PAYMENT-REQUIRED":encodePaymentRequiredHeader({x402Version:2,resource:{url:plan.url,description:"retry",mimeType:"application/json"},accepts:[plan.requirement]})});response.end();return;}
       response.writeHead(200,{"Content-Type":"application/json",...(scenario==="missing-receipt"?{}:{"PAYMENT-RESPONSE":encodePaymentResponseHeader({success:scenario!=="failed-receipt",network:"eip155:8453",amount:"10000",transaction:"0x"+"ab".repeat(32)})})});
       if(scenario==="slow-body") {response.flushHeaders();return;}
@@ -129,7 +167,7 @@ if(process.argv[2]==="--fixture-child") {
     assert.equal(results.filter(r=>r.code===0).length,1);
     assert.equal(f.calls.filter(c=>c.paid).length,1);
   });
-  for(const scenario of ["price","network","asset","recipient","scheme","query","alternative","domain","malformed","redirect","expiry-during-challenge","timeout-before"]) {
+  for(const scenario of ["price","network","asset","recipient","scheme","query","alternative","domain","bazaar-method","multiple-extension","malformed","redirect","expiry-during-challenge","timeout-before"]) {
     test(`CLI ${scenario} refuses before signing`,async t=>{
       const f=await fixture(t,scenario),result=await f.run();
       assert.equal(result.code,1);assert.equal(result.output.signingCalls,0);assert.equal(f.calls.length,1);
