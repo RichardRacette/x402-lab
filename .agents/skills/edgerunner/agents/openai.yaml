@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kiroshi Edgerunner"
+  short_description: "Scout reusable tools and evidence-backed market opportunities"
+  default_prompt: "Run $edgerunner: find what changes our next build, reuse, or product decision."
+policy:
+  allow_implicit_invocation: false
