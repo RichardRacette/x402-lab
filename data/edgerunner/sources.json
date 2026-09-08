@@ -1,0 +1,109 @@
+{
+  "schema": "edgerunner.sources/1",
+  "classification": "PUBLIC_RESEARCH",
+  "purpose": "Starting points for an authorized agent, not URLs the compiler fetches or an unlimited crawl allowlist.",
+  "sources": [
+    {
+      "id": "openai-automations",
+      "track": "reuse",
+      "url": "https://developers.openai.com/codex/app/automations",
+      "why": "Built-in scheduling, skills, account/environment prerequisites; compare before custom frontier scheduling."
+    },
+    {
+      "id": "openai-exec",
+      "track": "reuse",
+      "url": "https://developers.openai.com/codex/noninteractive",
+      "why": "Existing structured orchestration instead of custom frontier dispatch."
+    },
+    {
+      "id": "openai-sdk",
+      "track": "reuse",
+      "url": "https://developers.openai.com/codex/sdk",
+      "why": "Supported programmatic agents; check compatibility and authentication before reuse."
+    },
+    {
+      "id": "openai-astra",
+      "track": "capability",
+      "url": "https://openai.com/index/gpt-6-astra/",
+      "why": "Primary launch claims and linked documented capabilities; no benchmark claims treated as our results."
+    },
+    {
+      "id": "openai-skills",
+      "track": "reuse",
+      "url": "https://developers.openai.com/codex/skills",
+      "why": "Reuse supported skill packaging rather than build another planner."
+    },
+    {
+      "id": "ollama-codex",
+      "track": "local-compute",
+      "url": "https://docs.ollama.com/integrations/codex",
+      "why": "Local integration and configuration/egress/memory conditions."
+    },
+    {
+      "id": "ollama-releases",
+      "track": "local-compute",
+      "url": "https://github.com/ollama/ollama/releases",
+      "why": "Version-specific performance and API changes; installed version is a separate check."
+    },
+    {
+      "id": "mcp-roadmap",
+      "track": "standards",
+      "url": "https://blog.modelcontextprotocol.io/posts/mcp-roadmap/",
+      "why": "Maintainer roadmap; separate released features, extensions and proposals."
+    },
+    {
+      "id": "x402-releases",
+      "track": "machine-commerce",
+      "url": "https://github.com/coinbase/x402/releases",
+      "why": "Coordinate with existing x402 watcher; do not generate duplicate alerts."
+    },
+    {
+      "id": "firecrawl-pricing",
+      "track": "competition",
+      "url": "https://www.firecrawl.dev/pricing",
+      "why": "Current substitute price and free tier; pricing does not establish paying demand."
+    },
+    {
+      "id": "openhands-docs",
+      "track": "reuse",
+      "url": "https://docs.openhands.dev/",
+      "why": "Reference agent runtime patterns; verify supported current documentation before copying legacy CLI instructions."
+    },
+    {
+      "id": "goose-docs",
+      "track": "reuse",
+      "url": "https://block.github.io/goose/docs/",
+      "why": "Scout reusable agent/tool patterns; no assumed adoption or install."
+    },
+    {
+      "id": "huggingface-models",
+      "track": "local-compute",
+      "url": "https://huggingface.co/models",
+      "why": "Model cards, exact weights/quantization/license; download counts are leads, not utility."
+    },
+    {
+      "id": "github-search",
+      "track": "discovery",
+      "url": "https://github.com/search",
+      "why": "Find maintained code, recurring issues, paid alternatives; use focused public queries."
+    },
+    {
+      "id": "hacker-news",
+      "track": "discovery",
+      "url": "https://news.ycombinator.com/",
+      "why": "Builder leads, launches and pain reports; follow through to primary evidence."
+    }
+  ],
+  "discovery_policy": "Public X/YouTube/Reddit/Show HN posts may seed leads when available; verify consequential claims from primary sources. No accounts, bypass, contact, code execution or purchases.",
+  "budget": {
+    "daily_search_queries": 8,
+    "daily_primary_page_opens": 20,
+    "maximum_actionable_cards": 3,
+    "maximum_watch_cards": 2
+  },
+  "cadence_proposal": {
+    "daily": "one bounded scan",
+    "weekly": "one deeper substitute/buyer-problem comparison replacing that day's normal scan",
+    "schedule_state": "NOT_INSTALLED"
+  }
+}
