@@ -10,7 +10,7 @@ commerce or managed validation can never work.
 
 | Candidate | Decision | Evidence |
 | --- | --- | --- |
-| Email-domain CRM intake triage | NO_BUILD after executable comparison | Both core and maintained free baseline produced the same correct decisions on every valid case. No independent buyer integration saving was demonstrated. |
+| Email-domain CRM intake triage | NO_BUILD after executable comparison | Both core and maintained free baseline met the accepted routing criteria on every valid case. No independent buyer integration saving was demonstrated. |
 | Credentialless capped Apify access | Reject before implementation | [Apify AGI](https://agi.apify.com/) already sells capped temporary tokens directly; $1 minimum/14-day expiry is a possible niche gap, but no buyer or resale advantage was established. |
 | Public agent-readiness checks | Reject before implementation | [Cloudflare](https://blog.cloudflare.com/agent-readiness/) offers a free agent-callable scanner; [Agent Ready](https://agent-ready.dev/pricing) supplies free and low-priced checks. No unmet task specific to our buyer was established. |
 
@@ -56,6 +56,11 @@ Two earlier fallback-address fixture errors were corrected before execution and
 are recorded with original/new hashes. The six heldout cases were unseen by the
 candidate implementer. The reviewer authored the baseline and cases; this is not a
 fully blind comparative-generalization study.
+
+The accepted routes were not identical: for the SMTPUTF8 case the candidate returned
+explicit unsupported REVIEW while the baseline returned KEEP. The protocol allowed
+both, but the baseline avoided that additional review; its practical benefit was
+not timed. A reproduction returned the same raw scores and a byte-identical audit.
 
 The baseline uses maintained `email-validator`, `dnspython` and the same list,
 with a small policy adapter. It received a thirty-minute budget and completed
