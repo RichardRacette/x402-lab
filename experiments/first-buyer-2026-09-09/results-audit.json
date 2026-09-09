@@ -1,0 +1,34 @@
+{
+  "schema": "x402.first-buyer-audit/1",
+  "firstRunSha256": "3c3719a50a05eea87035ac59a1d0f9b583c8c22055b559b7f303a4c6cd49d375",
+  "defect": {
+    "caseId": "H04",
+    "originalExpected": "KEEP",
+    "correctExpected": "REVIEW",
+    "reason": "notmailinator.com is itself an exact entry in the frozen disposable list; both implementations correctly flag membership.",
+    "inputChanged": false,
+    "implementationChanged": false,
+    "newExecutionCount": 0
+  },
+  "audited": {
+    "candidate": {
+      "originalScore": 19,
+      "originalDenominator": 20,
+      "validOriginalCasesCorrect": 19,
+      "validOriginalCases": 19,
+      "correctedExpectationDiagnosticScore": 20,
+      "correctedExpectationDiagnosticDenominator": 20
+    },
+    "baseline": {
+      "originalScore": 19,
+      "originalDenominator": 20,
+      "validOriginalCasesCorrect": 19,
+      "validOriginalCases": 19,
+      "correctedExpectationDiagnosticScore": 20,
+      "correctedExpectationDiagnosticDenominator": 20
+    }
+  },
+  "decision": "NO_BUILD",
+  "reason": "Equal task correctness; no four-case advantage or measured independent buyer integration saving. Neither raw nor audited result justifies seller implementation.",
+  "limitation": "Correction is post-execution diagnosis, not a new heldout success or additional test. Negative suffix-boundary intent of H04 remains untested by that case."
+}

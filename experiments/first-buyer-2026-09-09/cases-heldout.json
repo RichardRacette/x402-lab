@@ -59,7 +59,7 @@
           "AAAA": {
             "status": "ok",
             "answers": [
-              "2001:db8::40"
+              "2606:4700:4700::1111"
             ]
           },
           "TXT": {
@@ -136,6 +136,16 @@
         }
       },
       "evidence_mode": "deterministic synthetic DNS fixture; real public domains where indicated"
+    }
+  ],
+  "amendments": [
+    {
+      "at_utc": "2026-09-09T05:19:02.442747+00:00",
+      "case_id": "H02",
+      "field": "dns.ipv6-mail.customer.org.AAAA.answers[0]",
+      "old": "2001:db8::40",
+      "new": "2606:4700:4700::1111",
+      "reason": "Pre-execution fixture correction: documentation-range IP is non-global and is not valid evidence of fallback mail routability. No baseline or candidate execution occurred before correction. DNS remains synthetic, no contact to these IPs."
     }
   ]
 }

@@ -111,3 +111,11 @@ ends the sprint with reproducible evidence and a scoped PR. No launch infrastruc
 is built to rescue failure. The next implementation session should then focus on
 Talent Bench's first observed recruiter rediscovery session using its existing
 synthetic test kit and frozen V0.1 scope, without starting another repository here.
+
+## Record clarification after execution (criteria unchanged)
+
+The introduction's phrase about neither implementation reading expected results
+was too broad: the independent reviewer authored all expected cases and then the
+free baseline. The actual separation was six cases withheld from the candidate
+implementer; the baseline author knew them. Original commit `72db0a6` preserves the
+record. No claim of a blind baseline or fully blind comparison is supported.

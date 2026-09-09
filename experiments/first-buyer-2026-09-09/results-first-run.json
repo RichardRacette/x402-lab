@@ -1,0 +1,1473 @@
+{
+  "schema": "x402.first-buyer-comparison/1",
+  "measuredAt": "2026-09-09T05:20:39.712Z",
+  "evidenceMode": "OFFLINE_SYNTHETIC_FIXTURES",
+  "actualSpendUsd": 0,
+  "caseCount": 20,
+  "nodeVersion": "v24.19.0",
+  "hashes": {
+    "cases-public.json": "c64f25dbd217acf8dcda8ff916b0e590d7f05b6b80b36d8da0fe7f428956b072",
+    "cases-heldout.json": "ecc772858f9a7755c72807181a683df22cec96e9ba677c7dd455dd96cd159fac",
+    "candidate.mjs": "0c1cd385a0360f1cfaf4d6efa9edee30045c9b739e87d1c84eb0a8e75cf7e338",
+    "candidate-cli.mjs": "c02d920a491f0e4e106fed9c3bfb9ebc7f34ccc2c7c4ab24b3a604e9ab09695e",
+    "baseline.py": "60ad70ab2de43090fc90179d2f26ccabaabf159c3fd4ad99694e03a8e1604ffa",
+    "baseline-requirements.txt": "75baf9f1f6d76d953d0cd39c3d771bf23e4ae5fc39289902d98bc0593d221f1d",
+    "run-comparison.mjs": "ff976628391024ca702ba9779a533446e4f018e98403346c76004ee1d8ba4f49"
+  },
+  "candidate": {
+    "correct": 19,
+    "publicCorrect": 14,
+    "heldoutCorrect": 5,
+    "falseBlocks": 0,
+    "mailboxClaims": 0,
+    "coldBatchElapsedMs": 62.845167000000004,
+    "coldBatchSize": 20,
+    "rows": [
+      {
+        "id": "P01",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "NO_DEMONSTRATED_REJECTION_AT_THIS_LAYER",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 gmail-smtp-in.l.google.com."
+                ]
+              }
+            ],
+            "normalizedDomain": "gmail.com",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "P02",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "NO_DEMONSTRATED_REJECTION_AT_THIS_LAYER",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 aspmx.l.google.com."
+                ]
+              }
+            ],
+            "normalizedDomain": "github.com",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "P03",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "NO_DEMONSTRATED_REJECTION_AT_THIS_LAYER",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 outlook-com.olc.protection.outlook.com."
+                ]
+              }
+            ],
+            "normalizedDomain": "outlook.com",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "P04",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "INVALID_ADDRESS_SEPARATOR",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": []
+          }
+        }
+      },
+      {
+        "id": "P05",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "INVALID_ADDRESS_SEPARATOR",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": []
+          }
+        }
+      },
+      {
+        "id": "P06",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "INVALID_LOCAL_PART",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": []
+          }
+        }
+      },
+      {
+        "id": "P07",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "DOMAIN_NULL_MX",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "0 ."
+                ]
+              }
+            ],
+            "normalizedDomain": "example.com",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            }
+          }
+        }
+      },
+      {
+        "id": "P08",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "DOMAIN_NXDOMAIN",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "NXDOMAIN",
+                "answers": []
+              }
+            ],
+            "normalizedDomain": "missing-contact-domain-29417.com",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            }
+          }
+        }
+      },
+      {
+        "id": "P09",
+        "split": "public",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DISPOSABLE_LIST_MATCH_REQUIRES_REVIEW",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 mail.mailinator.com."
+                ]
+              }
+            ],
+            "normalizedDomain": "mailinator.com",
+            "disposable": {
+              "state": "LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": "mailinator.com",
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "P10",
+        "split": "public",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DISPOSABLE_LIST_MATCH_REQUIRES_REVIEW",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 mail.mailinator.com."
+                ]
+              }
+            ],
+            "normalizedDomain": "dept.mailinator.com",
+            "disposable": {
+              "state": "LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": "mailinator.com",
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "P11",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "NO_DEMONSTRATED_REJECTION_AT_THIS_LAYER",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 mx.mail-provider.net."
+                ]
+              }
+            ],
+            "normalizedDomain": "mailinator.com.customer.org",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "P12",
+        "split": "public",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DNS_UNAVAILABLE_MX_TIMEOUT",
+          "status": "UNAVAILABLE",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "TIMEOUT",
+                "answers": []
+              }
+            ],
+            "normalizedDomain": "retry.mail-check.org",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            }
+          }
+        }
+      },
+      {
+        "id": "P13",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "NO_DEMONSTRATED_REJECTION_AT_THIS_LAYER",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 mx.mail-provider.net."
+                ]
+              }
+            ],
+            "normalizedDomain": "xn--bcher-kva.de",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "P14",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "NO_DEMONSTRATED_REJECTION_AT_THIS_LAYER",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "NODATA",
+                "answers": []
+              },
+              {
+                "type": "A",
+                "status": "ok",
+                "answers": [
+                  "1.1.1.1"
+                ]
+              },
+              {
+                "type": "TXT",
+                "status": "NODATA",
+                "answers": []
+              }
+            ],
+            "normalizedDomain": "ipv4-mail.customer.org",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "A_FALLBACK_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "H01",
+        "split": "heldout",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "UNSUPPORTED_SMTPUTF8_LOCAL_PART",
+          "status": "UNSUPPORTED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": []
+          }
+        }
+      },
+      {
+        "id": "H02",
+        "split": "heldout",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "NO_DEMONSTRATED_REJECTION_AT_THIS_LAYER",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "NODATA",
+                "answers": []
+              },
+              {
+                "type": "A",
+                "status": "NODATA",
+                "answers": []
+              },
+              {
+                "type": "AAAA",
+                "status": "ok",
+                "answers": [
+                  "2606:4700:4700::1111"
+                ]
+              },
+              {
+                "type": "TXT",
+                "status": "NODATA",
+                "answers": []
+              }
+            ],
+            "normalizedDomain": "ipv6-mail.customer.org",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "AAAA_FALLBACK_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "H03",
+        "split": "heldout",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DNS_UNAVAILABLE_MX_SERVFAIL",
+          "status": "UNAVAILABLE",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "SERVFAIL",
+                "answers": []
+              }
+            ],
+            "normalizedDomain": "dnssec-failed.customer.org",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            }
+          }
+        }
+      },
+      {
+        "id": "H04",
+        "split": "heldout",
+        "expectedRoute": "KEEP",
+        "correct": false,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DISPOSABLE_LIST_MATCH_REQUIRES_REVIEW",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 mx.mail-provider.net."
+                ]
+              }
+            ],
+            "normalizedDomain": "notmailinator.com",
+            "disposable": {
+              "state": "LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": "notmailinator.com",
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      },
+      {
+        "id": "H05",
+        "split": "heldout",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DNS_CONFLICTING_NULL_MX",
+          "status": "UNAVAILABLE",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "0 .",
+                  "10 mx.mail-provider.net."
+                ]
+              }
+            ],
+            "normalizedDomain": "conflicting-mail.customer.org",
+            "disposable": {
+              "state": "NOT_LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": null,
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            }
+          }
+        }
+      },
+      {
+        "id": "H06",
+        "split": "heldout",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DISPOSABLE_LIST_MATCH_REQUIRES_REVIEW",
+          "status": "ASSESSED",
+          "mailboxExists": "UNKNOWN",
+          "evidence": {
+            "source": "CALLER_SUPPLIED_FIXTURE",
+            "networkUsed": false,
+            "dns": [
+              {
+                "type": "MX",
+                "status": "ok",
+                "answers": [
+                  "10 mail.guerrillamail.com."
+                ]
+              }
+            ],
+            "normalizedDomain": "guerrillamail.com",
+            "disposable": {
+              "state": "LISTED_IN_SUPPLIED_SNAPSHOT",
+              "matchedDomain": "guerrillamail.com",
+              "freshness": "NOT_PROVIDED_BY_FIXTURE_CONTRACT"
+            },
+            "routing": "MX_ADVERTISED_MAILBOX_UNVERIFIED"
+          }
+        }
+      }
+    ]
+  },
+  "baseline": {
+    "correct": 19,
+    "publicCorrect": 14,
+    "heldoutCorrect": 5,
+    "falseBlocks": 0,
+    "mailboxClaims": 0,
+    "coldBatchElapsedMs": 224.96520800000002,
+    "coldBatchSize": 20,
+    "rows": [
+      {
+        "id": "P01",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "Syntax and domain routing checks found no obstacle; mailbox remains unverified.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "gmail.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 gmail-smtp-in.l.google.com."
+              ]
+            }
+          ],
+          "normalized": "Buyer@gmail.com",
+          "domain": "gmail.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null,
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "gmail-smtp-in.l.google.com"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "P02",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "Syntax and domain routing checks found no obstacle; mailbox remains unverified.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "github.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 aspmx.l.google.com."
+              ]
+            }
+          ],
+          "normalized": "sales+sept@github.com",
+          "domain": "github.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null,
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "aspmx.l.google.com"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "P03",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "Syntax and domain routing checks found no obstacle; mailbox remains unverified.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "outlook.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 outlook-com.olc.protection.outlook.com."
+              ]
+            }
+          ],
+          "normalized": "person@outlook.com",
+          "domain": "outlook.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null,
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "outlook-com.olc.protection.outlook.com"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "P04",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "Address syntax cannot be used: An email address must have an @-sign.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": []
+        }
+      },
+      {
+        "id": "P05",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "Address syntax cannot be used: The part after the @-sign contains invalid characters: '@'.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": []
+        }
+      },
+      {
+        "id": "P06",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "Address syntax cannot be used: An email address cannot have two periods in a row.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": []
+        }
+      },
+      {
+        "id": "P07",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "Domain evidence prevents ordinary mail routing: The domain name example.com does not accept email.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "example.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "0 ."
+              ]
+            }
+          ],
+          "normalized": "name@example.com",
+          "domain": "example.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null
+        }
+      },
+      {
+        "id": "P08",
+        "split": "public",
+        "expectedRoute": "BLOCK",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "BLOCK",
+          "reason": "Domain evidence prevents ordinary mail routing: The domain name missing-contact-domain-29417.com does not exist.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "missing-contact-domain-29417.com",
+              "type": "MX",
+              "status": "NXDOMAIN",
+              "answers": []
+            }
+          ],
+          "normalized": "hello@missing-contact-domain-29417.com",
+          "domain": "missing-contact-domain-29417.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null
+        }
+      },
+      {
+        "id": "P09",
+        "split": "public",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "Domain matches the pinned disposable list; buyer review required.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "mailinator.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 mail.mailinator.com."
+              ]
+            }
+          ],
+          "normalized": "local@mailinator.com",
+          "domain": "mailinator.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": "mailinator.com",
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "mail.mailinator.com"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "P10",
+        "split": "public",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "Domain matches the pinned disposable list; buyer review required.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "dept.mailinator.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 mail.mailinator.com."
+              ]
+            }
+          ],
+          "normalized": "local@dept.mailinator.com",
+          "domain": "dept.mailinator.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": "mailinator.com",
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "mail.mailinator.com"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "P11",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "Syntax and domain routing checks found no obstacle; mailbox remains unverified.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "mailinator.com.customer.org",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 mx.mail-provider.net."
+              ]
+            }
+          ],
+          "normalized": "lead@mailinator.com.customer.org",
+          "domain": "mailinator.com.customer.org",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null,
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "mx.mail-provider.net"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "P12",
+        "split": "public",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DNS result unavailable or temporary failure; retry without excluding contact.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "retry.mail-check.org",
+              "type": "MX",
+              "status": "TIMEOUT",
+              "answers": []
+            }
+          ],
+          "normalized": "slow@retry.mail-check.org",
+          "domain": "retry.mail-check.org",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null
+        }
+      },
+      {
+        "id": "P13",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "Syntax and domain routing checks found no obstacle; mailbox remains unverified.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "xn--bcher-kva.de",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 mx.mail-provider.net."
+              ]
+            }
+          ],
+          "normalized": "lead@bücher.de",
+          "domain": "xn--bcher-kva.de",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null,
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "mx.mail-provider.net"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "P14",
+        "split": "public",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "Syntax and domain routing checks found no obstacle; mailbox remains unverified.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "ipv4-mail.customer.org",
+              "type": "MX",
+              "status": "NODATA",
+              "answers": []
+            },
+            {
+              "domain": "ipv4-mail.customer.org",
+              "type": "A",
+              "status": "OK",
+              "answers": [
+                "1.1.1.1"
+              ]
+            },
+            {
+              "domain": "ipv4-mail.customer.org",
+              "type": "TXT",
+              "status": "NODATA",
+              "answers": []
+            }
+          ],
+          "normalized": "support@ipv4-mail.customer.org",
+          "domain": "ipv4-mail.customer.org",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null,
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                0,
+                "ipv4-mail.customer.org"
+              ]
+            ],
+            "fallback": "A"
+          }
+        }
+      },
+      {
+        "id": "H01",
+        "split": "heldout",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "Syntax and domain routing checks found no obstacle; mailbox remains unverified.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "gmail.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 gmail-smtp-in.l.google.com."
+              ]
+            }
+          ],
+          "normalized": "δοκιμή@gmail.com",
+          "domain": "gmail.com",
+          "requiresSMTPUTF8": true,
+          "disposableListMatch": null,
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "gmail-smtp-in.l.google.com"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "H02",
+        "split": "heldout",
+        "expectedRoute": "KEEP",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "KEEP",
+          "reason": "Syntax and domain routing checks found no obstacle; mailbox remains unverified.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "ipv6-mail.customer.org",
+              "type": "MX",
+              "status": "NODATA",
+              "answers": []
+            },
+            {
+              "domain": "ipv6-mail.customer.org",
+              "type": "A",
+              "status": "NODATA",
+              "answers": []
+            },
+            {
+              "domain": "ipv6-mail.customer.org",
+              "type": "AAAA",
+              "status": "OK",
+              "answers": [
+                "2606:4700:4700::1111"
+              ]
+            },
+            {
+              "domain": "ipv6-mail.customer.org",
+              "type": "TXT",
+              "status": "NODATA",
+              "answers": []
+            }
+          ],
+          "normalized": "postmaster@ipv6-mail.customer.org",
+          "domain": "ipv6-mail.customer.org",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null,
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                0,
+                "ipv6-mail.customer.org"
+              ]
+            ],
+            "fallback": "AAAA"
+          }
+        }
+      },
+      {
+        "id": "H03",
+        "split": "heldout",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "DNS result unavailable or temporary failure; retry without excluding contact.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "dnssec-failed.customer.org",
+              "type": "MX",
+              "status": "SERVFAIL",
+              "answers": []
+            }
+          ],
+          "normalized": "agent@dnssec-failed.customer.org",
+          "domain": "dnssec-failed.customer.org",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null
+        }
+      },
+      {
+        "id": "H04",
+        "split": "heldout",
+        "expectedRoute": "KEEP",
+        "correct": false,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "Domain matches the pinned disposable list; buyer review required.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "notmailinator.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 mx.mail-provider.net."
+              ]
+            }
+          ],
+          "normalized": "lead@notmailinator.com",
+          "domain": "notmailinator.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": "notmailinator.com",
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "mx.mail-provider.net"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      },
+      {
+        "id": "H05",
+        "split": "heldout",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "Contradictory null and ordinary MX records; retain for review.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "conflicting-mail.customer.org",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "0 .",
+                "10 mx.mail-provider.net."
+              ]
+            }
+          ],
+          "normalized": "owner@conflicting-mail.customer.org",
+          "domain": "conflicting-mail.customer.org",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": null
+        }
+      },
+      {
+        "id": "H06",
+        "split": "heldout",
+        "expectedRoute": "REVIEW",
+        "correct": true,
+        "falseBlock": false,
+        "mailboxClaim": false,
+        "output": {
+          "route": "REVIEW",
+          "reason": "Domain matches the pinned disposable list; buyer review required.",
+          "mailboxExists": "UNKNOWN",
+          "mailboxOwnership": "UNKNOWN",
+          "dnsEvidence": [
+            {
+              "domain": "guerrillamail.com",
+              "type": "MX",
+              "status": "OK",
+              "answers": [
+                "10 mail.guerrillamail.com."
+              ]
+            }
+          ],
+          "normalized": "owner@guerrillamail.com",
+          "domain": "guerrillamail.com",
+          "requiresSMTPUTF8": false,
+          "disposableListMatch": "guerrillamail.com",
+          "mailRouteEvidence": {
+            "mx": [
+              [
+                10,
+                "mail.guerrillamail.com"
+              ]
+            ],
+            "fallback": null
+          }
+        }
+      }
+    ]
+  },
+  "noBuild": {
+    "workflow": "Queue all contacts for existing manual intake review; no new service or automated deletion",
+    "recordsQueued": 20,
+    "automaticallyResolved": 0,
+    "additionalSoftwareCashUsd": 0,
+    "operatorMinutes": null,
+    "operatorMinutesStatus": "NOT_MEASURED",
+    "outputs": [
+      {
+        "id": "P01",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P02",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P03",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P04",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P05",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P06",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P07",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P08",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P09",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P10",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P11",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P12",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P13",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "P14",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "H01",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "H02",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "H03",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "H04",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "H05",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      },
+      {
+        "id": "H06",
+        "route": "REVIEW",
+        "reason": "EXISTING_MANUAL_REVIEW_PENDING",
+        "mailboxExists": "UNKNOWN"
+      }
+    ]
+  },
+  "gates": {
+    "technicalFloor": true,
+    "qualityAdvantage": false,
+    "correctCaseDifference": 0,
+    "independentBuyerIntegrationSavings": null,
+    "independentBuyerIntegrationSavingsStatus": "NOT_MEASURED",
+    "overallDecision": "LEAD_REVIEW_REQUIRED"
+  },
+  "limitations": [
+    "Cold subprocess batch timings include interpreter, JSON and list handling; exclude network, DNS, HTTP, hosting, payment and actual customer integration. One measured sample each; no production speed claim.",
+    "List and DNS evidence are identical for both. Fixture timestamps are not live DNS freshness. Freshness comparison unavailable.",
+    "Reviewer authored baseline and all cases; only candidate implementer was blind to six heldout cases. This limits comparative generalization.",
+    "Paid Agent Email Check, Hunter and Emailable fulfillment were not purchased or measured. Existing allowances have zero incremental cash within quota.",
+    "No external buyer, launch, live seller payment, independent demand or repeat purchase is represented."
+  ]
+}
