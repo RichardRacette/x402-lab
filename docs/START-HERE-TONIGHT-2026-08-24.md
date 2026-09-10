@@ -73,7 +73,7 @@ If Phase A fails, do not build Kiroshi over weak evidence yet.
 
 ## 5. Real-money / capital rule
 
-The project has approximately **$300 of experiment capital available**, but default remains **no spend**.
+Default remains **no spend**.
 
 Do not execute any paid research request without explicit approval at execution time.
 
