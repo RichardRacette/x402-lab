@@ -2,6 +2,9 @@
 
 x402-lab handles payment authorization, so even a tiny experiment gets basic wallet hygiene and explicit agent trust boundaries.
 
+See the [external-testing policy](EXTERNAL-TESTING.md) for public seller
+interactions and [reporting guidance](../SECURITY.md) for security concerns.
+
 ## Context provenance
 
 The governing rule is:

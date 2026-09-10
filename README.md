@@ -120,13 +120,13 @@ Read:
 - [`docs/KIROSHI-OPTICS.md`](docs/KIROSHI-OPTICS.md)
 - [`docs/KIROSHI-OPTICS-MVP.md`](docs/KIROSHI-OPTICS-MVP.md)
 
-## Experiment capital
-
-Approximately **$300** of discretionary experiment capital is available for bounded evidence-generating tests.
-
-That is strategic capacity, not a spending target.
+## Experiment spending
 
 Default remains `$0` spend until a test has a clear hypothesis, maximum cost, free-data gap and continue/reject criterion.
+
+External participants: see [Security](SECURITY.md) and the
+[external-testing policy](docs/EXTERNAL-TESTING.md) for unpaid checks, public
+contributions, reciprocal testnet use, and the separate paid-test approval gate.
 
 ## Using our shopper as a research tool
 
