@@ -1,0 +1,42 @@
+{
+  "schema": "seller-contract-evidence/v1",
+  "seller": "x402scan",
+  "current": {
+    "observedAt": "2026-08-25T12:07:58.000Z",
+    "request": {
+      "method": "GET",
+      "url": "https://www.x402scan.com/api/x402/merchants/0x7f33b3c113915a0f2981070553ba9538c0f90171/transactions?page=0&page_size=100&chain=base&sort_by=time&sort_order=desc"
+    },
+    "httpStatus": 402,
+    "sources": [
+      {
+        "id": "x402scan-preflight",
+        "role": "reported-challenge",
+        "kind": "report-derived",
+        "coverage": "excerpt",
+        "url": "https://github.com/RichardRacette/x402-lab/blob/710c358b94908a95dc9a405288976b5a15542ca5/src/buyer-trace-preflight.ts",
+        "observedAt": "2026-08-25T12:07:58.000Z",
+        "originSha256": "361d1c999fd6fc1ad4b58ba12a918b13aadd78f31fad52a6bf63e87a746bcdfb",
+        "originLocation": "createBuyerTracePreflight().x402scan and targets[0]; hash is local TypeScript file bytes.",
+        "content": {
+          "version": 2,
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "amount": "10000",
+          "recipient": "0x2EC4545f96A24876764bF2B04D54E66A1351bE71",
+          "timeout": 300,
+          "domainName": "USD Coin",
+          "domainVersion": "2",
+          "resource": "https://www.x402scan.com/api/x402/merchants/0x7f33b3c113915a0f2981070553ba9538c0f90171/transactions?page=0&page_size=100&chain=base&sort_by=time&sort_order=desc",
+          "reportedBody": "EMPTY",
+          "providerOpenApiUrl": "https://www.x402scan.com/openapi.json",
+          "providerSourceRepository": "https://github.com/Merit-Systems/x402scan",
+          "providerSourceCommit": "4b29346e90ff12393534adfece1ec32f8dd155b1"
+        },
+        "note": "Historical 2026-08-25 repository preflight facts about the unrelated x402scan seller, not People Data Labs. Raw header/body and response hashes are unavailable here. These flat facts are deliberately not reconstructed as x402 JSON or base64. No new observation or current-state claim."
+      }
+    ]
+  },
+  "documentation": []
+}
