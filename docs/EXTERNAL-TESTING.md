@@ -1,8 +1,10 @@
 # External interaction and testing
 
-External participants are welcome. Start with public, reproducible evidence and
-grant only the access needed for the next explicitly approved step. A reachable
-service, directory listing, valid quote, or receipt does not verify its operator.
+External participants are welcome. Sellers may use the
+[seller-review intake](SELLER-REVIEW-INTAKE.md) to request a bounded review.
+Start with public, reproducible evidence and grant only the access needed for the
+next explicitly approved step. A reachable service, directory listing, valid
+quote, or receipt does not verify its operator.
 
 ## Initial interaction
 
