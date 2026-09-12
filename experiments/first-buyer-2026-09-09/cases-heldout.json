@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "case_set_id": "crm-intake-triage-2026-09-09-v1",
+  "frozen_at_utc": "2026-09-09T05:17:47.085072+00:00",
+  "policy": {
+    "task": "Conservative CRM intake triage; preserve contacts unless syntax or domain evidence definitively prevents mail.",
+    "routes": [
+      "KEEP",
+      "REVIEW",
+      "BLOCK"
+    ],
+    "trim_outer_whitespace": true,
+    "disposable_action": "REVIEW",
+    "mailbox_existence": "unverified for every input",
+    "missing_fixture_record": "NODATA",
+    "unlisted_fixture_domain": "no network; fixture lookup failure -> REVIEW",
+    "dns_answers": "dnspython textual rdata; keys use lower-case ASCII DNS names without final dot",
+    "live_checks": "separate smoke checks, never substituted for deterministic fixture results",
+    "SMTPUTF8": "KEEP is correct; REVIEW accepted only with explicit unsupported status; BLOCK is never acceptable merely for valid SMTPUTF8"
+  },
+  "disposable_list_reference": "cases-public.json#disposable_list",
+  "cases": [
+    {
+      "id": "H01",
+      "email": "δοκιμή@gmail.com",
+      "expected_route": "KEEP",
+      "reason": "Valid SMTPUTF8 local part: KEEP, or REVIEW only when unsupported status is explicit.",
+      "dns": {
+        "gmail.com": {
+          "MX": {
+            "status": "ok",
+            "answers": [
+              "10 gmail-smtp-in.l.google.com."
+            ]
+          }
+        }
+      },
+      "evidence_mode": "deterministic synthetic DNS fixture; real public domains where indicated",
+      "acceptable_routes": [
+        "KEEP",
+        "REVIEW"
+      ]
+    },
+    {
+      "id": "H02",
+      "email": "postmaster@ipv6-mail.customer.org",
+      "expected_route": "KEEP",
+      "reason": "No MX and no A still permit IPv6 fallback.",
+      "dns": {
+        "ipv6-mail.customer.org": {
+          "MX": {
+            "status": "NODATA",
+            "answers": []
+          },
+          "A": {
+            "status": "NODATA",
+            "answers": []
+          },
+          "AAAA": {
+            "status": "ok",
+            "answers": [
+              "2606:4700:4700::1111"
+            ]
+          },
+          "TXT": {
+            "status": "NODATA",
+            "answers": []
+          }
+        }
+      },
+      "evidence_mode": "deterministic synthetic DNS fixture; real public domains where indicated"
+    },
+    {
+      "id": "H03",
+      "email": "agent@dnssec-failed.customer.org",
+      "expected_route": "REVIEW",
+      "reason": "SERVFAIL does not establish domain or mailbox invalidity.",
+      "dns": {
+        "dnssec-failed.customer.org": {
+          "MX": {
+            "status": "SERVFAIL",
+            "answers": []
+          }
+        }
+      },
+      "evidence_mode": "deterministic synthetic DNS fixture; real public domains where indicated"
+    },
+    {
+      "id": "H04",
+      "email": "lead@notmailinator.com",
+      "expected_route": "KEEP",
+      "reason": "Suffix matching requires a dot boundary, not just substring/suffix characters.",
+      "dns": {
+        "notmailinator.com": {
+          "MX": {
+            "status": "ok",
+            "answers": [
+              "10 mx.mail-provider.net."
+            ]
+          }
+        }
+      },
+      "evidence_mode": "deterministic synthetic DNS fixture; real public domains where indicated"
+    },
+    {
+      "id": "H05",
+      "email": "owner@conflicting-mail.customer.org",
+      "expected_route": "REVIEW",
+      "reason": "Mixed null/ordinary MX is contradictory configuration; avoid definitive conclusions.",
+      "dns": {
+        "conflicting-mail.customer.org": {
+          "MX": {
+            "status": "ok",
+            "answers": [
+              "0 .",
+              "10 mx.mail-provider.net."
+            ]
+          }
+        }
+      },
+      "evidence_mode": "deterministic synthetic DNS fixture; real public domains where indicated"
+    },
+    {
+      "id": "H06",
+      "email": "owner@GuerrillaMail.com",
+      "expected_route": "REVIEW",
+      "reason": "Normalize domain case before a pinned disposable-list check.",
+      "dns": {
+        "guerrillamail.com": {
+          "MX": {
+            "status": "ok",
+            "answers": [
+              "10 mail.guerrillamail.com."
+            ]
+          }
+        }
+      },
+      "evidence_mode": "deterministic synthetic DNS fixture; real public domains where indicated"
+    }
+  ],
+  "amendments": [
+    {
+      "at_utc": "2026-09-09T05:19:02.442747+00:00",
+      "case_id": "H02",
+      "field": "dns.ipv6-mail.customer.org.AAAA.answers[0]",
+      "old": "2001:db8::40",
+      "new": "2606:4700:4700::1111",
+      "reason": "Pre-execution fixture correction: documentation-range IP is non-global and is not valid evidence of fallback mail routability. No baseline or candidate execution occurred before correction. DNS remains synthetic, no contact to these IPs."
+    }
+  ]
+}

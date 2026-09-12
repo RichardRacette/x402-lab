@@ -52,6 +52,11 @@ It did **not** prove commercial demand.
 
 That is intentional.
 
+The [September 9 first-buyer sprint](docs/first-buyer-2026-09-09/decision.md)
+returned **NO_BUILD** after a bounded email-intake comparison against a maintained
+free substitute. The frozen experiment, original results, benchmark corrections,
+and cost assumptions are preserved for review; no new seller was added.
+
 The project has repeatedly discovered that attractive, easy-to-build ideas had weak buy-vs-build economics, strong free substitutes, existing competitors, or no unique x402-lab advantage.
 
 A weak Product #2 is worse than no Product #2.
