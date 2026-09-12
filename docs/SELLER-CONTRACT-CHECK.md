@@ -12,6 +12,44 @@ node --test scripts/seller-contract-check.test.mjs
 npm run typecheck
 ```
 
+## Design-partner CLI/CI alpha
+
+The repository also contains a thin release-gate interface over the unchanged
+offline evaluator. It adds stage labels, machine-readable evidence groupings and
+deterministic CI exit codes; it adds no fetch or verification capability.
+
+```sh
+npm run seller-contract:gate -- --stage pre-deploy --input fixtures/seller-contract-check/ghost.json
+npm run seller-contract:gate -- --stage post-deploy --input fixtures/seller-contract-check/ghost.json
+```
+
+The caller prepares the evidence packet. `pre-deploy` and `post-deploy` are labels
+for the operator's release workflow and do not change evaluation logic. A
+post-deploy packet must contain separately collected unpaid evidence; the gate
+never contacts an endpoint.
+
+| Exit | Decision | CI interpretation |
+| ---: | --- | --- |
+| `0` | `NO_CONTRADICTION_FOUND` | Every supplied evidence check is PASS or NOT_APPLICABLE. This is not payment authorization. |
+| `1` | `BLOCKED_BY_CONTRADICTION` | At least one supplied evidence check is FAIL. |
+| `2` | `REFUSED` | Usage, input, schema or file access was refused. |
+| `3` | `REVIEW_REQUIRED` | No contradiction was found, but at least one check remains UNKNOWN. |
+
+The output schema is `seller-contract-gate/v1`. It lists verified, contradicted,
+unresolved and not-applicable check IDs separately, while payment authorization,
+fulfillment, billing, settlement, credit redemption and receipt verification stay
+explicitly `UNTESTED`. CI may invoke the same command directly:
+
+```yaml
+- name: Seller contract pre-deploy gate
+  run: npm run seller-contract:gate -- --stage pre-deploy --input path/to/reviewed-evidence.json
+```
+
+This alpha is repository-local and unpromoted. It is not an npm package, hosted
+service, certification, generic receipt verifier or paid experiment. Advancement
+requires successful repeated use by the Ghost operator plus one or two independent
+sellers/reviewers, including evidence that the output affected a release decision.
+
 No installation, network access, wallet SDK or payment library is needed for the
 evaluator itself. It reuses `canonical`, `decode`, `hash`, `instant` and the bounded
 ordinary-file reader from `scripts/economic-report.mjs`. That module's CLI is not
