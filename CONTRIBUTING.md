@@ -45,7 +45,8 @@ repository-local setting overrides the global default; configure other machines
 separately. Account email privacy for web-created commits is a separate GitHub
 setting. Changing identity affects future commits, not existing history.
 
-For external seller exchanges and public testnet testing, follow
+For external seller exchanges and public testnet testing, start with the
+[seller-review intake](docs/SELLER-REVIEW-INTAKE.md) and follow
 [the external-testing policy](docs/EXTERNAL-TESTING.md).
 
 Prefer short, specific prefixes that make the history scannable:
