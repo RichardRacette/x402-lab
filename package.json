@@ -23,7 +23,7 @@
     "economics:test": "node --test scripts/economic-report.test.mjs"
   },
   "dependencies": {
-    "@x402/core": "2.23.0",
+    "@x402/core": "2.25.0",
     "@x402/evm": "2.23.0",
     "@x402/express": "2.24.0",
     "@x402/extensions": "2.24.0",
