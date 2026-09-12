@@ -124,7 +124,8 @@ Read:
 
 Default remains `$0` spend until a test has a clear hypothesis, maximum cost, free-data gap and continue/reject criterion.
 
-External participants: see [Security](SECURITY.md) and the
+External participants: start with the [seller-review intake](docs/SELLER-REVIEW-INTAKE.md),
+then see [Security](SECURITY.md) and the
 [external-testing policy](docs/EXTERNAL-TESTING.md) for unpaid checks, public
 contributions, reciprocal testnet use, and the separate paid-test approval gate.
 
@@ -185,6 +186,7 @@ These are reusable infrastructure, not product-market fit.
 - [x] automated x402 settlement
 - [x] public Base Sepolia seller
 - [x] first public paid Evidence Slice transaction
+- [x] publish bounded seller-review intake and evidence rubric
 - [x] machine-readable discovery metadata
 - [x] bounded buyer/shopper gateway
 - [x] product viability/profit gate
