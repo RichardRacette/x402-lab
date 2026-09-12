@@ -1,0 +1,75 @@
+name: Seller review request
+description: Request a bounded, unpaid comparison of public seller claims and pre-payment evidence.
+title: "Seller review: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Request an experimental interoperability review, not certification or a promise to purchase. Default scope is public evidence plus at most one unsigned synthetic request. Never submit secrets, credentials, private data, or payment material.
+
+  - type: input
+    id: origin
+    attributes:
+      label: Public HTTPS origin
+      description: The seller-controlled public origin. Do not provide credentials or a private endpoint.
+      placeholder: https://seller.example
+    validations:
+      required: true
+
+  - type: input
+    id: resource
+    attributes:
+      label: Exact resource and method
+      description: Include the exact public path and HTTP method.
+      placeholder: POST /v1/example
+    validations:
+      required: true
+
+  - type: textarea
+    id: synthetic_request
+    attributes:
+      label: Harmless synthetic request
+      description: Provide a minimal non-sensitive request body or state that none is required.
+      placeholder: '{"query":"synthetic interoperability check"}'
+    validations:
+      required: true
+
+  - type: textarea
+    id: public_contract
+    attributes:
+      label: Public contract surfaces
+      description: Link OpenAPI, well-known metadata, agent cards, receipt-key policy, and failure or credit documentation.
+      placeholder: |
+        OpenAPI: https://seller.example/openapi.json
+        x402 metadata: https://seller.example/.well-known/x402
+    validations:
+      required: true
+
+  - type: textarea
+    id: advertised_terms
+    attributes:
+      label: Advertised payment terms
+      description: State the version, scheme, network, asset, atomic amount, recipient, timeout, facilitator, and payment-flow ordering where known.
+    validations:
+      required: true
+
+  - type: textarea
+    id: review_question
+    attributes:
+      label: Review question
+      description: What specific compatibility question or suspected mismatch should the review answer?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Scope acknowledgement
+      options:
+        - label: I understand this is unpaid, selective, non-certifying research with no guaranteed turnaround or purchase.
+          required: true
+        - label: I have not included secrets, credentials, payment signatures, customer data, or private endpoints.
+          required: true
+        - label: Any paid test, signing, settlement, or credit redemption requires a separate owner decision.
+          required: true
