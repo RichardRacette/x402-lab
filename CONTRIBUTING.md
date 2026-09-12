@@ -38,6 +38,17 @@ npm test
 
 ## Commit style
 
+Use your GitHub-provided noreply address for public commits. Configure it in
+each checkout with `git config user.email YOUR_GITHUB_NOREPLY_ADDRESS` and check
+the effective identity with `git var GIT_AUTHOR_IDENT` before committing. A
+repository-local setting overrides the global default; configure other machines
+separately. Account email privacy for web-created commits is a separate GitHub
+setting. Changing identity affects future commits, not existing history.
+
+For external seller exchanges and public testnet testing, start with the
+[seller-review intake](docs/SELLER-REVIEW-INTAKE.md) and follow
+[the external-testing policy](docs/EXTERNAL-TESTING.md).
+
 Prefer short, specific prefixes that make the history scannable:
 
 - `feat:` new capability

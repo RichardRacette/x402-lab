@@ -124,7 +124,7 @@ Reject/refactor if the output is merely prettier x402scan rankings.
 
 ### Discovery-capital posture
 
-Approximately `$300` of experiment capital is available, but default remains `$0` spend.
+Default remains `$0` spend.
 
 Capital may support bounded evidence-generating tests only after the hypothesis, max cost, free-data gap and continue/reject criteria are explicit.
 

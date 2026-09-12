@@ -42,10 +42,6 @@ If items 1–5 do not produce better product-discovery insight than manual brows
 
 ## Discovery capital
 
-The project has access to approximately **$300 of discretionary experiment capital**.
-
-This is useful strategic capacity, not a spending target and not standing authorization.
-
 Default remains **$0 spend**.
 
 Use capital only when a specific purchase materially reduces uncertainty around a candidate opportunity, for example:

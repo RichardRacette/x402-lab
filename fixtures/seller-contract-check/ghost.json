@@ -1,0 +1,262 @@
+{
+  "schema": "seller-contract-evidence/v1",
+  "seller": "ghost",
+  "current": {
+    "observedAt": "2026-09-10T23:50:39.128Z",
+    "request": {
+      "method": "POST",
+      "url": "https://ghost-identity.ghost-agent-os.workers.dev/v1/search",
+      "body": {
+        "query": "x402 machine commerce",
+        "results": 10
+      }
+    },
+    "httpStatus": 402,
+    "sources": [
+      {
+        "id": "ghost-header",
+        "role": "decoded-header",
+        "kind": "capture",
+        "coverage": "excerpt",
+        "url": "https://ghost-identity.ghost-agent-os.workers.dev/v1/search",
+        "observedAt": "2026-09-10T23:50:39.128Z",
+        "content": {
+          "x402Version": 2,
+          "resource": {
+            "url": "https://ghost-identity.ghost-agent-os.workers.dev/v1/search",
+            "mimeType": "application/json"
+          },
+          "accepts": [
+            {
+              "scheme": "exact",
+              "network": "eip155:8453",
+              "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+              "amount": "10000",
+              "payTo": "0x26c536F9FB50d5Bd3f6eFE4738807d88E23FA13e",
+              "maxTimeoutSeconds": 600,
+              "extra": {
+                "name": "USD Coin",
+                "version": "2"
+              }
+            }
+          ],
+          "extensions": {
+            "bazaar": {
+              "info": {
+                "input": {
+                  "method": "POST"
+                }
+              }
+            }
+          }
+        },
+        "note": "Reviewed payment-field projection of the preserved SDK-decoded header. No raw base64 header or original header hash was retained. The optional Bazaar input method is retained; its example and schema are omitted.",
+        "originLocation": "UNTRUSTED-captures.json /2/decodedPaymentRequired"
+      },
+      {
+        "id": "ghost-body",
+        "role": "body",
+        "kind": "capture",
+        "coverage": "excerpt",
+        "url": "https://ghost-identity.ghost-agent-os.workers.dev/v1/search",
+        "observedAt": "2026-09-10T23:50:39.128Z",
+        "content": {
+          "x402Version": 2,
+          "resource": {
+            "url": "https://ghost-identity.ghost-agent-os.workers.dev/v1/search",
+            "mimeType": "application/json"
+          },
+          "accepts": [
+            {
+              "scheme": "exact",
+              "network": "eip155:8453",
+              "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+              "amount": "10000",
+              "payTo": "0x26c536F9FB50d5Bd3f6eFE4738807d88E23FA13e",
+              "maxTimeoutSeconds": 600,
+              "extra": {
+                "name": "USD Coin",
+                "version": "2"
+              }
+            }
+          ],
+          "extensions": {
+            "bazaar": {
+              "info": {
+                "input": {
+                  "method": "POST"
+                }
+              }
+            }
+          }
+        },
+        "note": "Reviewed projection retaining version, resource URL/mimeType and the complete accepts array. Hash below is the recorded original response-body hash, not this projection. The optional Bazaar input method is retained; its example and schema are omitted.",
+        "originSha256": "dee6f6873027e253b660434a499551121385bf371f976a8b83a1476fce1cafbc",
+        "originLocation": "UNTRUSTED-captures.json /2/body"
+      },
+      {
+        "id": "ghost-openapi",
+        "role": "openapi",
+        "kind": "capture",
+        "coverage": "excerpt",
+        "url": "https://ghost-identity.ghost-agent-os.workers.dev/openapi.json",
+        "observedAt": "2026-09-10T23:50:39.128Z",
+        "content": {
+          "servers": [
+            {
+              "url": "https://ghost-identity.ghost-agent-os.workers.dev"
+            }
+          ],
+          "paths": {
+            "/v1/search": {
+              "post": {
+                "operationId": "verified_search_v1_search_post",
+                "x-payment-info": {
+                  "protocols": [
+                    "x402"
+                  ],
+                  "price": {
+                    "amount": "0.01",
+                    "currency": "USDC",
+                    "amountMinor": 10000
+                  },
+                  "payTo": "0x26c536F9FB50d5Bd3f6eFE4738807d88E23FA13e",
+                  "network": "eip155:8453",
+                  "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                  "x402Version": 2
+                }
+              }
+            }
+          }
+        },
+        "note": "Reviewed exact-operation excerpt; the entire x-payment-info object is retained. Other operations and prose are omitted. Original body-byte hash copied from observation.json.",
+        "originSha256": "0356d2b4f0c44f858f376d2b073449911b0174bbb2ead1cb49f10d1f0a3164bc",
+        "originLocation": "/servers and /paths/~1v1~1search/post"
+      },
+      {
+        "id": "ghost-descriptor",
+        "role": "well-known",
+        "kind": "capture",
+        "coverage": "excerpt",
+        "url": "https://ghost-identity.ghost-agent-os.workers.dev/.well-known/x402",
+        "observedAt": "2026-09-10T23:50:39.128Z",
+        "content": {
+          "x402Version": 2,
+          "resources": [
+            {
+              "resource": {
+                "url": "https://ghost-identity.ghost-agent-os.workers.dev/v1/search",
+                "mimeType": "application/json"
+              },
+              "accepts": [
+                {
+                  "scheme": "exact",
+                  "network": "eip155:8453",
+                  "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                  "amount": "10000",
+                  "payTo": "0x26c536F9FB50d5Bd3f6eFE4738807d88E23FA13e",
+                  "maxTimeoutSeconds": 600,
+                  "extra": {
+                    "name": "USD Coin",
+                    "version": "2"
+                  }
+                }
+              ],
+              "method": "POST"
+            }
+          ]
+        },
+        "note": "Reviewed excerpt: original resources[4] moved to resources[0]; only method, resource URL/mimeType and accepts retained. Version comes from descriptor root.",
+        "originSha256": "9e36cb7205715880d4a57e9508eb62ebaa026e6e648122995a3af89263ab0b7e",
+        "originLocation": "/x402Version and /resources/4"
+      },
+      {
+        "id": "ghost-advertised",
+        "role": "advertised",
+        "kind": "report-derived",
+        "coverage": "excerpt",
+        "url": "https://github.com/RichardRacette/x402-lab/blob/710c358b94908a95dc9a405288976b5a15542ca5/reports/external-tests/ghost-2026-09-10-live-unpaid.md",
+        "observedAt": "2026-09-10T23:50:39.128Z",
+        "content": {
+          "version": 2,
+          "scheme": "exact",
+          "network": "eip155:8453"
+        },
+        "note": "Report-derived explicit issue declarations only. Issue #50 advertised native USDC at $0.01 but did not specify the asset address, atomic integer or recipient; those exact fields remain absent here. Not an original advertisement capture.",
+        "originSha256": "ceadb6d5baeea58fe3edfcec1b84b442fe7a2e2b082c6aaba84ae2fd08fb15cd",
+        "originLocation": "Terms comparison: I (issue claims); hash is local report file bytes."
+      },
+      {
+        "id": "ghost-policy",
+        "role": "documentation",
+        "kind": "capture",
+        "coverage": "excerpt",
+        "url": "https://ghost-identity.ghost-agent-os.workers.dev/openapi.json",
+        "observedAt": "2026-09-10T23:50:39.128Z",
+        "content": {
+          "failure": "if no provider delivers after settlement you get a 502 and the fee is returned as Ghost credit (readable at GET /v1/gate/credit, spendable via X-Ghost-Credit-Token).",
+          "tokenAccess": "A buyer's own prepaid balance and what they spent it on. Free to read.\n\nScoped to the presented token. ",
+          "topupOnly": "This is the only way credit enters."
+        },
+        "note": "Exact public prose excerpts from the preserved OpenAPI. Normalized policy claims below are reviewer interpretations. No DSSE key/procedure or complete failure-credit contract was supplied.",
+        "originSha256": "0356d2b4f0c44f858f376d2b073449911b0174bbb2ead1cb49f10d1f0a3164bc",
+        "originLocation": "/info/x-guidance; /paths/~1v1~1gate~1credit/get/description; /paths/~1v1~1gate~1credit~1topup/post/description"
+      }
+    ]
+  },
+  "documentation": [
+    {
+      "topic": "failure",
+      "coverage": "complete",
+      "value": "all-providers-fail-after-settlement:HTTP502",
+      "refs": [
+        {
+          "source": "ghost-policy",
+          "pointer": "/failure",
+          "quote": "if no provider delivers after settlement you get a 502"
+        }
+      ]
+    },
+    {
+      "topic": "credit",
+      "coverage": "partial",
+      "value": "future-service-credit; failure-grant-versus-topup-only-contract-unresolved",
+      "refs": [
+        {
+          "source": "ghost-policy",
+          "pointer": "/failure",
+          "quote": "the fee is returned as Ghost credit"
+        },
+        {
+          "source": "ghost-policy",
+          "pointer": "/topupOnly",
+          "quote": "This is the only way credit enters."
+        }
+      ]
+    },
+    {
+      "topic": "payer-binding",
+      "coverage": "partial",
+      "value": "token-scoped-access; x402-payer-link-and-token-issuance-unspecified",
+      "refs": [
+        {
+          "source": "ghost-policy",
+          "pointer": "/tokenAccess",
+          "quote": "Scoped to the presented token."
+        }
+      ]
+    },
+    {
+      "topic": "redemption",
+      "coverage": "partial",
+      "value": "X-Ghost-Credit-Token; no-second-charge-and-first-time-payer-contract-unspecified",
+      "refs": [
+        {
+          "source": "ghost-policy",
+          "pointer": "/failure",
+          "quote": "spendable via X-Ghost-Credit-Token"
+        }
+      ]
+    }
+  ]
+}
