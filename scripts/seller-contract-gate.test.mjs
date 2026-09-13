@@ -66,3 +66,36 @@ test('CLI blocks a supplied contradiction without contacting the seller', () => 
   assert.equal(output.decision, 'BLOCKED_BY_CONTRADICTION');
   assert.ok(output.evidenceChecks.contradicted.includes('header.body'));
 });
+
+test('CLI reviews raw header/excerpt body evidence but still blocks an independent contradiction', () => {
+  const url = 'https://seller.example.invalid/search', observedAt = '2026-09-13T09:00:00.000Z';
+  const quote = { x402Version: 2, resource: { url }, accepts: [{ scheme: 'exact', network: 'eip155:8453', asset: '0x' + '11'.repeat(20), amount: '10000', payTo: '0x' + '22'.repeat(20), maxTimeoutSeconds: 600, extra: { name: 'USD Coin', version: '2' } }] };
+  const source = (id, role, coverage, content) => ({ id, role, coverage, content, kind: 'synthetic', url, observedAt, note: 'Synthetic regression; not a Ghost capture.' });
+  const input = {
+    schema: 'seller-contract-evidence/v1', seller: 'synthetic-seller', documentation: [],
+    current: { observedAt, request: { method: 'POST', url }, httpStatus: 402, sources: [
+      source('header', 'header', 'complete', Buffer.from(JSON.stringify(quote)).toString('base64')),
+      source('body', 'body', 'excerpt', { x402Version: 2, accepts: quote.accepts }),
+      source('ad', 'advertised', 'complete', { amount: '10000' })
+    ] }
+  };
+  const directory = mkdtempSync(join(tmpdir(), 'seller-gate-coverage-')), path = join(directory, 'synthetic.json');
+  const invoke = stage => spawnSync(process.execPath, ['scripts/seller-contract-gate.mjs', '--input', path, '--stage', stage], { encoding: 'utf8', windowsHide: true, timeout: 10000 });
+  writeFileSync(path, JSON.stringify(input));
+  for (const stage of ['pre-deploy', 'post-deploy']) {
+    const first = invoke(stage), second = invoke(stage), output = JSON.parse(first.stdout);
+    assert.equal(first.status, EXIT.REVIEW);
+    assert.equal(first.stdout, second.stdout);
+    assert.equal(output.decision, 'REVIEW_REQUIRED');
+    assert.ok(output.evidenceChecks.unresolved.includes('header.body'));
+    assert.deepEqual(output.evidenceChecks.contradicted, []);
+    assert.ok(Object.values(output.behaviorClaims).every(value => value === 'UNTESTED'));
+  }
+  input.current.sources[2].content.amount = '20000';
+  writeFileSync(path, JSON.stringify(input));
+  const blocked = invoke('post-deploy'), output = JSON.parse(blocked.stdout);
+  assert.equal(blocked.status, EXIT.BLOCK);
+  assert.equal(output.decision, 'BLOCKED_BY_CONTRADICTION');
+  assert.ok(output.evidenceChecks.unresolved.includes('header.body'));
+  assert.deepEqual(output.evidenceChecks.contradicted, ['agreement.ad.amount']);
+});

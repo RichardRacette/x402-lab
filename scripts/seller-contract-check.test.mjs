@@ -27,6 +27,24 @@ test('mismatches are failures, absence is unknown, and identical inputs are dete
   const r = run(f); assert.equal(check(r, 'header.body').status, 'FAIL'); assert.equal(check(r, 'agreement.ad.network').status, 'FAIL');
   assert.equal(check(r, 'agreement.ad.timeout').status, 'UNKNOWN'); assert.deepEqual(run(f), r);
 });
+for (const excerptSide of ['header', 'body']) {
+  for (const omitted of [false, true]) {
+    test(`mixed header/body coverage stays unknown: ${excerptSide} excerpt, omitted=${omitted}`, () => {
+      const f = fixture();
+      const index = excerptSide === 'header' ? 0 : 1;
+      const content = quote();
+      if (omitted) delete content.resource;
+      f.current.sources[index] = source(excerptSide, excerptSide === 'header' ? 'decoded-header' : 'body', content);
+      f.current.sources[index].coverage = 'excerpt';
+      const r = run(f), c = check(r, 'header.body');
+      assert.equal(c.status, 'UNKNOWN');
+      assert.match(c.reason, /coverage/i);
+      assert.deepEqual(c.refs.map(ref => ref.source), ['header', 'body']);
+      assert.equal(r.checks.some(check => check.status === 'FAIL'), false);
+      assert.deepEqual(run(f), r);
+    });
+  }
+}
 for (const invalid of ['!', Buffer.from('{"x402Version":2,"x402Version":1}').toString('base64'), Buffer.from([0xff]).toString('base64'), 'A'.repeat(16385)]) {
   test('malformed header cannot be rescued by a matching body: ' + invalid.slice(0, 12), () => {
     const f = fixture(); f.current.sources[0].content = invalid;
