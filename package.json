@@ -15,12 +15,14 @@
     "buyer-trace": "tsx src/buyer-trace-cli.ts",
     "market:fixtures": "tsx src/market-observatory/cli.ts fixtures",
     "market:collect": "tsx src/market-observatory/cli.ts collect-x402stats",
-    "test": "tsx --test \"src/**/*.test.ts\" && node --test scripts/edgerunner.test.mjs && node --test scripts/economic-report.test.mjs && node --test scripts/seller-contract-check.test.mjs",
+    "test": "tsx --test \"src/**/*.test.ts\" && node --test scripts/edgerunner.test.mjs && node --test scripts/economic-report.test.mjs && node --test scripts/seller-contract-check.test.mjs && node --test scripts/seller-contract-gate.test.mjs",
     "typecheck": "tsc --noEmit",
     "edgerunner:report": "node scripts/edgerunner.mjs",
     "test:edgerunner": "node --test scripts/edgerunner.test.mjs",
     "economics:report": "node scripts/economic-report.mjs",
-    "economics:test": "node --test scripts/economic-report.test.mjs"
+    "economics:test": "node --test scripts/economic-report.test.mjs",
+    "seller-contract:gate": "node scripts/seller-contract-gate.mjs",
+    "seller-contract:gate:test": "node --test scripts/seller-contract-gate.test.mjs"
   },
   "dependencies": {
     "@x402/core": "2.25.0",

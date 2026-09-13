@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 export const INPUT_SCHEMA = 'seller-contract-evidence/v1';
 export const REPORT_SCHEMA = 'seller-contract-report/v1';
-export const EVALUATOR_VERSION = '0.1.0';
+export const EVALUATOR_VERSION = '0.1.1';
 const FIELDS = ['version', 'scheme', 'network', 'asset', 'amount', 'recipient', 'timeout', 'domainName', 'domainVersion'];
 const ROLES = ['header', 'decoded-header', 'body', 'openapi', 'well-known', 'advertised', 'reported-challenge', 'documentation'];
 const TOPICS = ['receipt-key', 'receipt-procedure', 'failure', 'credit', 'payer-binding', 'redemption'];
@@ -199,8 +199,10 @@ export function evaluate(bytes) {
   add('http.402', current.httpStatus === null ? 'UNKNOWN' : current.httpStatus === 402 ? 'PASS' : 'FAIL', 'Supplied HTTP status only; not proof of a payment contract.', [{ packet: 'current', pointer: '/httpStatus' }], current.httpStatus);
   add('header.encoding', !h ? 'UNKNOWN' : h.source.role === 'decoded-header' ? 'UNKNOWN' : h.status,
     !h || h.source.role === 'decoded-header' ? 'Original encoded header unavailable; never reconstructed from JSON.' : h.reason, h ? [ref(h.source)] : []);
-  add('header.body', !h?.decoded || !b?.decoded ? 'UNKNOWN' : equal(h.decoded, b.decoded) ? 'PASS' : 'FAIL',
-    'Compares supplied decoded JSON only; excerpts do not establish full origin or byte equality.', [...headers, ...bodies].map(p => ref(p.source)));
+  const mixedCoverage = h && b && h.source.coverage !== b.source.coverage;
+  add('header.body', !h?.decoded || !b?.decoded || mixedCoverage ? 'UNKNOWN' : equal(h.decoded, b.decoded) ? 'PASS' : 'FAIL',
+    mixedCoverage ? 'Header/body coverage differs; a complete representation and an excerpt cannot establish JSON equality or contradiction.'
+      : 'Compares supplied decoded JSON only; excerpts do not establish full origin or byte equality.', [...headers, ...bodies].map(p => ref(p.source)));
   const declarations = parsed.filter(p => ['advertised', 'openapi', 'well-known'].includes(p.source.role));
   for (const field of FIELDS) {
     const actual = observed?.terms[field];

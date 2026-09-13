@@ -12,6 +12,49 @@ node --test scripts/seller-contract-check.test.mjs
 npm run typecheck
 ```
 
+## Design-partner CLI/CI alpha
+
+The repository also contains a thin release-gate interface over the
+offline evaluator. It adds stage labels, machine-readable evidence groupings and
+deterministic CI exit codes; it adds no fetch or verification capability.
+
+```sh
+npm run seller-contract:gate -- --stage pre-deploy --input fixtures/seller-contract-check/ghost.json
+npm run seller-contract:gate -- --stage post-deploy --input fixtures/seller-contract-check/ghost.json
+```
+
+The caller prepares the evidence packet. `pre-deploy` and `post-deploy` are labels
+for the operator's release workflow and do not change evaluation logic. A
+post-deploy packet must contain separately collected unpaid evidence; the gate
+never contacts an endpoint.
+
+| Exit | Decision | CI interpretation |
+| ---: | --- | --- |
+| `0` | `NO_CONTRADICTION_FOUND` | Every supplied evidence check is PASS or NOT_APPLICABLE. This is not payment authorization. |
+| `1` | `BLOCKED_BY_CONTRADICTION` | At least one supplied evidence check is FAIL. |
+| `2` | `REFUSED` | Usage, input, schema or file access was refused. |
+| `3` | `REVIEW_REQUIRED` | No contradiction was found, but at least one check remains UNKNOWN. |
+
+The output schema is `seller-contract-gate/v1`. It lists verified, contradicted,
+unresolved and not-applicable check IDs separately, while payment authorization,
+fulfillment, billing, settlement, credit redemption and receipt verification stay
+explicitly `UNTESTED`. CI may invoke the same command directly:
+
+```yaml
+- name: Seller contract pre-deploy gate
+  run: npm run seller-contract:gate -- --stage pre-deploy --input path/to/reviewed-evidence.json
+```
+
+This alpha is repository-local and unpromoted. It is not an npm package, hosted
+service, certification, generic receipt verifier or paid experiment. Advancement
+requires successful repeated use by the Ghost operator plus one or two independent
+sellers/reviewers, including evidence that the output affected a release decision.
+
+The [September 13 Ghost alpha feedback and correction](../reports/external-tests/ghost-alpha-feedback-2026-09-13.md)
+records operator-reported use in both stages and the mixed-coverage comparison fix.
+The alpha remains draft and unpromoted; evidence preparation was reported as
+manual work, with no collector or broader product work initiated.
+
 No installation, network access, wallet SDK or payment library is needed for the
 evaluator itself. It reuses `canonical`, `decode`, `hash`, `instant` and the bounded
 ordinary-file reader from `scripts/economic-report.mjs`. That module's CLI is not
@@ -86,7 +129,7 @@ incorrect documentation conclusion; citation checks do not fix interpretation.
 
 ## Report v1 and scope
 
-Output uses `schema: "seller-contract-report/v1"`, `evaluatorVersion: "0.1.0"`,
+Output uses `schema: "seller-contract-report/v1"`, `evaluatorVersion: "0.1.1"`,
 the exact input-byte SHA-256, supplied observation time/request, and evidence
 descriptors with source URLs and computed `contentSha256` values. Content hashes
 cover canonical JSON with sorted object keys and a trailing LF, not original HTTP
@@ -107,6 +150,13 @@ a token contract, complete EIP-712
 domain, ownership, facilitator, payment authorization, or cryptographic receipt.
 Unrecognized profiles/layouts and multiple offers remain unresolved; no first-offer
 fallback is used. Excerpt equality is explicitly limited to the supplied projection.
+Header/body JSON comparison requires matching declared coverage. A complete
+header with an excerpted body (or the reverse) returns `UNKNOWN`, even if the
+supplied JSON happens to match. Excerpt omissions cannot establish a contradiction
+against a complete representation. This does not suppress independent failures:
+complete header/body mismatches, explicit advertised-term contradictions, invalid
+headers and comparable term drift retain their existing checks. With no other
+FAIL, mixed coverage therefore yields gate exit 3 / `REVIEW_REQUIRED`, not exit 1.
 
 Drift compares only two supplied, strictly ordered captures with identical method,
 URL and canonical request body, unpaid 402 status, matching representation/kind/
